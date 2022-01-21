@@ -1,96 +1,56 @@
 
-
-
-main
-{
-width:70%;
-height:200%;
-margin-top:2%;
-margin-left:15%;
-border: 1px solid lightblue;
-display:flex;
-}
-
-#generalleft
-{
-border: 1px solid lightblue;
-width:48%;
-height:98%;
-margin-top:1%;
-margin-left:1%;
-display:flex;
+#content{
+    display:flex;
 
 }
 
-#generalright
-{
-border: 1px solid lightblue;
-width:48%;
-height:98%;
-color:white;
-margin-top:1%;
-margin-left:2%;
-display:flex;
-
+#content-left{
+    border: 1px solid blue;
+    width:48%;
+    height:98%;
+    margin-top:1%;
+    margin-left:1%;
+    display:flex;
+    flex-direction: column;
 }
 
-#description
-{
-width:50%;
-height:5%;
-margin-top:3%;
-margin-left:25%;
-border: 1px solid lightblue;
-color:white;
-display:flex;
-font-size :11px;
-font-weight: bold;
-justify-content:center;
-align-items:flex-start;
-text-align:center;
+#content-right{
+    border: 1px solid lightblue;
+    width:48%;
+    height:98%;
+    color:white;
+    margin-top:1%;
+    margin-left:2%;
+    display:flex;
 }
 
-#descriptionbottom
-{
-background-color:black;
-width:30%;
-height:30%;
-margin-top:7%;
-margin-left:2%;
-display:flex;
-position: absolute;
-
-}
-#descriptionbottomleft
-{
-background-color:white;
-width:40%;
-height:80%;
-margin-top:5%;
-margin-left:5%;
-display:flex;
-
-
+#description{
+    text-align:center;
+    margin: 2%;
+    border: 1px solid lightblue;
+    color:white;
 }
 
-#descriptionbottomright
+#tournement
 {
-background-color:black;
-width:40%;
-height:80%;
-color:white;
-margin-top:8%;
-margin-left:8%;
-display:flex;
-font-size :11px;
-font-weight: bold;
-justify-content:center;
-align-items:flex-start;
+    display:flex;
+    height:30%;
+}
+
+#game-img{
+    width:45%;
+    margin: 5%;
+}
+
+#tournement-details{
+    width:45%;
+    margin: 5%;
+
 }
 
 #matchs
 {
-width:30%;
+/*width:30%;
 height:10%;
 margin-top:22%;
 margin-left:2%;
@@ -102,46 +62,46 @@ font-weight: bold;
 justify-content:center;
 align-items:flex-start;
 text-align:center;
-position : absolute;
+position : absolute;*/
 }
 
 #matchsbottom
 {
-width:30%;
+/*width:30%;
 height:50%;
 margin-top:28%;
 margin-left:2%;
 border: 1px solid lightblue;
 display:flex;
-position : absolute;
+position : absolute;*/
 }
 
 #matchsbottomleft
 {
-border: 1px solid lightblue;
+/*border: 1px solid lightblue;
 width:40%;
 height:85%;
 margin-top:5%;
 margin-left:6%;
-display:flex;
+display:flex;*/
 
 }
 
 #matchsbottomright
 {
-border: 1px solid lightblue;
+/*border: 1px solid lightblue;
 width:40%;
 height:85%;
 color:white;
 margin-top:5%;
 margin-left:7%;
-display:flex;
+display:flex;*/
 
 }
 
 #graphique
 {
-width:90%;
+/*width:90%;
 height:50%;
 margin-top:20%;
 margin-left:5%;
@@ -151,5 +111,5 @@ display:flex;
 font-size :11px;
 font-weight: bold;
 justify-content:center;
-align-items:flex-start;
+align-items:flex-start;*/
 }
