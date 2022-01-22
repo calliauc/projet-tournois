@@ -1,11 +1,10 @@
 
-#content{
+#columns{
     display:flex;
 }
 
-#content-left{
+#column-left{
     padding: 1%;
-    border: 1px solid blue;
     width:48%;
     height:98%;
     margin-top:1%;
@@ -16,7 +15,7 @@
 
 #description{
     text-align:center;
-    border: 1px solid lightblue;
+    background-color: #323232;
 }
 
 #tournement
@@ -27,6 +26,7 @@
 
 #game-img{
     width:45%;
+    padding: 2%;
 }
 
 #tournement-details{
@@ -35,36 +35,44 @@
 
 }
 
-#next-matchs{
+#match-list{
+    width: 100%;
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid green;
-
 }
 
-#next-matchs-list{
-    width: 100%;
-    max-height: 200px;
-    overflow: scroll auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid blue;
+#header-table-matchs{
+    background-color: #323232;
 }
 
 .match{
-    width: 90%;
+    width: 580px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border: 1px solid red;
+    margin: 5px;
+}
+
+.nom-match{
+    width: 65%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-match{
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 /*FIN COLONNE GAUCHE*/
 
-#content-right{
+#column-right{
     border: 1px solid blue;
     width:48%;
     height:98%;
