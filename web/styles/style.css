@@ -15,9 +15,8 @@ header{
 
 
 #logo{
-    width:25%;
-    height:100%;
-    color:lightblue;
+    background-color: #323232;
+    height: 100%;
 }
 
 nav{

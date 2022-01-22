@@ -14,11 +14,12 @@
 
   <body>
     <header>
-      <div id="logo">
-        <img src="/assets/img/mariokart.jpg"
-        alt="logo"
-        width=100%;
-        height=100%;/>
+      <div>
+        <a href="">
+          <img id="logo" src="assets/img/resized/logo_2.webp"
+          alt="logo"
+          />  
+        </a>
       </div>
       <nav>
         <a href="" id="menu-selected">En ce moment</a>
@@ -30,8 +31,8 @@
 
     <main>
       <h1>Tournoi en cours</h1>
-      <div id="content">
-        <div id="content-left">
+      <div id="columns">
+        <div id="column-left">
           <div id="description">
             <h2>MARIO KART</h2>
             <p id="mode-tournoi">Championnat</p>
@@ -39,7 +40,7 @@
 
           <div id="tournement">
             <div id="game-img">
-              <img src="assets/img/mariokart2.jpg"
+              <img src="assets/img/resized/mariokart.webp"
               alt="Image du jeu"
               width=100%;
               height=100%;/>
@@ -56,27 +57,31 @@
           </div>
 
           <table id="match-list">
-            <tr class="match">
-              <th colspan="2"><h3>Matchs prévus</h3></th>
-            </tr>
-            <tr class="match">
-              <td class="nom-match">NOM DU MATCH</td>
-              <td class="btn-match"><button type="button" class="btn btn-primary">Rentrer résultat</button></td>
-            </tr>
-            <tr class="match">
-              <td class="nom-match">NOM DU MATCH</td>
-              <td class="btn-match"><button type="button" class="btn btn-primary">Rentrer résultat</button></td>
-            </tr>
-            <tr class="match">
-              <td class="nom-match">NOM DU MATCH</td>
-              <td class="btn-match"><button type="button" class="btn btn-primary">Rentrer résultat</button></td>
-            </tr>
+            <thead>
+              <tr id="header-table-matchs" class="match">
+                <th colspan="2"><h3>Matchs prévus</h3></th>
+              </tr>  
+            </thead>
+            <tbody>
+              <tr class="match">
+                <td class="nom-match">NOM DU MATCH</td>
+                <td class="btn-match"><button type="button" class="btn btn-primary">Rentrer résultat</button></td>
+              </tr>
+              <tr class="match">
+                <td class="nom-match">NOM DU MATCH</td>
+                <td class="btn-match"><button type="button" class="btn btn-primary">Rentrer résultat</button></td>
+              </tr>
+              <tr class="match">
+                <td class="nom-match">NOM DU MATCH</td>
+                <td class="btn-match"><button type="button" class="btn btn-primary">Rentrer résultat</button></td>
+              </tr>  
+            </tbody>
           </table>
 
 
         </div>
 
-        <div id="content-right">
+        <div id="column-right">
           <div id="graphique">
             <p>Représentation graphique</p>
           </div>
