@@ -21,9 +21,9 @@
         height=100%;/>
       </div>
       <nav>
-        <div id="menu-selected">En ce moment</div>
-        <div>À venir</div>
-        <div>Terminé</div>  
+        <a href="" id="menu-selected">En ce moment</a>
+        <a href="">À venir</a>
+        <a href="">Terminé</a>
       </nav>
     </header>
 
@@ -56,33 +56,30 @@
           </div>
 
           <div id="next-matchs">
-            <h3>Matchs prévus</h3>
-            <div id="next-matchs-list">
-              <div class="match">
-                <p>NOM DU MATCH</p>
-                <button type="button" class="btn btn-primary">Rentrer résultat</button>
-              </div>
-              <div class="match">
-                <p>NOM DU MATCH</p>
-                <button type="button" class="btn btn-primary">Rentrer résultat</button>
-              </div>
-              <div class="match">
-                <p>NOM DU MATCH</p>
-                <button type="button" class="btn btn-primary">Rentrer résultat</button>
-              </div>
-              <div class="match">
-                <p>NOM DU MATCH</p>
-                <button type="button" class="btn btn-primary">Rentrer résultat</button>
-              </div>
-              <div class="match">
-                <p>NOM DU MATCH</p>
-                <button type="button" class="btn btn-primary">Rentrer résultat</button>
-              </div>
-              <div class="match">
-                <p>NOM DU MATCH</p>
-                <button type="button" class="btn btn-primary">Rentrer résultat</button>
-              </div>
+          <table id="next-matchs-list">
+            <tr>
+              <th colspan="2"><h3>Matchs prévus</h3></th>
+            </tr>
+            <tr class="match">
+              <td class="nom-match">NOM DU MATCH</td>
+              <td><button type="button" class="btn-match btn btn-primary">Rentrer résultat</button></td>
+            </tr>
+            <tr class="match">
+              <td class="nom-match">NOM DU MATCH</td>
+              <td><button type="button" class="btn-match btn btn-primary">Rentrer résultat</button></td>
+            </tr>
+            <tr class="match">
+              <td class="nom-match">NOM DU MATCH</td>
+              <td><button type="button" class="btn-match btn btn-primary">Rentrer résultat</button></td>
+            </tr>
+          </table>
+
+          <div id="next-matchs-list">
+            <div class="match">
+              <div class="nom-match"><p>NOM DU MATCH</p></div>
+              <button type="button" class="btn-match btn btn-primary">Rentrer résultat</button>
             </div>
+          </div>
 
           </div>
 
