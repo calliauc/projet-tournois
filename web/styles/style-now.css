@@ -3,13 +3,12 @@
     display:flex;
 }
 
-.columns{
+.column{
     width:48%;
     height:100%;
     margin:1%;
     display:flex;
     flex-direction: column;
-    border: 3px solid green;
 }
 
 /*DEBUT COLONNE GAUCHE*/
@@ -35,8 +34,19 @@
     margin: 1%;
 }
 
-#match-list{
+#matchs{
     margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#matchs-header{
+    width: 100%;
+    margin: 1%;
+}
+
+#matchs-list{
     max-height: 300px;
     overflow-x: hidden;
     overflow-y: scroll auto;
@@ -45,13 +55,8 @@
     align-items: center;
 }
 
-#match-header{
-    width: 100%;
-    margin: 1%;
-}
-
 .match{
-    width: 580px;
+    width: 500px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -74,7 +79,7 @@
 /*DEBUT COLONNE DROITE*/
 
 .graph{
-    width:100%;
+    margin-bottom: 2%;
     height:200px;
 }
 
