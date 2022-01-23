@@ -12,83 +12,93 @@
   </head>
 
 
-  <body>
+  <body class="container-fluid">
     <header>
-      <div>
-        <a href="">
-          <img id="logo" src="assets/img/resized/logo_2.webp"
-          alt="logo"
-          />  
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">
+          <img src="assets/img/resized/logo_2.webp" alt="Logo" style="width:50px;">
         </a>
-      </div>
-      <nav>
-        <a href="" id="menu-selected">En ce moment</a>
-        <a href="">À venir</a>
-        <a href="">Terminé</a>
-      </nav>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">En ce moment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">A venir</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Terminé</a>
+          </li>
+        </ul>
+      </nav> 
     </header>
 
 
     <main>
-      <h1>Tournoi en cours</h1>
-      <div id="columns">
-        <div id="column-left">
-          <div id="description">
-            <h2>MARIO KART</h2>
-            <p id="mode-tournoi">Championnat</p>
-          </div>
-
-          <div id="tournement">
-            <div id="game-img">
-              <img src="assets/img/resized/mariokart.webp"
-              alt="Image du jeu"
-              width=100%;
-              height=100%;/>
+      <div class="card bg-dark text-white">
+        <div class="card-header"><h1>Tournoi en cours</h1></div>
+        <div class="card-body">
+          <div id="columns">
+            <div class="column">
+              <div class="card bg-dark text-white">
+                <div class="card-header">
+                  <h2>MARIO KART</h2>
+                </div>
+                <div class="card-body">
+                  <div id="tournement">
+                    <div id="game-img">
+                      <img src="assets/img/resized/mariokart.webp"
+                      alt="Image du jeu"
+                      width=100%;
+                      height=100%;/>
+                    </div>
+                    <div id="tournement-details" class="card bg-dark text-white">
+                      <div class="card-header"><h3>Championnat</h3></div>
+                      <div class="card-body">Effectif : 17</div>
+                      <div class="card-body">Date début : 21-02-2022</div>
+                      <div class="card-body">Fin prévue : 22-02-2022</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+              <div id="match-list" class="card bg-dark text-white">
+                <div id="match-header" class="card-header">
+                  <h3>Matchs prévus</h3>
+                  <div class="progress">
+                    <div class="progress-bar bg-success" style="width:60%">Validés</div>
+                    <div class="progress-bar" style="width:20%">Actuels</div>
+                    <div class="progress-bar bg-secondary" style="width:20%">Futurs</div>
+                  </div>
+                </div>
+                <div class="match card-body">
+                  <p class="nom-match">NOM DU MATCH<p>
+                  <button type="button" class="btn btn-primary">Rentrer résultat</button>
+                </div>
+              </div>
             </div>
 
-            <div id="tournement-details">
-              <ul>
-                <li>Effectif :</li>
-                <li>Date début :</li>
-                <li>Avancement :</li>
-                <li>## matchs joués sur ##</li>  
-              </ul>
+            <div class="column">
+              <div class="card bg-dark text-white graph">
+                <div class="card-header"><h2>ARBRE DES FINALES</h2></div>
+                <div class="card-body">Plein de graphs</div>
+              </div>
+              <div class="card bg-dark text-white graph">
+                <div class="card-header"><h2>POULES</h2></div>
+                <div class="card-body">Plein de tables dans des cards</div>
+              </div>
+    
             </div>
-          </div>
-
-          <table id="match-list">
-            <thead>
-              <tr id="header-table-matchs" class="match">
-                <th colspan="2"><h3>Matchs prévus</h3></th>
-              </tr>  
-            </thead>
-            <tbody>
-              <tr class="match">
-                <td class="nom-match">NOM DU MATCH</td>
-                <td class="btn-match"><button type="button" class="btn btn-primary">Rentrer résultat</button></td>
-              </tr>
-              <tr class="match">
-                <td class="nom-match">NOM DU MATCH</td>
-                <td class="btn-match"><button type="button" class="btn btn-primary">Rentrer résultat</button></td>
-              </tr>
-              <tr class="match">
-                <td class="nom-match">NOM DU MATCH</td>
-                <td class="btn-match"><button type="button" class="btn btn-primary">Rentrer résultat</button></td>
-              </tr>  
-            </tbody>
-          </table>
-
-
-        </div>
-
-        <div id="column-right">
-          <div id="graphique">
-            <p>Représentation graphique</p>
+    
           </div>
         </div>
-
       </div>
+
+      
       </main>
+
+      <footer>
+
+      </footer>
 
   </body>
 </html>

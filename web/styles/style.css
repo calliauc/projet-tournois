@@ -6,56 +6,19 @@ body {
     color: lightblue;
 }
 
-header{
-    width:40%;
-    height:100px;
-    border: 2px solid lightblue;
-    display:flex;
-}
-
-
-#logo{
-    background-color: #323232;
-    height: 100%;
-}
-
-nav{
-    display:flex;
-    width: 100%;
-}
-
-nav > a{
-    background-color: #323232;
-    width:25%;
-    height:100%;
-    color:lightblue;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size :1em;
-}
-
-nav > a:hover{
-    background-color: #32323291;
-    color:lightcyan;
-    text-decoration: none;
-}
-
-
-#menu-selected{
-    background-color: #434343;
-}
 
 main{
-    width:70%;
-    margin-top:2%;
-    border: 1px solid lightblue;
+    margin-top: 1%;
+    width: 60%;
 }
 
 h1{
     color:lightblue;
     display:flex;
     justify-content:center;
-    margin-top: 3%;
     font-weight: bold;
+}
+
+ul{
+    list-style-type: none;
 }
