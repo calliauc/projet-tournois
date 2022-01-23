@@ -48,6 +48,7 @@
 
 #matchs-list{
     max-height: 300px;
+    padding: 1%;
     overflow-x: hidden;
     overflow-y: scroll auto;
     display: flex;
@@ -58,22 +59,16 @@
 .match{
     width: 500px;
     height: 50px;
+    margin: 1%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1%;
 }
 
 .nom-match{
     width: 65%;
-    display: flex;
-    justify-content: center;
 }
 
-.btn-match{
-    width: 30%;
-    display: flex;
-}
 
 /*FIN COLONNE GAUCHE*/
 /*DEBUT COLONNE DROITE*/

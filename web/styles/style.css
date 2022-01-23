@@ -19,6 +19,16 @@ h1{
     font-weight: bold;
 }
 
+h2{
+    display:flex;
+    justify-content:center;
+}
+
+h3{
+    display:flex;
+    justify-content:center;
+}
+
 ul{
     list-style-type: none;
 }
