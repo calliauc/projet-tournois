@@ -1,0 +1,81 @@
+
+#columns{
+    display:flex;
+}
+
+.column{
+    width:48%;
+    height:100%;
+    margin:1%;
+    display:flex;
+    flex-direction: column;
+}
+
+/*DEBUT COLONNE GAUCHE*/
+
+#description{
+    text-align:center;
+    background-color: #323232;
+}
+
+#tournement
+{
+    display:flex;
+    height:30%;
+}
+
+#game-img{
+    width:50%;
+    margin: 1%;
+}
+
+#tournement-details{
+    width:50%;
+    margin: 1%;
+}
+
+#matchs{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#matchs-header{
+    width: 100%;
+    margin: 1%;
+}
+
+#matchs-list{
+    max-height: 300px;
+    padding: 1%;
+    overflow-x: hidden;
+    overflow-y: scroll auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match{
+    width: 500px;
+    height: 50px;
+    margin: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nom-match{
+    width: 65%;
+}
+
+
+/*FIN COLONNE GAUCHE*/
+/*DEBUT COLONNE DROITE*/
+
+.graph{
+    margin-bottom: 2%;
+    height:200px;
+}
+
+/*FIN COLONNE DROITE*/
