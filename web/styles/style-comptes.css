@@ -1,20 +1,34 @@
 
 main{
   background-image: url("MP10-Promo-Art-1200x520.jpg");
-  height: auto;
+  height: 520px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+
+.btn{
+  margin: 2px;
 }
 
 #card-login{
   width: 40%;
 }
 
-#formulaire-comptes{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.card-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#formulaire{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 }
+
+
