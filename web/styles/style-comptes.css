@@ -1,6 +1,6 @@
 
 main{
-  background-image: url("MP10-Promo-Art-1200x520.jpg");
+  background-image: url("../assets/img/resized/banniere.webp");
   height: 520px;
   display: flex;
   flex-direction: column;
