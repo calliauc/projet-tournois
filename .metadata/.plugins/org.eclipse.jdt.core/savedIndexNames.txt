@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\theoc\Desktop\FORMATION JAVA\GIT-WORK\projet-tournois\.metadata\.plugins\org.eclipse.jdt.core
+2154333352.index
+1855185914.index
+1865797976.index
