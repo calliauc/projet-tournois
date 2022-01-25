@@ -6,6 +6,9 @@ public class Match {
 	
 	protected int idExterieur ; 
 	protected int idDomicile ;
+	protected Integer scoreExterieur=null ; 
+	protected Integer scoreDomicile=null ; 
+	protected Integer idGagnant = null ; 
 	protected int idJournee ; 
 	protected int idTournoi ;
 	
@@ -67,6 +70,7 @@ public class Match {
 		return "Match [idExterieur=" + idExterieur + ", idDomicile=" + idDomicile + ", idJournee=" + idJournee
 				+ ", idTournoi=" + idTournoi + "]";
 	} 
+	
 	
 	
 	
