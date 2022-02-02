@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<!-- configuration JPA -->
+	<!-- unite de persistence=> info connexion à UNE base -->
+	<persistence-unit name="esport" transaction-type="RESOURCE_LOCAL">
+		<!-- implementation de JPA -->
+		<provider>
+			org.hibernate.jpa.HibernatePersistenceProvider
+		</provider>
+		<properties>
+			<!-- les proprietes sont propres à chaque implementation -->
+			<property name="hibernate.connection.driver" value="org.postgresql.Driver"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5432/esport"/>
+			<property name="hibernate.connection.user" value="postgres"/>
+			<property name="hibernate.connection.password" value="postgres"/>
+			<!-- dialect hibernate -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect"/>
+			<!-- controle de la structure de la base 
+				 validate:controle X
+				 update:si le controle echoue=>ajoute dans la base les elements manquants
+				 create: drop au lancemlent de tout les elements que JPA va gerer, on recree tout
+				 create-drop
+			-->	
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
