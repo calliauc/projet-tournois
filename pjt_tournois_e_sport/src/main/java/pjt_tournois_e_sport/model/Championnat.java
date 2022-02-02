@@ -28,7 +28,7 @@ public class Championnat extends Tournoi {
 		
 	}
 	
-	private void SetPositionFinale(List<Classement> classement)
+	private void SetPositionFinale(List<Inscription> classement)
 	{
 		
 	}

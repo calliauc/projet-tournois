@@ -813,3 +813,17 @@ org.eclipse.jdt.core.JavaModelException: target/classes/pjt_tournois_e_sport/mod
 2022-02-02 20:01:12,885 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
 2022-02-02 20:01:12,887 [Worker-22: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2022-02-02 20:01:12,887 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\theoc\Desktop\FORMATION JAVA\GIT-WORK\projet-tournois\pjt_tournois_e_sport\src\test\resources
+2022-02-02 20:04:01,785 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2022-02-02 20:04:22,693 [Worker-6: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: projet.sopra:pjt_tournois_e_sport:1.0 @ C:\Users\theoc\Desktop\FORMATION JAVA\GIT-WORK\projet-tournois\pjt_tournois_e_sport\pom.xml.
+2022-02-02 20:04:23,444 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /pjt_tournois_e_sport/src/main/java
+2022-02-02 20:04:23,445 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /pjt_tournois_e_sport/src/main/resources
+2022-02-02 20:04:23,446 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /pjt_tournois_e_sport/src/test/java
+2022-02-02 20:04:23,582 [Worker-6: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 1 sec
+2022-02-02 20:04:24,712 [Worker-14: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-02-02 20:04:24,720 [Worker-14: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2022-02-02 20:04:24,731 [Worker-14: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-02-02 20:04:24,733 [Worker-14: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\theoc\Desktop\FORMATION JAVA\GIT-WORK\projet-tournois\pjt_tournois_e_sport\src\test\resources
+2022-02-02 20:04:40,523 [Worker-16: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-02-02 20:04:40,526 [Worker-16: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-02-02 20:04:40,528 [Worker-16: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-02-02 20:04:40,529 [Worker-16: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\theoc\Desktop\FORMATION JAVA\GIT-WORK\projet-tournois\pjt_tournois_e_sport\src\test\resources
