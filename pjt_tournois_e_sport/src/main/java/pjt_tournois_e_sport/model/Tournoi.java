@@ -4,33 +4,56 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
-public class Tournoi {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SequenceGenerator(name="seqTournoi", sequenceName = "seq_tournoi",initialValue = 100,allocationSize = 1)
+public abstract class Tournoi {
 
 	/// ATTRIBUTES
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")
 	protected int idTournoi ; 
+	@Column(name="tournoi_nom", length = 50, nullable =false)
 	protected String nom; 
+	@Column(name="tournoi_date_creation", nullable =false)
 	protected LocalDate dateDeCreation ; 
-	protected LocalDate dateDeDebut ; 
+	@Column(name="tournoi_date_debut", nullable =false)
+	protected LocalDate dateDeDebut ;
+	@Column(name="tournoi_jeu", length = 50, nullable =false)
 	protected String Jeu ; 
-	protected LinkedList<Joueur> listeJoueurs = new LinkedList() ; 
-	protected int nbJoueurs ; 
-	protected List<Tournoi> listeTournois = new ArrayList();
+	@OneToMany(mappedBy="id.tournoi")
+	protected Set<Inscription> listeInscriptions = new Set<Inscription>() ;
 	
 	/// CONSTRUCTOR
 	
-	public Tournoi(String nom, LocalDate dateDeCreation, LocalDate dateDeDebut, String jeu, LinkedList<Joueur> listeJoueurs) {
-		
-		listeTournois.add(this); 
-		this.idTournoi = listeTournois.size() ; 
-		this.nom = nom;
-		this.dateDeDebut = dateDeDebut;
-		this.dateDeCreation = dateDeCreation; 
-		this.Jeu = jeu;
-		this.listeJoueurs = listeJoueurs;
-		this.nbJoueurs = listeJoueurs.size(); 
+	
+	
+	public Tournoi() {
 	}
+
+	
+	public Tournoi(String nom, LocalDate dateDeCreation, LocalDate dateDeDebut, String jeu,
+			Set<Inscription> listeInscriptions) {
+		super();
+		this.nom = nom;
+		this.dateDeCreation = dateDeCreation;
+		this.dateDeDebut = dateDeDebut;
+		Jeu = jeu;
+		this.listeInscriptions = listeInscriptions;
+	}
+
 
 	/// GETTERS
 	
@@ -40,10 +63,6 @@ public class Tournoi {
 
 	public String getNom() {
 		return nom;
-	}
-
-	public int getNbJoueurs() {
-		return nbJoueurs;
 	}
 
 	public LocalDate getDateDeCreation() {
@@ -58,27 +77,19 @@ public class Tournoi {
 		return Jeu;
 	}
 
-	public LinkedList<Joueur> getListeJoueurs() {
-		return listeJoueurs;
-	}
-
-	public List<Tournoi> getListeTournois() {
-		return listeTournois;
-	}
-
 	
 	/// SETTERS
 	
+	public Set<Inscription> getListeInscriptions() {
+		return listeInscriptions;
+	}
+
 	public void setIdTournoi(int idTournoi) {
 		this.idTournoi = idTournoi;
 	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public void setNbJoueurs(int nbJoueurs) {
-		this.nbJoueurs = nbJoueurs;
 	}
 
 	public void setDateDeCreation(LocalDate dateDeCreation) {
@@ -93,13 +104,28 @@ public class Tournoi {
 		Jeu = jeu;
 	}
 
-	public void setListeJoueurs(LinkedList<Joueur> listeJoueurs) {
-		this.listeJoueurs = listeJoueurs;
+	public void setListeInscriptions(Set<Inscription> listeInscriptions) {
+		this.listeInscriptions = listeInscriptions;
 	}
 
-	public void setListeTournois(List<Tournoi> listeTournois) {
-		this.listeTournois = listeTournois;
-	} 
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idTournoi);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tournoi other = (Tournoi) obj;
+		return idTournoi == other.idTournoi;
+	}
 	
 	
 	
