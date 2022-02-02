@@ -6,7 +6,7 @@
 
 	<!-- configuration JPA -->
 	<!-- unite de persistence=> info connexion à UNE base -->
-	<persistence-unit name="safari" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="esport" transaction-type="RESOURCE_LOCAL">
 		<!-- implementation de JPA -->
 		<provider>
 			org.hibernate.jpa.HibernatePersistenceProvider
@@ -14,7 +14,7 @@
 		<properties>
 			<!-- les proprietes sont propres à chaque implementation -->
 			<property name="hibernate.connection.driver" value="org.postgresql.Driver"/>
-			<property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5432/exo"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5432/esport"/>
 			<property name="hibernate.connection.user" value="postgres"/>
 			<property name="hibernate.connection.password" value="postgres"/>
 			<!-- dialect hibernate -->
