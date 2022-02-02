@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -24,7 +25,7 @@ public abstract class Tournoi {
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")
-	protected int idTournoi ; 
+	protected Long id ; 
 	@Column(name="tournoi_nom", length = 50, nullable =false)
 	protected String nom; 
 	@Column(name="tournoi_date_creation", nullable =false)
@@ -57,8 +58,8 @@ public abstract class Tournoi {
 
 	/// GETTERS
 	
-	public int getIdTournoi() {
-		return idTournoi;
+	public Long getId() {
+		return id;
 	}
 
 	public String getNom() {
@@ -84,8 +85,8 @@ public abstract class Tournoi {
 		return listeInscriptions;
 	}
 
-	public void setIdTournoi(int idTournoi) {
-		this.idTournoi = idTournoi;
+	public void setIdTournoi(Long id) {
+		this.id= id;
 	}
 
 	public void setNom(String nom) {
@@ -111,7 +112,7 @@ public abstract class Tournoi {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(idTournoi);
+		return Objects.hash(id);
 	}
 
 
@@ -124,7 +125,7 @@ public abstract class Tournoi {
 		if (getClass() != obj.getClass())
 			return false;
 		Tournoi other = (Tournoi) obj;
-		return idTournoi == other.idTournoi;
+		return id == other.id;
 	}
 	
 	
