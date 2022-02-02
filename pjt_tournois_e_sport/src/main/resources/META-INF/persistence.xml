@@ -11,9 +11,6 @@
 		<provider>
 			org.hibernate.jpa.HibernatePersistenceProvider
 		</provider>
-		<!--  regle une erreur de JPA qui ne supporte pas InscriptionKey avec des classes filles en attribut (merci stack overflow ^^) -->
-		<exclude-unlisted-classes>true</exclude-unlisted-classes>
-        
 		<properties>
 			<!-- les proprietes sont propres à chaque implementation -->
 			<property name="hibernate.connection.driver" value="org.postgresql.Driver"/>

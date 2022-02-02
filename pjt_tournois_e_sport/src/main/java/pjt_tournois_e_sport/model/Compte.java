@@ -1,33 +1,25 @@
 package pjt_tournois_e_sport.model;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.SequenceGenerator;
-
-@MappedSuperclass
 public abstract class Compte {
 	
 	/// ATTRIBUTES
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCompte")
-	protected Long idCompte ; 
+	
+	protected int idCompte ; 
 	protected String pseudo; 
 	protected String password; 
 	protected String mail;
 	
-	
+	public List<Compte> Users =new ArrayList();
 	
 	/// CONSTRUCTOR
-	public Compte() {
-		
-	}
 	
-	public Compte(String pseudo, String password, String mail) {
-		 	
+	
+	public Compte(int idCompte, String pseudo, String password, String mail) {
+		
+		this.idCompte = idCompte ; 	
 		this.pseudo = pseudo;
 		this.password = password;
 		this.mail = mail;
@@ -36,7 +28,7 @@ public abstract class Compte {
 
 	/// GETTERS
 
-	public Long getIdCompte() {
+	public int getIdCompte() {
 		return idCompte;
 	}
 
@@ -54,7 +46,7 @@ public abstract class Compte {
 
 	/// SETTERS
 	
-	public void setIdCompte(Long idCompte) {
+	public void setIdCompte(int idCompte) {
 		this.idCompte = idCompte;
 	}
 
@@ -68,23 +60,6 @@ public abstract class Compte {
 
 	public void setMail(String mail) {
 		this.mail = mail;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(idCompte);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Compte other = (Compte) obj;
-		return idCompte == other.idCompte;
 	} 
 	
 	
