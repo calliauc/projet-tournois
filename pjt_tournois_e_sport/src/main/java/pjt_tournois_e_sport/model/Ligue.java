@@ -1,30 +1,56 @@
 package pjt_tournois_e_sport.model;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ligue")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Ligue extends Tournoi {
 
 	/// ATTRIBUTES
 	
+	@Column(name = "isPoule")
 	private boolean isPoule ; 
-	private LinkedList<Journee> journees = new LinkedList() ; 
+	@Column(name = "nbPhase")
+	private int nbPhase;
+	@Column(name = "matchsAJouerPourPhase")
+	private Set<Match> matchsAJouerPourPhase = new HashSet(); 
 	
 	
-	/// CONSTRUCTOR
+	/// CONSTRUCTORS
+	
+	public Ligue() {
+
+	}
 	
 	public Ligue(String nom, LocalDate dateDeCreation, LocalDate dateDeDebut, String jeu,
-			LinkedList<Joueur> listeJoueurs, boolean isPoule, LinkedList<Journee> journees) {
-		
-		super(nom, dateDeCreation, dateDeDebut, jeu, listeJoueurs);
+			Set<Inscription> listeInscriptions, boolean isPoule, int nbPhase, Set<Match> matchsAJouerPourPhase) {
+		super(nom, dateDeCreation, dateDeDebut, jeu, listeInscriptions);
 		this.isPoule = isPoule;
-		this.journees = journees;
+		this.nbPhase = nbPhase;
+		this.matchsAJouerPourPhase = matchsAJouerPourPhase;
 	}
 
+	
 	/// GETTERS
 	
 	public boolean isPoule() {
 		return isPoule;
+	}
+
+	public int getNbPhase() {
+		return nbPhase;
+	}
+
+	public Set<Match> getMatchsAJouerPourPhase() {
+		return matchsAJouerPourPhase;
 	}
 
 	
@@ -33,13 +59,15 @@ public class Ligue extends Tournoi {
 	public void setPoule(boolean isPoule) {
 		this.isPoule = isPoule;
 	}
-	
-	/// METHODS
-	
-	private void setScoreFinal()
-	{
-		
+
+	public void setNbPhase(int nbPhase) {
+		this.nbPhase = nbPhase;
 	}
 	
+	public void setMatchsAJouerPourPhase(Set<Match> matchsAJouerPourPhase) {
+		this.matchsAJouerPourPhase = matchsAJouerPourPhase;
+	}
+
+
 	
 }

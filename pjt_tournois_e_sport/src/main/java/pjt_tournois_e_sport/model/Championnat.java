@@ -1,35 +1,45 @@
 package pjt_tournois_e_sport.model;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="championnat")
 public class Championnat extends Tournoi {
-
+	
 	/// ATTRIBUTES
 	
-	/// CONSTRUCTOR
+	@Column(name = "poule")
+	private Poule poule;
+	
+
+	/// CONSTRUCTORS
+	
+	public Championnat() {
+		
+	}
 	
 	public Championnat(String nom, LocalDate dateDeCreation, LocalDate dateDeDebut, String jeu,
-			LinkedList<Joueur> listeJoueurs) {
-		super(nom, dateDeCreation, dateDeDebut, jeu, listeJoueurs);
-		// TODO Auto-generated constructor stub
+			Set<Inscription> listeInscriptions, Poule poule) {
+		super(nom, dateDeCreation, dateDeDebut, jeu, listeInscriptions);
+		this.poule = poule;
+	}
+
+		
+	/// GETTERS
+	public Poule getPoule() {
+		return poule;
 	}
 
 	
-	/// METHODS
-	
-	private void phasePoule() 
-	{
-		
+	/// SETTERS
+	public void setPoule(Poule poule) {
+		this.poule = poule;
 	}
 	
-	private void phaseFinale()
-	{
-		
-	}
 	
-	private void SetPositionFinale(List<Inscription> classement)
-	{
-		
-	}
+
 }
