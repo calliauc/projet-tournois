@@ -2,3 +2,9 @@
 **/bin/
 **/.metadata/
 **/target/
+bin/
+/.metadata/
+.classpath
+.projet
+.settings/
+target/
