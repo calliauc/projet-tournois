@@ -1,14 +1,11 @@
 package pjt_tournois_e_sport.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.SequenceGenerator;
 
 @MappedSuperclass
 
@@ -17,10 +14,10 @@ public abstract class Compte {
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqCompte" )
-	protected Long idCompte ; 
-	protected String pseudo; 
-	protected String password; 
-	protected String mail;
+	private Long idCompte ; 
+	private String pseudo; 
+	private String password; 
+	private String mail;
 	
 
 	

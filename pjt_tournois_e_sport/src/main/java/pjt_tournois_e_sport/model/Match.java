@@ -4,10 +4,10 @@ public class Match {
 
 	/// ATTRIBUTES
 	
-	protected int idExterieur ; 
-	protected int idDomicile ;
-	protected int idJournee ; 
-	protected int idTournoi ;
+	private int idExterieur ; 
+	private int idDomicile ;
+	private int idJournee ; 
+	private int idTournoi ;
 	
 	/// CONSTRUCTOR
 	
