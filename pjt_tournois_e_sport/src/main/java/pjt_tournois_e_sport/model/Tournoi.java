@@ -1,9 +1,7 @@
 package pjt_tournois_e_sport.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,17 +23,18 @@ public abstract class Tournoi {
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")
-	protected int idTournoi ; 
+	private int idTournoi ; 
 	@Column(name="tournoi_nom", length = 50, nullable =false)
-	protected String nom; 
+	private String nom; 
 	@Column(name="tournoi_date_creation", nullable =false)
-	protected LocalDate dateDeCreation ; 
+	private LocalDate dateDeCreation ; 
 	@Column(name="tournoi_date_debut", nullable =false)
-	protected LocalDate dateDeDebut ;
+	private LocalDate dateDeDebut ;
 	@Column(name="tournoi_jeu", length = 50, nullable =false)
-	protected String Jeu ; 
+	
+	private String Jeu ; 
 	@OneToMany(mappedBy="id.tournoi")
-	protected Set<Inscription> listeInscriptions = new Set<Inscription>() ;
+	private Set<Inscription> listeInscriptions = new HashSet<Inscription>() ;
 	
 	/// CONSTRUCTOR
 	
