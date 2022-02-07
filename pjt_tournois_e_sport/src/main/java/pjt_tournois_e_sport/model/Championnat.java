@@ -12,8 +12,6 @@ public class Championnat extends Tournoi {
 	
 	/// ATTRIBUTES
 	
-	@Column(name = "poule")
-	private Poule poule;
 	
 
 	/// CONSTRUCTORS
@@ -23,22 +21,18 @@ public class Championnat extends Tournoi {
 	}
 	
 	public Championnat(String nom, LocalDate dateDeCreation, LocalDate dateDeDebut, String jeu,
-			Set<Inscription> listeInscriptions, Poule poule) {
+			Set<Inscription> listeInscriptions) {
 		super(nom, dateDeCreation, dateDeDebut, jeu, listeInscriptions);
-		this.poule = poule;
+
 	}
 
 		
 	/// GETTERS
-	public Poule getPoule() {
-		return poule;
-	}
+
 
 	
 	/// SETTERS
-	public void setPoule(Poule poule) {
-		this.poule = poule;
-	}
+
 	
 	
 

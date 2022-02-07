@@ -20,8 +20,8 @@ import javax.persistence.Table;
 })
 public class Organisateur extends Compte{
 
-	@OneToMany(mappedBy="id")
-	@Column(name="organisateur_tournois")
+	@OneToMany(mappedBy="organisateur")
+	@Column(name="tournois_organisés")
 	private List<Tournoi> tournois;
 	
 	public Organisateur() {
