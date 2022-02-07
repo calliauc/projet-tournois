@@ -21,7 +21,7 @@ import javax.persistence.Table;
 		@AttributeOverride(name="mail", column=@Column(name="joueur_mail"))
 })
 public class Joueur extends Compte {
-	@OneToMany(mappedBy="id")
+	@OneToMany(mappedBy="id.joueur")
 	@Column(name="joueur_inscriptions")
 	private Set<Inscription> inscriptions;
 

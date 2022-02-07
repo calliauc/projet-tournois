@@ -20,8 +20,8 @@ public class Ligue extends Tournoi {
 	private boolean isPoule ; 
 	@Column(name = "nbPhase")
 	private int nbPhase;
-	@Column(name = "matchsAJouerPourPhase")
-	private Set<Match> matchsAJouerPourPhase = new HashSet(); 
+	
+
 	
 	
 	/// CONSTRUCTORS
@@ -31,11 +31,10 @@ public class Ligue extends Tournoi {
 	}
 	
 	public Ligue(String nom, LocalDate dateDeCreation, LocalDate dateDeDebut, String jeu,
-			Set<Inscription> listeInscriptions, boolean isPoule, int nbPhase, Set<Match> matchsAJouerPourPhase) {
+			Set<Inscription> listeInscriptions, boolean isPoule, int nbPhase) {
 		super(nom, dateDeCreation, dateDeDebut, jeu, listeInscriptions);
 		this.isPoule = isPoule;
 		this.nbPhase = nbPhase;
-		this.matchsAJouerPourPhase = matchsAJouerPourPhase;
 	}
 
 	
@@ -49,10 +48,7 @@ public class Ligue extends Tournoi {
 		return nbPhase;
 	}
 
-	public Set<Match> getMatchsAJouerPourPhase() {
-		return matchsAJouerPourPhase;
-	}
-
+	
 	
 	/// SETTERS
 	
@@ -63,11 +59,6 @@ public class Ligue extends Tournoi {
 	public void setNbPhase(int nbPhase) {
 		this.nbPhase = nbPhase;
 	}
-	
-	public void setMatchsAJouerPourPhase(Set<Match> matchsAJouerPourPhase) {
-		this.matchsAJouerPourPhase = matchsAJouerPourPhase;
-	}
-
 
 	
 }

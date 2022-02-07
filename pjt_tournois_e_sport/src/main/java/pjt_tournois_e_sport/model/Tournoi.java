@@ -7,11 +7,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -23,7 +26,7 @@ public abstract class Tournoi {
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")
-	private int idTournoi ; 
+	private Long idTournoi ; 
 	@Column(name="tournoi_nom", length = 50, nullable =false)
 	private String nom; 
 	@Column(name="tournoi_date_creation", nullable =false)
@@ -36,6 +39,9 @@ public abstract class Tournoi {
 	@OneToMany(mappedBy="id.tournoi")
 	private Set<Inscription> listeInscriptions = new HashSet<Inscription>() ;
 	
+	@ManyToOne
+	@JoinColumn(name = "organisteur_tournoi", foreignKey = @ForeignKey(name = "organisteur_tournoi_fk"))
+	private Organisateur organisateur;
 	/// CONSTRUCTOR
 	
 	
@@ -57,7 +63,7 @@ public abstract class Tournoi {
 
 	/// GETTERS
 	
-	public int getIdTournoi() {
+	public Long getIdTournoi() {
 		return idTournoi;
 	}
 
@@ -84,7 +90,7 @@ public abstract class Tournoi {
 		return listeInscriptions;
 	}
 
-	public void setIdTournoi(int idTournoi) {
+	public void setIdTournoi(Long idTournoi) {
 		this.idTournoi = idTournoi;
 	}
 
@@ -106,6 +112,16 @@ public abstract class Tournoi {
 
 	public void setListeInscriptions(Set<Inscription> listeInscriptions) {
 		this.listeInscriptions = listeInscriptions;
+	}
+
+
+	public Organisateur getOrganisateur() {
+		return organisateur;
+	}
+
+
+	public void setOrganisateur(Organisateur organisateur) {
+		this.organisateur = organisateur;
 	}
 
 
