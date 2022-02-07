@@ -1,6 +1,7 @@
 package pjt_tournois_e_sport.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -26,14 +27,17 @@ public class Journee {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqJournee" )
 	private Long id;
+	
 	@ManyToOne
 	@JoinColumn(name = "journee_tournoi", foreignKey = @ForeignKey(name = "journee_tournoi_fk"))
 	private Tournoi tournoi; 
-	@OneToMany
-	@JoinColumn(name = "journee_matchs", foreignKey = @ForeignKey(name = "journee_matchs_fk"))
-	private Set<Match> MatchsAJouerPourJournee; 
+	
+	@OneToMany(mappedBy = "journee")
+	private Set<Match> MatchsAJouerPourJournee;
+	
 	@Column(name="journee_date_debut")
 	private LocalDateTime DateDebutJournee;
+	
 	@Column(name="journee_date_fin")
 	private LocalDateTime DateFinJournee; 
 	
@@ -100,13 +104,30 @@ public class Journee {
 	public void setDateFinJournee(LocalDateTime dateFinJournee) {
 		DateFinJournee = dateFinJournee;
 	}
-	
+
+
 	
 
 	/// METHODS
 	
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Journee other = (Journee) obj;
+		return Objects.equals(id, other.id);
+	}
+	
 
 
 

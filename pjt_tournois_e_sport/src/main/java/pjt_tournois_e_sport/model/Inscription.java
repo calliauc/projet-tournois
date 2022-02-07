@@ -5,6 +5,9 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -20,6 +23,9 @@ public class Inscription {
 	private int score ;
 	@EmbeddedId
 	private InscriptionKey id;
+	@ManyToOne
+	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
+	private Match prochainMatch;
 	
 	
 	/// CONSTRUCTOR
