@@ -35,18 +35,18 @@ public class Match {
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
 	private Journee journee;
 	
-	@Column(name="resultat")
-	private Map<InscriptionKey,Integer> resultat = new HashMap<InscriptionKey, Integer>();
+//	@Column(name="resultat")
+//	private Map<Inscription,Integer> resultat = new HashMap<Inscription, Integer>();
 	
 	/// CONSTRUCTOR
 	public Match() {
 	}
 
-	public Match(List<Inscription> inscriptions, Journee journee, Map<InscriptionKey, Integer> resultat) {
+	public Match(List<Inscription> inscriptions, Journee journee) {
 		super();
 		this.inscriptions = inscriptions;
 		this.journee = journee;
-		this.resultat = resultat;
+//		this.resultat = resultat;
 	}
 
 	
@@ -64,9 +64,9 @@ public class Match {
 		return journee;
 	}
 
-	public Map<InscriptionKey, Integer> getResultat() {
-		return resultat;
-	}
+//	public Map<Inscription, Integer> getResultat() {
+//		return resultat;
+//	}
 
 	
 	/// SETTERS
@@ -83,9 +83,9 @@ public class Match {
 		this.journee = journee;
 	}
 
-	public void setResultat(Map<InscriptionKey, Integer> resultat) {
-		this.resultat = resultat;
-	}
+//	public void setResultat(Map<Inscription, Integer> resultat) {
+//		this.resultat = resultat;
+//	}
 
 	
 		
