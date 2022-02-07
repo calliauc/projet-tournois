@@ -1,8 +1,6 @@
 package pjt_tournois_e_sport.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -35,21 +33,22 @@ public class Match {
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
 	private Journee journee;
 	
-//	@Column(name="resultat")
-//	private Map<Inscription,Integer> resultat = new HashMap<Inscription, Integer>();
+	@OneToMany(mappedBy = "match")
+	private List<Resultat> resultats;
 	
 	/// CONSTRUCTOR
 	public Match() {
 	}
 
-	public Match(List<Inscription> inscriptions, Journee journee) {
+	
+	public Match(List<Inscription> inscriptions, Journee journee, List<Resultat> resultats) {
 		super();
 		this.inscriptions = inscriptions;
 		this.journee = journee;
-//		this.resultat = resultat;
+		this.resultats = resultats;
 	}
 
-	
+
 	/// GETTERS
 	
 	public Long getId() {
@@ -64,13 +63,21 @@ public class Match {
 		return journee;
 	}
 
-//	public Map<Inscription, Integer> getResultat() {
-//		return resultat;
-//	}
+	public List<Resultat> getResultats() {
+		return resultats;
+	}
+
 
 	
 	/// SETTERS
 	
+
+
+	public void setResultats(List<Resultat> resultats) {
+		this.resultats = resultats;
+	}
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -83,11 +90,7 @@ public class Match {
 		this.journee = journee;
 	}
 
-//	public void setResultat(Map<Inscription, Integer> resultat) {
-//		this.resultat = resultat;
-//	}
 
-	
 		
 	/// METHODS
 	

@@ -27,20 +27,21 @@ public class Inscription {
 	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
 	private Match prochainMatch;
 	
-	
 	/// CONSTRUCTOR
 	public Inscription() {
 		
 	}
-	public Inscription(int position, int score) {
+	
 
+
+	public Inscription(int position, int score, Match prochainMatch) {
+		super();
 		this.position = position;
 		this.score = score;
+		this.prochainMatch = prochainMatch;
 	}
 
 	/// GETTERS
-	
-
 	public int getPosition() {
 		return position;
 	}
@@ -52,10 +53,24 @@ public class Inscription {
 	public InscriptionKey getId() {
 		return id;
 	}
+
+	
+	public Match getProchainMatch() {
+		return prochainMatch;
+	}
+	
 	/// SETTERS
 	
 
-	
+
+
+
+	public void setProchainMatch(Match prochainMatch) {
+		this.prochainMatch = prochainMatch;
+	}
+
+
+
 	public void setPosition(int position) {
 		this.position = position;
 	}
