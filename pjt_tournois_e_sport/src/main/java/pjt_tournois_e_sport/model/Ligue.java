@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +21,8 @@ public class Ligue extends Tournoi {
 	private boolean isPoule ; 
 	@Column(name = "nbPhase")
 	private int nbPhase;
+	@OneToMany(mappedBy="id.tournoi")
+	private Set<Journee> JourneesAJouer; 
 	
 
 	

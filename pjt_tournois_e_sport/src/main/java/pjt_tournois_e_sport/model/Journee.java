@@ -1,65 +1,111 @@
 package pjt_tournois_e_sport.model;
 
-import java.util.LinkedList;
-import pjt_tournois_e_sport.model.Match;
+import java.time.LocalDateTime;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="journee")
+@SequenceGenerator(name="seqJournee", sequenceName="seq_journee", initialValue=100, allocationSize=1)
 
 public class Journee {
 	
 	/// ATTRIBUTES
 	
-	protected int idJournée ; 
-	protected int idTournoi ; 
-	protected LinkedList<Match> matchs_journee = new LinkedList() ;
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqJournee" )
+	private Long id;
+	@ManyToOne
+	@JoinColumn(name = "journee_tournoi", foreignKey = @ForeignKey(name = "journee_tournoi_fk"))
+	private Tournoi tournoi; 
+	@OneToMany
+	@JoinColumn(name = "journee_matchs", foreignKey = @ForeignKey(name = "journee_matchs_fk"))
+	private Set<Match> MatchsAJouerPourJournee; 
+	@Column(name="journee_date_debut")
+	private LocalDateTime DateDebutJournee;
+	@Column(name="journee_date_fin")
+	private LocalDateTime DateFinJournee; 
 	
 	/// CONSTRUCTOR
-
-	public Journee(int idJournée, int idTournoi, LinkedList<Match> matchs_journee) {
-		this.idJournée = idJournée;
-		this.idTournoi = idTournoi;
-		this.matchs_journee = matchs_journee;
+	
+	public Journee() {
+		
 	}
+
+	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee) {
+		super();
+		this.tournoi = tournoi;
+		DateDebutJournee = dateDebutJournee;
+		DateFinJournee = dateFinJournee;
+	}
+
+	
+	
+	
 
 	/// GETTERS
 
-	public int getIdJournée() {
-		return idJournée;
+	public Long getIdJournee() {
+		return id;
 	}
 
-	public LinkedList<Match> getMatchs_journee() {
-		return matchs_journee;
+	public Tournoi getTournoi() {
+		return tournoi;
 	}
 
-
-	public int getIdTournoi() {
-		return idTournoi;
+	public Set<Match> getMatchsAJouerPourJournee() {
+		return MatchsAJouerPourJournee;
 	}
+
+	public LocalDateTime getDateDebutJournee() {
+		return DateDebutJournee;
+	}
+
+	public LocalDateTime getDateFinJournee() {
+		return DateFinJournee;
+	}
+
+	
 
 
 	/// SETTERS
 
-	public void setIdTournoi(int idTournoi) {
-		this.idTournoi = idTournoi;
+	public void setIdJournee(Long idJournee) {
+		this.id = idJournee;
 	}
 
-	public void setIdJournée(int idJournée) {
-			this.idJournée = idJournée;
+	public void setTournoi(Tournoi tournoi) {
+		this.tournoi = tournoi;
 	}
 
-
-	public void setMatchs_journee(LinkedList<Match> matchs_journee) {
-		this.matchs_journee = matchs_journee;
+	public void setMatchsAJouerPourJournee(Set<Match> matchsAJouerPourJournee) {
+		MatchsAJouerPourJournee = matchsAJouerPourJournee;
 	}
 
+	public void setDateDebutJournee(LocalDateTime dateDebutJournee) {
+		DateDebutJournee = dateDebutJournee;
+	}
+
+	public void setDateFinJournee(LocalDateTime dateFinJournee) {
+		DateFinJournee = dateFinJournee;
+	}
+	
 	
 
 	/// METHODS
 	
-	@Override
-	public String toString() {
-		return "Journee [idJournée=" + idJournée + ", idTournoi=" + idTournoi + ", matchs_journee=" + matchs_journee
-				+ "]";
-	}
+	
 
 
 
