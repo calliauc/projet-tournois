@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -11,6 +12,10 @@ import javax.persistence.Table;
 public class Championnat extends Tournoi {
 	
 	/// ATTRIBUTES
+	@OneToMany(mappedBy="id.tournoi")
+	private Set<Journee> JourneesAJouerPoules;
+	@OneToMany(mappedBy="id.tournoi")
+	private Set<Journee> JourneesAJouerFinales;
 	
 	
 
