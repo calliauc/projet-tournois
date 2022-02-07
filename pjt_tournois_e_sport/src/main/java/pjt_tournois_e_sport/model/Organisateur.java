@@ -37,7 +37,4 @@ public class Organisateur extends Compte{
 	public void setTournois(List<Tournoi> tournois) {
 		this.tournois = tournois;
 	}
-	
-	
-
 }
