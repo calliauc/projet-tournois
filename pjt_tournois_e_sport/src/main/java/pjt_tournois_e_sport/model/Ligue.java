@@ -21,7 +21,7 @@ public class Ligue extends Tournoi {
 	private boolean isPoule ; 
 	@Column(name = "nbPhase")
 	private int nbPhase;
-	@OneToMany(mappedBy="id.tournoi")
+	@OneToMany(mappedBy="tournoi")
 	private Set<Journee> JourneesAJouer; 
 	
 

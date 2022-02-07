@@ -12,10 +12,10 @@ import javax.persistence.Table;
 public class Championnat extends Tournoi {
 	
 	/// ATTRIBUTES
-	@OneToMany(mappedBy="id.tournoi")
+	@OneToMany(mappedBy="tournoi")
 	private Set<Journee> JourneesAJouerPoules;
-	@OneToMany(mappedBy="id.tournoi")
-	private Set<Journee> JourneesAJouerFinales;
+//	@OneToMany(mappedBy="id")
+//	private Set<Journee> JourneesAJouerFinales;
 	
 	
 
