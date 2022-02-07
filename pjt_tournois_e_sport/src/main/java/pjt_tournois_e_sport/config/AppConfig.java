@@ -19,7 +19,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = { "pjt_tournois_e_sport.dao","pjt_tournois_e_sport.services" })
+//@ComponentScan(basePackages = { "pjt_tournois_e_sport.dao","pjt_tournois_e_sport.services" })
 @EnableTransactionManagement
 @PropertySource("classpath:infos.properties")
 @EnableJpaRepositories(basePackages = {"pjt_tournois_e_sport.repositories"})
