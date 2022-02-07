@@ -13,7 +13,7 @@ import pjt_tournois_e_sport.model.Tournoi;
  * Hello world!
  *
  */
-public class App 
+public class AppSpring 
 {
 	public static void generate_matchs_ligue(LinkedList<Joueur> participants, int idTournoi)
 	{
