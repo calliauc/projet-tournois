@@ -1,6 +1,5 @@
 package pjt_tournois_e_sport.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,9 @@ public class MatchService {
 		return matchRepo.findAll();
 	}
 	
-	public List<Match> findByDateWithJournees(LocalDateTime dateDebut){
-		return matchRepo.findByDateWithJournees(dateDebut);
-	}
+//	public List<Match> findByDateWithJournees(LocalDateTime dateDebut){
+//		return matchRepo.findByDateWithJournees(dateDebut);
+//	}
 	
 	public Match getById(Long id) {
 		return matchRepo.findById(id).orElseThrow(() -> {
