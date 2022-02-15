@@ -54,4 +54,13 @@ public class TournoiService {
 		Tournoi tournoiEnBase = tournoiRepo.findById(t.getIdTournoi()).orElseThrow(TournoiException::new);
 		tournoiRepo.delete(tournoiEnBase);
 	}
+	
+	public void delete(Long id) {
+		delete(getById(id)); 
+	}
+	
+	public boolean exist(Long id) {
+		return tournoiRepo.existsById(id);
+	}
 }
+
