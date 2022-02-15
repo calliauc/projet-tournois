@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 
 @Entity
 @Table(name="journee")
@@ -34,12 +38,15 @@ public class Journee {
 	
 	@OneToMany(mappedBy = "journee")
 	private Set<Match> MatchsAJouerPourJournee;
-	
+	@FutureOrPresent
 	@Column(name="journee_date_debut")
 	private LocalDateTime DateDebutJournee;
-	
+	@Future
 	@Column(name="journee_date_fin")
 	private LocalDateTime DateFinJournee; 
+	@Enumerated(EnumType.STRING)	
+	@Column(name="journee_etape")
+	private Etape etape; 
 	
 	/// CONSTRUCTOR
 	
@@ -47,11 +54,12 @@ public class Journee {
 		
 	}
 
-	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee) {
+	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape) {
 		super();
 		this.tournoi = tournoi;
-		DateDebutJournee = dateDebutJournee;
-		DateFinJournee = dateFinJournee;
+		this.DateDebutJournee = dateDebutJournee;
+		this.DateFinJournee = dateFinJournee;
+		this.etape = etape;
 	}
 
 	
@@ -60,7 +68,7 @@ public class Journee {
 
 	/// GETTERS
 
-	public Long getIdJournee() {
+	public Long getId() {
 		return id;
 	}
 
@@ -80,12 +88,15 @@ public class Journee {
 		return DateFinJournee;
 	}
 
-	
+	public Etape getEtape() {
+		return etape;
+	}
 
 
 	/// SETTERS
 
-	public void setIdJournee(Long idJournee) {
+	
+	public void setId(Long idJournee) {
 		this.id = idJournee;
 	}
 
@@ -105,6 +116,10 @@ public class Journee {
 		DateFinJournee = dateFinJournee;
 	}
 
+
+	public void setEtape(Etape etape) {
+		this.etape = etape;
+	}
 
 	
 
