@@ -59,6 +59,9 @@ public class JourneeService {
 		delete(getById(id)); 
 	}
 	
+	public boolean exist(Long id) {
+		return journeeRepo.existsById(id);
+	}
 	
 	
 }

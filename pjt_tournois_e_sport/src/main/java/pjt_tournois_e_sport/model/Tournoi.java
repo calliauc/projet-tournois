@@ -22,7 +22,9 @@ import javax.persistence.SequenceGenerator;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SequenceGenerator(name="seqTournoi", sequenceName = "seq_tournoi",initialValue = 100,allocationSize = 1)
 public abstract class Tournoi {
-
+	
+	////TO-DO annotations @JsonView 
+	
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")

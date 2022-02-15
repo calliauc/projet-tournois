@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @SequenceGenerator(name="seqCompte", sequenceName="seq_organisateur", initialValue=100, allocationSize=1)
 @AttributeOverrides({
 		@AttributeOverride(name="idCompte" ,column=@Column(name="organisateur_id")),
-		@AttributeOverride(name="pseudo" ,column=@Column(name="organisateur_pseudo")),
-		@AttributeOverride(name="password", column=@Column(name="organisateur_password")), 
+		@AttributeOverride(name="pseudo" ,column=@Column(name="organisateur_pseudo", nullable = false)),
+		@AttributeOverride(name="password", column=@Column(name="organisateur_password", nullable = false)), 
 		@AttributeOverride(name="mail", column=@Column(name="organisateur_mail"))
 })
 public class Organisateur extends Compte{

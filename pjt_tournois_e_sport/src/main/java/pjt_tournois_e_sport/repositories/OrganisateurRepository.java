@@ -11,12 +11,12 @@ import pjt_tournois_e_sport.model.Organisateur;
 
 public interface OrganisateurRepository extends JpaRepository<Organisateur, Long>{
 
-	List<Organisateur> findByPseudo(String pseudo);
+	Optional<Organisateur> findByPseudo(String pseudo);
 	
-	//List<Organisateur> findByTournois(List<Tournoi> tournois);
+	Optional<Organisateur> findById(Long id);
 	
 	// Trouver l'organisateur en fonction de l'id du tournoi
 	@Query("select o from Organisateur o left join fetch o.tournois where o.idCompte = :IdTournoi")
-	Optional<Organisateur> findByIdWithTournois(@Param("IdTournoi") Long IdTournoi);
+	Optional<Organisateur> findOrganisateurWithTournois(@Param("IdTournoi") Long IdTournoi);
 	
 }
