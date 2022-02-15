@@ -16,8 +16,8 @@ import javax.persistence.Table;
 @SequenceGenerator(name="seqCompte", sequenceName="seq_joueur", initialValue=100, allocationSize=1)
 @AttributeOverrides({
 		@AttributeOverride(name="idCompte" ,column=@Column(name="joueur_id")),
-		@AttributeOverride(name="pseudo" ,column=@Column(name="joueur_pseudo")),
-		@AttributeOverride(name="password", column=@Column(name="joueur_password")), 
+		@AttributeOverride(name="pseudo" ,column=@Column(name="joueur_pseudo", nullable = false)),
+		@AttributeOverride(name="password", column=@Column(name="joueur_password", nullable = false)), 
 		@AttributeOverride(name="mail", column=@Column(name="joueur_mail"))
 })
 public class Joueur extends Compte {
