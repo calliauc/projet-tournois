@@ -31,36 +31,33 @@ public class MatchService {
 	}
 
 	public Match createOrUpdate(Match m) {
-		if (m == null) {
-			throw new MatchException();
-		}
-		Match matchEnBase = null;
+		checkData(m);
 		if (m.getId() == null) {
-			// create
-			// controle des donnees
-			checkData(m);
 			return matchRepo.save(m);
 		} else {
-			// update (gestion de la version)
+			Match matchEnBase = null;
 			matchEnBase = this.getById(m.getId());
-			checkData(m);
 			matchEnBase.setJournee(m.getJournee());
 			return matchRepo.save(matchEnBase);
 		}
 	}
 	
-	private void checkData(Match m) {
-		if (m.getJournee() == null) {
-			throw new MatchException("donnees incorrectes");
-		}
-	}
-	
 	public void delete(Match m) {
-		if (m == null || m.getId() == null) {
+		checkData(m);
+		if (m.getId() == null) {
 			throw new TournoiException();
 		}
 		Match tournoiEnBase = matchRepo.findById(m.getId()).orElseThrow(TournoiException::new);
 		matchRepo.delete(tournoiEnBase);
 	}
 
+	private void checkData(Match m) {
+		if(m==null) {
+			throw new MatchException("pas de match renseigne");
+		}
+		
+		if (m.getJournee() == null || m.getInscriptions().isEmpty()) {
+			throw new MatchException("donnees incorrectes");
+		}
+	}
 }
