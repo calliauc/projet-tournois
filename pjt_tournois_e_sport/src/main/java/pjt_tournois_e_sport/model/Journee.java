@@ -37,13 +37,13 @@ public class Journee {
 	private Tournoi tournoi; 
 	
 	@OneToMany(mappedBy = "journee")
-	private Set<Match> MatchsAJouerPourJournee;
+	private Set<Match> matchsAJouerPourJournee;
 	@FutureOrPresent
 	@Column(name="journee_date_debut")
-	private LocalDateTime DateDebutJournee;
+	private LocalDateTime dateDebutJournee;
 	@Future
 	@Column(name="journee_date_fin")
-	private LocalDateTime DateFinJournee; 
+	private LocalDateTime dateFinJournee; 
 	@Enumerated(EnumType.STRING)	
 	@Column(name="journee_etape")
 	private Etape etape; 
@@ -57,8 +57,8 @@ public class Journee {
 	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape) {
 		super();
 		this.tournoi = tournoi;
-		this.DateDebutJournee = dateDebutJournee;
-		this.DateFinJournee = dateFinJournee;
+		this.dateDebutJournee = dateDebutJournee;
+		this.dateFinJournee = dateFinJournee;
 		this.etape = etape;
 	}
 
@@ -77,15 +77,15 @@ public class Journee {
 	}
 
 	public Set<Match> getMatchsAJouerPourJournee() {
-		return MatchsAJouerPourJournee;
+		return matchsAJouerPourJournee;
 	}
 
 	public LocalDateTime getDateDebutJournee() {
-		return DateDebutJournee;
+		return dateDebutJournee;
 	}
 
 	public LocalDateTime getDateFinJournee() {
-		return DateFinJournee;
+		return dateFinJournee;
 	}
 
 	public Etape getEtape() {
@@ -105,15 +105,15 @@ public class Journee {
 	}
 
 	public void setMatchsAJouerPourJournee(Set<Match> matchsAJouerPourJournee) {
-		MatchsAJouerPourJournee = matchsAJouerPourJournee;
+		this.matchsAJouerPourJournee = matchsAJouerPourJournee;
 	}
 
 	public void setDateDebutJournee(LocalDateTime dateDebutJournee) {
-		DateDebutJournee = dateDebutJournee;
+		this.dateDebutJournee = dateDebutJournee;
 	}
 
 	public void setDateFinJournee(LocalDateTime dateFinJournee) {
-		DateFinJournee = dateFinJournee;
+		this.dateFinJournee = dateFinJournee;
 	}
 
 
@@ -142,19 +142,6 @@ public class Journee {
 		Journee other = (Journee) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-
-
-
-
-
-
-
-
-
-
-
-
 	
 	
 }
