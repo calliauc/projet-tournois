@@ -17,12 +17,12 @@ import javax.persistence.Table;
 public class Inscription {
 	
 	/// ATTRIBUTES
+	@EmbeddedId
+	private InscriptionKey id;
 	@Column(name="position")
 	private int position ;
 	@Column(name="score")
 	private int score ;
-	@EmbeddedId
-	private InscriptionKey id;
 	@ManyToOne
 	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
 	private Match prochainMatch;

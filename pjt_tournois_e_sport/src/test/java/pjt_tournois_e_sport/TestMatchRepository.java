@@ -25,7 +25,7 @@ import pjt_tournois_e_sport.repositories.MatchRepository;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes= {AppConfig.class})
-class MatchRepositoryTest {
+class TestMatchRepository {
 	
 	@Autowired
 	private MatchRepository matchRepo;
@@ -35,7 +35,7 @@ class MatchRepositoryTest {
 	@Test
 	@Transactional
 	@Disabled
-	public void findAllTest() {
+	public void testCreateAndFindAll() {
 		
 		Match matchTest1 = new Match();
 		Match matchTest2 = new Match();
@@ -49,7 +49,7 @@ class MatchRepositoryTest {
 	@Test
 	@Transactional
 	@Disabled
-	public void findByDateWithJourneeTest() {
+	public void testFindByDateWithJournee() {
 		Match matchTest1 = new Match();
 		Match matchTest2 = new Match();
 		Journee journeeTest = new Journee();
