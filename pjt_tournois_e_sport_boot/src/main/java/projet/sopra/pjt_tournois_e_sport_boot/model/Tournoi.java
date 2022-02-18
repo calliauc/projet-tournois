@@ -28,6 +28,7 @@ public abstract class Tournoi {
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")
+
 	protected Long idTournoi;
 	@Column(name = "tournoi_nom", length = 50, nullable = false)
 	protected String nom;
@@ -43,6 +44,7 @@ public abstract class Tournoi {
 
 	@Column(name = "tournoi_nb_participants_match", nullable = false)
 	protected int nbParticipantsParMatch;
+
 
 	@ManyToOne
 	@JoinColumn(name = "organisteur_tournoi", foreignKey = @ForeignKey(name = "organisteur_tournoi_fk"))
