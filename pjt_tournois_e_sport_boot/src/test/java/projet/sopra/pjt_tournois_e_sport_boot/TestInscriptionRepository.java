@@ -2,9 +2,10 @@ package projet.sopra.pjt_tournois_e_sport_boot;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+
 import javax.transaction.Transactional;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,29 +30,30 @@ public class TestInscriptionRepository {
 	
 	@Test
 	@Transactional
-	@Disabled
 	public void testFindByScoreBetween() {
-		Utilisateur user1 = new Utilisateur();
-		user1.setUsername("user1");
+		//Creation des utilisateurs dans base
+		Utilisateur user1 = new Utilisateur("user1","u1@u1","user1");
 		userRepo.save(user1);
-		Utilisateur user2 = new Utilisateur();
-		user2.setUsername("user2");
+		Utilisateur user2 = new Utilisateur("user2","u2@u2","user2");
 		userRepo.save(user2);
-		Utilisateur user3 = new Utilisateur();
-		user3.setUsername("user3");
+		Utilisateur user3 = new Utilisateur("user3","u3@u3","user3");
 		userRepo.save(user3);
-		Utilisateur user4 = new Utilisateur();
-		user4.setUsername("user4");
+		Utilisateur user4 = new Utilisateur("user4","u4@u4","user4");
 		userRepo.save(user4);
 		
+		//Creation du tournoi = ligue dans la base
 		Ligue ligueTest = new Ligue();
 		ligueTest.setNom("ligueTest");
+		ligueTest.setDateDeCreation(LocalDate.of(2022, 2, 18));
+		ligueTest.setDateDeDebut(LocalDate.of(2022, 2, 20));
+		ligueTest.setJeu("Mariokart");
+		ligueTest.setNbParticipantsParMatch(4);
 		tournoiRepo.save(ligueTest);
 		
+		//Inscriptions des 4 joueurs à la ligue
 		Inscription inscription1 = new Inscription();
 		inscription1.setId(new InscriptionKey(user1,ligueTest));
 		inscription1.setScore(10);
-		
 		Inscription inscription2 = new Inscription();
 		inscription2.setId(new InscriptionKey(user2,ligueTest));
 		inscription2.setScore(200);
@@ -65,8 +67,12 @@ public class TestInscriptionRepository {
 		inscriptionRepo.save(inscription2);
 		inscriptionRepo.save(inscription3);
 		inscriptionRepo.save(inscription4);
+		
+		//Parametrage test
 		int minTest =100;
 		int maxTest = 4000;
+		
+		//Test
 		inscriptionRepo.findByScoreBetween(minTest, maxTest).forEach(i -> {
 			assertTrue(i.getScore()>=minTest && i.getScore()<=maxTest);
 		});
