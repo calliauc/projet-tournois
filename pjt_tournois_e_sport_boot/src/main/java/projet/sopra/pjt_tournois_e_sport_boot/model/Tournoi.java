@@ -20,59 +20,55 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SequenceGenerator(name="seqTournoi", sequenceName = "seq_tournoi",initialValue = 100,allocationSize = 1)
+@SequenceGenerator(name = "seqTournoi", sequenceName = "seq_tournoi", initialValue = 100, allocationSize = 1)
 public abstract class Tournoi {
-	
-	////TO-DO annotations @JsonView 
-	
+
+	//// TO-DO annotations @JsonView
+
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")
-	private Long idTournoi ; 
-	@Column(name="tournoi_nom", length = 50, nullable =false)
-	private String nom; 
-	@Column(name="tournoi_date_creation", nullable =false)
-	private LocalDate dateDeCreation ; 
-	@Column(name="tournoi_date_debut", nullable =false)
-	private LocalDate dateDeDebut ;
-	@Column(name="tournoi_jeu", length = 50, nullable =false)
-	
-	private String Jeu ; 
-	@OneToMany(mappedBy="id.tournoi")
-	private Set<Inscription> listeInscriptions = new HashSet<Inscription>() ;
-	
-	
+	protected Long idTournoi;
+	@Column(name = "tournoi_nom", length = 50, nullable = false)
+	protected String nom;
+	@Column(name = "tournoi_date_creation", nullable = false)
+	protected LocalDate dateDeCreation;
+	@Column(name = "tournoi_date_debut", nullable = false)
+	protected LocalDate dateDeDebut;
+	@Column(name = "tournoi_jeu", length = 50, nullable = false)
 
-	
+	protected String jeu;
+	@OneToMany(mappedBy = "id.tournoi")
+	protected Set<Inscription> listeInscriptions = new HashSet<Inscription>();
 
+	@Column(name = "tournoi_nb_participants_match", nullable = false)
+	protected int nbParticipantsParMatch;
 
-	@Column(name="tournoi_nb_participants_match", length = 50, nullable =false)
-	private int nbParticipantsParMatch; 
-	
 	@ManyToOne
 	@JoinColumn(name = "organisteur_tournoi", foreignKey = @ForeignKey(name = "organisteur_tournoi_fk"))
-	private Utilisateur organisateur;
+	protected Utilisateur organisateur;
 	/// CONSTRUCTOR
-	
-	
-	
+
 	public Tournoi() {
 	}
 
-	
-	public Tournoi(String nom, LocalDate dateDeCreation, LocalDate dateDeDebut, String jeu,
+	/*
+	 * EDIT (comm à supprimer)
+	 * Suppression de dateCreation dans les parametres du constructeur.
+	 * Ce sera toujours le moment de création de l'ojet par défaut.
+	 */
+	public Tournoi(String nom, LocalDate dateDeDebut, String jeu,
 			Set<Inscription> listeInscriptions) {
 		super();
 		this.nom = nom;
-		this.dateDeCreation = dateDeCreation;
+		this.dateDeCreation = LocalDate.now();
 		this.dateDeDebut = dateDeDebut;
-		Jeu = jeu;
+		this.jeu = jeu;
 		this.listeInscriptions = listeInscriptions;
 	}
 
-
 	/// GETTERS
-	
+
 	public Long getIdTournoi() {
 		return idTournoi;
 	}
@@ -90,16 +86,15 @@ public abstract class Tournoi {
 	}
 
 	public String getJeu() {
-		return Jeu;
+		return jeu;
 	}
 
 	public int getNbParticipantsParMatch() {
 		return nbParticipantsParMatch;
 	}
 
-	
 	/// SETTERS
-	
+
 	public Set<Inscription> getListeInscriptions() {
 		return listeInscriptions;
 	}
@@ -121,35 +116,31 @@ public abstract class Tournoi {
 	}
 
 	public void setJeu(String jeu) {
-		Jeu = jeu;
+		jeu = jeu;
 	}
 
 	public void setListeInscriptions(Set<Inscription> listeInscriptions) {
 		this.listeInscriptions = listeInscriptions;
 	}
 
-
 	public Utilisateur getOrganisateur() {
 		return organisateur;
 	}
 
-
 	public void setOrganisateur(Utilisateur organisateur) {
 		this.organisateur = organisateur;
 	}
-	
+
 	public void setNbParticipantsParMatch(int nbParticipantsParMatch) {
 		this.nbParticipantsParMatch = nbParticipantsParMatch;
 	}
-	
-	///// METHODS
 
+	///// METHODS
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(idTournoi);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -162,8 +153,5 @@ public abstract class Tournoi {
 		Tournoi other = (Tournoi) obj;
 		return idTournoi == other.idTournoi;
 	}
-	
-	
-	
-	
+
 }
