@@ -16,6 +16,7 @@ public class InscriptionService {
 	@Autowired
 	private InscriptionRepository inscriptionRepo;
 	
+	//CRUD
 	public List<Inscription> getAll(){
 		return inscriptionRepo.findAll();
 	}
@@ -47,6 +48,16 @@ public class InscriptionService {
 		inscriptionRepo.delete(i);
 	}
 	
+	public void deleteById(InscriptionKey id) {
+		inscriptionRepo.deleteById(id);
+	}
+	
+	//METHODS CRUD
+	
+	public boolean exist(InscriptionKey id) {
+		return inscriptionRepo.existsById(id);
+	}
+	
 	//en attendant que le validator soit OK
 	private void checkData(Inscription i) {
 		if(i ==null) {
@@ -55,5 +66,10 @@ public class InscriptionService {
 		if(i.getScore() <0) {
 			throw new InscriptionException("le score doit etre positif");
 		}
+	}
+	
+	// SPECIAL QUERIES
+	public List<Inscription> getAllByScoreBetween(int score1, int score2){
+		return inscriptionRepo.findByScoreBetween(score1, score2);
 	}
 }
