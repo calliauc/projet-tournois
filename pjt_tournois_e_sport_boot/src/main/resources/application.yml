@@ -1,0 +1,28 @@
+logging:
+  level:
+    root: info
+    
+server:
+  servlet:
+    context-path: /tournoi_esport
+spring:
+  datasource:
+    dbcp2:
+      initial-size: 5
+      max-total: 10
+    driver-class-name: org.postgresql.Driver
+    password: postgres
+    url: jdbc:postgresql://127.0.0.1:5432/ProjetTournoisESports
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+        show_sql: false
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/pages/
+#      suffix: .jsp
