@@ -41,6 +41,14 @@ public abstract class Tournoi {
 	@OneToMany(mappedBy="id.tournoi")
 	private Set<Inscription> listeInscriptions = new HashSet<Inscription>() ;
 	
+	
+
+	
+
+
+	@Column(name="tournoi_nb_participants_match", length = 50, nullable =false)
+	private int nbParticipantsParMatch; 
+	
 	@ManyToOne
 	@JoinColumn(name = "organisteur_tournoi", foreignKey = @ForeignKey(name = "organisteur_tournoi_fk"))
 	private Utilisateur organisateur;
@@ -85,6 +93,10 @@ public abstract class Tournoi {
 		return Jeu;
 	}
 
+	public int getNbParticipantsParMatch() {
+		return nbParticipantsParMatch;
+	}
+
 	
 	/// SETTERS
 	
@@ -125,6 +137,12 @@ public abstract class Tournoi {
 	public void setOrganisateur(Utilisateur organisateur) {
 		this.organisateur = organisateur;
 	}
+	
+	public void setNbParticipantsParMatch(int nbParticipantsParMatch) {
+		this.nbParticipantsParMatch = nbParticipantsParMatch;
+	}
+	
+	///// METHODS
 
 
 	@Override
