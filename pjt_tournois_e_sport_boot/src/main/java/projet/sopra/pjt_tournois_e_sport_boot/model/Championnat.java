@@ -64,6 +64,8 @@ public class Championnat extends Tournoi {
 //		displayFinalScores();
 	}
 	
+
+	
 	private void createTwoPool() {
 		List<Inscription> players = new ArrayList<Inscription>(this.listeInscriptions);
 		Collections.shuffle(players);

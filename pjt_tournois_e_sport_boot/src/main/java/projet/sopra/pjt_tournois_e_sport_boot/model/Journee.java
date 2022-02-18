@@ -21,37 +21,37 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 
 @Entity
-@Table(name="journee")
-@SequenceGenerator(name="seqJournee", sequenceName="seq_journee", initialValue=100, allocationSize=1)
+@Table(name = "journee")
+@SequenceGenerator(name = "seqJournee", sequenceName = "seq_journee", initialValue = 100, allocationSize = 1)
 
 public class Journee {
-	
+
 	/// ATTRIBUTES
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqJournee" )
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqJournee")
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "journee_tournoi", foreignKey = @ForeignKey(name = "journee_tournoi_fk"))
-	private Tournoi tournoi; 
-	
+	private Tournoi tournoi;
+
 	@OneToMany(mappedBy = "journee")
 	private Set<Match> matchsAJouerPourJournee;
 	@FutureOrPresent
-	@Column(name="journee_date_debut")
+	@Column(name = "journee_date_debut")
 	private LocalDateTime dateDebutJournee;
 	@Future
-	@Column(name="journee_date_fin")
-	private LocalDateTime dateFinJournee; 
-	@Enumerated(EnumType.STRING)	
-	@Column(name="journee_etape")
-	private Etape etape; 
-	
+	@Column(name = "journee_date_fin")
+	private LocalDateTime dateFinJournee;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "journee_etape")
+	private Etape etape;
+
 	/// CONSTRUCTOR
-	
+
 	public Journee() {
-		
+
 	}
 
 	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape) {
@@ -61,10 +61,6 @@ public class Journee {
 		this.dateFinJournee = dateFinJournee;
 		this.etape = etape;
 	}
-
-	
-	
-	
 
 	/// GETTERS
 
@@ -92,10 +88,8 @@ public class Journee {
 		return etape;
 	}
 
-
 	/// SETTERS
 
-	
 	public void setId(Long idJournee) {
 		this.id = idJournee;
 	}
@@ -116,16 +110,12 @@ public class Journee {
 		this.dateFinJournee = dateFinJournee;
 	}
 
-
 	public void setEtape(Etape etape) {
 		this.etape = etape;
 	}
 
-	
-
 	/// METHODS
-	
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -142,6 +132,6 @@ public class Journee {
 		Journee other = (Journee) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
+
 }

@@ -74,4 +74,45 @@ public class Ligue extends Tournoi {
 
 	}
 	
+	
+	/// Creation match de pools
+	
+	// @formatter:off
+	/*
+	 * Génération des matches de poule (opti sans doublon)
+	 * 
+	 * Pour une pool de 3 joueurs :
+	 * J1 : A/B, C repos
+	 * J2 : A/C, B repos
+	 * J3 : B/C, A repos
+	 * 
+	 * 
+	 * Pour une pool de 4 joueurs :
+	 * J1 : A/B, C/D
+	 * J2 : A/C, B/D
+	 * J3 : A/D, B/C
+	 * 
+	 * 
+	 * Pour une pool de 5 joueurs :
+	 * J1 : A/B, C/D, E repos
+	 * J2 : A/C, B/E, D repos
+	 * J3 : A/D, C/E, B repos
+	 * J4 : A/E, B/D, C repos
+	 * J5 : B/C, D/E, A repos
+	 * 
+	 * 
+	 * Pour une pool de 6 joueurs :
+	 * J1 : A/B, C/D, E/F
+	 * J2 : A/C, B/F, D/E
+	 * J3 : A/D, B/E, C/F
+	 * J4 : A/E, B/C, D/F
+	 * J5 : A/F, B/D, C/E
+	 */
+	// @formatter:on
+	
+	public void initMatchs() {
+		
+	}
+	
+	
 }
