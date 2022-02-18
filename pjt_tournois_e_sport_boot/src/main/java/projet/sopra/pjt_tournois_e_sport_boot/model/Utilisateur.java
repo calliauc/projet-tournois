@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -17,7 +16,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -68,14 +66,14 @@ public class Utilisateur implements UserDetails {
 	private List<Tournoi> tournois;
 	
 	//////////// CONSTRUCTOR
-	
-	public Utilisateur(Long id, String username, String mail, String password) {
-		this.id = id;
+			
+	public Utilisateur(String username, String mail, String password) {
+		super();
 		this.username = username;
 		this.mail = mail;
 		this.password = password;
 	}
-		
+
 	public Utilisateur() {
 			
 		}
