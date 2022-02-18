@@ -28,6 +28,7 @@ public abstract class Tournoi {
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")
+<<<<<<< Updated upstream
 	protected Long idTournoi;
 	@Column(name = "tournoi_nom", length = 50, nullable = false)
 	protected String nom;
@@ -44,6 +45,21 @@ public abstract class Tournoi {
 	@Column(name = "tournoi_nb_participants_match", nullable = false)
 	protected int nbParticipantsParMatch;
 
+=======
+	protected Long idTournoi ; 
+	@Column(name="tournoi_nom", length = 50, nullable =false)
+	protected String nom; 
+	@Column(name="tournoi_date_creation", nullable =false)
+	protected LocalDate dateDeCreation ; 
+	@Column(name="tournoi_date_debut", nullable =false)
+	protected LocalDate dateDeDebut ;
+	@Column(name="tournoi_jeu", length = 50, nullable =false)
+	protected String Jeu ; 
+	@OneToMany(mappedBy="id.tournoi")
+	protected Set<Inscription> listeInscriptions = new HashSet<Inscription>() ;
+	@Column(name="tournoi_nb_participants_match", length = 50, nullable =false)
+	protected int nbParticipantsParMatch; 
+>>>>>>> Stashed changes
 	@ManyToOne
 	@JoinColumn(name = "organisteur_tournoi", foreignKey = @ForeignKey(name = "organisteur_tournoi_fk"))
 	protected Utilisateur organisateur;
