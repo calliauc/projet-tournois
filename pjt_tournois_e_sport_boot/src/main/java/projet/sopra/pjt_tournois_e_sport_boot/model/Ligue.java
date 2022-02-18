@@ -32,9 +32,11 @@ public class Ligue extends Tournoi {
 
 	}
 	
-	public Ligue(String nom, LocalDate dateDeCreation, LocalDate dateDeDebut, String jeu,
+
+	
+	public Ligue(String nom, LocalDate dateDeDebut, String jeu,
 			Set<Inscription> listeInscriptions, boolean isPoule, int nbPhase) {
-		super(nom, dateDeCreation, dateDeDebut, jeu, listeInscriptions);
+		super(nom, dateDeDebut, jeu, listeInscriptions);
 		this.isPoule = isPoule;
 		this.nbPhase = nbPhase;
 	}
@@ -62,5 +64,14 @@ public class Ligue extends Tournoi {
 		this.nbPhase = nbPhase;
 	}
 
+	/// Affichage
+	
+	public void displayLigue() {
+		System.out.println("Ligue " + this.idTournoi + " (" + this.listeInscriptions.size() + " players) :");
+		for (Inscription i: this.listeInscriptions) {
+			System.out.println(i);
+		}
+
+	}
 	
 }
