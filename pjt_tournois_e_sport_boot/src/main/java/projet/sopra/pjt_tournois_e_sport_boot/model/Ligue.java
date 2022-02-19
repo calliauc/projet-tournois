@@ -62,6 +62,11 @@ public class Ligue extends Tournoi {
 		this.nbPhase = nbPhase;
 	}
 
+
+
+	//// METHODS
+
+	
 	/// Affichage
 
 	public void displayLigue() {
@@ -70,9 +75,8 @@ public class Ligue extends Tournoi {
 			System.out.println(i);
 		}
 	}
-
-	//// METHODS
-
+	
+	
 	public Set<Journee> generateJourneesLigue2PPM() {
 
 		////// TO DO INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
