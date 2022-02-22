@@ -62,11 +62,8 @@ public class Ligue extends Tournoi {
 		this.nbPhase = nbPhase;
 	}
 
-
-
 	//// METHODS
 
-	
 	/// Affichage
 
 	public void displayLigue() {
@@ -75,42 +72,40 @@ public class Ligue extends Tournoi {
 			System.out.println(i);
 		}
 	}
-	
-	
+
 	public Set<Journee> generateJourneesLigue2PPM() {
 
 		////// TO DO INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
 
 		Set<Journee> journees = new HashSet<Journee>();
 		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(listeInscriptions);
-		for (int i = 0; i < listeInscriptions.size() - 1; i++) {
-			Journee j = new Journee();
-			j.setEtape(Etape.Ligue);
-			Set<Match> matchsJournee = new HashSet<Match>();
-			for (int k = 0; k < listeInscriptions.size() / 2; k++) {
+		int isPair = (listeInscriptions.size() + 1) % 2;
 
+		for (int i = 0; i < inscriptionsLigue.size() - isPair; i++) {
+			Journee jour = new Journee();
+			jour.setEtape(Etape.Ligue);
+			Set<Match> matchsJournee = new HashSet<Match>();
+			for (int j = 0; j < listeInscriptions.size() / 2; j++) {
 				Match m = new Match();
-				m.getInscriptions().add(inscriptionsLigue.get(k));
-				m.getInscriptions().add(inscriptionsLigue.get(k + inscriptionsLigue.size() / 2));
+				m.getInscriptions().add(inscriptionsLigue.get(j));
+				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() / 2 - (j + 1)));
 				matchsJournee.add(m);
 			}
-			j.setMatchsAJouerPourJournee(matchsJournee);
-			journees.add(j);
+			if (isPair != 1) {
+				System.out.println("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
+			}
+			jour.setMatchsAJouerPourJournee(matchsJournee);
+			journees.add(jour);
 
-			inscriptionsLigue.add(1, inscriptionsLigue.pollLast());
+			inscriptionsLigue.add(isPair, inscriptionsLigue.pollLast());
 		}
 		System.out.println(journees.toString());
 		return journees;
 	}
-	
-	
 
-	
 	public void initMatchs() {
-		
+
 	}
-	
-	
 
 	public Set<Journee> generateJourneesLigueMorePPM() {
 		//// METHODE PAS HYPER UTILE MAIS A FINIR POUR LE FUN
@@ -155,39 +150,4 @@ public class Ligue extends Tournoi {
 		return true;
 	}
 
-	
-	/// Creation match de pools
-	
-	// @formatter:off
-	/*
-	 * Génération des matches de poule (opti sans doublon)
-	 * 
-	 * Pour une pool de 3 joueurs :
-	 * J1 : A/B, C repos
-	 * J2 : A/C, B repos
-	 * J3 : B/C, A repos
-	 * 
-	 * 
-	 * Pour une pool de 4 joueurs :
-	 * J1 : A/B, C/D
-	 * J2 : A/C, B/D
-	 * J3 : A/D, B/C
-	 * 
-	 * 
-	 * Pour une pool de 5 joueurs :
-	 * J1 : A/B, C/D, E repos
-	 * J2 : A/C, B/E, D repos
-	 * J3 : A/D, C/E, B repos
-	 * J4 : A/E, B/D, C repos
-	 * J5 : B/C, D/E, A repos
-	 * 
-	 * 
-	 * Pour une pool de 6 joueurs :
-	 * J1 : A/B, C/D, E/F
-	 * J2 : A/C, B/F, D/E
-	 * J3 : A/D, B/E, C/F
-	 * J4 : A/E, B/C, D/F
-	 * J5 : A/F, B/D, C/E
-	 */
-	// @formatter:on
 }
