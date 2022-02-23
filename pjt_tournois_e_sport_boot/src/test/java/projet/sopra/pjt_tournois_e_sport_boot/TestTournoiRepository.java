@@ -20,17 +20,19 @@ public class TestTournoiRepository {
 	@Autowired
 	private TournoiRepository tournoiRepo;
 	
-	
+	/*
+	 * TODO corriger ce test
+	 */
 	@Test
 	@Transactional
 	@Disabled
 	public void testCreateAndFindAll() {
 		
-		Ligue tournoiTest1 = new Ligue("ligue1", LocalDate.now(), LocalDate.now(), "mario", null, true, 1);
-		Ligue tournoiTest2 = new Ligue("ligue2", LocalDate.now(), LocalDate.now(), "mario2", null, true, 1);
-		tournoiRepo.save(tournoiTest1);
-		tournoiRepo.save(tournoiTest2);
-		assertEquals(tournoiRepo.findAll().size(),tournoiRepo.count());
+//		Ligue tournoiTest1 = new Ligue("ligue1", LocalDate.now(), LocalDate.now(), "mario", null, true, 1);
+//		Ligue tournoiTest2 = new Ligue("ligue2", LocalDate.now(), LocalDate.now(), "mario2", null, true, 1);
+//		tournoiRepo.save(tournoiTest1);
+//		tournoiRepo.save(tournoiTest2);
+//		assertEquals(tournoiRepo.findAll().size(),tournoiRepo.count());
 		
 	}
 	
