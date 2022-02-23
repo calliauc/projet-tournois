@@ -35,25 +35,35 @@ public class GenerateMatchLigueTest {
 	
 	@Test
 	public void testGenerateMatchs() {
+		LOGGER.info("Debut du test");
 		//Creation des utilisateurs dans base
+		LOGGER.info("Creation des users");
 		Utilisateur user1 = new Utilisateur("user1","u1@u1","user1");
-		userRepo.save(user1);
+//		userRepo.save(user1);
 		Utilisateur user2 = new Utilisateur("user2","u2@u2","user2");
-		userRepo.save(user2);
+//		userRepo.save(user2);
 		Utilisateur user3 = new Utilisateur("user3","u3@u3","user3");
-		userRepo.save(user3);
+//		userRepo.save(user3);
 		Utilisateur user4 = new Utilisateur("user4","u4@u4","user4");
-		userRepo.save(user4);
-		
+//		userRepo.save(user4);
+		LOGGER.info("Users créés");
+
+		LOGGER.info("Creation de la ligue");
 		//Creation du tournoi = ligue dans la base
 		Ligue ligueTest = new Ligue();
+		LOGGER.info("Remplissage des attributs de la ligue");
 		ligueTest.setNom("ligueTest");
 		ligueTest.setDateDeCreation(LocalDate.of(2022, 2, 18));
 		ligueTest.setDateDeDebut(LocalDate.of(2022, 2, 20));
 		ligueTest.setJeu("Mariokart");
 		ligueTest.setNbParticipantsParMatch(2);
-		tournoiRepo.save(ligueTest);
+		LOGGER.info("Fin du remplissage");
+//		LOGGER.info("Sauvegarde en base");
+//		tournoiRepo.save(ligueTest);
+//		LOGGER.info("Fin de la sauvegarde en base");
 		
+		
+		LOGGER.info("Creation des inscriptions");
 		//Inscriptions des 4 joueurs à la ligue
 		Inscription inscription1 = new Inscription();
 		inscription1.setId(new InscriptionKey(user1,ligueTest));
@@ -66,13 +76,18 @@ public class GenerateMatchLigueTest {
 
 		Inscription inscription4 = new Inscription();
 		inscription4.setId(new InscriptionKey(user4,ligueTest));
+		LOGGER.info("Fin de la creation des inscriptions");
 
-		inscriptionRepo.save(inscription1);
-		inscriptionRepo.save(inscription2);
-		inscriptionRepo.save(inscription3);
-		inscriptionRepo.save(inscription4);
-		
+//		LOGGER.info("Sauvegarde des inscriptions");
+//		inscriptionRepo.save(inscription1);
+//		inscriptionRepo.save(inscription2);
+//		inscriptionRepo.save(inscription3);
+//		inscriptionRepo.save(inscription4);
+//		LOGGER.info("Fin de la sauvegarde des inscriptions");
+
+		LOGGER.info("Generation des matches");
 		ligueTest.generateJourneesLigueDuels(); 
+		LOGGER.info("Fin de la generation des matches");
 		
 	}
 }
