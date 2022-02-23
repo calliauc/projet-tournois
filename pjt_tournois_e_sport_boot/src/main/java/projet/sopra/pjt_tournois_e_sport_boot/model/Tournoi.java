@@ -118,7 +118,7 @@ public abstract class Tournoi {
 	}
 
 	public void setJeu(String jeu) {
-		jeu = jeu;
+		this.jeu = jeu;
 	}
 
 	public void setListeInscriptions(Set<Inscription> listeInscriptions) {
