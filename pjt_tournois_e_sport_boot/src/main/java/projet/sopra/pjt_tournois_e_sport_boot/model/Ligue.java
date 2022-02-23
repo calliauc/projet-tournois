@@ -73,7 +73,7 @@ public class Ligue extends Tournoi {
 		}
 	}
 
-	public Set<Journee> generateJourneesLigue2PPM() {
+	public Set<Journee> generateJourneesLigueDuels() {
 
 		////// TO DO INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
 
@@ -107,7 +107,7 @@ public class Ligue extends Tournoi {
 
 	}
 
-	public Set<Journee> generateJourneesLigueMorePPM() {
+	public Set<Journee> generateJourneesLigueMelee() {
 		//// METHODE PAS HYPER UTILE MAIS A FINIR POUR LE FUN
 		Set<Journee> journees = new HashSet<Journee>();
 

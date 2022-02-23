@@ -3,6 +3,8 @@ package projet.sopra.pjt_tournois_e_sport_boot;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,6 +19,11 @@ import projet.sopra.pjt_tournois_e_sport_boot.repositories.UtilisateurRepository
 @SpringBootTest
 public class GenerateMatchLigueTest {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(GenerateMatchLigueTest.class);
+	/*
+	 * TODO mettre des logs pour trouver le bug
+	 */
+	
 	@Autowired
 	private InscriptionRepository inscriptionRepo;
 	@Autowired 
@@ -24,8 +31,10 @@ public class GenerateMatchLigueTest {
 	@Autowired
 	private TournoiRepository tournoiRepo;
 	
+	
+	
 	@Test
-	public void testGenrateMatchs() {
+	public void testGenerateMatchs() {
 		//Creation des utilisateurs dans base
 		Utilisateur user1 = new Utilisateur("user1","u1@u1","user1");
 		userRepo.save(user1);
@@ -63,7 +72,7 @@ public class GenerateMatchLigueTest {
 		inscriptionRepo.save(inscription3);
 		inscriptionRepo.save(inscription4);
 		
-		ligueTest.generateJourneesLigue2PPM(); 
+		ligueTest.generateJourneesLigueDuels(); 
 		
 	}
 }
