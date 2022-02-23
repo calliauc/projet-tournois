@@ -20,7 +20,7 @@ public class Championnat extends Tournoi {
 	private Set<Journee> JourneesAJouerPoules;
 //	@OneToMany(mappedBy="id")
 //	private Set<Journee> JourneesAJouerFinales;
-	private Set<Ligue> pools = new HashSet<Ligue>();
+	private Set<Poule> poules = new HashSet<Poule>();
 
 	/// CONSTRUCTORS
 
@@ -73,10 +73,10 @@ public class Championnat extends Tournoi {
 		Set<Inscription> tempA = Set.copyOf(players.subList(0 * players.size() / 2, 1 * players.size() / 2));
 		Set<Inscription> tempB = Set.copyOf(players.subList(1 * players.size() / 2, 2 * players.size() / 2));
 
-		Ligue poolA = new Ligue("PoolA", LocalDate.now(), jeu, tempA, true, nbParticipantsParMatch);
-		Ligue poolB = new Ligue("PoolB", LocalDate.now(), jeu, tempB, true, nbParticipantsParMatch);
+		Poule poolA = new Poule("PoolA", LocalDate.now(), jeu, tempA, true, nbParticipantsParMatch, this);
+		Poule poolB = new Poule("PoolB", LocalDate.now(), jeu, tempB, true, nbParticipantsParMatch, this);
 
-		Collections.addAll(pools, poolA, poolB);
+		Collections.addAll(poules, poolA, poolB);
 	}
 
 	private void createFourPool() {
@@ -88,12 +88,12 @@ public class Championnat extends Tournoi {
 		Set<Inscription> tempC = Set.copyOf(players.subList(2 * players.size() / 4, 3 * players.size() / 4));
 		Set<Inscription> tempD = Set.copyOf(players.subList(3 * players.size() / 4, 4 * players.size() / 4));
 
-		Ligue poolA = new Ligue("PoolA", LocalDate.now(), jeu, tempA, true, nbParticipantsParMatch);
-		Ligue poolB = new Ligue("PoolB", LocalDate.now(), jeu, tempB, true, nbParticipantsParMatch);
-		Ligue poolC = new Ligue("PoolC", LocalDate.now(), jeu, tempC, true, nbParticipantsParMatch);
-		Ligue poolD = new Ligue("PoolD", LocalDate.now(), jeu, tempD, true, nbParticipantsParMatch);
+		Poule poolA = new Poule("PoolA", LocalDate.now(), jeu, tempA, true, nbParticipantsParMatch, this);
+		Poule poolB = new Poule("PoolB", LocalDate.now(), jeu, tempB, true, nbParticipantsParMatch, this);
+		Poule poolC = new Poule("PoolC", LocalDate.now(), jeu, tempC, true, nbParticipantsParMatch, this);
+		Poule poolD = new Poule("PoolD", LocalDate.now(), jeu, tempD, true, nbParticipantsParMatch, this);
 
-		Collections.addAll(pools, poolA, poolB, poolC, poolD);
+		Collections.addAll(poules, poolA, poolB, poolC, poolD);
 	}
 
 	private void createEightPool() {
@@ -109,16 +109,16 @@ public class Championnat extends Tournoi {
 		Set<Inscription> tempG = Set.copyOf(players.subList(6 * players.size() / 8, 7 * players.size() / 8));
 		Set<Inscription> tempH = Set.copyOf(players.subList(7 * players.size() / 8, 8 * players.size() / 8));
 
-		Ligue poolA = new Ligue("PoolA", LocalDate.now(), jeu, tempA, true, nbParticipantsParMatch);
-		Ligue poolB = new Ligue("PoolB", LocalDate.now(), jeu, tempB, true, nbParticipantsParMatch);
-		Ligue poolC = new Ligue("PoolC", LocalDate.now(), jeu, tempC, true, nbParticipantsParMatch);
-		Ligue poolD = new Ligue("PoolD", LocalDate.now(), jeu, tempD, true, nbParticipantsParMatch);
-		Ligue poolE = new Ligue("PoolE", LocalDate.now(), jeu, tempE, true, nbParticipantsParMatch);
-		Ligue poolF = new Ligue("PoolF", LocalDate.now(), jeu, tempF, true, nbParticipantsParMatch);
-		Ligue poolG = new Ligue("PoolG", LocalDate.now(), jeu, tempG, true, nbParticipantsParMatch);
-		Ligue poolH = new Ligue("PoolH", LocalDate.now(), jeu, tempH, true, nbParticipantsParMatch);
+		Poule poolA = new Poule("PoolA", LocalDate.now(), jeu, tempA, true, nbParticipantsParMatch, this);
+		Poule poolB = new Poule("PoolB", LocalDate.now(), jeu, tempB, true, nbParticipantsParMatch, this);
+		Poule poolC = new Poule("PoolC", LocalDate.now(), jeu, tempC, true, nbParticipantsParMatch, this);
+		Poule poolD = new Poule("PoolD", LocalDate.now(), jeu, tempD, true, nbParticipantsParMatch, this);
+		Poule poolE = new Poule("PoolE", LocalDate.now(), jeu, tempE, true, nbParticipantsParMatch, this);
+		Poule poolF = new Poule("PoolF", LocalDate.now(), jeu, tempF, true, nbParticipantsParMatch, this);
+		Poule poolG = new Poule("PoolG", LocalDate.now(), jeu, tempG, true, nbParticipantsParMatch, this);
+		Poule poolH = new Poule("PoolH", LocalDate.now(), jeu, tempH, true, nbParticipantsParMatch, this);
 
-		Collections.addAll(pools, poolA, poolB, poolC, poolD, poolE, poolF, poolG, poolH);
+		Collections.addAll(poules, poolA, poolB, poolC, poolD, poolE, poolF, poolG, poolH);
 
 	}
 
