@@ -23,11 +23,11 @@ public class Ligue extends Tournoi {
 	/// ATTRIBUTES
 
 	@Column(name = "isPoule")
-	private boolean isPoule;
+	protected boolean isPoule;
 	@Column(name = "nbPhase")
-	private int nbPhase;
+	protected int nbPhase;
 	@OneToMany(mappedBy = "tournoi")
-	private Set<Journee> JourneesAJouer;
+	protected Set<Journee> JourneesAJouer;
 
 	/// CONSTRUCTORS
 
