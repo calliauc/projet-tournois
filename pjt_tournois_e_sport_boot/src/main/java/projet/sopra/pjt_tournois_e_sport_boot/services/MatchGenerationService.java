@@ -29,7 +29,7 @@ public class MatchGenerationService {
 	public void generateJourneesLigueDuels(Ligue ligue) {
 
 		////// TO DO : INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
-		////// TO DO : CREER DES SOUS FONCTIONS POUR RENDRE CETTE FONCTION PLUS LISIBLE 
+
 
 		Set<Journee> journees = new HashSet<Journee>();
 		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(ligue.getListeInscriptions());
@@ -38,8 +38,8 @@ public class MatchGenerationService {
 		for (int i = 0; i < inscriptionsLigue.size() - isPair; i++) {
 			Journee jour = new Journee();
 			jour.setTournoi(ligue);
-			journeeRepo.save(jour);
 			jour.setEtape(Etape.Ligue);
+			journeeRepo.save(jour);
 			Set<Match> matchsJournee = new HashSet<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {
 				Match m = new Match();
@@ -55,10 +55,8 @@ public class MatchGenerationService {
 			jour.setMatchsAJouerPourJournee(matchsJournee);
 			journeeRepo.save(jour);
 			journees.add(jour);
-			journeeRepo.save(jour);
 			inscriptionsLigue.add(isPair, inscriptionsLigue.pollLast());
 		}
-		System.out.println(journees.toString());
 		tournoiRepo.save(ligue);
 	}
 
