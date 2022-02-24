@@ -45,7 +45,6 @@ public abstract class Tournoi {
 	@Column(name = "tournoi_nb_participants_match", nullable = false)
 	protected int nbParticipantsParMatch;
 
-
 	@ManyToOne
 	@JoinColumn(name = "organisteur_tournoi", foreignKey = @ForeignKey(name = "organisteur_tournoi_fk"))
 	protected Utilisateur organisateur;

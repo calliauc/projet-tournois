@@ -24,6 +24,9 @@ public class Inscription {
 	private int position ;
 	@Column(name="score")
 	private int score ;
+	/*
+	 * TODO Score total pour départager
+	 */
 	@ManyToOne
 	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
 	private Match prochainMatch;

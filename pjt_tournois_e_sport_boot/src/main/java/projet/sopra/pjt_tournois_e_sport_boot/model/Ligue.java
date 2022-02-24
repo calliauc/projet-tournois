@@ -29,6 +29,11 @@ public class Ligue extends Tournoi {
 	@OneToMany(mappedBy = "tournoi")
 	protected Set<Journee> JourneesAJouer;
 
+	/*
+	 * TODO gestion classement
+	 */
+
+
 	/// CONSTRUCTORS
 
 	public Ligue() {

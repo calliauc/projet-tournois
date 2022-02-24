@@ -3,8 +3,12 @@ package projet.sopra.pjt_tournois_e_sport_boot.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
+
 public class Poule extends Ligue{
 
+	@Transient
 	private Championnat championnat;
 
 	public Poule() {

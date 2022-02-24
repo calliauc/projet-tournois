@@ -51,7 +51,9 @@ public class Utilisateur implements UserDetails {
 	@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "users_roles")
 	private Set<Role> roles;
-	
+	/*
+	 * TODO : 
+	 */
 	//////////// Attributs Joueur
 	
 	

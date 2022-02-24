@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "championnat")
@@ -20,8 +21,13 @@ public class Championnat extends Tournoi {
 	private Set<Journee> JourneesAJouerPoules;
 	@OneToMany(mappedBy="id")
 	private Set<Journee> JourneesAJouerFinales;
+	@Transient
 	private Set<Poule> poules = new HashSet<Poule>();
 
+	/*
+	 * TODO gestion classement
+	 */
+	
 	/// CONSTRUCTORS
 
 	public Championnat() {
