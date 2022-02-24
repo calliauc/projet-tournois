@@ -18,9 +18,9 @@ public class Championnat extends Tournoi {
 	/// ATTRIBUTES
 	@OneToMany(mappedBy = "tournoi")
 	private Set<Journee> JourneesAJouerPoules;
-//	@OneToMany(mappedBy="id")
-//	private Set<Journee> JourneesAJouerFinales;
-	private Set<Poule> poules = new HashSet<Poule>();
+	@OneToMany(mappedBy="id")
+	private Set<Journee> JourneesAJouerFinales;
+//	private Set<Poule> poules = new HashSet<Poule>();
 
 	/// CONSTRUCTORS
 

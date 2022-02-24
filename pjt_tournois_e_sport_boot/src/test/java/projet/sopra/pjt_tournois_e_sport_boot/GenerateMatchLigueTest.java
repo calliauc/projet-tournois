@@ -15,6 +15,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.UtilisateurRepository;
+import projet.sopra.pjt_tournois_e_sport_boot.services.MatchGenerationService;
 
 @SpringBootTest
 public class GenerateMatchLigueTest {
@@ -30,7 +31,8 @@ public class GenerateMatchLigueTest {
 	private UtilisateurRepository userRepo;
 	@Autowired
 	private TournoiRepository tournoiRepo;
-	
+	@Autowired
+	private MatchGenerationService matchGenerationService;
 	
 	
 	@Test
@@ -39,13 +41,13 @@ public class GenerateMatchLigueTest {
 		//Creation des utilisateurs dans base
 		LOGGER.info("Creation des users");
 		Utilisateur user1 = new Utilisateur("user1","u1@u1","user1");
-//		userRepo.save(user1);
+		userRepo.save(user1);
 		Utilisateur user2 = new Utilisateur("user2","u2@u2","user2");
-//		userRepo.save(user2);
+		userRepo.save(user2);
 		Utilisateur user3 = new Utilisateur("user3","u3@u3","user3");
-//		userRepo.save(user3);
+		userRepo.save(user3);
 		Utilisateur user4 = new Utilisateur("user4","u4@u4","user4");
-//		userRepo.save(user4);
+		userRepo.save(user4);
 		LOGGER.info("Users créés");
 
 		LOGGER.info("Creation de la ligue");
@@ -58,35 +60,48 @@ public class GenerateMatchLigueTest {
 		ligueTest.setJeu("Mariokart");
 		ligueTest.setNbParticipantsParMatch(2);
 		LOGGER.info("Fin du remplissage");
-//		LOGGER.info("Sauvegarde en base");
-//		tournoiRepo.save(ligueTest);
-//		LOGGER.info("Fin de la sauvegarde en base");
+		
+		LOGGER.info("Sauvegarde en base");
+		tournoiRepo.save(ligueTest);
+		LOGGER.info("Fin de la sauvegarde en base");
 		
 		
 		LOGGER.info("Creation des inscriptions");
 		//Inscriptions des 4 joueurs à la ligue
 		Inscription inscription1 = new Inscription();
 		inscription1.setId(new InscriptionKey(user1,ligueTest));
-
+		ligueTest.getListeInscriptions().add(inscription1);
+		
 		Inscription inscription2 = new Inscription();
 		inscription2.setId(new InscriptionKey(user2,ligueTest));
-
+		ligueTest.getListeInscriptions().add(inscription2);
+		
 		Inscription inscription3 = new Inscription();
 		inscription3.setId(new InscriptionKey(user3,ligueTest));
-
+		ligueTest.getListeInscriptions().add(inscription3);
+		
 		Inscription inscription4 = new Inscription();
 		inscription4.setId(new InscriptionKey(user4,ligueTest));
+		ligueTest.getListeInscriptions().add(inscription4);
+		
 		LOGGER.info("Fin de la creation des inscriptions");
 
-//		LOGGER.info("Sauvegarde des inscriptions");
-//		inscriptionRepo.save(inscription1);
-//		inscriptionRepo.save(inscription2);
-//		inscriptionRepo.save(inscription3);
-//		inscriptionRepo.save(inscription4);
-//		LOGGER.info("Fin de la sauvegarde des inscriptions");
+		
+		
+		LOGGER.info("Sauvegarde des inscriptions");
+		inscriptionRepo.save(inscription1);
+		inscriptionRepo.save(inscription2);
+		inscriptionRepo.save(inscription3);
+		inscriptionRepo.save(inscription4);
+		LOGGER.info("Fin de la sauvegarde des inscriptions");
+		
+		LOGGER.info("Sauvegarde en base");
+		tournoiRepo.save(ligueTest);
+		LOGGER.info("Fin de la sauvegarde en base");
 
 		LOGGER.info("Generation des matches");
-		ligueTest.generateJourneesLigueDuels(); 
+//		ligueTest.generateJourneesLigueDuels(); 
+		matchGenerationService.generateJourneesLigueDuels(ligueTest);
 		LOGGER.info("Fin de la generation des matches");
 		
 	}
