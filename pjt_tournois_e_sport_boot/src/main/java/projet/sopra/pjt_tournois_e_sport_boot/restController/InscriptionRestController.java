@@ -46,12 +46,7 @@ public class InscriptionRestController {
 	
 	@GetMapping("/avecId")
 	public List<InscriptionDto> getAllWithKey(){
-		List<Inscription> inscriptions = inscriptionService.getAll();
-		List<InscriptionDto> inscriptionsWithKey = new ArrayList<InscriptionDto>();
-		for(Inscription i : inscriptions) {
-			inscriptionsWithKey.add(inscriptionToInscriptionDTO(i));
-		}
-		return inscriptionsWithKey;
+		return inscriptionListToInscriptionDTOList(inscriptionService.getAll());
 	}
 	
 	@GetMapping("{id}")
@@ -95,10 +90,18 @@ public class InscriptionRestController {
 		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getProchainMatch());
 	}
 	
+	private List<InscriptionDto> inscriptionListToInscriptionDTOList(List<Inscription> inscriptions){
+		List<InscriptionDto> inscriptionsWithKey = new ArrayList<InscriptionDto>();
+		for(Inscription i : inscriptions) {
+			inscriptionsWithKey.add(inscriptionToInscriptionDTO(i));
+		}
+		return inscriptionsWithKey;
+	}
+	
 	// SPECIAL QUERIES
 	
 	@GetMapping("/{score1}/{score2}")
-	public List<Inscription> getAllByScore(@PathVariable int score1, @PathVariable int score2){
-		return inscriptionService.getAllByScoreBetween(score1, score2);
+	public List<InscriptionDto> getAllByScore(@PathVariable int score1, @PathVariable int score2){
+		return inscriptionListToInscriptionDTOList(inscriptionService.getAllByScoreBetween(score1, score2));
 	}
 }
