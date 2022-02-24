@@ -19,7 +19,7 @@ public class Championnat extends Tournoi {
 	/// ATTRIBUTES
 	@OneToMany(mappedBy = "tournoi")
 	private Set<Journee> JourneesAJouerPoules;
-	@OneToMany(mappedBy="id")
+	@OneToMany(mappedBy = "id")
 	private Set<Journee> JourneesAJouerFinales;
 	@Transient
 	private Set<Poule> poules = new HashSet<Poule>();
@@ -27,7 +27,7 @@ public class Championnat extends Tournoi {
 	/*
 	 * TODO gestion classement
 	 */
-	
+
 	/// CONSTRUCTORS
 
 	public Championnat() {
@@ -41,13 +41,38 @@ public class Championnat extends Tournoi {
 
 	/// GETTERS
 
+	public Set<Journee> getJourneesAJouerPoules() {
+		return JourneesAJouerPoules;
+	}
+
+	public Set<Journee> getJourneesAJouerFinales() {
+		return JourneesAJouerFinales;
+	}
+
+	public Set<Poule> getPoules() {
+		return poules;
+	}
+
 	/// SETTERS
+
+	public void setJourneesAJouerPoules(Set<Journee> journeesAJouerPoules) {
+		JourneesAJouerPoules = journeesAJouerPoules;
+	}
+
+	public void setJourneesAJouerFinales(Set<Journee> journeesAJouerFinales) {
+		JourneesAJouerFinales = journeesAJouerFinales;
+	}
+
+	public void setPoules(Set<Poule> poules) {
+		this.poules = poules;
+	}
 
 	/// GESTION POULES
 
-	
-	/*	CREATION POULES
-	 * S'il y avait un nombre infini de participation j'aurais cherché un moyen d'automatiser mieux tout ça, mais pas la peine pour 8 poules max
+	/*
+	 * CREATION POULES S'il y avait un nombre infini de participation j'aurais
+	 * cherché un moyen d'automatiser mieux tout ça, mais pas la peine pour 8 poules
+	 * max
 	 */
 	public void splitInPoule() {
 		int nb_players = this.listeInscriptions.size();
@@ -69,9 +94,7 @@ public class Championnat extends Tournoi {
 		}
 //		displayFinalScores();
 	}
-	
 
-	
 	private void createTwoPoule() {
 		List<Inscription> players = new ArrayList<Inscription>(this.listeInscriptions);
 		Collections.shuffle(players);
@@ -128,5 +151,4 @@ public class Championnat extends Tournoi {
 
 	}
 
-	
 }

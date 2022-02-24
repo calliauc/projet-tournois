@@ -78,35 +78,35 @@ public class Ligue extends Tournoi {
 		}
 	}
 
-	public Set<Journee> generateJourneesLigueDuels() {
-
-		////// TO DO INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
-
-		Set<Journee> journees = new HashSet<Journee>();
-		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(listeInscriptions);
-		int isPair = (listeInscriptions.size() + 1) % 2;
-
-		for (int i = 0; i < inscriptionsLigue.size() - isPair; i++) {
-			Journee jour = new Journee();
-			jour.setEtape(Etape.Ligue);
-			Set<Match> matchsJournee = new HashSet<Match>();
-			for (int j = 0; j < listeInscriptions.size() / 2; j++) {
-				Match m = new Match();
-				m.getInscriptions().add(inscriptionsLigue.get(j));
-				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() / 2 - (j + 1)));
-				matchsJournee.add(m);
-			}
-			if (isPair != 1) {
-				System.out.println("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
-			}
-			jour.setMatchsAJouerPourJournee(matchsJournee);
-			journees.add(jour);
-
-			inscriptionsLigue.add(isPair, inscriptionsLigue.pollLast());
-		}
-		System.out.println(journees.toString());
-		return journees;
-	}
+//	public Set<Journee> generateJourneesLigueDuels() {
+//
+//		////// TO DO INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
+//
+//		Set<Journee> journees = new HashSet<Journee>();
+//		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(listeInscriptions);
+//		int isPair = (listeInscriptions.size() + 1) % 2;
+//
+//		for (int i = 0; i < inscriptionsLigue.size() - isPair; i++) {
+//			Journee jour = new Journee();
+//			jour.setEtape(Etape.Ligue);
+//			Set<Match> matchsJournee = new HashSet<Match>();
+//			for (int j = 0; j < listeInscriptions.size() / 2; j++) {
+//				Match m = new Match();
+//				m.getInscriptions().add(inscriptionsLigue.get(j));
+//				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() / 2 - (j + 1)));
+//				matchsJournee.add(m);
+//			}
+//			if (isPair != 1) {
+//				System.out.println("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
+//			}
+//			jour.setMatchsAJouerPourJournee(matchsJournee);
+//			journees.add(jour);
+//
+//			inscriptionsLigue.add(isPair, inscriptionsLigue.pollLast());
+//		}
+//		System.out.println(journees.toString());
+//		return journees;
+//	}
 
 	public void initMatchs() {
 
