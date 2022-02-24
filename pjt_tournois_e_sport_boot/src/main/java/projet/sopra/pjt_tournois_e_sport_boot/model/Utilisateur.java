@@ -52,7 +52,7 @@ public class Utilisateur implements UserDetails {
 	@CollectionTable(name = "users_roles")
 	private Set<Role> roles;
 	/*
-	 * TODO : 
+	 * TODO : autoriser un orga sur ses tournois seulement
 	 */
 	//////////// Attributs Joueur
 	
