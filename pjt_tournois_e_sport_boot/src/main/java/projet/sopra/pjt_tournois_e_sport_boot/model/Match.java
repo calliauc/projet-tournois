@@ -1,5 +1,6 @@
 package projet.sopra.pjt_tournois_e_sport_boot.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ public class Match {
 	private Long id;
 	
 	@OneToMany(mappedBy = "prochainMatch")
-	private List<Inscription> inscriptions;
+	private List<Inscription> inscriptions = new ArrayList<Inscription>();
 	
 	@ManyToOne
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
