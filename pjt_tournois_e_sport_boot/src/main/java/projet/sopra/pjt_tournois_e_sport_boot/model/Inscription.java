@@ -7,9 +7,10 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 @Entity
@@ -20,13 +21,16 @@ public class Inscription {
 	/// ATTRIBUTES
 	@EmbeddedId
 	private InscriptionKey id;
+	@JsonView(Views.Common.class)
 	@Column(name="position")
 	private int position ;
+	@JsonView(Views.Common.class)
 	@Column(name="score")
 	private int score ;
 	/*
 	 * TODO Score total pour départager
 	 */
+	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
 	private Match prochainMatch;

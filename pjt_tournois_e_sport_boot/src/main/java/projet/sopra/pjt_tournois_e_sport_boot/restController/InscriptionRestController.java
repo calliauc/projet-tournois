@@ -1,5 +1,6 @@
 package projet.sopra.pjt_tournois_e_sport_boot.restController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.sopra.pjt_tournois_e_sport_boot.dto.InscriptionDto;
+import projet.sopra.pjt_tournois_e_sport_boot.dto.InscriptionKeyDto;
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.InscriptionException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
 
 @RestController
@@ -33,8 +39,19 @@ public class InscriptionRestController {
 	//CRUD
 	
 	@GetMapping("")
+	@JsonView(Views.Common.class)
 	public List<Inscription> getAll() {
 		return inscriptionService.getAll();
+	}
+	
+	@GetMapping("/avecId")
+	public List<InscriptionDto> getAllWithKey(){
+		List<Inscription> inscriptions = inscriptionService.getAll();
+		List<InscriptionDto> inscriptionsWithKey = new ArrayList<InscriptionDto>();
+		for(Inscription i : inscriptions) {
+			inscriptionsWithKey.add(inscriptionToInscriptionDTO(i));
+		}
+		return inscriptionsWithKey;
 	}
 	
 	@GetMapping("{id}")
@@ -71,6 +88,11 @@ public class InscriptionRestController {
 			throw new InscriptionException();
 		}
 		return inscriptionService.createOrUpdate(inscription);
+	}
+	
+	private InscriptionDto inscriptionToInscriptionDTO(Inscription i) {
+		InscriptionKeyDto ikDto = new InscriptionKeyDto(i.getId().getJoueur().getId(), i.getId().getTournoi().getIdTournoi());
+		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getProchainMatch());
 	}
 	
 	// SPECIAL QUERIES
