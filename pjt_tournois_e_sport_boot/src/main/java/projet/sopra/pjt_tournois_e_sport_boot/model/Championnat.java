@@ -19,15 +19,16 @@ public class Championnat extends Tournoi {
 	/// ATTRIBUTES
 	@OneToMany(mappedBy = "tournoi")
 	private Set<Journee> JourneesAJouerPoules;
-	@OneToMany(mappedBy="id")
+	@OneToMany(mappedBy = "id")
 	private Set<Journee> JourneesAJouerFinales;
 	@Transient
 	private Set<Poule> poules = new HashSet<Poule>();
 
+	private int nbPoules = 0;
 	/*
 	 * TODO gestion classement
 	 */
-	
+
 	/// CONSTRUCTORS
 
 	public Championnat() {
@@ -41,13 +42,38 @@ public class Championnat extends Tournoi {
 
 	/// GETTERS
 
+	public Set<Journee> getJourneesAJouerPoules() {
+		return JourneesAJouerPoules;
+	}
+
+	public Set<Journee> getJourneesAJouerFinales() {
+		return JourneesAJouerFinales;
+	}
+
+	public Set<Poule> getPoules() {
+		return poules;
+	}
+
 	/// SETTERS
+
+	public void setJourneesAJouerPoules(Set<Journee> journeesAJouerPoules) {
+		JourneesAJouerPoules = journeesAJouerPoules;
+	}
+
+	public void setJourneesAJouerFinales(Set<Journee> journeesAJouerFinales) {
+		JourneesAJouerFinales = journeesAJouerFinales;
+	}
+
+	public void setPoules(Set<Poule> poules) {
+		this.poules = poules;
+	}
 
 	/// GESTION POULES
 
-	
-	/*	CREATION POULES
-	 * S'il y avait un nombre infini de participation j'aurais cherché un moyen d'automatiser mieux tout ça, mais pas la peine pour 8 poules max
+	/*
+	 * CREATION POULES S'il y avait un nombre infini de participation j'aurais
+	 * cherché un moyen d'automatiser mieux tout ça, mais pas la peine pour 8 poules
+	 * max
 	 */
 	public void splitInPoule() {
 		int nb_players = this.listeInscriptions.size();
@@ -63,15 +89,13 @@ public class Championnat extends Tournoi {
 		} else if (nb_players <= 48) {
 			createEightPoule();
 			System.out.println(
-					nb_players + " joueurs : 8 poules \nLes 2 premiers de chaque poule en huiti�me de finales");
+					nb_players + " joueurs : 8 poules \nLes 2 premiers de chaque poule en huitieme de finales");
 		} else {
 			System.out.println("Trop de joueurs");
 		}
 //		displayFinalScores();
 	}
-	
 
-	
 	private void createTwoPoule() {
 		List<Inscription> players = new ArrayList<Inscription>(this.listeInscriptions);
 		Collections.shuffle(players);
@@ -82,6 +106,7 @@ public class Championnat extends Tournoi {
 		Poule pouleA = new Poule("PouleA", LocalDate.now(), jeu, tempA, true, nbParticipantsParMatch, this);
 		Poule pouleB = new Poule("PouleB", LocalDate.now(), jeu, tempB, true, nbParticipantsParMatch, this);
 
+		nbPoules = 2;
 		Collections.addAll(poules, pouleA, pouleB);
 	}
 
@@ -99,6 +124,7 @@ public class Championnat extends Tournoi {
 		Poule pouleC = new Poule("PouleC", LocalDate.now(), jeu, tempC, true, nbParticipantsParMatch, this);
 		Poule pouleD = new Poule("PouleD", LocalDate.now(), jeu, tempD, true, nbParticipantsParMatch, this);
 
+		nbPoules = 4;
 		Collections.addAll(poules, pouleA, pouleB, pouleC, pouleD);
 	}
 
@@ -124,9 +150,22 @@ public class Championnat extends Tournoi {
 		Poule pouleG = new Poule("PouleG", LocalDate.now(), jeu, tempG, true, nbParticipantsParMatch, this);
 		Poule pouleH = new Poule("PouleH", LocalDate.now(), jeu, tempH, true, nbParticipantsParMatch, this);
 
+		nbPoules = 8;
 		Collections.addAll(poules, pouleA, pouleB, pouleC, pouleD, pouleE, pouleF, pouleG, pouleH);
 
 	}
 
+	/// GESTION PHASES FINALES
+	
+	/*
+	 * TODO
+	 * - Démarrer les phases finales sur la bonne journée (huitième/quart/demi)
+	 * 
+	 * 			!!	La suite sera probablement déportée dans la classe journée  !!
+	 * 
+	 * - Récupérer le premier et second de chaque poule et les répartir dans la première jouurnée de phase finale
+	 * - Créer les matches
+	 * - Récupérer les résultats (rest controller) et générer la journée suivante
+	 */
 	
 }
