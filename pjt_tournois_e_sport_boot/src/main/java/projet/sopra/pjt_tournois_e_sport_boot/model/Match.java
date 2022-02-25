@@ -113,7 +113,15 @@ public class Match {
 	}
 	
 	
+	/// GESTION CUSTOM
 	
+	/*
+	 * TODO récupérer le premier selon la liste de resultats
+	 */
 	
+	public Inscription getPremier() {
+		Inscription w = new Inscription(); // Pour pas que ça plante
+		return w;
+	}
 	
 }
