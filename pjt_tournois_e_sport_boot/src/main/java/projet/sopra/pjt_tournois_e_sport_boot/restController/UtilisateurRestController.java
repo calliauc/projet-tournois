@@ -44,23 +44,27 @@ public class UtilisateurRestController {
 	}
 
 	@GetMapping("/{id}")
+	@JsonView(Views.Common.class)
 	public Utilisateur getById(@PathVariable Long id) {
 		return uService.getById(id);
 	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
+	@JsonView(Views.Common.class)
 	public Utilisateur create(@Valid @RequestBody Utilisateur u, BindingResult br) {
-		LOGGER.info("Dans PostMapping -> save");
+		LOGGER.info("Dans PostMapping");
 		return save(u, br);
 	}
 
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	@PutMapping("/{id}")
+	@JsonView(Views.Common.class)
 	public Utilisateur update(@Valid @RequestBody Utilisateur u, BindingResult br, @PathVariable Long id) {
 		if (!uService.exists(id)) {
 			throw new UtilisateurException("This user id doesn't exist");
 		}
+		LOGGER.info("Dans PutMapping");
 		return save(u, br);
 	}
 
@@ -76,6 +80,7 @@ public class UtilisateurRestController {
 		if (br.hasErrors()) {
 			throw new UtilisateurException("Utilisateur invalide");
 		}
+		LOGGER.info("Validator OK => on save");
 		return uService.save(u);
 	}
 

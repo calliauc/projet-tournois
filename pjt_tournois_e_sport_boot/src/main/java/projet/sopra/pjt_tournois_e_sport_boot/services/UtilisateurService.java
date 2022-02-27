@@ -116,7 +116,7 @@ public class UtilisateurService {
 	}
 
 	private Utilisateur setData(Utilisateur user) {
-		Utilisateur utilisateurEnBase = new Utilisateur();
+		Utilisateur utilisateurEnBase = getById(user.getId());
 		utilisateurEnBase.setId(user.getId());
 		utilisateurEnBase.setUsername(user.getUsername());
 		utilisateurEnBase.setPassword(passwordEncoder.encode(user.getPassword()));

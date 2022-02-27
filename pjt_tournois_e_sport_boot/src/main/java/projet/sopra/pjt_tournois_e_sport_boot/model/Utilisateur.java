@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -41,12 +42,12 @@ public class Utilisateur implements UserDetails {
 	@JsonView(Views.Common.class)
 	private Long id;
 
-	@Column(name = "username", unique = true, nullable = false)
+	@Column(name = "username", nullable = false)
 	@JsonView(Views.Common.class)
 	@NotEmpty
 	private String username;
 
-	@Column(name = "email", unique = true, nullable = false)
+	@Column(name = "email", nullable = false)
 	@JsonView(Views.Common.class)
 	@NotEmpty
 	@Email(message = "Invalid email")
@@ -79,6 +80,9 @@ public class Utilisateur implements UserDetails {
 	@OneToMany(mappedBy = "organisateur")
 	@Column(name = "tournois_organises", nullable = true)
 	private List<Tournoi> tournois;
+	
+	@Version
+	private int version;
 
 	//////////// CONSTRUCTOR
 	public Utilisateur() {
