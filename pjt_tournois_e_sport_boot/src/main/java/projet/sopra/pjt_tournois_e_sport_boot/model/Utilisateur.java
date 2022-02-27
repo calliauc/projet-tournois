@@ -19,6 +19,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,55 +33,71 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "users")
 @SequenceGenerator(name = "seqUtilisateur", sequenceName = "seq_users", initialValue = 100, allocationSize = 1)
 public class Utilisateur implements UserDetails {
-	
+
 	///////// Attributs généraux
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUtilisateur")
 	@JsonView(Views.Common.class)
 	private Long id;
+
 	@Column(name = "username", unique = true, nullable = false)
 	@JsonView(Views.Common.class)
+	@NotEmpty
 	private String username;
+
 	@Column(name = "email", unique = true, nullable = false)
 	@JsonView(Views.Common.class)
+	@NotEmpty
+	@Email(message = "Invalid email")
 	private String mail;
+
 	@Column(name = "password", length = 150, nullable = false)
+	@NotEmpty
+	@Size(min = 2, max = 150, message = "taille min = 2")
 	private String password;
+
 	@Column(name = "enable", nullable = false)
 	private boolean enable = true;
+
 	@Enumerated(EnumType.STRING)
 	@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "users_roles")
+	@JsonView(Views.Common.class)
 	private Set<Role> roles;
 	/*
 	 * TODO : autoriser un orga sur ses tournois seulement
 	 */
 	//////////// Attributs Joueur
-	
-	
-	@OneToMany(mappedBy="id.joueur")
-	@Column(name="joueur_inscriptions", nullable= true)
+
+	@OneToMany(mappedBy = "id.joueur")
+	@Column(name = "joueur_inscriptions", nullable = true)
 	private Set<Inscription> inscriptions;
-	
-	////////////Attributs Organisateur
-	
-	@OneToMany(mappedBy="organisateur")
-	@Column(name="tournois_organises", nullable= true)
+
+	//////////// Attributs Organisateur
+
+	@OneToMany(mappedBy = "organisateur")
+	@Column(name = "tournois_organises", nullable = true)
 	private List<Tournoi> tournois;
-	
+
 	//////////// CONSTRUCTOR
-			
+	public Utilisateur() {
+	}
+
+	public Utilisateur(String username, String mail, String password, Set<Role> roles) {
+		super();
+		this.username = username;
+		this.mail = mail;
+		this.password = password;
+		this.roles = roles;
+	}
+
 	public Utilisateur(String username, String mail, String password) {
 		super();
 		this.username = username;
 		this.mail = mail;
 		this.password = password;
 	}
-
-	public Utilisateur() {
-			
-		}
 
 	//////// GETTERS SETTERS
 
@@ -146,9 +165,8 @@ public class Utilisateur implements UserDetails {
 		this.tournois = tournois;
 	}
 
-	
 	//////////// METHODS
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
