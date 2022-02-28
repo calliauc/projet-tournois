@@ -50,6 +50,10 @@ public class MatchService {
 		Match tournoiEnBase = matchRepo.findById(m.getId()).orElseThrow(TournoiException::new);
 		matchRepo.delete(tournoiEnBase);
 	}
+	
+	public void deleteById(Long id) {
+		matchRepo.deleteById(id);
+	}
 
 	private void checkData(Match m) {
 		if(m==null) {
@@ -59,5 +63,9 @@ public class MatchService {
 		if (m.getJournee() == null || m.getInscriptions().isEmpty()) {
 			throw new MatchException("donnees incorrectes");
 		}
+	}
+	
+	public boolean exist (Long id) {
+		return matchRepo.existsById(id);
 	}
 }
