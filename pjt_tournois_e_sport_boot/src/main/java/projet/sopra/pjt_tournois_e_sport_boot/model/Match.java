@@ -31,6 +31,7 @@ public class Match {
 	private Long id;
 	
 	@OneToMany(mappedBy = "prochainMatch")
+	@NotEmpty
 	private List<Inscription> inscriptions = new ArrayList<Inscription>();
 	
 	@ManyToOne

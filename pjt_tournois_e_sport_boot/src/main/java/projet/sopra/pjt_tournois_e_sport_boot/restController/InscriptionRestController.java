@@ -3,6 +3,8 @@ package projet.sopra.pjt_tournois_e_sport_boot.restController;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -58,12 +60,12 @@ public class InscriptionRestController {
 	
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
-	public Inscription create(@RequestBody Inscription inscription, BindingResult br) {
+	public Inscription create(@Valid @RequestBody Inscription inscription, BindingResult br) {
 		return save(inscription,br);
 	}
 	
 	@PutMapping("/{id}")
-	public Inscription update(@RequestBody Inscription inscription, BindingResult br, @PathVariable InscriptionKey id) {
+	public Inscription update(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable InscriptionKey id) {
 		if(!inscriptionService.exist(id)) {
 			throw new InscriptionException();
 		}
