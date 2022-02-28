@@ -51,7 +51,7 @@ public class InscriptionRestController {
 		return inscriptionListToInscriptionDTOList(inscriptionService.getAll());
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public Inscription getById(@PathVariable InscriptionKey id) {
 		return inscriptionService.getById(id);
 	}
@@ -63,7 +63,7 @@ public class InscriptionRestController {
 	}
 	
 	@PutMapping("/{id}")
-	public Inscription create(@RequestBody Inscription inscription, BindingResult br, @PathVariable InscriptionKey id) {
+	public Inscription update(@RequestBody Inscription inscription, BindingResult br, @PathVariable InscriptionKey id) {
 		if(!inscriptionService.exist(id)) {
 			throw new InscriptionException();
 		}
