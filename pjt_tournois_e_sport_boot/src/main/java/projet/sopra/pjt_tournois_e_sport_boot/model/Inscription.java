@@ -9,6 +9,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.PositiveOrZero;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -23,9 +24,11 @@ public class Inscription {
 	private InscriptionKey id;
 	@JsonView(Views.Common.class)
 	@Column(name="position")
+	@PositiveOrZero
 	private int position ;
 	@JsonView(Views.Common.class)
 	@Column(name="score")
+	@PositiveOrZero
 	private int score ;
 	/*
 	 * TODO Score total pour départager

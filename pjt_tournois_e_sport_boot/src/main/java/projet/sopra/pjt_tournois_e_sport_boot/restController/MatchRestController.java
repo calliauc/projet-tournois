@@ -22,71 +22,76 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import projet.sopra.pjt_tournois_e_sport_boot.dto.InscriptionDto;
 import projet.sopra.pjt_tournois_e_sport_boot.dto.InscriptionKeyDto;
-import projet.sopra.pjt_tournois_e_sport_boot.exceptions.InscriptionException;
+import projet.sopra.pjt_tournois_e_sport_boot.dto.MatchDto;
+import projet.sopra.pjt_tournois_e_sport_boot.exceptions.MatchException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
-import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
-import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.MatchService;
 
 @RestController
-@RequestMapping("api/inscription")
-public class InscriptionRestController {
-	//TO DO :
-// getById composé --> id joueur et tournoi en parametre
-//	Meme chose delete
-//	Meme chose update
-//Validation
+@RequestMapping("api/match")
+public class MatchRestController {
+//	TO-DO Vigilance
+//	  - getall avec list inscription ? list resultat (plutot non) ?
 	
-	@Autowired
-	private InscriptionService inscriptionService;
+	@Autowired 
+	private MatchService matchService;
 	
 	//CRUD
 	
 	@GetMapping("")
 	@JsonView(Views.Common.class)
-	public List<Inscription> getAll() {
-		return inscriptionService.getAll();
+	public List<Match> getAll(){
+		return matchService.getAll();
 	}
 	
-	@GetMapping("/avecId")
-	public List<InscriptionDto> getAllWithKey(){
-		return inscriptionListToInscriptionDTOList(inscriptionService.getAll());
+	@GetMapping("/avecInscriptions")
+	public List<MatchDto> getAllWithInscriptions(){
+		return listMatchToListMatchDto(matchService.getAll());
 	}
 	
 	@GetMapping("/{id}")
-	public Inscription getById(@PathVariable InscriptionKey id) {
-		return inscriptionService.getById(id);
+	@JsonView(Views.Common.class)
+	public Match getById(@PathVariable Long id) {
+		return matchService.getById(id);
+	}
+	
+	@GetMapping("/{id}/avecInscriptions")
+	public MatchDto getByIdWithInscriptions(@PathVariable Long id) {
+		return matchToMatchDto(matchService.getById(id));
 	}
 	
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
-	public Inscription create(@Valid @RequestBody Inscription inscription, BindingResult br) {
-		return save(inscription,br);
+	public Match create(@Valid @RequestBody Match match, BindingResult br) {
+		return save(match,br);
 	}
 	
 	@PutMapping("/{id}")
-	public Inscription update(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable InscriptionKey id) {
-		if(!inscriptionService.exist(id)) {
-			throw new InscriptionException();
+	public Match update(@Valid @RequestBody Match match, BindingResult br, @PathVariable Long id) {
+		if(!matchService.exist(id)) {
+			throw new MatchException();
 		}
-		return save(inscription,br);
+		return save(match,br);
 	}
+	
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable InscriptionKey id) {
-		if(!inscriptionService.exist(id)) {
-			throw new InscriptionException();
+	public void delete(@PathVariable Long id) {
+		if(!matchService.exist(id)) {
+			throw new MatchException();
 		}
-		inscriptionService.deleteById(id);
+		matchService.deleteById(id);
 	}
 	
 	//METHODS
 	
-	private Inscription save(Inscription inscription, BindingResult br) {
+	private Match save(Match match, BindingResult br) {
 		if (br.hasErrors()) {
-			throw new InscriptionException();
+			throw new MatchException();
 		}
-		return inscriptionService.createOrUpdate(inscription);
+		return matchService.createOrUpdate(match);
 	}
 	
 	private InscriptionDto inscriptionToInscriptionDTO(Inscription i) {
@@ -102,10 +107,18 @@ public class InscriptionRestController {
 		return inscriptionsWithKey;
 	}
 	
-	// SPECIAL QUERIES
 	
-	@GetMapping("/{score1}/{score2}")
-	public List<InscriptionDto> getAllByScore(@PathVariable int score1, @PathVariable int score2){
-		return inscriptionListToInscriptionDTOList(inscriptionService.getAllByScoreBetween(score1, score2));
+	private MatchDto matchToMatchDto(Match m) {
+		MatchDto matchDto = new MatchDto(m.getId(),inscriptionListToInscriptionDTOList(m.getInscriptions()),m.getJournee());
+		return matchDto;
 	}
+	
+	private List<MatchDto> listMatchToListMatchDto(List<Match> matchs){
+		List<MatchDto> matchsDto = new ArrayList<MatchDto>();
+		for(Match m : matchs) {
+			matchsDto.add(matchToMatchDto(m));
+		}
+		return matchsDto;
+	}
+	
 }

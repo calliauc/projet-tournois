@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="Match")
@@ -25,13 +28,16 @@ public class Match {
 	@Id
 	@Column(name="match_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMatch")
+	@JsonView(Views.Common.class)
 	private Long id;
 	
 	@OneToMany(mappedBy = "prochainMatch")
+	@NotEmpty
 	private List<Inscription> inscriptions = new ArrayList<Inscription>();
 	
 	@ManyToOne
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
+	@JsonView(Views.Common.class)
 	private Journee journee;
 	
 	@OneToMany(mappedBy = "match")
