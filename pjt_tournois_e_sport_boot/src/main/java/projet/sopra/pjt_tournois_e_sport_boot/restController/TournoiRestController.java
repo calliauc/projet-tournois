@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.TournoiException;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
+import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 
 @RestController
@@ -30,6 +32,8 @@ public class TournoiRestController {
 	
 	@Autowired
 	private TournoiService tournoiService; 
+	@Autowired
+	private InscriptionService inscriptionService; 
 	
 	////CRUD
 	
@@ -68,7 +72,10 @@ public class TournoiRestController {
 	
 	//// TO DO - SPECIAL QUERIES
 	
-	
+	@GetMapping("/{id}/classement")
+	private List<Inscription> getClassementLigue(@PathVariable Long id) {
+		return tournoiService.getClassementLigue(id);
+	}
 	
 	
 	

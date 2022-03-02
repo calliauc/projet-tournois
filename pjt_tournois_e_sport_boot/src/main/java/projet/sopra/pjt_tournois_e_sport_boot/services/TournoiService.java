@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.TournoiException;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
+import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
 
 
@@ -14,6 +16,8 @@ import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
 public class TournoiService {
 	@Autowired
 	private TournoiRepository tournoiRepo;
+	@Autowired
+	private InscriptionRepository inscriptionRepo;
 	
 	public List<Tournoi> getAll() {
 		return tournoiRepo.findAll();
@@ -37,6 +41,13 @@ public class TournoiService {
 			tournoiEnBase = this.getById(t.getIdTournoi());
 			checkData(t);
 			tournoiEnBase.setNom(t.getNom());
+			tournoiEnBase.setDateDeCreation(t.getDateDeCreation());
+			tournoiEnBase.setDateDeDebut(t.getDateDeDebut());
+			tournoiEnBase.setJeu(t.getJeu());
+			tournoiEnBase.setListeInscriptions(t.getListeInscriptions());
+			tournoiEnBase.setNbParticipantsParMatch(t.getNbParticipantsParMatch());
+			tournoiEnBase.setNbParticipantsTotal(t.getNbParticipantsTotal());
+			tournoiEnBase.setOrganisateur(t.getOrganisateur());
 			return tournoiRepo.save(tournoiEnBase);
 		}
 	}
@@ -62,5 +73,11 @@ public class TournoiService {
 	public boolean exist(Long id) {
 		return tournoiRepo.existsById(id);
 	}
+	
+	// SPECIAL QUERIES
+	public List<Inscription> getClassementLigue(Long id){
+		return inscriptionRepo.getClassementLigue(id);
+	}
+	
 }
 
