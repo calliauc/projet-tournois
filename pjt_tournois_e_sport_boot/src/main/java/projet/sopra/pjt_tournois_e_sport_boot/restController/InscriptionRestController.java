@@ -108,4 +108,6 @@ public class InscriptionRestController {
 	public List<InscriptionDto> getAllByScore(@PathVariable int score1, @PathVariable int score2){
 		return inscriptionListToInscriptionDTOList(inscriptionService.getAllByScoreBetween(score1, score2));
 	}
+	
+	
 }
