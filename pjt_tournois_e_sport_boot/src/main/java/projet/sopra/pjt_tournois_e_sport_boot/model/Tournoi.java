@@ -37,14 +37,13 @@ public abstract class Tournoi {
 	@Column(name = "tournoi_date_debut", nullable = false)
 	protected LocalDate dateDeDebut;
 	@Column(name = "tournoi_jeu", length = 50, nullable = false)
-
 	protected String jeu;
 	@OneToMany(mappedBy = "id.tournoi")
 	protected Set<Inscription> listeInscriptions = new HashSet<Inscription>();
-
 	@Column(name = "tournoi_nb_participants_match", nullable = false)
 	protected int nbParticipantsParMatch;
-
+	@Column(name="tournoi_nb_participants_total", nullable = false)
+	protected int nbParticipantsTotal;	
 	@ManyToOne
 	@JoinColumn(name = "organisteur_tournoi", foreignKey = @ForeignKey(name = "organisteur_tournoi_fk"))
 	protected Utilisateur organisateur;
@@ -69,6 +68,10 @@ public abstract class Tournoi {
 	}
 
 	/// GETTERS
+
+	public int getNbParticipantsTotal() {
+		return nbParticipantsTotal;
+	}
 
 	public Long getIdTournoi() {
 		return idTournoi;
@@ -95,6 +98,11 @@ public abstract class Tournoi {
 	}
 
 	/// SETTERS
+
+
+	public void setNbParticipantsTotal(int nbParticipantsTotal) {
+		this.nbParticipantsTotal = nbParticipantsTotal;
+	}
 
 	public Set<Inscription> getListeInscriptions() {
 		return listeInscriptions;

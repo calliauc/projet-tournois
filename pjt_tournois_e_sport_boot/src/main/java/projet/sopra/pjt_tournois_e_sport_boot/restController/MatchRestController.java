@@ -96,7 +96,7 @@ public class MatchRestController {
 	
 	private InscriptionDto inscriptionToInscriptionDTO(Inscription i) {
 		InscriptionKeyDto ikDto = new InscriptionKeyDto(i.getId().getJoueur().getId(), i.getId().getTournoi().getIdTournoi());
-		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getProchainMatch());
+		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getScoreDifference(), i.getProchainMatch());
 	}
 	
 	private List<InscriptionDto> inscriptionListToInscriptionDTOList(List<Inscription> inscriptions){

@@ -7,16 +7,18 @@ public class InscriptionDto {
 	private InscriptionKeyDto id;
 	private int position;
 	private int score;
+	private int scoreDifference; 
 	private Match prochainMatch;
 	
 	public InscriptionDto() {
 	}
 
-	public InscriptionDto(InscriptionKeyDto id, int position, int score, Match prochainMatch) {
+	public InscriptionDto(InscriptionKeyDto id, int position, int score, int scoreDifference, Match prochainMatch) {
 		super();
 		this.id = id;
 		this.position = position;
 		this.score = score;
+		this.scoreDifference = scoreDifference;
 		this.prochainMatch = prochainMatch;
 	}
 
@@ -50,6 +52,14 @@ public class InscriptionDto {
 
 	public void setProchainMatch(Match prochainMatch) {
 		this.prochainMatch = prochainMatch;
+	}
+
+	public int getScoreDifference() {
+		return scoreDifference;
+	}
+
+	public void setScoreDifference(int scoreDifference) {
+		this.scoreDifference = scoreDifference;
 	}
 	
 	
