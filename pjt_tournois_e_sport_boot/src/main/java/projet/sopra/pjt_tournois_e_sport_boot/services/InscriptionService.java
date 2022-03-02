@@ -37,6 +37,7 @@ public class InscriptionService {
 		iEnBase.setPosition(i.getPosition());
 		iEnBase.setProchainMatch(i.getProchainMatch());
 		iEnBase.setScore(i.getScore());
+		iEnBase.setScoreDifference(i.getScoreDifference());
 		return inscriptionRepo.save(iEnBase);
 	}
 	
