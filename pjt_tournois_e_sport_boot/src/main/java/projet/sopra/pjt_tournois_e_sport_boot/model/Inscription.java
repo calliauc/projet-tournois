@@ -1,5 +1,6 @@
 package projet.sopra.pjt_tournois_e_sport_boot.model;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -13,37 +14,41 @@ import javax.validation.constraints.PositiveOrZero;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-
+/**
+ * @author theoc
+ *
+ */
 @Entity
-@Table(name="inscription")
+@Table(name = "inscription")
 
 public class Inscription {
-	
+
 	/// ATTRIBUTES
 	@EmbeddedId
 	private InscriptionKey id;
 	@JsonView(Views.Common.class)
-	@Column(name="position")
+	@Column(name = "position")
 	@PositiveOrZero
-	private int position ;
+	private int position;
 	@JsonView(Views.Common.class)
-	@Column(name="score")
+	@Column(name = "score")
 	@PositiveOrZero
-	private int score ;
+	private int score;
+	/// somme des differences de scores de chaque match -- > sigma (score_joueur - score_adversaire) /!\ ne marche que pour les duels
+	@Column(name = "score_difference")
+	private int scoreDifference;
 	/*
 	 * TODO Score total pour départager
 	 */
 	@JsonView(Views.Common.class)
 	@ManyToOne
-	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
+	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name = "inscription_prochain_match_fk"))
 	private Match prochainMatch;
-	
+
 	/// CONSTRUCTOR
 	public Inscription() {
-		
-	}
-	
 
+	}
 
 	public Inscription(int position, int score, Match prochainMatch) {
 		super();
@@ -65,22 +70,19 @@ public class Inscription {
 		return id;
 	}
 
-	
 	public Match getProchainMatch() {
 		return prochainMatch;
 	}
-	
+
+	public int getScoreDifference() {
+		return scoreDifference;
+	}
+
 	/// SETTERS
-	
-
-
-
 
 	public void setProchainMatch(Match prochainMatch) {
 		this.prochainMatch = prochainMatch;
 	}
-
-
 
 	public void setPosition(int position) {
 		this.position = position;
@@ -89,14 +91,20 @@ public class Inscription {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
 	public void setId(InscriptionKey id) {
 		this.id = id;
 	}
-	
+
+	public void setScoreDifference(int score_difference) {
+		this.scoreDifference = score_difference;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -107,8 +115,32 @@ public class Inscription {
 			return false;
 		Inscription other = (Inscription) obj;
 		return Objects.equals(id, other.id);
-	} 
+	}
+	
+	//// COMPARATEURS POUR LA GENERATION DU CLASSEMENT (TRI PAR SCORES...)
+	public static Comparator<Inscription> ComparatorScore = new Comparator<Inscription>() {
+	     
+        @Override
+        public int compare(Inscription e1, Inscription e2) {
+            return (int) (e2.getScore() - e1.getScore());
+        }
+    };
+    
+    public static Comparator<Inscription> ComparatorScoreDiff = new Comparator<Inscription>() {
+	     
+        @Override
+        public int compare(Inscription e1, Inscription e2) {
+            return (int) (e2.getScoreDifference()- e1.getScoreDifference());
+        }
+    };
+
+	@Override
+	public String toString() {
+		return "Inscription [id=" + id + ", position=" + position + ", score=" + score + ", scoreDifference="
+				+ scoreDifference + ", prochainMatch=" + prochainMatch + "]";
+	}
 	
 	
- 
+	
+
 }
