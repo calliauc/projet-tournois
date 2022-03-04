@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,6 +24,8 @@ public class Championnat extends Tournoi {
 	private Set<Journee> JourneesAJouerFinales;
 	@Transient
 	private Set<Poule> poules = new HashSet<Poule>();
+	@Column(name="prochaine_etape_finale")
+	private Etape prochaineEtape;
 
 	private int nbPoules = 0;
 	/*
@@ -81,13 +84,16 @@ public class Championnat extends Tournoi {
 			System.out.println("Pas assez de joueurs, passez en ligue ?");
 		} else if (nb_players < 12) {
 			createTwoPoule();
+			this.prochaineEtape = Etape.Demi;
 			System.out.println(nb_players + " joueurs : 2 poules \nLes 2 premiers de chaque poule en demi-finales");
 		} else if (nb_players < 24) {
 			createFourPoule();
+			this.prochaineEtape = Etape.Quart;
 			System.out
 					.println(nb_players + " joueurs : 4 poules \nLes 2 premiers de chaque poule en quarts de finales");
 		} else if (nb_players <= 48) {
 			createEightPoule();
+			this.prochaineEtape = Etape.Huitieme;
 			System.out.println(
 					nb_players + " joueurs : 8 poules \nLes 2 premiers de chaque poule en huitieme de finales");
 		} else {
@@ -156,6 +162,14 @@ public class Championnat extends Tournoi {
 	}
 
 	/// GESTION PHASES FINALES
+	
+	public void initPhaseFinale() {
+		List<Poule> listPoules = new ArrayList<Poule>(this.poules);
+		
+		Journee j1 = new Journee(this, null, null, this.prochaineEtape);
+		
+	}
+	
 	
 	/*
 	 * TODO
