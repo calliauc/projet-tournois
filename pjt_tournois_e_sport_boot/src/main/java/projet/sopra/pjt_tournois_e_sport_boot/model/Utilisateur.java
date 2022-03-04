@@ -39,7 +39,7 @@ public class Utilisateur implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUtilisateur")
-	@JsonView(Views.Common.class)
+	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
 	private Long id;
 
 	@Column(name = "username", nullable = false)
