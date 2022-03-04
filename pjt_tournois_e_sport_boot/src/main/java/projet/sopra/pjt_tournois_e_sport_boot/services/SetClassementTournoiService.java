@@ -3,7 +3,6 @@ package projet.sopra.pjt_tournois_e_sport_boot.services;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,10 +38,10 @@ public class SetClassementTournoiService {
 		List<Inscription> participants = match.getInscriptions();
 		Inscription j1EnBase = inscriptionRepo.getById(participants.get(0).getId());
 		Inscription j2EnBase = inscriptionRepo.getById(participants.get(1).getId());
-		Resultat resultatJ1 = resultatRepo.findByParticipant(j1EnBase).orElseThrow(() -> {
+		Resultat resultatJ1 = resultatRepo.findByMatchAndParticipant(match, j1EnBase).orElseThrow(() -> {
 			throw new ResultatException("resultat inconnu");
 		});
-		Resultat resultatJ2 = resultatRepo.findByParticipant(j2EnBase).orElseThrow(() -> {
+		Resultat resultatJ2 = resultatRepo.findByMatchAndParticipant(match, j2EnBase).orElseThrow(() -> {
 			throw new ResultatException("resultat inconnu");
 		});
 		////// SET SCORE + SCORE_DIFF(S/0 SCREAMING_SNAKE_CASE ^^) CLASSEMENT LIGUE (ET
@@ -55,16 +54,16 @@ public class SetClassementTournoiService {
 		if (diffPosition < 0) {
 			j1EnBase.setScore(j1EnBase.getScore() + ptGagnesWinDuel);
 			j1EnBase.setScoreDifference(j1EnBase.getScoreDifference() + diffScore);
-			j2EnBase.setScore(j1EnBase.getScore() + ptGagnesLoseDuel);
+			j2EnBase.setScore(j2EnBase.getScore() + ptGagnesLoseDuel);
 			j2EnBase.setScoreDifference(j2EnBase.getScoreDifference() - diffScore);
 
 		} else if (diffPosition > 0) {
-			j2EnBase.setScore(j1EnBase.getScore() + ptGagnesWinDuel);
+			j2EnBase.setScore(j2EnBase.getScore() + ptGagnesWinDuel);
 			j2EnBase.setScoreDifference(j2EnBase.getScoreDifference() + diffScore);
 			j1EnBase.setScore(j1EnBase.getScore() + ptGagnesLoseDuel);
 			j1EnBase.setScoreDifference(j1EnBase.getScoreDifference() - diffScore);
 		} else {
-			j2EnBase.setScore(j1EnBase.getScore() + ptGagnesNulDuel);
+			j2EnBase.setScore(j2EnBase.getScore() + ptGagnesNulDuel);
 			j1EnBase.setScore(j1EnBase.getScore() + ptGagnesNulDuel);
 		}
 		inscriptionRepo.save(j1EnBase);
@@ -93,7 +92,12 @@ public class SetClassementTournoiService {
 		LinkedList<Inscription> participants = new LinkedList<Inscription>(inscriptionRepo.getClassementLigue(tournoi.getIdTournoi()));
 		Collections.sort(participants, Inscription.ComparatorScore);
 		for (int i = 0; i < participants.size(); i++) {
-			participants.get(i).setPosition(i);
+			if (i > 0 && (participants.get(i-1).getScoreDifference() == participants.get(i).getScoreDifference())) {
+				participants.get(i).setPosition(i);
+			}
+			else {
+				participants.get(i).setPosition(i+1);
+			}
 			inscriptionRepo.save(participants.get(i));
 		}
 	}
