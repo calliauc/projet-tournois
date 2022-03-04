@@ -3,7 +3,6 @@ package projet.sopra.pjt_tournois_e_sport_boot.services;
 import java.util.Arrays;
 import java.util.HashSet;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +33,14 @@ public class ConsoleService implements CommandLineRunner {
 	}
 
 	private void initDataBase() {
-		Utilisateur jojo = new Utilisateur();
-		jojo.setUsername("jojo");
-		jojo.setPassword(passwordEncoder.encode("jojo"));
-		jojo.setMail("a@a.fr");
-		jojo.setRoles(new HashSet<Role>(Arrays.asList(Role.ROLE_ADMIN)));
-		utilisateurRepo.save(jojo);
+		if (utilisateurRepo.findByUsername("jojo").isEmpty()) {
+			Utilisateur jojo = new Utilisateur();
+			jojo.setUsername("jojo");
+			jojo.setPassword(passwordEncoder.encode("jojo"));
+			jojo.setMail("a@a.fr");
+			jojo.setRoles(new HashSet<Role>(Arrays.asList(Role.ROLE_ADMIN)));
+			utilisateurRepo.save(jojo);
+		}
 		
 		
 		
