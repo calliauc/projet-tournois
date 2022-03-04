@@ -27,12 +27,11 @@ public class Ligue extends Tournoi {
 	@Column(name = "nbPhase")
 	protected int nbPhase;
 	@OneToMany(mappedBy = "tournoi")
-	protected Set<Journee> JourneesAJouer;
+	protected Set<Journee> JourneesAJouer = new HashSet<Journee>();
 
 	/*
 	 * TODO gestion classement
 	 */
-
 
 	/// CONSTRUCTORS
 
@@ -53,6 +52,10 @@ public class Ligue extends Tournoi {
 		return isPoule;
 	}
 
+	public Set<Journee> getJourneesAJouer() {
+		return JourneesAJouer;
+	}
+
 	public int getNbPhase() {
 		return nbPhase;
 	}
@@ -61,6 +64,10 @@ public class Ligue extends Tournoi {
 
 	public void setPoule(boolean isPoule) {
 		this.isPoule = isPoule;
+	}
+
+	public void setJourneesAJouer(Set<Journee> journeesAJouer) {
+		JourneesAJouer = journeesAJouer;
 	}
 
 	public void setNbPhase(int nbPhase) {

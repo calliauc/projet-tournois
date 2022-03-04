@@ -57,6 +57,7 @@ public class MatchGenerationService {
 			journees.add(jour);
 			inscriptionsLigue.add(isPair, inscriptionsLigue.pollLast());
 		}
+		ligue.setJourneesAJouer(journees);
 		tournoiRepo.save(ligue);
 	}
 
