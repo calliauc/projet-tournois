@@ -1,0 +1,29 @@
+<table class="table">
+  <tr *ngFor="let t of tournois">
+    <td>{{ t.idTournoi }}</td>
+    <td>{{ t.nom }}</td>
+    <td>{{ t.dateDeCreation }}</td>
+    <td>{{ t.dateDeDebut }}</td>
+    <td>{{ t.jeu }}</td>
+    <!--<td>{{ t.listeInscriptions }}</td>-->
+    <td>{{ t.nbParticipantsParMatch }}</td>
+    <td>{{ t.nbParticipantsTotal }}</td>
+    <!--<td>{{ t.organisateur }}</td>-->
+    <td>
+      <a
+        [routerLink]="['/tournoi', 'edit', t.idTournoi]"
+        routerLinkActive="active"
+        class="btn btn-outline-primary"
+        >editer</a
+      >
+    </td>
+    <td>
+      <button (click)="delete(t.idTournoi!)" class="btn btn-outline-danger">
+        supprimer
+      </button>
+    </td>
+  </tr>
+</table>
+<a routerLink="/tournoi/edit" routerLinkActive="active" class="btn btn-link"
+  >nouveau tournoi</a
+>
