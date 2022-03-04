@@ -25,12 +25,13 @@ public class Inscription {
 
 	/// ATTRIBUTES
 	@EmbeddedId
+	@JsonView(Views.InscriptionWithId.class)
 	private InscriptionKey id;
-	@JsonView(Views.Common.class)
+	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
 	@Column(name = "position")
 	@PositiveOrZero
 	private int position;
-	@JsonView(Views.Common.class)
+	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
 	@Column(name = "score")
 	@PositiveOrZero
 	private int score;
@@ -40,7 +41,7 @@ public class Inscription {
 	/*
 	 * TODO Score total pour départager
 	 */
-	@JsonView(Views.Common.class)
+	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
 	@ManyToOne
 	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name = "inscription_prochain_match_fk"))
 	private Match prochainMatch;
