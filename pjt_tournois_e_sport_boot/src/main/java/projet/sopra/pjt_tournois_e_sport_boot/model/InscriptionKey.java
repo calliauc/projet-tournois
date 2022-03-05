@@ -15,11 +15,11 @@ public class InscriptionKey implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="joueur_inscription_id" , foreignKey= @ForeignKey(name="joueur_inscription__id_fk"))
-	@JsonView(Views.InscriptionWithId.class)
+	@JsonView({Views.InscriptionWithId.class,Views.ResultatWithInscriptionAndMatch.class})
 	private Utilisateur joueur;
 	@ManyToOne
 	@JoinColumn(name="tournoi_inscription_id" , foreignKey= @ForeignKey(name="tournoi_inscription__id_fk"))
-	@JsonView(Views.InscriptionWithId.class)
+	@JsonView({Views.InscriptionWithId.class,Views.ResultatWithInscriptionAndMatch.class})
 	private Tournoi tournoi;
 	
 	public InscriptionKey() {
