@@ -28,7 +28,8 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.ResultatService;
 @RestController
 @RequestMapping("api/resultat")
 public class ResultatRestController {
-////TO-DO annotations @JsonView 
+////TO-DO 
+// Create et Update
 	
 	
 	@Autowired
@@ -49,12 +50,13 @@ public class ResultatRestController {
 		return resultatService.getById(id);
 	}
 	
+	// TO-DO
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
 	public Resultat create(@Valid @RequestBody Resultat resultat, BindingResult br) {
 		return save(resultat, br); 
 	}
-	
+	// TO-DO
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	@PutMapping("/{id}")
 	public Resultat update(@Valid @RequestBody Resultat resultat, BindingResult br, @PathVariable Long id) {
