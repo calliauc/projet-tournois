@@ -69,7 +69,7 @@ public class InscriptionKey implements Serializable {
 
 	@Override
 	public String toString() {
-		return "InscriptionKey [joueur=" + joueur + ", tournoi=" + tournoi + "]";
+		return "InscriptionKey [joueur=" + joueur.getId() + ", tournoi=" + tournoi.getIdTournoi() + "]";
 	}
 
 		

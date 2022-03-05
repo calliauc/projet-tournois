@@ -6,10 +6,10 @@ public class Views {
 
 	}
 	
-	public static class InscriptionWithId{
+	public static class InscriptionWithId extends Common{
 		
 	}
-
+	
 	
 	
 }

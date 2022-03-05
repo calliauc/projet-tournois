@@ -103,10 +103,10 @@ public class TestInscriptionRepository {
 	
 	@Test
 	@Transactional
+	@Disabled
 	public void testFindById() {
 		
-		LOGGER.info("DEBUT TEST");
-		
+	
 		//Creation des utilisateurs dans base
 		Utilisateur user1 = new Utilisateur("user1","u1@u1","user1");
 		userRepo.save(user1);

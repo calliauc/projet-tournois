@@ -76,9 +76,8 @@ public class InscriptionRestController {
 	// TO DO (exception cause tournoi classe abstraite)
 	@PutMapping("/{idJoueur}&{idTournoi}")
 	public Inscription update(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idTournoi) {
-		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idTournoi));
-		if(!inscriptionService.exist(key)) {
-			throw new InscriptionException();
+		if(!inscriptionService.exist(inscription.getId())) {
+			throw new InscriptionException(" \n Id pas normal " + inscription.getId().toString());
 		}
 		return save(inscription,br);
 	}
