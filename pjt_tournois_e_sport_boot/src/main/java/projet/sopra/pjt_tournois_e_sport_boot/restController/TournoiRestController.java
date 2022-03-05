@@ -83,7 +83,7 @@ public class TournoiRestController {
 	}
 	
 	//// TO DO - SPECIAL QUERIES
-	
+	@JsonView(Views.InscriptionWithId.class)
 	@GetMapping("/{id}/classement")
 	private List<Inscription> getClassementLigue(@PathVariable Long id) {
 		return tournoiService.getClassementLigue(id);
