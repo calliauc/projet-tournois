@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 
 @RestController
 @RequestMapping("api/tournoi")
+@CrossOrigin(origins = "*")
 public class TournoiRestController {
 	
 	////TO-DO annotations @JsonView 

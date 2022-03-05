@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TournoiService {
-  static URL: string = 'http://localhost:8080/boot/api/tournoi';
+  static URL: string = 'http://localhost:8080/tournoi_esport/api/tournoi';
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Tournoi[]> {
