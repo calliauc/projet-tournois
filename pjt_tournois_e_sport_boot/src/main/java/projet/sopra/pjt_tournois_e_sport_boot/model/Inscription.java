@@ -25,24 +25,24 @@ public class Inscription {
 
 	/// ATTRIBUTES
 	@EmbeddedId
-	@JsonView({Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class})
+	@JsonView({Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class, Views.TournoiWithInscriptions.class})
 	private InscriptionKey id;
-	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
+	@JsonView(Views.InscriptionWithId.class)
 	@Column(name = "position")
 	@PositiveOrZero
 	private int position;
-	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
+	@JsonView(Views.InscriptionWithId.class)
 	@Column(name = "score")
 	@PositiveOrZero
 	private int score;
 	/// somme des differences de scores de chaque match -- > sigma (score_joueur - score_adversaire) /!\ ne marche que pour les duels
-	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
+	@JsonView(Views.InscriptionWithId.class)
 	@Column(name = "score_difference")
 	private int scoreDifference;
 	/*
 	 * TODO Score total pour départager
 	 */
-	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
+	@JsonView(Views.InscriptionWithId.class)
 	@ManyToOne
 	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name = "inscription_prochain_match_fk"))
 	private Match prochainMatch;
