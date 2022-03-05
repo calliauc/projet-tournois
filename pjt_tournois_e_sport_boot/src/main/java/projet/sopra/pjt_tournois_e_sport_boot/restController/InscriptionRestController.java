@@ -34,10 +34,10 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 @RequestMapping("api/inscription")
 public class InscriptionRestController {
 	//TO DO :
-// getById composé --> id joueur et tournoi en parametre
-//	Meme chose delete
-//	Meme chose update
-//Validation
+//  getById composé
+//  delete
+//	update
+//  create
 	
 	@Autowired
 	private InscriptionService inscriptionService;

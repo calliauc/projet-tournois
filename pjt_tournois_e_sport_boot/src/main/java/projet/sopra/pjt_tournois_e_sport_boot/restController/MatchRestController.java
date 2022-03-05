@@ -32,8 +32,10 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.MatchService;
 @RestController
 @RequestMapping("api/match")
 public class MatchRestController {
-//	TO-DO Vigilance
-//	  - getall avec list inscription ? list resultat (plutot non) ?
+//	TO-DO :
+//  delete
+//	update
+//  create
 	
 	@Autowired 
 	private MatchService matchService;
@@ -62,12 +64,14 @@ public class MatchRestController {
 		return matchToMatchDto(matchService.getById(id));
 	}
 	
+	//TO DO probleme validation
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
 	public Match create(@Valid @RequestBody Match match, BindingResult br) {
 		return save(match,br);
 	}
 	
+	//TODO probleme validation
 	@PutMapping("/{id}")
 	public Match update(@Valid @RequestBody Match match, BindingResult br, @PathVariable Long id) {
 		if(!matchService.exist(id)) {
@@ -76,6 +80,7 @@ public class MatchRestController {
 		return save(match,br);
 	}
 	
+	// TODO - Conflit resultat
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
