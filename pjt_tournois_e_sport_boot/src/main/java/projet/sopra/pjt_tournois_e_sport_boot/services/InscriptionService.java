@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.InscriptionException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
-import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 
 @Service
@@ -60,13 +59,9 @@ public class InscriptionService {
 		return inscriptionRepo.existsById(id);
 	}
 	
-	//en attendant que le validator soit OK
 	private void checkData(Inscription i) {
 		if(i ==null) {
 			throw new InscriptionException("pas d'inscription renseignee");
-		}
-		if(i.getScore() <0) {
-			throw new InscriptionException("le score doit etre positif");
 		}
 	}
 	

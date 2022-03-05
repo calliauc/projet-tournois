@@ -6,12 +6,12 @@ import java.time.LocalDate;
 
 import javax.transaction.Transactional;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
@@ -35,6 +35,7 @@ public class TestInscriptionRepository {
 	
 	@Test
 	@Transactional
+	@Disabled
 	public void testFindByScoreBetween() {
 		
 		LOGGER.info("DEBUT TEST");
@@ -98,5 +99,63 @@ public class TestInscriptionRepository {
 		
 		LOGGER.info(inscriptionRepo.getClassementLigue(ligueTest.getIdTournoi()).toString());
 		LOGGER.info("FIN TEST");
+	}
+	
+	@Test
+	@Transactional
+	public void testFindById() {
+		
+		LOGGER.info("DEBUT TEST");
+		
+		//Creation des utilisateurs dans base
+		Utilisateur user1 = new Utilisateur("user1","u1@u1","user1");
+		userRepo.save(user1);
+		Utilisateur user2 = new Utilisateur("user2","u2@u2","user2");
+		userRepo.save(user2);
+		Utilisateur user3 = new Utilisateur("user3","u3@u3","user3");
+		userRepo.save(user3);
+		Utilisateur user4 = new Utilisateur("user4","u4@u4","user4");
+		userRepo.save(user4);
+		
+		
+		//Creation du tournoi = ligue dans la base
+		Ligue ligueTest = new Ligue();
+		ligueTest.setNom("ligueTest");
+		ligueTest.setDateDeCreation(LocalDate.of(2022, 2, 18));
+		ligueTest.setDateDeDebut(LocalDate.of(2022, 2, 20));
+		ligueTest.setJeu("Mariokart");
+		ligueTest.setNbParticipantsParMatch(4);
+		tournoiRepo.save(ligueTest);
+		
+		//Inscriptions des 4 joueurs à la ligue
+		Inscription inscription1 = new Inscription();
+		inscription1.setId(new InscriptionKey(user1,ligueTest));
+		inscription1.setScore(10);
+		inscription1.setScoreDifference(12);
+		Inscription inscription2 = new Inscription();
+		inscription2.setId(new InscriptionKey(user2,ligueTest));
+		inscription2.setScore(10);
+		inscription2.setScoreDifference(13);
+		Inscription inscription3 = new Inscription();
+		inscription3.setId(new InscriptionKey(user3,ligueTest));
+		inscription3.setScore(3000);
+		inscription3.setScoreDifference(13);
+		Inscription inscription4 = new Inscription();
+		inscription4.setId(new InscriptionKey(user4,ligueTest));
+		inscription4.setScore(40000);
+		inscription4.setScoreDifference(13);
+		inscriptionRepo.save(inscription1);
+		inscriptionRepo.save(inscription2);
+		inscriptionRepo.save(inscription3);
+		inscriptionRepo.save(inscription4);
+
+			
+		//Def inscriptionKey
+		InscriptionKey key = new InscriptionKey(user1,ligueTest);
+		
+		//Test
+		LOGGER.info("\n -----------KEY-------------KEY---------------KEY-------------KEY-----------\n");
+		LOGGER.info(key.toString());
+		assertTrue(inscriptionRepo.findById(key).isPresent());
 	}
 }

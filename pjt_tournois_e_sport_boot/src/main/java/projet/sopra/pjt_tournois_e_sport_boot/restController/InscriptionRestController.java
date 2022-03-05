@@ -66,12 +66,14 @@ public class InscriptionRestController {
 		return inscriptionService.getById(key);
 	}
 	
+	//TO DO
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
 	public Inscription create(@Valid @RequestBody Inscription inscription, BindingResult br) {
 		return save(inscription,br);
 	}
 	
+	// TO DO (exception cause tournoi classe abstraite)
 	@PutMapping("/{idJoueur}&{idTournoi}")
 	public Inscription update(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idTournoi) {
 		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idTournoi));
@@ -80,6 +82,28 @@ public class InscriptionRestController {
 		}
 		return save(inscription,br);
 	}
+	
+	/*
+	@PutMapping("/ligue/{idJoueur}&{idLigue}")
+	public Inscription updateOfLigue(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idLigue) {
+		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idLigue));
+		if(!inscriptionService.exist(key)) {
+			throw new InscriptionException();
+		}
+		return save(inscription,br);
+	}
+	
+	@PutMapping("/champ/{idJoueur}&{idChampionnat}")
+	public Inscription updateOfChampionnat(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idChampionnat) {
+		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idChampionnat));
+		if(!inscriptionService.exist(key)) {
+			throw new InscriptionException();
+		}
+		return save(inscription,br);
+	} 
+	*/
+	
+	// TO DO (conflit avec table Resultat)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{idJoueur}&{idTournoi}")
 	public void delete(@PathVariable Long idJoueur, @PathVariable Long idTournoi) {

@@ -36,6 +36,7 @@ public class Inscription {
 	@PositiveOrZero
 	private int score;
 	/// somme des differences de scores de chaque match -- > sigma (score_joueur - score_adversaire) /!\ ne marche que pour les duels
+	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
 	@Column(name = "score_difference")
 	private int scoreDifference;
 	/*
