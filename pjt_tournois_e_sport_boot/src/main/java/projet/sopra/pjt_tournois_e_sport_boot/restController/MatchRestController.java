@@ -83,32 +83,6 @@ public class MatchRestController {
 		}
 		return matchService.createOrUpdate(match);
 	}
-	
-//	private InscriptionDto inscriptionToInscriptionDTO(Inscription i) {
-//		InscriptionKeyDto ikDto = new InscriptionKeyDto(i.getId().getJoueur().getId(), i.getId().getTournoi().getIdTournoi());
-//		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getScoreDifference(), i.getProchainMatch());
-//	}
-	
-//	private List<InscriptionDto> inscriptionListToInscriptionDTOList(List<Inscription> inscriptions){
-//		List<InscriptionDto> inscriptionsWithKey = new ArrayList<InscriptionDto>();
-//		for(Inscription i : inscriptions) {
-//			inscriptionsWithKey.add(inscriptionToInscriptionDTO(i));
-//		}
-//		return inscriptionsWithKey;
-//	}
-	
-	
-//	private MatchDto matchToMatchDto(Match m) {
-//		MatchDto matchDto = new MatchDto(m.getId(),inscriptionListToInscriptionDTOList(m.getInscriptions()),m.getJournee());
-//		return matchDto;
-//	}
-	
-//	private List<MatchDto> listMatchToListMatchDto(List<Match> matchs){
-//		List<MatchDto> matchsDto = new ArrayList<MatchDto>();
-//		for(Match m : matchs) {
-//			matchsDto.add(matchToMatchDto(m));
-//		}
-//		return matchsDto;
-//	}
+
 	
 }

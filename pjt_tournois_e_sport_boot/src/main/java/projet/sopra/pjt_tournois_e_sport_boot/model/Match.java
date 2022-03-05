@@ -28,7 +28,7 @@ public class Match {
 	@Id
 	@Column(name="match_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMatch")
-	@JsonView({Views.MatchWithJourneeAndResultat.class, Views.ResultatWithInscriptionAndMatch.class})
+	@JsonView({Views.MatchWithJourneeAndResultat.class, Views.ResultatWithInscriptionAndMatch.class,Views.JourneeWithTournoiAndMatch.class})
 	private Long id;
 	
 	@OneToMany(mappedBy = "prochainMatch")

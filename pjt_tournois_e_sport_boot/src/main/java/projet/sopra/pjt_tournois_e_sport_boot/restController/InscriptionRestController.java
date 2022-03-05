@@ -49,12 +49,12 @@ public class InscriptionRestController {
 	//CRUD
 	
 	@GetMapping("")
-	@JsonView(Views.Common.class)
+	@JsonView(Views.InscriptionWithId.class)
 	public List<Inscription> getAll() {
 		return inscriptionService.getAll();
 	}
 	
-	@GetMapping("/avecId")
+	@GetMapping("/avecDto")
 	public List<InscriptionDto> getAllWithKey(){
 		return inscriptionListToInscriptionDTOList(inscriptionService.getAll());
 	}

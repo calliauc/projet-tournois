@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.JourneeException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.JourneeService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 
@@ -27,7 +30,10 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 public class JourneeRestController {
 	
 	
-	//// TO-DO annotations @JsonView 
+	//// TO-DO 
+//	Create
+//	Update
+//	Delete en conflit avec prochain match
 
 	@Autowired
 	private JourneeService journeeService; 
@@ -38,22 +44,26 @@ public class JourneeRestController {
 	//// CRUD
 	
 	@GetMapping("")
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	public List<Journee> getAll() {
 		List<Journee> list = journeeService.getAll(); 
 		return list; 
 	}
 	
 	@GetMapping("/{id}")
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	public Journee getById(@PathVariable Long id) {
 		return journeeService.getById(id);
 	}
 	
+	//TO-DO
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
 	public Journee create(@Valid @RequestBody Journee journee, BindingResult br) {
 		return save(journee, br); 
 	}
 	
+	//TO-DO
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	@PutMapping("/{id}")
 	public Journee update(@Valid @RequestBody Journee journee, BindingResult br, @PathVariable Long id) {
@@ -63,6 +73,7 @@ public class JourneeRestController {
 		return save(journee, br);
 	}
 	
+//	TO-DO (Conflit avec prochain match)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	private void delete(@PathVariable Long id) {

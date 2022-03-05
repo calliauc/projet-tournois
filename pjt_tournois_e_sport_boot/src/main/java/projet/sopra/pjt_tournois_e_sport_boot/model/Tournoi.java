@@ -30,32 +30,32 @@ public abstract class Tournoi {
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")
-	@JsonView({Views.Common.class,Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class})
+	@JsonView({Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,Views.TournoiWithInscriptions.class,Views.JourneeWithTournoiAndMatch.class})
 	protected Long idTournoi;
 	@Column(name = "tournoi_nom", length = 50, nullable = false)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.TournoiWithInscriptions.class)
 	protected String nom;
 	@Column(name = "tournoi_date_creation", nullable = false)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.TournoiWithInscriptions.class)
 	protected LocalDate dateDeCreation;
 	@Column(name = "tournoi_date_debut", nullable = false)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.TournoiWithInscriptions.class)
 	protected LocalDate dateDeDebut;
 	@Column(name = "tournoi_jeu", length = 50, nullable = false)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.TournoiWithInscriptions.class)
 	protected String jeu;
 	@OneToMany(mappedBy = "id.tournoi")
-	@JsonView(Views.Common.class)
+	@JsonView(Views.TournoiWithInscriptions.class)
 	protected Set<Inscription> listeInscriptions = new HashSet<Inscription>();
 	@Column(name = "tournoi_nb_participants_match", nullable = false)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.TournoiWithInscriptions.class)
 	protected int nbParticipantsParMatch;
 	@Column(name="tournoi_nb_participants_total", nullable = false)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.TournoiWithInscriptions.class)
 	protected int nbParticipantsTotal;	
 	@ManyToOne
 	@JoinColumn(name = "organisteur_tournoi", foreignKey = @ForeignKey(name = "organisteur_tournoi_fk"))
-	@JsonView(Views.Common.class)
+	@JsonView(Views.TournoiWithInscriptions.class)
 	protected Utilisateur organisateur;
 	/// CONSTRUCTOR
 
