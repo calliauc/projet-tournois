@@ -33,21 +33,29 @@ public abstract class Tournoi {
 	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
 	protected Long idTournoi;
 	@Column(name = "tournoi_nom", length = 50, nullable = false)
+	@JsonView(Views.Common.class)
 	protected String nom;
 	@Column(name = "tournoi_date_creation", nullable = false)
+	@JsonView(Views.Common.class)
 	protected LocalDate dateDeCreation;
 	@Column(name = "tournoi_date_debut", nullable = false)
+	@JsonView(Views.Common.class)
 	protected LocalDate dateDeDebut;
 	@Column(name = "tournoi_jeu", length = 50, nullable = false)
+	@JsonView(Views.Common.class)
 	protected String jeu;
 	@OneToMany(mappedBy = "id.tournoi")
+	@JsonView(Views.Common.class)
 	protected Set<Inscription> listeInscriptions = new HashSet<Inscription>();
 	@Column(name = "tournoi_nb_participants_match", nullable = false)
+	@JsonView(Views.Common.class)
 	protected int nbParticipantsParMatch;
 	@Column(name="tournoi_nb_participants_total", nullable = false)
+	@JsonView(Views.Common.class)
 	protected int nbParticipantsTotal;	
 	@ManyToOne
 	@JoinColumn(name = "organisteur_tournoi", foreignKey = @ForeignKey(name = "organisteur_tournoi_fk"))
+	@JsonView(Views.Common.class)
 	protected Utilisateur organisateur;
 	/// CONSTRUCTOR
 

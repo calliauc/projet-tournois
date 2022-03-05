@@ -9,14 +9,14 @@
     <td>{{ t.nbParticipantsParMatch }}</td>
     <td>{{ t.nbParticipantsTotal }}</td>
     <!--<td>{{ t.organisateur }}</td>-->
-    <td>
+    <!--<td>
       <a
         [routerLink]="['/tournoi', 'edit', t.idTournoi]"
         routerLinkActive="active"
         class="btn btn-outline-primary"
         >editer</a
       >
-    </td>
+    </td>-->
     <td>
       <button (click)="delete(t.idTournoi!)" class="btn btn-outline-danger">
         supprimer
@@ -24,6 +24,6 @@
     </td>
   </tr>
 </table>
-<a routerLink="/tournoi/edit" routerLinkActive="active" class="btn btn-link"
+<!--<a routerLink="/tournoi/edit" routerLinkActive="active" class="btn btn-link"
   >nouveau tournoi</a
->
+>-->
