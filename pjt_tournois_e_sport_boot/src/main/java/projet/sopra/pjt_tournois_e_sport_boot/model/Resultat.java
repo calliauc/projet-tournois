@@ -24,24 +24,27 @@ public class Resultat {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqResultat")
-	@JsonView(Views.MatchWithJourneeAndResultat.class)
+	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.MatchWithJourneeAndResultat.class})
 	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "resultat_match_id", foreignKey = @ForeignKey(name="resultat_match_fk"))
+	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
 	private Match match;
 	
 	@OneToOne
 	@JoinColumns(
 			{@JoinColumn(name = "resultat_participant_id", foreignKey = @ForeignKey(name="resultat_participant_fk")),
 			@JoinColumn(name="resultat_tournoi_id",  foreignKey = @ForeignKey(name="resultat_tournoi_fk"))})
-	@JsonView(Views.MatchWithJourneeAndResultat.class)
+	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.MatchWithJourneeAndResultat.class})
 	private Inscription participant;
 	
 	@Column(name="position_match")
+	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
 	private int positionMatch;
 	
 	@Column(name="score_match")
+	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
 	private int scoreMatch;
 
 	public Resultat() {

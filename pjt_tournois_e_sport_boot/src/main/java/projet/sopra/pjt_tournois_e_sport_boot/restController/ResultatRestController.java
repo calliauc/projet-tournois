@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.ResultatException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.ResultatService;
 
 
@@ -33,13 +36,14 @@ public class ResultatRestController {
 	
 	////CRUD
 	
-	
+	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
 	@GetMapping("")
 	public List<Resultat> getAll() {
 		List<Resultat> list = resultatService.getAll(); 
 		return list; 
 	}
 	
+	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
 	@GetMapping("/{id}")
 	public Resultat getById(@PathVariable Long id) {
 		return resultatService.getById(id);

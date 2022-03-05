@@ -25,7 +25,7 @@ public class Inscription {
 
 	/// ATTRIBUTES
 	@EmbeddedId
-	@JsonView(Views.InscriptionWithId.class)
+	@JsonView({Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class})
 	private InscriptionKey id;
 	@JsonView({Views.Common.class,Views.InscriptionWithId.class})
 	@Column(name = "position")
