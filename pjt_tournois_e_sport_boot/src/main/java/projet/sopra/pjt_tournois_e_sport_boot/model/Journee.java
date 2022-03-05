@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "journee")
 @SequenceGenerator(name = "seqJournee", sequenceName = "seq_journee", initialValue = 100, allocationSize = 1)
@@ -30,6 +32,7 @@ public class Journee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqJournee")
+	@JsonView(Views.MatchWithJourneeAndResultat.class)
 	private Long id;
 
 	@ManyToOne

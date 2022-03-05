@@ -1,6 +1,5 @@
 package projet.sopra.pjt_tournois_e_sport_boot.restController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -20,11 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import projet.sopra.pjt_tournois_e_sport_boot.dto.InscriptionDto;
-import projet.sopra.pjt_tournois_e_sport_boot.dto.InscriptionKeyDto;
-import projet.sopra.pjt_tournois_e_sport_boot.dto.MatchDto;
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.MatchException;
-import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.MatchService;
@@ -42,29 +37,19 @@ public class MatchRestController {
 	
 	//CRUD
 	
+	
 	@GetMapping("")
-	@JsonView(Views.Common.class)
-	public List<Match> getAll(){
+	@JsonView(Views.MatchWithJourneeAndResultat.class)
+	public List<Match> getAllWithInscriptions(){
 		return matchService.getAll();
 	}
 	
-	@GetMapping("/avecInscriptions")
-	public List<MatchDto> getAllWithInscriptions(){
-		return listMatchToListMatchDto(matchService.getAll());
-	}
-	
 	@GetMapping("/{id}")
-	@JsonView(Views.Common.class)
+	@JsonView(Views.MatchWithJourneeAndResultat.class)
 	public Match getById(@PathVariable Long id) {
 		return matchService.getById(id);
 	}
 	
-	@GetMapping("/{id}/avecInscriptions")
-	public MatchDto getByIdWithInscriptions(@PathVariable Long id) {
-		return matchToMatchDto(matchService.getById(id));
-	}
-	
-	//TO DO probleme validation
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
 	public Match create(@Valid @RequestBody Match match, BindingResult br) {
@@ -94,36 +79,36 @@ public class MatchRestController {
 	
 	private Match save(Match match, BindingResult br) {
 		if (br.hasErrors()) {
-			throw new MatchException();
+			throw new MatchException("Validation not ok \n \n"+br.getGlobalErrors());
 		}
 		return matchService.createOrUpdate(match);
 	}
 	
-	private InscriptionDto inscriptionToInscriptionDTO(Inscription i) {
-		InscriptionKeyDto ikDto = new InscriptionKeyDto(i.getId().getJoueur().getId(), i.getId().getTournoi().getIdTournoi());
-		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getScoreDifference(), i.getProchainMatch());
-	}
+//	private InscriptionDto inscriptionToInscriptionDTO(Inscription i) {
+//		InscriptionKeyDto ikDto = new InscriptionKeyDto(i.getId().getJoueur().getId(), i.getId().getTournoi().getIdTournoi());
+//		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getScoreDifference(), i.getProchainMatch());
+//	}
 	
-	private List<InscriptionDto> inscriptionListToInscriptionDTOList(List<Inscription> inscriptions){
-		List<InscriptionDto> inscriptionsWithKey = new ArrayList<InscriptionDto>();
-		for(Inscription i : inscriptions) {
-			inscriptionsWithKey.add(inscriptionToInscriptionDTO(i));
-		}
-		return inscriptionsWithKey;
-	}
+//	private List<InscriptionDto> inscriptionListToInscriptionDTOList(List<Inscription> inscriptions){
+//		List<InscriptionDto> inscriptionsWithKey = new ArrayList<InscriptionDto>();
+//		for(Inscription i : inscriptions) {
+//			inscriptionsWithKey.add(inscriptionToInscriptionDTO(i));
+//		}
+//		return inscriptionsWithKey;
+//	}
 	
 	
-	private MatchDto matchToMatchDto(Match m) {
-		MatchDto matchDto = new MatchDto(m.getId(),inscriptionListToInscriptionDTOList(m.getInscriptions()),m.getJournee());
-		return matchDto;
-	}
+//	private MatchDto matchToMatchDto(Match m) {
+//		MatchDto matchDto = new MatchDto(m.getId(),inscriptionListToInscriptionDTOList(m.getInscriptions()),m.getJournee());
+//		return matchDto;
+//	}
 	
-	private List<MatchDto> listMatchToListMatchDto(List<Match> matchs){
-		List<MatchDto> matchsDto = new ArrayList<MatchDto>();
-		for(Match m : matchs) {
-			matchsDto.add(matchToMatchDto(m));
-		}
-		return matchsDto;
-	}
+//	private List<MatchDto> listMatchToListMatchDto(List<Match> matchs){
+//		List<MatchDto> matchsDto = new ArrayList<MatchDto>();
+//		for(Match m : matchs) {
+//			matchsDto.add(matchToMatchDto(m));
+//		}
+//		return matchsDto;
+//	}
 	
 }

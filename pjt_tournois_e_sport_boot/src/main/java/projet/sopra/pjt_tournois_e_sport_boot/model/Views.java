@@ -10,6 +10,10 @@ public class Views {
 		
 	}
 	
+	public static class MatchWithJourneeAndResultat extends Common{
+		
+	}
+	
 	
 	
 }
