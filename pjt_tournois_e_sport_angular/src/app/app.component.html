@@ -1,6 +1,31 @@
 <nav>
-  <a routerLink="/form/code" routerLinkActive="active" class="btn btn-link"
-    >Tournoi</a
+  <a routerLink="/accueil" routerLinkActive="active" class="btn btn-link"
+    >acceuil</a
+  >
+  <a
+    *ngIf="!authenticated"
+    routerLink="/inscription"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >inscription</a
+  >
+  <a
+    *ngIf="!authenticated"
+    routerLink="/login"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >login</a
+  >
+  <a
+    *ngIf="authenticated"
+    routerLink="/tournoi"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >tournoi</a
+  >
+
+  <a *ngIf="authenticated" class="btn btn-link" (click)="logout()"
+    >deconnection</a
   >
 </nav>
 <router-outlet></router-outlet>

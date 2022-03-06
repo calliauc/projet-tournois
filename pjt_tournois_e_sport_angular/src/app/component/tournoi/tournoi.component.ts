@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Tournoi } from './../../model/tournoi';
 import { TournoiService } from './../../service/tournoi.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,23 +10,17 @@ import { Component, OnInit } from '@angular/core';
   providers: [{ useClass: TournoiService, provide: TournoiService }],
 })
 export class TournoiComponent implements OnInit {
+  tournoisObservable!: Observable<Tournoi[]>;
+
   constructor(private tournoiService: TournoiService) {}
 
-  tournois: Tournoi[] = [];
-
   ngOnInit(): void {
-    this.list();
+    this.tournoisObservable = this.tournoiService.getAll();
   }
 
-  list() {
-    this.tournoiService.getAll().subscribe((result) => {
-      this.tournois = result;
-    });
-  }
-
-  delete(id: number) {
-    this.tournoiService.delete(id).subscribe((result) => {
-      this.list();
+  delete(idTournoi: number) {
+    this.tournoiService.delete(idTournoi).subscribe((ok) => {
+      this.tournoisObservable = this.tournoiService.getAll();
     });
   }
 }

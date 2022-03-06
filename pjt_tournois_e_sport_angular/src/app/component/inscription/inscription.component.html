@@ -1,0 +1,67 @@
+<div>
+  <form (ngSubmit)="save()" [formGroup]="form">
+    <div class="form-group">
+      <label>login:</label>
+      <input class="form-control" formControlName="login" />
+      <div
+        class="alert alert-danger"
+        *ngIf="form.controls['login'].dirty && form.controls['login'].invalid"
+      >
+        <span *ngIf="form.controls['login'].hasError('required')"
+          >login obligatoire</span
+        >
+        <span *ngIf="form.controls['login'].hasError('minlength')"
+          >le login doit faire 3 careteres minimum</span
+        >
+        <span *ngIf="form.controls['login'].hasError('maxlength')"
+          >le login ne doit pas faire plus de 255 caracteres</span
+        >
+        <span *ngIf="form.controls['login'].hasError('loginAlreadyUsed')"
+          >le login est deja utilisé
+        </span>
+      </div>
+    </div>
+    <ng-container formGroupName="passwordGrp">
+      <div class="form-group">
+        <label>mot de passe:</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+        <div
+          class="alert alert-danger"
+          *ngIf="
+            form.get('passwordGrp')?.get('password')?.dirty &&
+            form.get('passwordGrp')?.get('password')?.invalid
+          "
+        >
+          <span>{{ errorPassword }}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>confirmation:</label>
+        <input type="password" class="form-control" formControlName="confirm" />
+        <div
+          class="alert alert-danger"
+          *ngIf="
+            form.controls['passwordGrp'].dirty &&
+            form.controls['passwordGrp'].invalid
+          "
+        >
+          <span>le mot de passe et la confirmation ne sont pas identiques</span>
+        </div>
+      </div>
+    </ng-container>
+    <div class="from-group">
+      <button
+        type="submit"
+        class="btn btn-outline-success"
+        [disabled]="form.invalid"
+      >
+        enregistrer
+      </button>
+      <a routerLink="/accueil" class="btn btn-link">annuler</a>
+    </div>
+  </form>
+</div>
