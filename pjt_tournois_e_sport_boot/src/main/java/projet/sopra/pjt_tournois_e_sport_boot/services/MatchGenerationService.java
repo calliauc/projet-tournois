@@ -72,15 +72,20 @@ public class MatchGenerationService {
 		Journee jour = new Journee(champ, null, null, champ.getProchaineEtape());
 
 		// Creation d'une liste avec les 2 premiers de chaque poule
-		List<List<Inscription>> topInscriptionsOfPoules = new ArrayList<List<Inscription>>();
+		List<List<Inscription>> topsOfPoules = new ArrayList<List<Inscription>>();
 		for (Poule poule : champ.getPoules()) {
-			topInscriptionsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
+			topsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
 		}
 
-		// Repartition des top 1 et top 2 de chaque poule dans leur premier match de phase finale
+		// Repartition des top 1 et top 2
 		for (int i = 0; i < champ.getNbPoules(); i++) {
-			
+			List<Inscription> inscriptionsMatch = new ArrayList<Inscription>();
+			inscriptionsMatch.add(topsOfPoules.get(i).get(0));
+			inscriptionsMatch.add(topsOfPoules.get(champ.getNbPoules() - i).get(1));
+			Match m = new Match();
+			m.setInscriptions(inscriptionsMatch);
 		}
 	}
+	
 
 }
