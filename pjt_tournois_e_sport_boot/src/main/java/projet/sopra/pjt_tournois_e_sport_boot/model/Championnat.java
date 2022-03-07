@@ -176,14 +176,43 @@ public class Championnat extends Tournoi {
 	/// GESTION PHASES FINALES
 
 	private void generatePhaseFinale() {
-		this.JourneesAJouerFinales.add(0, new Journee(this, null, null, Etape.Finale));
-		this.JourneesAJouerFinales.add(0, new Journee(this, null, null, Etape.Demi));
+		initFinale();
+		initDemi();
 		if (this.nbPoules >= 4) {
-			this.JourneesAJouerFinales.add(0, new Journee(this, null, null, Etape.Quart));
+			initQuart();
 			if (this.nbPoules >= 8) {
-				this.JourneesAJouerFinales.add(0, new Journee(this, null, null, Etape.Huitieme));
+				initHuitieme();
 			}
 		}
+	}
+
+	private void initHuitieme() {
+		Journee j = new Journee(this, null, null, Etape.Huitieme);
+		for (int i = 0; i < 8; i++) {
+			j.getMatchsAJouerPourJournee().add(new Match());
+		}
+		this.JourneesAJouerFinales.add(0, j);
+	}
+
+	private void initQuart() {
+		Journee j = new Journee(this, null, null, Etape.Quart);
+		for (int i = 0; i < 4; i++) {
+			j.getMatchsAJouerPourJournee().add(new Match());
+		}
+		this.JourneesAJouerFinales.add(0, j);
+	}
+
+	private void initDemi() {
+		Journee j = new Journee(this, null, null, Etape.Demi);
+		j.getMatchsAJouerPourJournee().add(new Match());
+		j.getMatchsAJouerPourJournee().add(new Match());
+		this.JourneesAJouerFinales.add(0, j);
+	}
+
+	private void initFinale() {
+		Journee j = new Journee(this, null, null, Etape.Finale);
+		j.getMatchsAJouerPourJournee().add(new Match());
+		this.JourneesAJouerFinales.add(0, j);
 	}
 
 }

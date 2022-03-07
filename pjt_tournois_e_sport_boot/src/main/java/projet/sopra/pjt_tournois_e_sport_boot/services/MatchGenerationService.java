@@ -69,8 +69,6 @@ public class MatchGenerationService {
 	}
 
 	public void initChampionatFinales(Championnat champ) {
-		Journee jour = new Journee(champ, null, null, champ.getProchaineEtape());
-
 		// Creation d'une liste avec les 2 premiers de chaque poule
 		List<List<Inscription>> topsOfPoules = new ArrayList<List<Inscription>>();
 		for (Poule poule : champ.getPoules()) {
