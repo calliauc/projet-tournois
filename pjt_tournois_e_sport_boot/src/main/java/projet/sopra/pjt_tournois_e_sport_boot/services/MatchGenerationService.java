@@ -75,7 +75,7 @@ public class MatchGenerationService {
 	 * @formatter:on
 	 */
 	public void initChampionatFinales(Championnat champ) {
-		// Creation d'une liste avec les 2 premiers de chaque poule
+		// Creation d'une liste de listes avec les 2 premiers de chaque poule
 		List<List<Inscription>> topsOfPoules = new ArrayList<List<Inscription>>();
 		for (Poule poule : champ.getPoules()) {
 			topsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
