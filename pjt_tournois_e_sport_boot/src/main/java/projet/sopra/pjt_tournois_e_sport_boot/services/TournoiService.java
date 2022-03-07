@@ -51,7 +51,7 @@ public class TournoiService {
 			tournoiEnBase.setDateDeCreation(t.getDateDeCreation());
 			tournoiEnBase.setDateDeDebut(t.getDateDeDebut());
 			tournoiEnBase.setJeu(t.getJeu());
-			tournoiEnBase.setListeInscriptions(t.getListeInscriptions());
+			//tournoiEnBase.setListeInscriptions(t.getListeInscriptions());
 			tournoiEnBase.setNbParticipantsParMatch(t.getNbParticipantsParMatch());
 			tournoiEnBase.setNbParticipantsTotal(t.getNbParticipantsTotal());
 			tournoiEnBase.setOrganisateur(t.getOrganisateur());

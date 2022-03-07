@@ -3,10 +3,10 @@ package projet.sopra.pjt_tournois_e_sport_boot.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,16 +18,15 @@ public class Championnat extends Tournoi {
 
 	/// ATTRIBUTES
 	@OneToMany(mappedBy = "tournoi")
-	private Set<Journee> JourneesAJouerPoules;
+	private List<Journee> JourneesAJouerPoules = new ArrayList<Journee>();
 	@OneToMany(mappedBy = "id")
-	private Set<Journee> JourneesAJouerFinales;
+	private List<Journee> JourneesAJouerFinales = new ArrayList<Journee>();
 	@Transient
-	private Set<Poule> poules = new HashSet<Poule>();
+	private List<Poule> poules = new ArrayList<Poule>();
+	@Column(name = "prochaine_etape_finale")
+	private Etape prochaineEtape;
 
 	private int nbPoules = 0;
-	/*
-	 * TODO gestion classement
-	 */
 
 	/// CONSTRUCTORS
 
@@ -42,30 +41,45 @@ public class Championnat extends Tournoi {
 
 	/// GETTERS
 
-	public Set<Journee> getJourneesAJouerPoules() {
+	public List<Journee> getJourneesAJouerPoules() {
 		return JourneesAJouerPoules;
 	}
 
-	public Set<Journee> getJourneesAJouerFinales() {
+	public List<Journee> getJourneesAJouerFinales() {
 		return JourneesAJouerFinales;
 	}
 
-	public Set<Poule> getPoules() {
+	public List<Poule> getPoules() {
 		return poules;
 	}
 
+	public Etape getProchaineEtape() {
+		return prochaineEtape;
+	}
+
+	public int getNbPoules() {
+		return nbPoules;
+	}
 	/// SETTERS
 
-	public void setJourneesAJouerPoules(Set<Journee> journeesAJouerPoules) {
+	public void setJourneesAJouerPoules(List<Journee> journeesAJouerPoules) {
 		JourneesAJouerPoules = journeesAJouerPoules;
 	}
 
-	public void setJourneesAJouerFinales(Set<Journee> journeesAJouerFinales) {
+	public void setJourneesAJouerFinales(List<Journee> journeesAJouerFinales) {
 		JourneesAJouerFinales = journeesAJouerFinales;
 	}
 
-	public void setPoules(Set<Poule> poules) {
+	public void setPoules(List<Poule> poules) {
 		this.poules = poules;
+	}
+
+	public void setProchaineEtape(Etape prochaineEtape) {
+		this.prochaineEtape = prochaineEtape;
+	}
+
+	public void setNbPoules(int nbPoules) {
+		this.nbPoules = nbPoules;
 	}
 
 	/// GESTION POULES
@@ -81,13 +95,16 @@ public class Championnat extends Tournoi {
 			System.out.println("Pas assez de joueurs, passez en ligue ?");
 		} else if (nb_players < 12) {
 			createTwoPoule();
+			this.prochaineEtape = Etape.Demi;
 			System.out.println(nb_players + " joueurs : 2 poules \nLes 2 premiers de chaque poule en demi-finales");
 		} else if (nb_players < 24) {
 			createFourPoule();
+			this.prochaineEtape = Etape.Quart;
 			System.out
 					.println(nb_players + " joueurs : 4 poules \nLes 2 premiers de chaque poule en quarts de finales");
 		} else if (nb_players <= 48) {
 			createEightPoule();
+			this.prochaineEtape = Etape.Huitieme;
 			System.out.println(
 					nb_players + " joueurs : 8 poules \nLes 2 premiers de chaque poule en huitieme de finales");
 		} else {
@@ -156,16 +173,24 @@ public class Championnat extends Tournoi {
 	}
 
 	/// GESTION PHASES FINALES
-	
-	/*
-	 * TODO
-	 * - Démarrer les phases finales sur la bonne journée (huitième/quart/demi)
-	 * 
-	 * 			!!	La suite sera probablement déportée dans la classe journée  !!
-	 * 
-	 * - Récupérer le premier et second de chaque poule et les répartir dans la première jouurnée de phase finale
-	 * - Créer les matches
-	 * - Récupérer les résultats (rest controller) et générer la journée suivante
-	 */
-	
+
+	public void generatePhaseFinale() {
+		initEtape(Etape.Finale);
+		initEtape(Etape.Demi);
+		if (this.nbPoules >= 4) {
+			initEtape(Etape.Quart);
+			if (this.nbPoules >= 8) {
+				initEtape(Etape.Huitieme);
+			}
+		}
+	}
+
+	private void initEtape(Etape etape) {
+		Journee j = new Journee(this, null, null, etape);
+		for (int i = 0; i < etape.getNbMatches(); i++) {
+			j.getMatchsAJouerPourJournee().add(new Match());
+		}
+		this.JourneesAJouerFinales.add(0, j);
+	}
+
 }
