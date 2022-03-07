@@ -67,10 +67,7 @@ public class InscriptionKey implements Serializable {
 		return Objects.equals(joueur, other.joueur) && Objects.equals(tournoi, other.tournoi);
 	}
 
-	@Override
-	public String toString() {
-		return "InscriptionKey [joueur=" + joueur.getId() + ", tournoi=" + tournoi.getIdTournoi() + "]";
-	}
+	
 
 		
 	

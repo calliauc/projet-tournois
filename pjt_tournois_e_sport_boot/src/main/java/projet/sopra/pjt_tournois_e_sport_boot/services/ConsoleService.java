@@ -14,16 +14,14 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Role;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.UtilisateurRepository;
 
-
 @Service
 public class ConsoleService implements CommandLineRunner {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
-	private UtilisateurRepository utilisateurRepo; 
-	
+	private UtilisateurRepository utilisateurRepo;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConsoleService.class);
 
@@ -41,9 +39,6 @@ public class ConsoleService implements CommandLineRunner {
 			jojo.setRoles(new HashSet<Role>(Arrays.asList(Role.ROLE_ADMIN)));
 			utilisateurRepo.save(jojo);
 		}
-		
-		
-		
 
 	}
 
