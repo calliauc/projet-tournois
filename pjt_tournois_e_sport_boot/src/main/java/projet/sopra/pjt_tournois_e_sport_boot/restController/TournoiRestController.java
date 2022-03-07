@@ -61,32 +61,31 @@ public class TournoiRestController {
 
 	// TO-DO
 	@ResponseStatus(code = HttpStatus.CREATED)
-	@PostMapping("")
+	@PostMapping("/ligue")
 	public Tournoi create(@Valid @RequestBody Ligue ligue, BindingResult br) {
 		return createTournoi(ligue, br);
 	}
 
 	@ResponseStatus(code = HttpStatus.CREATED)
-	@PostMapping("")
+	@PostMapping("/championnat")
 	public Tournoi create(@Valid @RequestBody Championnat championnat, BindingResult br) {
 		return createTournoi(championnat, br);
 	}
 
 	@ResponseStatus(code = HttpStatus.CREATED)
-	@PostMapping("")
 	public Tournoi createTournoi(Tournoi tournoi, BindingResult br) {
 		return save(tournoi, br);
 	}
 
 	// TO-DO
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
-	@PutMapping("/{id}")
+	@PutMapping("/ligue_{id}")
 	public Tournoi update(@Valid @RequestBody Ligue tournoi, BindingResult br, @PathVariable Long id) {
 		return updateTournoi(tournoi, br, id);
 	}
 
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
-	@PutMapping("/{id}")
+	@PutMapping("/championnat_{id}")
 	public Tournoi update(@Valid @RequestBody Championnat tournoi, BindingResult br, @PathVariable Long id) {
 		return updateTournoi(tournoi, br, id);
 	}
