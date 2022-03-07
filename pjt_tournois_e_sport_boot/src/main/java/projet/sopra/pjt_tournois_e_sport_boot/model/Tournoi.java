@@ -46,11 +46,11 @@ public abstract class Tournoi {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tournoi_statut_temps")
 	@JsonView(Views.TournoiWithInscriptions.class)
-	private StatutTemps statutTemps;
+	protected StatutTemps statutTemps;
 	@Enumerated(EnumType.STRING)
-	@Column(name = "tournoi_statut_temps")
+	@Column(name = "tournoi_statut_inscriptions")
 	@JsonView(Views.TournoiWithInscriptions.class)
-	private StatutInscriptions statutInscriptions;
+	protected StatutInscriptions statutInscriptions;
 	@Column(name = "tournoi_jeu", length = 50, nullable = false)
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected String jeu;
@@ -85,8 +85,8 @@ public abstract class Tournoi {
 		this.dateDeDebut = dateDeDebut;
 		this.jeu = jeu;
 		this.listeInscriptions = listeInscriptions;
-		this.statutInscriptions = StatutInscriptions.Inscription_En_Cours;
-		this.statutTemps = StatutTemps.A_venir;
+//		this.statutInscriptions = StatutInscriptions.Inscription_En_Cours;
+//		this.statutTemps = StatutTemps.A_venir;
 	}
 
 	/// GETTERS
