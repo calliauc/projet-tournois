@@ -14,8 +14,6 @@ import javax.validation.constraints.PositiveOrZero;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import projet.sopra.pjt_tournois_e_sport_boot.model.Views.Common;
-
 /**
  * @author theoc
  *
@@ -53,6 +51,14 @@ public class Inscription {
 	public Inscription() {
 
 	}
+	
+	
+
+	public Inscription(InscriptionKey id) {
+		this.id = id;
+	}
+
+
 
 	public Inscription(int position, int score, Match prochainMatch) {
 		super();
@@ -60,6 +66,19 @@ public class Inscription {
 		this.score = score;
 		this.prochainMatch = prochainMatch;
 	}
+	
+	
+
+	public Inscription(InscriptionKey id, @PositiveOrZero int position, @PositiveOrZero int score, int scoreDifference,
+			Match prochainMatch) {
+		this.id = id;
+		this.position = position;
+		this.score = score;
+		this.scoreDifference = scoreDifference;
+		this.prochainMatch = prochainMatch;
+	}
+
+
 
 	/// GETTERS
 	public int getPosition() {
