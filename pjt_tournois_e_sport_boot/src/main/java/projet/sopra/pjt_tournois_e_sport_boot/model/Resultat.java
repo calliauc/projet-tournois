@@ -2,6 +2,7 @@ package projet.sopra.pjt_tournois_e_sport_boot.model;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -15,6 +16,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -24,19 +28,20 @@ public class Resultat {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqResultat")
-	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.MatchWithJourneeAndResultat.class})
+	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.Match.class})
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "resultat_match_id", foreignKey = @ForeignKey(name="resultat_match_fk"))
 	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
+	@OnDelete( action = OnDeleteAction.CASCADE)
 	private Match match;
 	
 	@OneToOne
 	@JoinColumns(
 			{@JoinColumn(name = "resultat_participant_id", foreignKey = @ForeignKey(name="resultat_participant_fk")),
 			@JoinColumn(name="resultat_tournoi_id",  foreignKey = @ForeignKey(name="resultat_tournoi_fk"))})
-	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.MatchWithJourneeAndResultat.class})
+	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.Match.class})
 	private Inscription participant;
 	
 	@Column(name="position_match")

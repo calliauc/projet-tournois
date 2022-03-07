@@ -31,7 +31,7 @@ public class Journee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqJournee")
-	@JsonView({Views.JourneeWithTournoiAndMatch.class,Views.MatchWithJourneeAndResultat.class})
+	@JsonView({Views.JourneeWithTournoiAndMatch.class,Views.Match.class})
 	private Long id;
 
 	@ManyToOne

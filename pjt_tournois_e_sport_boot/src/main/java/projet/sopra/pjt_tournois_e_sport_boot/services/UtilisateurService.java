@@ -43,6 +43,7 @@ public class UtilisateurService {
 		LOGGER.info("Données OK");
 		if (user.getId() == null) {
 			LOGGER.info("Création d'un nouvel utilisateur");
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			return utilisateurRepo.save(user);
 		} else {
 			LOGGER.info("Modification d'un utilisateur");

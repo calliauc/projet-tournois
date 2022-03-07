@@ -25,7 +25,8 @@ public class Inscription {
 
 	/// ATTRIBUTES
 	@EmbeddedId
-	@JsonView({Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class, Views.TournoiWithInscriptions.class,Views.UserWithIncriptions.class})
+	@JsonView({ Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
+			Views.TournoiWithInscriptions.class, Views.UserWithIncriptions.class, Views.Match.class })
 	private InscriptionKey id;
 	@JsonView(Views.InscriptionWithId.class)
 	@Column(name = "position")
@@ -35,14 +36,15 @@ public class Inscription {
 	@Column(name = "score")
 	@PositiveOrZero
 	private int score;
-	/// somme des differences de scores de chaque match -- > sigma (score_joueur - score_adversaire) /!\ ne marche que pour les duels
+	/// somme des differences de scores de chaque match -- > sigma (score_joueur -
+	/// score_adversaire) /!\ ne marche que pour les duels
 	@JsonView(Views.InscriptionWithId.class)
 	@Column(name = "score_difference")
 	private int scoreDifference;
 	/*
 	 * TODO Score total pour départager
 	 */
-	@JsonView(Views.InscriptionWithId.class)
+	@JsonView({Views.InscriptionWithId.class,Views.MatchWithIncriptions.class})
 	@ManyToOne
 	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name = "inscription_prochain_match_fk"))
 	private Match prochainMatch;
@@ -139,31 +141,28 @@ public class Inscription {
 		Inscription other = (Inscription) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 	//// COMPARATEURS POUR LA GENERATION DU CLASSEMENT (TRI PAR SCORES...)
 	public static Comparator<Inscription> ComparatorScore = new Comparator<Inscription>() {
-	     
-        @Override
-        public int compare(Inscription e1, Inscription e2) {
-            return (int) (e2.getScore() - e1.getScore());
-        }
-    };
-    
-    public static Comparator<Inscription> ComparatorScoreDiff = new Comparator<Inscription>() {
-	     
-        @Override
-        public int compare(Inscription e1, Inscription e2) {
-            return (int) (e2.getScoreDifference()- e1.getScoreDifference());
-        }
-    };
+
+		@Override
+		public int compare(Inscription e1, Inscription e2) {
+			return (int) (e2.getScore() - e1.getScore());
+		}
+	};
+
+	public static Comparator<Inscription> ComparatorScoreDiff = new Comparator<Inscription>() {
+
+		@Override
+		public int compare(Inscription e1, Inscription e2) {
+			return (int) (e2.getScoreDifference() - e1.getScoreDifference());
+		}
+	};
 
 	@Override
 	public String toString() {
 		return "Inscription [id=" + id + ", position=" + position + ", score=" + score + ", scoreDifference="
 				+ scoreDifference + ", prochainMatch=" + prochainMatch + "]";
 	}
-	
-	
-	
 
 }

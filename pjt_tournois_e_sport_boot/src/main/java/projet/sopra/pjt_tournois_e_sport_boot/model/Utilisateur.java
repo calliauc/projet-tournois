@@ -41,7 +41,9 @@ public class Utilisateur implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUtilisateur")
-	@JsonView({Views.Common.class,Views.InscriptionWithId.class,Views.ResultatWithInscriptionAndMatch.class, Views.TournoiWithInscriptions.class,Views.UserWithTournois.class, Views.UserWithIncriptions.class})
+	@JsonView({ Views.Common.class, Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
+			Views.TournoiWithInscriptions.class, Views.UserWithTournois.class, Views.UserWithIncriptions.class,
+			Views.Match.class })
 	private Long id;
 
 	@Column(name = "username", nullable = false)
@@ -82,7 +84,7 @@ public class Utilisateur implements UserDetails {
 	@OneToMany(mappedBy = "organisateur")
 	@JsonView(Views.UserWithTournois.class)
 	private List<Tournoi> tournois;
-	
+
 	@Version
 	private int version;
 
