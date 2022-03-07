@@ -50,8 +50,8 @@ public abstract class Tournoi {
 	protected String nom;
 	@Column(name = "tournoi_date_creation", nullable = false)
 	@JsonView(Views.TournoiWithInscriptions.class)
-	protected LocalDate dateDeCreation;
-	@Column(name = "tournoi_date_debut", nullable = false)
+	protected LocalDate dateDeCreation = LocalDate.now();
+	@Column(name = "tournoi_date_debut")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected LocalDate dateDeDebut;
 	@Enumerated(EnumType.STRING)
@@ -62,16 +62,16 @@ public abstract class Tournoi {
 	@Column(name = "tournoi_statut_inscriptions")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected StatutInscriptions statutInscriptions;
-	@Column(name = "tournoi_jeu", length = 50, nullable = false)
+	@Column(name = "tournoi_jeu", length = 50)
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected String jeu;
 	@OneToMany(mappedBy = "id.tournoi")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected Set<Inscription> listeInscriptions = new HashSet<Inscription>();
-	@Column(name = "tournoi_nb_participants_match", nullable = false)
+	@Column(name = "tournoi_nb_participants_match")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected int nbParticipantsParMatch;
-	@Column(name="tournoi_nb_participants_total", nullable = false)
+	@Column(name="tournoi_nb_participants_total")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected int nbParticipantsTotal;	
 	@ManyToOne
