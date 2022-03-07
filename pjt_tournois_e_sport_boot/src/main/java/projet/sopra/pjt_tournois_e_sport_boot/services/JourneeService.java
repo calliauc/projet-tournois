@@ -40,6 +40,7 @@ public class JourneeService {
 			journeeEnBase.setDateDebutJournee(j.getDateDebutJournee());
 			journeeEnBase.setDateFinJournee(j.getDateFinJournee());
 			journeeEnBase.setEtape(j.getEtape());
+			journeeEnBase.setNumero(j.getNumero());
 			checkData(j);
 			return journeeRepo.save(journeeEnBase);
 		}
