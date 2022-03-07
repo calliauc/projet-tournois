@@ -5,17 +5,22 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import javax.validation.Validator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.MatchException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
+import projet.sopra.pjt_tournois_e_sport_boot.exceptions.TournoiException;
+import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.ResultatRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
@@ -38,9 +43,11 @@ public class MatchService {
 	private InscriptionRepository inscriptionRepo;
 
 	@Autowired
-	private ResultatRepository resultatRepo;
-
-	public List<Match> getAll() {
+	private ResultatService resultatService;
+	@Autowired
+	private Validator validator;
+	
+	public List<Match> getAll(){
 		return matchRepo.findAll();
 	}
 
@@ -80,19 +87,25 @@ public class MatchService {
 		}
 		matchRepo.delete(matchEnBase);
 	}
-
-	public void deleteById(Long id) {
-		matchRepo.deleteById(id);
+	
+	public void delete(Long id) {
+		for(Resultat r : this.getById(id).getResultats()) {
+			resultatService.delete(r);
+		}
+		delete(this.getById(id));
 	}
 
 	private void checkData(Match m) {
-		if (m == null) {
-			throw new MatchException("pas de match renseigne");
+		if (!validator.validate(m).isEmpty()) {
+			throw new UtilisateurException();
 		}
-
-		if (m.getJournee() == null || m.getInscriptions().isEmpty()) {
-			throw new MatchException("donnees incorrectes");
-		}
+//		if(m==null) {
+//			throw new MatchException("pas de match renseigne");
+//		}
+//		
+//		if (m.getJournee() == null || m.getInscriptions().isEmpty()) {
+//			throw new MatchException("donnees incorrectes");
+//		}
 	}
 
 	public boolean exist(Long id) {

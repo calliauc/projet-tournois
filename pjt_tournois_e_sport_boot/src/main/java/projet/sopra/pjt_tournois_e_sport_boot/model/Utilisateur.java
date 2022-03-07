@@ -30,6 +30,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import projet.sopra.pjt_tournois_e_sport_boot.model.Views.Common;
+
 @Entity
 @Table(name = "users")
 @SequenceGenerator(name = "seqUtilisateur", sequenceName = "seq_users", initialValue = 100, allocationSize = 1)
@@ -39,7 +41,9 @@ public class Utilisateur implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUtilisateur")
-	@JsonView({Views.Common.class,Views.InscriptionWithId.class,Views.ResultatWithInscriptionAndMatch.class, Views.TournoiWithInscriptions.class})
+	@JsonView({ Views.Common.class, Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
+			Views.TournoiWithInscriptions.class, Views.UserWithTournois.class, Views.UserWithIncriptions.class,
+			Views.Match.class })
 	private Long id;
 
 	@Column(name = "username", nullable = false)
@@ -80,7 +84,7 @@ public class Utilisateur implements UserDetails {
 	@OneToMany(mappedBy = "organisateur")
 	@JsonView(Views.UserWithTournois.class)
 	private List<Tournoi> tournois;
-	
+
 	@Version
 	private int version;
 

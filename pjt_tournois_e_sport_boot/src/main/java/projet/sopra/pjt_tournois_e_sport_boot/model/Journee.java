@@ -31,7 +31,7 @@ public class Journee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqJournee")
-	@JsonView({Views.JourneeWithTournoiAndMatch.class,Views.MatchWithJourneeAndResultat.class})
+	@JsonView({Views.JourneeWithTournoiAndMatch.class,Views.Match.class})
 	private Long id;
 
 	@ManyToOne
@@ -70,6 +70,14 @@ public class Journee {
 
 	}
 
+	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape) {
+		super();
+		this.tournoi = tournoi;
+		this.dateDebutJournee = dateDebutJournee;
+		this.dateFinJournee = dateFinJournee;
+		this.etape = etape;
+	}
+	
 	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape, int numero) {
 		super();
 		this.tournoi = tournoi;

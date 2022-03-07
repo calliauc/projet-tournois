@@ -16,7 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -29,10 +30,11 @@ public class Match {
 	@Id
 	@Column(name="match_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMatch")
-	@JsonView({Views.MatchWithJourneeAndResultat.class, Views.ResultatWithInscriptionAndMatch.class,Views.JourneeWithTournoiAndMatch.class})
+	@JsonView({Views.Match.class, Views.ResultatWithInscriptionAndMatch.class,Views.JourneeWithTournoiAndMatch.class})
 	private Long id;
 	
 	@ManyToMany(mappedBy = "matchs")
+	@JsonView(Views.MatchWithIncriptions.class)
 	private List<Inscription> inscriptions = new ArrayList<Inscription>();
 	
 	@OneToMany(mappedBy = "prochainMatch")
@@ -40,11 +42,11 @@ public class Match {
 	
 	@ManyToOne
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
-	@JsonView(Views.MatchWithJourneeAndResultat.class)
+	@JsonView(Views.Match.class)
 	private Journee journee;
 	
 	@OneToMany(mappedBy = "match")
-	@JsonView(Views.MatchWithJourneeAndResultat.class)
+	@JsonView(Views.Match.class)
 	private List<Resultat> resultats;
 	
 	/// CONSTRUCTOR
