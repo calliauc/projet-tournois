@@ -88,8 +88,8 @@ public class UtilisateurService {
 	}
 
 	//// QUERY JOUEURS
-	public Utilisateur getUtilisateurWithInscriptions(InscriptionKey key) {
-		return utilisateurRepo.findJoueurWithInscriptions(key).orElseThrow(() -> {
+	public Utilisateur getUtilisateurWithInscriptions(Long id) {
+		return utilisateurRepo.findJoueurWithInscriptions(id).orElseThrow(() -> {
 			throw new UtilisateurException("Can't find players by inscriptions");
 		});
 	}

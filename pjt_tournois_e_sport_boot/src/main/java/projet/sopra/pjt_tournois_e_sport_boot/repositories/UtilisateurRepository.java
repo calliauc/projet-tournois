@@ -32,13 +32,12 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 	Optional<Utilisateur> findByUsernameWithRoles(@Param("username") String username);
 
 	////// REQUETES JOUEURS
-
-	@Query("select j from Utilisateur j left join fetch j.inscriptions where j.id = :Id")
-	Optional<Utilisateur> findJoueurWithInscriptions(@Param("Id") InscriptionKey Id);
+	//on récupère la liste des inscriptions en fonction de l'id du JOUEUR
+	@Query("select j from Utilisateur j left join fetch j.inscriptions where j.id = :Id")// ici c'est l'id du user donc long et pas InscriptionKey 
+	Optional<Utilisateur> findJoueurWithInscriptions(@Param("Id") Long Id);
 
 	////// REQUETES ORGANISATEURS
-
-	// Trouver l'organisateur en fonction de l'id du tournoi
+	//on récupérer la liste des tournois en fonction de l'id de l'ORGANISATEUR
 	@Query("select o from Utilisateur o left join fetch o.tournois where o.id = :IdTournoi")
 	Optional<Utilisateur> findOrganisateurWithTournois(@Param("IdTournoi") Long IdTournoi);
 
