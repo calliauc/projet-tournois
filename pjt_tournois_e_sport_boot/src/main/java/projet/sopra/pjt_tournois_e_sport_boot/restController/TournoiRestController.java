@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.TournoiException;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Championnat;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Ligue;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
@@ -31,74 +33,92 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 @RequestMapping("api/tournoi")
 @CrossOrigin(origins = "*")
 public class TournoiRestController {
-	
-	////TO-DO
-	// Create 
+
+	//// TO-DO
+	// Create
 	// Update
 	// JSONVIEW SPECIAL QUERIES
-	
-	
+
 	@Autowired
-	private TournoiService tournoiService; 
+	private TournoiService tournoiService;
 	@Autowired
-	private InscriptionService inscriptionService; 
-	
-	////CRUD
-	
-	
+	private InscriptionService inscriptionService;
+
+	//// CRUD
+
 	@GetMapping("")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	public List<Tournoi> getAll() {
-		List<Tournoi> list = tournoiService.getAll(); 
-		return list; 
+		List<Tournoi> list = tournoiService.getAll();
+		return list;
 	}
-	
+
 	@GetMapping("/{id}")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	public Tournoi getById(@PathVariable Long id) {
 		return tournoiService.getById(id);
 	}
-	
-	//TO-DO
+
+	// TO-DO
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
-	public Tournoi create(@Valid @RequestBody Tournoi tournoi, BindingResult br) {
-		return save(tournoi, br); 
+	public Tournoi create(@Valid @RequestBody Ligue ligue, BindingResult br) {
+		return createTournoi(ligue, br);
 	}
-	
-	//TO-DO
+
+	@ResponseStatus(code = HttpStatus.CREATED)
+	@PostMapping("")
+	public Tournoi create(@Valid @RequestBody Championnat championnat, BindingResult br) {
+		return createTournoi(championnat, br);
+	}
+
+	@ResponseStatus(code = HttpStatus.CREATED)
+	@PostMapping("")
+	public Tournoi createTournoi(Tournoi tournoi, BindingResult br) {
+		return save(tournoi, br);
+	}
+
+	// TO-DO
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	@PutMapping("/{id}")
-	public Tournoi update(@Valid @RequestBody Tournoi tournoi, BindingResult br, @PathVariable Long id) {
+	public Tournoi update(@Valid @RequestBody Ligue tournoi, BindingResult br, @PathVariable Long id) {
+		return updateTournoi(tournoi, br, id);
+	}
+
+	@ResponseStatus(code = HttpStatus.ACCEPTED)
+	@PutMapping("/{id}")
+	public Tournoi update(@Valid @RequestBody Championnat tournoi, BindingResult br, @PathVariable Long id) {
+		return updateTournoi(tournoi, br, id);
+	}
+
+	@ResponseStatus(code = HttpStatus.ACCEPTED)
+	public Tournoi updateTournoi(Tournoi tournoi, BindingResult br, Long id) {
 		if (!tournoiService.exist(id)) {
-			throw new TournoiException(); 
+			throw new TournoiException();
 		}
 		return save(tournoi, br);
 	}
-	
+
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	private void delete(@PathVariable Long id) {
-		tournoiService.delete(id); 
+		tournoiService.delete(id);
 	}
-	
+
 	//// TO DO - SPECIAL QUERIES
 	@JsonView(Views.InscriptionWithId.class)
 	@GetMapping("/{id}/classement")
 	private List<Inscription> getClassementLigue(@PathVariable Long id) {
 		return tournoiService.getClassementLigue(id);
 	}
-	
-	
-	
-	
+
 	//// METHODS
-	
+
 	private Tournoi save(Tournoi tournoi, BindingResult br) {
 		if (br.hasErrors()) {
-			throw new TournoiException(); 
+			throw new TournoiException();
 		}
-		return tournoiService.createOrUpdate(tournoi); 
-		
+		return tournoiService.createOrUpdate(tournoi);
+
 	}
 }
