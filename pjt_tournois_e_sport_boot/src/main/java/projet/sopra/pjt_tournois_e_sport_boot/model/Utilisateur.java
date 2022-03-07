@@ -73,12 +73,14 @@ public class Utilisateur implements UserDetails {
 
 	@OneToMany(mappedBy = "id.joueur")
 	@Column(name = "joueur_inscriptions", nullable = true)
+	@JsonView(Views.UserWithIncriptions.class)
 	private Set<Inscription> inscriptions;
 
 	//////////// Attributs Organisateur
 
 	@OneToMany(mappedBy = "organisateur")
 	@Column(name = "tournois_organises", nullable = true)
+	@JsonView(Views.UserWithTournois.class)
 	private List<Tournoi> tournois;
 	
 	@Version
