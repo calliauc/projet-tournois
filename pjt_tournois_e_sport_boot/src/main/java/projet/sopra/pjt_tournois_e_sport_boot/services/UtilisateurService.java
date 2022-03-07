@@ -90,7 +90,7 @@ public class UtilisateurService {
 	//// QUERY JOUEURS
 	public Utilisateur getUtilisateurWithInscriptions(InscriptionKey key) {
 		return utilisateurRepo.findJoueurWithInscriptions(key).orElseThrow(() -> {
-			throw new UtilisateurException("Can't find by inscriptions");
+			throw new UtilisateurException("Can't find players by inscriptions");
 		});
 	}
 
@@ -98,9 +98,19 @@ public class UtilisateurService {
 
 	public Utilisateur getOrganisateurWithTournois(Long id) {
 		return utilisateurRepo.findOrganisateurWithTournois(id).orElseThrow(() -> {
-			throw new UtilisateurException("can't find by tournoi");
+			throw new UtilisateurException("can't find orga by tournoi");
 		});
 	}
+	
+	// QUERY ROLES
+
+	public Utilisateur getByUsernameWithRoles(String username) {
+		return utilisateurRepo.findByUsernameWithRoles(username).orElseThrow(() -> {
+			throw new UtilisateurException("can't find roles with username");
+		});
+	}
+	
+	
 
 	// Fonctions propres au service
 	private void check(Utilisateur user) {
