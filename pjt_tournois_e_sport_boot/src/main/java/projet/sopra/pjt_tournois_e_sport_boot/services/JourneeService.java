@@ -4,18 +4,31 @@ import java.util.List;
 
 import javax.validation.Validator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.JourneeException;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
+import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
 
 @Service
 public class JourneeService {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(JourneeService.class);
 
 	@Autowired 
 	private JourneeRepository journeeRepo;
+	
+	@Autowired 
+	private InscriptionRepository inscriptionRepo;
+	
+	@Autowired
+	private MatchService matchService;
 	
 	@Autowired
 	private Validator validator;
@@ -53,11 +66,26 @@ public class JourneeService {
 	}
 	
 	public void delete(Journee j) {
+		for (Match m : j.getMatchsAJouerPourJournee()) {
+			
+			matchService.delete(m);
+		}
 		journeeRepo.delete(j);
 	}
 	
 	public void delete(Long id) {
-		delete(getById(id)); 
+		Journee j = getById(id);
+		for (Match m : j.getMatchsAJouerPourJournee()) {
+			for (Inscription i : m.getInscriptions()) {
+				if (i.getProchainMatch() == m) {
+					Inscription inscriptionEnBase = inscriptionRepo.getById(i.getId()); 
+					inscriptionEnBase.setProchainMatch(null);
+				}
+			}
+			matchService.delete(m);
+			
+		}
+		journeeRepo.delete(j);
 	}
 	
 	public boolean exist(Long id) {
