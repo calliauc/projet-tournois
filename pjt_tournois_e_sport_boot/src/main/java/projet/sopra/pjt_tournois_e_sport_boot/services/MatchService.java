@@ -23,15 +23,15 @@ public class MatchService {
 	private ResultatService resultatService;
 	@Autowired
 	private Validator validator;
-	
-	public List<Match> getAll(){
+
+	public List<Match> getAll() {
 		return matchRepo.findAll();
 	}
-	
+
 //	public List<Match> findByDateWithJournees(LocalDateTime dateDebut){
 //		return matchRepo.findByDateWithJournees(dateDebut);
 //	}
-	
+
 	public Match getById(Long id) {
 		return matchRepo.findById(id).orElseThrow(() -> {
 			throw new MatchException("match inconnu");
@@ -49,7 +49,7 @@ public class MatchService {
 			return matchRepo.save(matchEnBase);
 		}
 	}
-	
+
 	public void delete(Match m) {
 		checkData(m);
 		if (m.getId() == null) {
@@ -58,12 +58,14 @@ public class MatchService {
 		Match tournoiEnBase = matchRepo.findById(m.getId()).orElseThrow(TournoiException::new);
 		matchRepo.delete(tournoiEnBase);
 	}
-	
+
 	public void delete(Long id) {
-		for(Resultat r : this.getById(id).getResultats()) {
+		for (Resultat r : this.getById(id).getResultats()) {
 			resultatService.delete(r);
 		}
-		delete(this.getById(id));
+		if (matchRepo.existsById(id)) {
+			delete(this.getById(id));
+		}
 	}
 
 	private void checkData(Match m) {
@@ -78,8 +80,8 @@ public class MatchService {
 //			throw new MatchException("donnees incorrectes");
 //		}
 	}
-	
-	public boolean exist (Long id) {
+
+	public boolean exist(Long id) {
 		return matchRepo.existsById(id);
 	}
 }
