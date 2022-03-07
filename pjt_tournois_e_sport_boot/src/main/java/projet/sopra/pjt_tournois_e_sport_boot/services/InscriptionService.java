@@ -29,11 +29,10 @@ public class InscriptionService {
 	
 	public Inscription createOrUpdate(Inscription i) {
 		checkData(i);
-		if(i.getId()==null) {
+		if(!this.exist(i.getId())) {
 			return inscriptionRepo.save(i);
 		}
-		Inscription iEnBase=new Inscription();
-		iEnBase = this.getById(i.getId());
+		Inscription iEnBase= this.getById(i.getId());
 		iEnBase.setPosition(i.getPosition());
 		iEnBase.setProchainMatch(i.getProchainMatch());
 		iEnBase.setScore(i.getScore());
