@@ -1,6 +1,7 @@
 package projet.sopra.pjt_tournois_e_sport_boot.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class Journee {
 
 	@OneToMany(mappedBy = "journee")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
-	private Set<Match> matchsAJouerPourJournee;
+	private List<Match> matchsAJouerPourJournee;
 //	@FutureOrPresent
 	@Transient
 	@Column(name = "journee_date_debut")
@@ -97,7 +98,7 @@ public class Journee {
 		return tournoi;
 	}
 
-	public Set<Match> getMatchsAJouerPourJournee() {
+	public List<Match> getMatchsAJouerPourJournee() {
 		return matchsAJouerPourJournee;
 	}
 
@@ -127,7 +128,7 @@ public class Journee {
 		this.tournoi = tournoi;
 	}
 
-	public void setMatchsAJouerPourJournee(Set<Match> matchsAJouerPourJournee) {
+	public void setMatchsAJouerPourJournee(List<Match> matchsAJouerPourJournee) {
 		this.matchsAJouerPourJournee = matchsAJouerPourJournee;
 	}
 

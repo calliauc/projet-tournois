@@ -47,7 +47,7 @@ public class MatchGenerationService {
 			jour.setEtape(Etape.Ligue);
 			jour.setNumero(i + 1);
 			journeeRepo.save(jour);
-			Set<Match> matchsJournee = new HashSet<Match>();
+			List<Match> matchsJournee = new ArrayList<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {
 				Match m = new Match();
 				m.setJournee(jour);
@@ -68,45 +68,36 @@ public class MatchGenerationService {
 		tournoiRepo.save(ligue);
 	}
 
-	
 	public void initChampionatFinales(Championnat champ) {
 		// Creation d'une liste avec les 2 premiers de chaque poule
 		List<List<Inscription>> topsOfPoules = new ArrayList<List<Inscription>>();
 		for (Poule poule : champ.getPoules()) {
 			topsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
 		}
-		
-		champ.getJourneesAJouerFinales().get(0);
-		
-		
+
+		/* @formatter:off
+		 * Boucle sur le nombre de matchs de l'étape à venir
+		 * Ajout des premiers de chaque poule dans l'odre
+		 * Ajout des seconds de chaque poule dans l'odre inverse
+		 * @formatter:on
+		 */
+
+		int nbMatchs = champ.getProchaineEtape().getNbMatches();
+		for (int i = 0; i < nbMatchs; i++) {
+			List<Inscription> inscriptionsMatch = new ArrayList<Inscription>();
+			inscriptionsMatch.add(topsOfPoules.get(i).get(0));
+			inscriptionsMatch.add(topsOfPoules.get(nbMatchs - i).get(1));
+			champ.getJourneesAJouerFinales().get(0).getMatchsAJouerPourJournee().get(i)
+					.setInscriptions(inscriptionsMatch);
+		}
+
 		champ.getProchaineEtape().next();
-		
+
 	}
 
 	public void etapeSuivanteChampionnat(Championnat champ) {
 
-		
-		
 		champ.getProchaineEtape().next();
 	}
-		
-		
-		
-/*	public void initChampionatFinales(Championnat champ) {
-		// Creation d'une liste avec les 2 premiers de chaque poule
-		List<List<Inscription>> topsOfPoules = new ArrayList<List<Inscription>>();
-		for (Poule poule : champ.getPoules()) {
-			topsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
-		}
-
-		// Repartition des top 1 et top 2 des poules
-		for (int i = 0; i < champ.getNbPoules(); i++) {
-			List<Inscription> inscriptionsMatch = new ArrayList<Inscription>();
-			inscriptionsMatch.add(topsOfPoules.get(i).get(0));
-			inscriptionsMatch.add(topsOfPoules.get(champ.getNbPoules() - i).get(1));
-			Match m = new Match();
-			m.setInscriptions(inscriptionsMatch);
-		}
-	}*/
 
 }
