@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +20,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SequenceGenerator(name = "seqTournoi", sequenceName = "seq_tournoi", initialValue = 100, allocationSize = 1)
+
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property ="type")
+@JsonSubTypes(
+{
+    @Type(value = Ligue.class, name = "ligue"),
+    @Type(value = Championnat.class, name = "championnat")
+})
 public abstract class Tournoi {
 
 	//// TO-DO annotations @JsonView
@@ -37,20 +50,28 @@ public abstract class Tournoi {
 	protected String nom;
 	@Column(name = "tournoi_date_creation", nullable = false)
 	@JsonView(Views.TournoiWithInscriptions.class)
-	protected LocalDate dateDeCreation;
-	@Column(name = "tournoi_date_debut", nullable = false)
+	protected LocalDate dateDeCreation = LocalDate.now();
+	@Column(name = "tournoi_date_debut")
 	@JsonView(Views.TournoiWithInscriptions.class)
-	protected LocalDate dateDeDebut;
-	@Column(name = "tournoi_jeu", length = 50, nullable = false)
+	protected LocalDate dateDeDebut = LocalDate.now();
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tournoi_statut_temps")
+	@JsonView(Views.TournoiWithInscriptions.class)
+	protected StatutTemps statutTemps;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tournoi_statut_inscriptions")
+	@JsonView(Views.TournoiWithInscriptions.class)
+	protected StatutInscriptions statutInscriptions;
+	@Column(name = "tournoi_jeu", length = 50)
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected String jeu;
 	@OneToMany(mappedBy = "id.tournoi")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected Set<Inscription> listeInscriptions = new HashSet<Inscription>();
-	@Column(name = "tournoi_nb_participants_match", nullable = false)
+	@Column(name = "tournoi_nb_participants_match")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected int nbParticipantsParMatch;
-	@Column(name="tournoi_nb_participants_total", nullable = false)
+	@Column(name="tournoi_nb_participants_total")
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected int nbParticipantsTotal;	
 	@ManyToOne
@@ -75,6 +96,8 @@ public abstract class Tournoi {
 		this.dateDeDebut = dateDeDebut;
 		this.jeu = jeu;
 		this.listeInscriptions = listeInscriptions;
+//		this.statutInscriptions = StatutInscriptions.Inscription_En_Cours;
+//		this.statutTemps = StatutTemps.A_venir;
 	}
 
 	/// GETTERS
@@ -107,8 +130,14 @@ public abstract class Tournoi {
 		return nbParticipantsParMatch;
 	}
 
-	/// SETTERS
+	public StatutTemps getStatutTemps() {
+		return statutTemps;
+	}
 
+	public StatutInscriptions getStatutInscriptions() {
+		return statutInscriptions;
+	}
+	/// SETTERS
 
 	public void setNbParticipantsTotal(int nbParticipantsTotal) {
 		this.nbParticipantsTotal = nbParticipantsTotal;
@@ -154,8 +183,16 @@ public abstract class Tournoi {
 		this.nbParticipantsParMatch = nbParticipantsParMatch;
 	}
 
-	///// METHODS
+	public void setStatutTemps(StatutTemps statutTemps) {
+		this.statutTemps = statutTemps;
+	}
 
+	public void setStatutInscriptions(StatutInscriptions statutInscriptions) {
+		this.statutInscriptions = statutInscriptions;
+	}
+
+	///// METHODS
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(idTournoi);
