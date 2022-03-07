@@ -7,11 +7,14 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import projet.sopra.pjt_tournois_e_sport_boot.model.Championnat;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Etape;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Ligue;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Poule;
+import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
@@ -25,6 +28,8 @@ public class MatchGenerationService {
 	private MatchRepository matchRepo;
 	@Autowired
 	private JourneeRepository journeeRepo;
+	@Autowired
+	private InscriptionRepository inscriptionRepo;
 
 	public void generateJourneesLigueDuels(Ligue ligue) {
 
@@ -59,6 +64,14 @@ public class MatchGenerationService {
 		}
 		ligue.setJourneesAJouer(journees);
 		tournoiRepo.save(ligue);
+	}
+	
+	
+	public void generateJourneesChampionatFinales(Championnat champ) {
+		for (Poule poule : champ.getPoules()) {
+			inscriptionRepo.getClassementLigue(poule.getIdTournoi());
+			champ.get
+		}
 	}
 
 }

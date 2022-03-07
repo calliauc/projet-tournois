@@ -14,6 +14,8 @@ import javax.validation.constraints.PositiveOrZero;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import projet.sopra.pjt_tournois_e_sport_boot.model.Views.Common;
+
 /**
  * @author theoc
  *

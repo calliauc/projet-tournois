@@ -162,14 +162,7 @@ public class Championnat extends Tournoi {
 	}
 
 	/// GESTION PHASES FINALES
-	
-	public void initPhaseFinale() {
-		List<Poule> listPoules = new ArrayList<Poule>(this.poules);
-		
-		Journee j1 = new Journee(this, null, null, this.prochaineEtape);
-		
-	}
-	
+
 	
 	/*
 	 * TODO
