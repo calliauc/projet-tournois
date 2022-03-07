@@ -1,5 +1,6 @@
 package projet.sopra.pjt_tournois_e_sport_boot.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.TournoiException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
+import projet.sopra.pjt_tournois_e_sport_boot.model.StatutInscriptions;
+import projet.sopra.pjt_tournois_e_sport_boot.model.StatutTemps;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
@@ -20,13 +23,17 @@ public class TournoiService {
 	private InscriptionRepository inscriptionRepo;
 	
 	public List<Tournoi> getAll() {
-		return tournoiRepo.findAll();
+		List<Tournoi> tournois = tournoiRepo.findAll();
+		updateStatusAll(tournois);
+		return tournois;
 	}
 	
 	public Tournoi getById(Long id) {
-		return tournoiRepo.findById(id).orElseThrow(() -> {
+		Tournoi tournoiEnBase = tournoiRepo.findById(id).orElseThrow(() -> {
 			throw new TournoiException("tournoi inconnu");
 		});
+		updateStatus(tournoiEnBase);
+		return tournoiEnBase;
 	}
 	
 	public Tournoi createOrUpdate(Tournoi t) {
@@ -78,6 +85,25 @@ public class TournoiService {
 	public List<Inscription> getClassementLigue(Long id){
 		return inscriptionRepo.getClassementLigue(id);
 	}
+	
+	
+	public void updateStatus(Tournoi tournoi) {
+		/// check inscriptions 
+		if (tournoi.getListeInscriptions().size() == tournoi.getNbParticipantsTotal()) {
+			tournoi.setStatutInscriptions(StatutInscriptions.Inscriptions_Terminées);
+		}
+		if (LocalDate.now().isAfter(tournoi.getDateDeDebut()) || LocalDate.now().isEqual(tournoi.getDateDeDebut())) {
+			tournoi.setStatutTemps(StatutTemps.En_cours);
+		}
+		tournoiRepo.save(tournoi);
+	}
+	
+	public void updateStatusAll(List<Tournoi> tournois) {
+		for (Tournoi t : tournois) {
+			updateStatus(t);
+		}
+	}
+	
 	
 }
 
