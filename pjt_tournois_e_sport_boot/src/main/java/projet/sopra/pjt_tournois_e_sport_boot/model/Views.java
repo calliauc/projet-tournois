@@ -26,7 +26,7 @@ public class Views {
 		
 	}
 	
-	public static class UserWithIncriptions{
+	public static class UserWithIncriptions extends Common{
 		
 	}
 	

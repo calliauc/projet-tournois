@@ -12,27 +12,27 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Embeddable
 public class InscriptionKey implements Serializable {
-	
+
 	@ManyToOne
-	@JoinColumn(name="joueur_inscription_id" , foreignKey= @ForeignKey(name="joueur_inscription__id_fk"))
-	@JsonView({Views.InscriptionWithId.class,Views.ResultatWithInscriptionAndMatch.class,Views.TournoiWithInscriptions.class})
+	@JoinColumn(name = "joueur_inscription_id", foreignKey = @ForeignKey(name = "joueur_inscription__id_fk"))
+	@JsonView({ Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
+			Views.TournoiWithInscriptions.class, Views.UserWithTournois.class })
 	private Utilisateur joueur;
 	@ManyToOne
-	@JoinColumn(name="tournoi_inscription_id" , foreignKey= @ForeignKey(name="tournoi_inscription__id_fk"))
-	@JsonView({Views.InscriptionWithId.class,Views.ResultatWithInscriptionAndMatch.class})
+	@JoinColumn(name = "tournoi_inscription_id", foreignKey = @ForeignKey(name = "tournoi_inscription__id_fk"))
+	@JsonView({ Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
+			Views.UserWithTournois.class, Views.UserWithIncriptions.class })
 	private Tournoi tournoi;
-	
+
 	public InscriptionKey() {
-		
+
 	}
-	
+
 	public InscriptionKey(Utilisateur joueur, Tournoi tournoi) {
 		super();
 		this.joueur = joueur;
 		this.tournoi = tournoi;
 	}
-
-	
 
 	public Utilisateur getJoueur() {
 		return joueur;
@@ -67,9 +67,4 @@ public class InscriptionKey implements Serializable {
 		return Objects.equals(joueur, other.joueur) && Objects.equals(tournoi, other.tournoi);
 	}
 
-	
-
-		
-	
-	
 }
