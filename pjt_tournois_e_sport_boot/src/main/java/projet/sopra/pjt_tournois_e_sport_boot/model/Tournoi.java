@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,6 +43,14 @@ public abstract class Tournoi {
 	@Column(name = "tournoi_date_debut", nullable = false)
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected LocalDate dateDeDebut;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tournoi_statut_temps")
+	@JsonView(Views.TournoiWithInscriptions.class)
+	private StatutTemps statutTemps;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tournoi_statut_temps")
+	@JsonView(Views.TournoiWithInscriptions.class)
+	private StatutInscriptions statutInscriptions;
 	@Column(name = "tournoi_jeu", length = 50, nullable = false)
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected String jeu;
@@ -75,6 +85,8 @@ public abstract class Tournoi {
 		this.dateDeDebut = dateDeDebut;
 		this.jeu = jeu;
 		this.listeInscriptions = listeInscriptions;
+		this.statutInscriptions = StatutInscriptions.Inscription_En_Cours;
+		this.statutTemps = StatutTemps.A_venir;
 	}
 
 	/// GETTERS
@@ -107,8 +119,14 @@ public abstract class Tournoi {
 		return nbParticipantsParMatch;
 	}
 
-	/// SETTERS
+	public StatutTemps getStatutTemps() {
+		return statutTemps;
+	}
 
+	public StatutInscriptions getStatutInscriptions() {
+		return statutInscriptions;
+	}
+	/// SETTERS
 
 	public void setNbParticipantsTotal(int nbParticipantsTotal) {
 		this.nbParticipantsTotal = nbParticipantsTotal;
@@ -154,8 +172,16 @@ public abstract class Tournoi {
 		this.nbParticipantsParMatch = nbParticipantsParMatch;
 	}
 
-	///// METHODS
+	public void setStatutTemps(StatutTemps statutTemps) {
+		this.statutTemps = statutTemps;
+	}
 
+	public void setStatutInscriptions(StatutInscriptions statutInscriptions) {
+		this.statutInscriptions = statutInscriptions;
+	}
+
+	///// METHODS
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(idTournoi);
