@@ -26,7 +26,7 @@ public class Championnat extends Tournoi {
 	@Column(name = "prochaine_etape_finale")
 	private Etape prochaineEtape;
 
-	private int nbPoules = 0;
+//	private int nbPoules = 0; remplace par prochaineEtape.getNbMatches();
 
 	/// CONSTRUCTORS
 
@@ -57,9 +57,9 @@ public class Championnat extends Tournoi {
 		return prochaineEtape;
 	}
 
-	public int getNbPoules() {
-		return nbPoules;
-	}
+//	public int getNbPoules() {
+//		return nbPoules;
+//	}
 	/// SETTERS
 
 	public void setJourneesAJouerPoules(List<Journee> journeesAJouerPoules) {
@@ -78,9 +78,9 @@ public class Championnat extends Tournoi {
 		this.prochaineEtape = prochaineEtape;
 	}
 
-	public void setNbPoules(int nbPoules) {
-		this.nbPoules = nbPoules;
-	}
+//	public void setNbPoules(int nbPoules) {
+//		this.nbPoules = nbPoules;
+//	}
 
 	/// GESTION POULES
 
@@ -123,7 +123,7 @@ public class Championnat extends Tournoi {
 		Poule pouleA = new Poule("PouleA", LocalDate.now(), jeu, tempA, true, nbParticipantsParMatch, this);
 		Poule pouleB = new Poule("PouleB", LocalDate.now(), jeu, tempB, true, nbParticipantsParMatch, this);
 
-		nbPoules = 2;
+//		nbPoules = 2;
 		Collections.addAll(poules, pouleA, pouleB);
 	}
 
@@ -141,7 +141,7 @@ public class Championnat extends Tournoi {
 		Poule pouleC = new Poule("PouleC", LocalDate.now(), jeu, tempC, true, nbParticipantsParMatch, this);
 		Poule pouleD = new Poule("PouleD", LocalDate.now(), jeu, tempD, true, nbParticipantsParMatch, this);
 
-		nbPoules = 4;
+//		nbPoules = 4;
 		Collections.addAll(poules, pouleA, pouleB, pouleC, pouleD);
 	}
 
@@ -167,7 +167,7 @@ public class Championnat extends Tournoi {
 		Poule pouleG = new Poule("PouleG", LocalDate.now(), jeu, tempG, true, nbParticipantsParMatch, this);
 		Poule pouleH = new Poule("PouleH", LocalDate.now(), jeu, tempH, true, nbParticipantsParMatch, this);
 
-		nbPoules = 8;
+//		nbPoules = 8;
 		Collections.addAll(poules, pouleA, pouleB, pouleC, pouleD, pouleE, pouleF, pouleG, pouleH);
 
 	}
@@ -177,9 +177,9 @@ public class Championnat extends Tournoi {
 	public void generatePhaseFinale() {
 		initEtape(Etape.Finale);
 		initEtape(Etape.Demi);
-		if (this.nbPoules >= 4) {
+		if (this.prochaineEtape.getNbMatches() >= 4) {
 			initEtape(Etape.Quart);
-			if (this.nbPoules >= 8) {
+			if (this.prochaineEtape.getNbMatches() >= 8) {
 				initEtape(Etape.Huitieme);
 			}
 		}

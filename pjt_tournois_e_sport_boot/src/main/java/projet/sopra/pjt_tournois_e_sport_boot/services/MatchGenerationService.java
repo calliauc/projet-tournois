@@ -68,7 +68,31 @@ public class MatchGenerationService {
 		tournoiRepo.save(ligue);
 	}
 
+	
 	public void initChampionatFinales(Championnat champ) {
+		// Creation d'une liste avec les 2 premiers de chaque poule
+		List<List<Inscription>> topsOfPoules = new ArrayList<List<Inscription>>();
+		for (Poule poule : champ.getPoules()) {
+			topsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
+		}
+		
+		champ.getJourneesAJouerFinales().get(0);
+		
+		
+		champ.getProchaineEtape().next();
+		
+	}
+
+	public void etapeSuivanteChampionnat(Championnat champ) {
+
+		
+		
+		champ.getProchaineEtape().next();
+	}
+		
+		
+		
+/*	public void initChampionatFinales(Championnat champ) {
 		// Creation d'une liste avec les 2 premiers de chaque poule
 		List<List<Inscription>> topsOfPoules = new ArrayList<List<Inscription>>();
 		for (Poule poule : champ.getPoules()) {
@@ -83,7 +107,6 @@ public class MatchGenerationService {
 			Match m = new Match();
 			m.setInscriptions(inscriptionsMatch);
 		}
-	}
-	
+	}*/
 
 }
