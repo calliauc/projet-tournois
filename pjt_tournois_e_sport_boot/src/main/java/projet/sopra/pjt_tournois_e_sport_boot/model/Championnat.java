@@ -177,12 +177,8 @@ public class Championnat extends Tournoi {
 	public void generatePhaseFinale() {
 		initEtape(Etape.Finale);
 		initEtape(Etape.Demi);
-		if (this.prochaineEtape.getNbMatches() >= 4) {
 			initEtape(Etape.Quart);
-			if (this.prochaineEtape.getNbMatches() >= 8) {
 				initEtape(Etape.Huitieme);
-			}
-		}
 	}
 
 	private void initEtape(Etape etape) {
