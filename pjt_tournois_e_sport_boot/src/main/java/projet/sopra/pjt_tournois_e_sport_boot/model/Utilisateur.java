@@ -30,6 +30,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import projet.sopra.pjt_tournois_e_sport_boot.model.Views.Common;
+
 @Entity
 @Table(name = "users")
 @SequenceGenerator(name = "seqUtilisateur", sequenceName = "seq_users", initialValue = 100, allocationSize = 1)
