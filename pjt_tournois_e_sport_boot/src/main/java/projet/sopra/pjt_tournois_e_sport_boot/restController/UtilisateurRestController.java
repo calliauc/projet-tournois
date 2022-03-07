@@ -75,7 +75,7 @@ public class UtilisateurRestController {
 	}
 
 	// Requete pour query spéciales:
-	@GetMapping("/{username}")
+	@GetMapping("/username_{username}")
 	@JsonView(Views.Common.class)
 	public Utilisateur getByUsername(@PathVariable String username) {
 		return uService.getByUsername(username);
@@ -108,13 +108,13 @@ public class UtilisateurRestController {
 	// Requete pour Collections
 
 	@GetMapping("/inscriptions_{key}")
-	@JsonView(Views.Common.class)
+	@JsonView(Views.UserWithIncriptions.class)
 	public Utilisateur getUtilisateurWithIncriptions(@PathVariable InscriptionKey key) {
 		return uService.getUtilisateurWithInscriptions(key);
 	}
 
 	@GetMapping("/tournoi_{idTournoi}")
-	@JsonView(Views.Common.class)
+	@JsonView(Views.UserWithTournois.class)
 	public Utilisateur getOrganisateurWithTournois(@PathVariable Long idTournoi) {
 		return uService.getOrganisateurWithTournois(idTournoi);
 	}
