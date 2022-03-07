@@ -28,6 +28,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 
 @RestController
 @RequestMapping("api/tournoi")
@@ -62,12 +63,14 @@ public class TournoiRestController {
 	// TO-DO
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("/ligue")
+	@JsonView(Views.TournoiWithInscriptions.class)
 	public Tournoi create(@Valid @RequestBody Ligue ligue, BindingResult br) {
 		return createTournoi(ligue, br);
 	}
 
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("/championnat")
+	@JsonView(Views.TournoiWithInscriptions.class)
 	public Tournoi create(@Valid @RequestBody Championnat championnat, BindingResult br) {
 		return createTournoi(championnat, br);
 	}
@@ -80,12 +83,14 @@ public class TournoiRestController {
 	// TO-DO
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	@PutMapping("/ligue_{id}")
+	@JsonView(Views.TournoiWithInscriptions.class)
 	public Tournoi update(@Valid @RequestBody Ligue tournoi, BindingResult br, @PathVariable Long id) {
 		return updateTournoi(tournoi, br, id);
 	}
 
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	@PutMapping("/championnat_{id}")
+	@JsonView(Views.TournoiWithInscriptions.class)
 	public Tournoi update(@Valid @RequestBody Championnat tournoi, BindingResult br, @PathVariable Long id) {
 		return updateTournoi(tournoi, br, id);
 	}
