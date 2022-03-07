@@ -66,42 +66,28 @@ public class InscriptionRestController {
 		return inscriptionService.getById(key);
 	}
 	
-	//TO DO
 	@ResponseStatus(code = HttpStatus.CREATED)
+	@JsonView(Views.InscriptionWithId.class)
 	@PostMapping("")
-	public Inscription create(@Valid @RequestBody Inscription inscription, BindingResult br) {
-		return save(inscription,br);
+	public Inscription create(@Valid @RequestBody InscriptionKeyDto ikDto, BindingResult br) {
+		Inscription i =new Inscription(InscriptionKeyDtoToInscriptionKey(ikDto));
+		return save(i,br);
 	}
 	
-	// TO DO (exception cause tournoi classe abstraite)
+	@JsonView(Views.InscriptionWithId.class)
 	@PutMapping("/{idJoueur}&{idTournoi}")
-	public Inscription update(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idTournoi) {
+	public Inscription update(@Valid @RequestBody InscriptionDto inscriptionDto, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idTournoi) {
+		Inscription inscription = InscriptionDtoToInscription(inscriptionDto);
 		if(!inscriptionService.exist(inscription.getId())) {
-			throw new InscriptionException(" \n Id pas normal " + inscription.getId().toString());
+			throw new InscriptionException("\n\n Id absent base : " + inscription.getId().toString() + "\n\n");
+		}
+		if(inscription.getId().getJoueur().getId() != idJoueur || inscription.getId().getTournoi().getIdTournoi() != idTournoi) {
+			throw new InscriptionException("Les id ne correspondent pas");
 		}
 		return save(inscription,br);
 	}
 	
-	/*
-	@PutMapping("/ligue/{idJoueur}&{idLigue}")
-	public Inscription updateOfLigue(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idLigue) {
-		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idLigue));
-		if(!inscriptionService.exist(key)) {
-			throw new InscriptionException();
-		}
-		return save(inscription,br);
-	}
-	
-	@PutMapping("/champ/{idJoueur}&{idChampionnat}")
-	public Inscription updateOfChampionnat(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idChampionnat) {
-		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idChampionnat));
-		if(!inscriptionService.exist(key)) {
-			throw new InscriptionException();
-		}
-		return save(inscription,br);
-	} 
-	*/
-	
+		
 	// TO DO (conflit avec table Resultat)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{idJoueur}&{idTournoi}")
@@ -122,6 +108,8 @@ public class InscriptionRestController {
 		return inscriptionService.createOrUpdate(inscription);
 	}
 	
+	//DTO
+	
 	private InscriptionDto inscriptionToInscriptionDTO(Inscription i) {
 		InscriptionKeyDto ikDto = new InscriptionKeyDto(i.getId().getJoueur().getId(), i.getId().getTournoi().getIdTournoi());
 		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getScoreDifference(), i.getProchainMatch());
@@ -133,6 +121,19 @@ public class InscriptionRestController {
 			inscriptionsWithKey.add(inscriptionToInscriptionDTO(i));
 		}
 		return inscriptionsWithKey;
+	}
+	
+	private InscriptionKey InscriptionKeyDtoToInscriptionKey(InscriptionKeyDto ikDto) {
+		InscriptionKey ik = new InscriptionKey();
+		ik.setJoueur(utilisateurService.getById(ikDto.getIdJoueur()));
+		ik.setTournoi(tournoiService.getById(ikDto.getIdTournoi()));
+		//BeanUtils.copyProperties(ikDto, ik);
+		return ik;
+	}
+	
+	private Inscription InscriptionDtoToInscription (InscriptionDto iDto) {
+		Inscription i = new Inscription(InscriptionKeyDtoToInscriptionKey(iDto.getId()),iDto.getPosition(), iDto.getScore(), iDto.getScoreDifference(), iDto.getProchainMatch());
+		return i;
 	}
 	
 	// SPECIAL QUERIES

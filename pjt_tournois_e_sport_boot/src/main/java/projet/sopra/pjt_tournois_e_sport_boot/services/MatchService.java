@@ -2,12 +2,16 @@ package projet.sopra.pjt_tournois_e_sport_boot.services;
 
 import java.util.List;
 
+import javax.validation.Validator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.MatchException;
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.TournoiException;
+import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 
 @Service
@@ -15,6 +19,10 @@ public class MatchService {
 
 	@Autowired
 	private MatchRepository matchRepo;
+	@Autowired
+	private ResultatService resultatService;
+	@Autowired
+	private Validator validator;
 	
 	public List<Match> getAll(){
 		return matchRepo.findAll();
@@ -51,18 +59,24 @@ public class MatchService {
 		matchRepo.delete(tournoiEnBase);
 	}
 	
-	public void deleteById(Long id) {
-		matchRepo.deleteById(id);
+	public void delete(Long id) {
+		for(Resultat r : this.getById(id).getResultats()) {
+			resultatService.delete(r);
+		}
+		delete(this.getById(id));
 	}
 
 	private void checkData(Match m) {
-		if(m==null) {
-			throw new MatchException("pas de match renseigne");
+		if (!validator.validate(m).isEmpty()) {
+			throw new UtilisateurException();
 		}
-		
-		if (m.getJournee() == null || m.getInscriptions().isEmpty()) {
-			throw new MatchException("donnees incorrectes");
-		}
+//		if(m==null) {
+//			throw new MatchException("pas de match renseigne");
+//		}
+//		
+//		if (m.getJournee() == null || m.getInscriptions().isEmpty()) {
+//			throw new MatchException("donnees incorrectes");
+//		}
 	}
 	
 	public boolean exist (Long id) {

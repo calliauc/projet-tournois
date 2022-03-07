@@ -16,12 +16,12 @@ public class InscriptionKey implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "joueur_inscription_id", foreignKey = @ForeignKey(name = "joueur_inscription__id_fk"))
 	@JsonView({ Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
-			Views.TournoiWithInscriptions.class, Views.UserWithTournois.class })
+			Views.TournoiWithInscriptions.class, Views.UserWithTournois.class,Views.Match.class})
 	private Utilisateur joueur;
 	@ManyToOne
 	@JoinColumn(name = "tournoi_inscription_id", foreignKey = @ForeignKey(name = "tournoi_inscription__id_fk"))
 	@JsonView({ Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
-			Views.UserWithTournois.class, Views.UserWithIncriptions.class })
+			Views.UserWithTournois.class, Views.UserWithIncriptions.class,Views.MatchWithIncriptions.class })
 	private Tournoi tournoi;
 
 	public InscriptionKey() {

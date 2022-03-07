@@ -3,7 +3,6 @@ package projet.sopra.pjt_tournois_e_sport_boot.restController;
 import java.util.List;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -34,30 +33,33 @@ public class MatchRestController {
 	
 	@Autowired 
 	private MatchService matchService;
+
 	
 	//CRUD
 	
 	
 	@GetMapping("")
-	@JsonView(Views.MatchWithJourneeAndResultat.class)
+	@JsonView(Views.MatchWithIncriptions.class)
 	public List<Match> getAllWithInscriptions(){
 		return matchService.getAll();
 	}
 	
 	@GetMapping("/{id}")
-	@JsonView(Views.MatchWithJourneeAndResultat.class)
+	@JsonView(Views.Match.class)
 	public Match getById(@PathVariable Long id) {
 		return matchService.getById(id);
 	}
 	
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
+	@JsonView(Views.Match.class)
 	public Match create(@Valid @RequestBody Match match, BindingResult br) {
 		return save(match,br);
 	}
 	
 	//TODO probleme validation
 	@PutMapping("/{id}")
+	@JsonView(Views.Match.class)
 	public Match update(@Valid @RequestBody Match match, BindingResult br, @PathVariable Long id) {
 		if(!matchService.exist(id)) {
 			throw new MatchException();
@@ -72,7 +74,7 @@ public class MatchRestController {
 		if(!matchService.exist(id)) {
 			throw new MatchException();
 		}
-		matchService.deleteById(id);
+		matchService.delete(id);
 	}
 	
 	//METHODS

@@ -10,7 +10,10 @@ public class Views {
 		
 	}
 	
-	public static class MatchWithJourneeAndResultat{
+	public static class Match{
+		
+	}
+	public static class MatchWithIncriptions extends Match{
 		
 	}
 	
