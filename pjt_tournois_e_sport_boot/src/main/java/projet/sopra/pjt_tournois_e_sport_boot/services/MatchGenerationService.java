@@ -39,6 +39,7 @@ public class MatchGenerationService {
 			Journee jour = new Journee();
 			jour.setTournoi(ligue);
 			jour.setEtape(Etape.Ligue);
+			jour.setNumero(i+1);
 			journeeRepo.save(jour);
 			Set<Match> matchsJournee = new HashSet<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
+import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.ConsoleService;
@@ -31,7 +32,6 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 @RequestMapping("api/utilisateur")
 public class UtilisateurRestController {
 
-	// To Do : ajouter @Valid
 	@Autowired
 	UtilisateurService uService;
 
@@ -72,6 +72,57 @@ public class UtilisateurRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		uService.delete(id);
+	}
+
+	// Requete pour query spéciales:
+	@GetMapping("/username_{username}")
+	@JsonView(Views.Common.class)
+	public Utilisateur getByUsername(@PathVariable String username) {
+		return uService.getByUsername(username);
+	}
+
+	@GetMapping("/like_{username}")
+	@JsonView(Views.Common.class)
+	public List<Utilisateur> getByUsernameLike(@PathVariable String username) {
+		return uService.getByUsernameLike(username);
+	}
+
+//	@GetMapping("/{username}")
+//	@JsonView(Views.Common.class)
+//	public List<Utilisateur> getByUsernameStartingWith(@PathVariable String username) {
+//		return uService.getByUsernameStartingWith(username);
+//	}
+//
+//	@GetMapping("/{username}")
+//	@JsonView(Views.Common.class)
+//	public List<Utilisateur> getByUsernameContaining(@PathVariable String username) {
+//		return uService.getByUsernameStartingWith(username);
+//	}
+//
+//	@GetMapping("/{id}/{username}")
+//	@JsonView(Views.Common.class)
+//	public Utilisateur getByIdAndUsername(@PathVariable Long id, @PathVariable String username) {
+//		return uService.getByIdCompteAndUsername(id, username);
+//	}
+
+	// Requete pour Collections
+
+	@GetMapping("/inscriptions_{key}")
+	@JsonView(Views.UserWithIncriptions.class)
+	public Utilisateur getUtilisateurWithIncriptions(@PathVariable InscriptionKey key) {
+		return uService.getUtilisateurWithInscriptions(key);
+	}
+
+	@GetMapping("/tournoi_{idTournoi}")
+	@JsonView(Views.UserWithTournois.class)
+	public Utilisateur getOrganisateurWithTournois(@PathVariable Long idTournoi) {
+		return uService.getOrganisateurWithTournois(idTournoi);
+	}
+
+	@GetMapping("/roles_{username}")
+	@JsonView(Views.Common.class)
+	public Utilisateur getByUsernameWithRoles(@PathVariable String username) {
+		return uService.getByUsernameWithRoles(username);
 	}
 
 	// Methods
