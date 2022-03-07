@@ -20,6 +20,7 @@ public interface JourneeRepository extends JpaRepository<Journee, Long>{
 //	List<Journee> findByDateFinJournee(LocalDateTime DateFin);
 //	
 	
+	List<Journee> findByTournoiAndNumero(Tournoi tournoi, int numero);
 	
 
 }
