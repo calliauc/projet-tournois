@@ -20,11 +20,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SequenceGenerator(name = "seqTournoi", sequenceName = "seq_tournoi", initialValue = 100, allocationSize = 1)
+
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property ="type")
+@JsonSubTypes(
+{
+    @Type(value = Ligue.class, name = "ligue"),
+    @Type(value = Championnat.class, name = "championnat")
+})
 public abstract class Tournoi {
 
 	//// TO-DO annotations @JsonView
@@ -46,11 +57,11 @@ public abstract class Tournoi {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tournoi_statut_temps")
 	@JsonView(Views.TournoiWithInscriptions.class)
-	private StatutTemps statutTemps;
+	protected StatutTemps statutTemps;
 	@Enumerated(EnumType.STRING)
-	@Column(name = "tournoi_statut_temps")
+	@Column(name = "tournoi_statut_inscriptions")
 	@JsonView(Views.TournoiWithInscriptions.class)
-	private StatutInscriptions statutInscriptions;
+	protected StatutInscriptions statutInscriptions;
 	@Column(name = "tournoi_jeu", length = 50, nullable = false)
 	@JsonView(Views.TournoiWithInscriptions.class)
 	protected String jeu;
@@ -85,8 +96,8 @@ public abstract class Tournoi {
 		this.dateDeDebut = dateDeDebut;
 		this.jeu = jeu;
 		this.listeInscriptions = listeInscriptions;
-		this.statutInscriptions = StatutInscriptions.Inscription_En_Cours;
-		this.statutTemps = StatutTemps.A_venir;
+//		this.statutInscriptions = StatutInscriptions.Inscription_En_Cours;
+//		this.statutTemps = StatutTemps.A_venir;
 	}
 
 	/// GETTERS
