@@ -53,7 +53,7 @@ public abstract class Tournoi {
 	protected LocalDate dateDeCreation = LocalDate.now();
 	@Column(name = "tournoi_date_debut")
 	@JsonView(Views.TournoiWithInscriptions.class)
-	protected LocalDate dateDeDebut;
+	protected LocalDate dateDeDebut = LocalDate.now();
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tournoi_statut_temps")
 	@JsonView(Views.TournoiWithInscriptions.class)
