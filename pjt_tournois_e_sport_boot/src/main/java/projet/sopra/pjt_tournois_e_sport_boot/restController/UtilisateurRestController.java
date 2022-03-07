@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
-import projet.sopra.pjt_tournois_e_sport_boot.services.ConsoleService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 
 @RestController
@@ -34,6 +36,10 @@ public class UtilisateurRestController {
 
 	@Autowired
 	UtilisateurService uService;
+	@Autowired
+	TournoiService tournoiService;
+	@Autowired
+	private InscriptionService inscriptionService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UtilisateurRestController.class);
 
@@ -107,10 +113,13 @@ public class UtilisateurRestController {
 
 	// Requete pour Collections
 
-	@GetMapping("/inscriptions_{key}")
+	@GetMapping("/inscriptions_{idJoueur}")
 	@JsonView(Views.UserWithIncriptions.class)
-	public Utilisateur getUtilisateurWithIncriptions(@PathVariable InscriptionKey key) {
-		return uService.getUtilisateurWithInscriptions(key);
+	public Utilisateur getUtilisateurWithIncriptions(@PathVariable Long idJoueur) {
+//		LOGGER.info("idTournoi="+idTournoi+" idJoueur="+idJoueur);
+//		Inscription i = inscriptionService.getById(new InscriptionKey(uService.getById(idJoueur),tournoiService.getById(idTournoi)));
+//		LOGGER.info("InscriptionKey="+i);
+		return uService.getUtilisateurWithInscriptions(idJoueur);
 	}
 
 	@GetMapping("/tournoi_{idTournoi}")

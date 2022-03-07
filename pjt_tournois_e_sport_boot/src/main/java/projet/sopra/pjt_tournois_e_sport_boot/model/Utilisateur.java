@@ -41,7 +41,7 @@ public class Utilisateur implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUtilisateur")
-	@JsonView({Views.Common.class,Views.InscriptionWithId.class,Views.ResultatWithInscriptionAndMatch.class, Views.TournoiWithInscriptions.class})
+	@JsonView({Views.Common.class,Views.InscriptionWithId.class,Views.ResultatWithInscriptionAndMatch.class, Views.TournoiWithInscriptions.class,Views.UserWithTournois.class, Views.UserWithIncriptions.class})
 	private Long id;
 
 	@Column(name = "username", nullable = false)
