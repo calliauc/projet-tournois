@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-tournoi',
   templateUrl: './tournoi.component.html',
   styleUrls: ['./tournoi.component.css'],
-  providers: [{ useClass: TournoiService, provide: TournoiService }],
 })
 export class TournoiComponent implements OnInit {
   tournoisObservable!: Observable<Tournoi[]>;

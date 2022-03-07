@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InscriptionComponent } from './component/inscription/inscription.component';
 import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
+import { EditTournoiComponent } from './component/tournoi-edit/tournoi-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AccueilComponent } from './component/accueil/accueil.component';
     InscriptionComponent,
     LoginComponent,
     AccueilComponent,
+    EditTournoiComponent,
   ],
   imports: [
     BrowserModule,
