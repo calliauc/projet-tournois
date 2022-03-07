@@ -70,22 +70,22 @@ public class SetClassementTournoiService {
 		inscriptionRepo.save(j2EnBase);
 	}
 
-	/// VERSION SANS CHECKER LE SCORE DIFF
-
-	public void SetClassementFacile(Tournoi tournoi) {
-		LinkedList<Inscription> participants = new LinkedList<Inscription>(tournoi.getListeInscriptions());
-		Collections.sort(participants, Inscription.ComparatorScore);
-		for (int i = 0; i < participants.size(); i++) {
-			if (i > 0 && (participants.get(i).getScore() == participants.get(i).getScore())) {
-				participants.get(i).setPosition(i - 1);
-			}
-			else {
-				participants.get(i).setPosition(i);
-			}
-			inscriptionRepo.save(participants.get(i));
-		}
-	}
-	
+//	/// VERSION SANS CHECKER LE SCORE DIFF
+//
+//	public void SetClassementFacile(Tournoi tournoi) {
+//		LinkedList<Inscription> participants = new LinkedList<Inscription>(tournoi.getListeInscriptions());
+//		Collections.sort(participants, Inscription.ComparatorScore);
+//		for (int i = 0; i < participants.size(); i++) {
+//			if (i > 0 && (participants.get(i).getScore() == participants.get(i).getScore())) {
+//				participants.get(i).setPosition(i - 1);
+//			}
+//			else {
+//				participants.get(i).setPosition(i);
+//			}
+//			inscriptionRepo.save(participants.get(i));
+//		}
+//	}
+//	
 	/// VERSION CHECKER LE SCORE DIFF
 	
 	public void SetClassementPasFacile(Tournoi tournoi) {

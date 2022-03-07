@@ -17,8 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.FutureOrPresent;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -43,11 +42,13 @@ public class Journee {
 	@OneToMany(mappedBy = "journee")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private Set<Match> matchsAJouerPourJournee;
-	@FutureOrPresent
+//	@FutureOrPresent
+	@Transient
 	@Column(name = "journee_date_debut")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private LocalDateTime dateDebutJournee;
-	@Future
+//	@Future
+	@Transient
 	@Column(name = "journee_date_fin")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private LocalDateTime dateFinJournee;
@@ -55,19 +56,27 @@ public class Journee {
 	@Column(name = "journee_etape")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private Etape etape;
-
+	
+	/// attribut pour connaitre l'ordre des journées d'une ligue/poule sans passer par les dates 
+	@Column(name="journee_numero")
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
+	private int numero; 
+	
+	
+	
 	/// CONSTRUCTOR
 
 	public Journee() {
 
 	}
 
-	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape) {
+	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape, int numero) {
 		super();
 		this.tournoi = tournoi;
 		this.dateDebutJournee = dateDebutJournee;
 		this.dateFinJournee = dateFinJournee;
 		this.etape = etape;
+		this.numero = numero; 
 	}
 
 	/// GETTERS
@@ -94,6 +103,10 @@ public class Journee {
 
 	public Etape getEtape() {
 		return etape;
+	}
+	
+	public int getNumero() {
+		return numero;
 	}
 
 	/// SETTERS
@@ -122,7 +135,13 @@ public class Journee {
 		this.etape = etape;
 	}
 
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+	
 	/// METHODS
+
+	
 
 	@Override
 	public int hashCode() {
