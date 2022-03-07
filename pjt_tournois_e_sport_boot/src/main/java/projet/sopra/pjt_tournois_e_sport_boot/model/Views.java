@@ -30,7 +30,7 @@ public class Views {
 		
 	}
 	
-	public static class UserWithTournois{
+	public static class UserWithTournois extends Common {
 		
 	}
 	
