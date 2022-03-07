@@ -13,8 +13,10 @@ import projet.sopra.pjt_tournois_e_sport_boot.exceptions.JourneeException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
+import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 
 @Service
 public class JourneeService {
@@ -28,13 +30,17 @@ public class JourneeService {
 	private InscriptionRepository inscriptionRepo;
 	
 	@Autowired
-	private MatchService matchService;
+	private MatchRepository matchRepo;
 	
 	@Autowired
 	private Validator validator;
 	
 	public List<Journee> getAll() {
 		return journeeRepo.findAll(); 
+	}
+	
+	public List<Journee> getWithTournoiOrderByNumero(Tournoi tournoi){
+		return journeeRepo.getJourneesOrderByNumero(tournoi);
 	}
 	
 	public Journee getById(Long id) {
@@ -68,7 +74,7 @@ public class JourneeService {
 	public void delete(Journee j) {
 		for (Match m : j.getMatchsAJouerPourJournee()) {
 			
-			matchService.delete(m);
+			matchRepo.delete(m);
 		}
 		journeeRepo.delete(j);
 	}
@@ -82,7 +88,7 @@ public class JourneeService {
 					inscriptionEnBase.setProchainMatch(null);
 				}
 			}
-			matchService.delete(m);
+			matchRepo.delete(m);
 			
 		}
 		journeeRepo.delete(j);

@@ -2,6 +2,7 @@ package projet.sopra.pjt_tournois_e_sport_boot.services;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Ligue;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
@@ -25,6 +27,9 @@ public class MatchGenerationService {
 	private MatchRepository matchRepo;
 	@Autowired
 	private JourneeRepository journeeRepo;
+	
+	@Autowired
+	private MatchService matchService;
 
 	public void generateJourneesLigueDuels(Ligue ligue) {
 
@@ -33,6 +38,7 @@ public class MatchGenerationService {
 
 		Set<Journee> journees = new HashSet<Journee>();
 		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(ligue.getListeInscriptions());
+		System.out.println("inscriptions : " + inscriptionsLigue.toString());
 		int isPair = (ligue.getListeInscriptions().size() + 1) % 2;
 
 		for (int i = 0; i < inscriptionsLigue.size() - isPair; i++) {
@@ -43,10 +49,15 @@ public class MatchGenerationService {
 			journeeRepo.save(jour);
 			Set<Match> matchsJournee = new HashSet<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {
+				System.out.println("Match : "+j);
 				Match m = new Match();
 				m.setJournee(jour);
 				m.getInscriptions().add(inscriptionsLigue.get(j));
-				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() / 2 - (j + 1)));
+				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
+				for (Inscription x : m.getInscriptions()) {
+					
+					System.out.println(x.getId().getJoueur().getId());
+				}
 				matchsJournee.add(m);
 				matchRepo.save(m);
 			}

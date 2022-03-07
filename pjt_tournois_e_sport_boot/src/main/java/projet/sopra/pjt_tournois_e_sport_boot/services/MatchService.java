@@ -1,5 +1,6 @@
 package projet.sopra.pjt_tournois_e_sport_boot.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,31 +9,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.MatchException;
-import projet.sopra.pjt_tournois_e_sport_boot.exceptions.TournoiException;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
+import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
+import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.ResultatRepository;
+import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
 
 @Service
 public class MatchService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MatchService.class);
-	
+
 	@Autowired
 	private MatchRepository matchRepo;
-	
+
 	@Autowired
-	private ResultatRepository resultatRepo; 
-	
-	public List<Match> getAll(){
+	private TournoiRepository tournoiRepo;
+
+	@Autowired
+	private JourneeRepository journeeRepo;
+
+	@Autowired
+	private InscriptionRepository inscriptionRepo;
+
+	@Autowired
+	private ResultatRepository resultatRepo;
+
+	public List<Match> getAll() {
 		return matchRepo.findAll();
 	}
-	
+
 //	public List<Match> findByDateWithJournees(LocalDateTime dateDebut){
 //		return matchRepo.findByDateWithJournees(dateDebut);
 //	}
-	
+
 	public Match getById(Long id) {
 		return matchRepo.findById(id).orElseThrow(() -> {
 			throw new MatchException("match inconnu");
@@ -50,7 +65,7 @@ public class MatchService {
 			return matchRepo.save(matchEnBase);
 		}
 	}
-	
+
 	public void delete(Match m) {
 //		checkData(m);
 //		if (m.getId() == null) {
@@ -65,22 +80,49 @@ public class MatchService {
 		}
 		matchRepo.delete(matchEnBase);
 	}
-	
+
 	public void deleteById(Long id) {
 		matchRepo.deleteById(id);
 	}
 
 	private void checkData(Match m) {
-		if(m==null) {
+		if (m == null) {
 			throw new MatchException("pas de match renseigne");
 		}
-		
+
 		if (m.getJournee() == null || m.getInscriptions().isEmpty()) {
 			throw new MatchException("donnees incorrectes");
 		}
 	}
-	
-	public boolean exist (Long id) {
+
+	public boolean exist(Long id) {
 		return matchRepo.existsById(id);
 	}
+
+	public void setProchainMatch(Inscription inscription) {
+		boolean isProchainMatchFound = false;
+		int numProchaineJournee = resultatRepo.findByParticipant(inscription).size();
+		while (isProchainMatchFound != true) {
+			Journee jProchainMatch = journeeRepo.findByNumeroAndTournoi(numProchaineJournee + 1,
+					inscription.getId().getTournoi());
+			for (Match m : jProchainMatch.getMatchsAJouerPourJournee()) {
+				if (m.getInscriptions().contains(inscription)) {
+					inscription.setProchainMatch(m);
+					inscriptionRepo.save(inscription);
+					isProchainMatchFound = true;
+					break;
+				}
+			}
+			numProchaineJournee++;
+
+		}
+
+	}
+
+	public void setAllProchainMatch(Long idTournoi) {
+		for (Inscription i : tournoiRepo.getById(idTournoi).getListeInscriptions()) {
+			setProchainMatch(i);
+		}
+	}
+
 }
