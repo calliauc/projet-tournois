@@ -3,7 +3,6 @@ package projet.sopra.pjt_tournois_e_sport_boot.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,9 +18,9 @@ public class Championnat extends Tournoi {
 
 	/// ATTRIBUTES
 	@OneToMany(mappedBy = "tournoi")
-	private List<Journee> JourneesAJouerPoules;
+	private List<Journee> JourneesAJouerPoules = new ArrayList<Journee>();
 	@OneToMany(mappedBy = "id")
-	private List<Journee> JourneesAJouerFinales = new LinkedList<Journee>();
+	private List<Journee> JourneesAJouerFinales = new ArrayList<Journee>();
 	@Transient
 	private List<Poule> poules = new ArrayList<Poule>();
 	@Column(name = "prochaine_etape_finale")
@@ -175,43 +174,22 @@ public class Championnat extends Tournoi {
 
 	/// GESTION PHASES FINALES
 
-	private void generatePhaseFinale() {
-		initFinale();
-		initDemi();
+	public void generatePhaseFinale() {
+		initEtape(Etape.Finale);
+		initEtape(Etape.Demi);
 		if (this.nbPoules >= 4) {
-			initQuart();
+			initEtape(Etape.Quart);
 			if (this.nbPoules >= 8) {
-				initHuitieme();
+				initEtape(Etape.Huitieme);
 			}
 		}
 	}
 
-	private void initHuitieme() {
-		Journee j = new Journee(this, null, null, Etape.Huitieme);
-		for (int i = 0; i < 8; i++) {
+	private void initEtape(Etape etape) {
+		Journee j = new Journee(this, null, null, etape);
+		for (int i = 0; i < etape.getNbMatches(); i++) {
 			j.getMatchsAJouerPourJournee().add(new Match());
 		}
-		this.JourneesAJouerFinales.add(0, j);
-	}
-
-	private void initQuart() {
-		Journee j = new Journee(this, null, null, Etape.Quart);
-		for (int i = 0; i < 4; i++) {
-			j.getMatchsAJouerPourJournee().add(new Match());
-		}
-		this.JourneesAJouerFinales.add(0, j);
-	}
-
-	private void initDemi() {
-		Journee j = new Journee(this, null, null, Etape.Demi);
-		j.getMatchsAJouerPourJournee().add(new Match());
-		j.getMatchsAJouerPourJournee().add(new Match());
-		this.JourneesAJouerFinales.add(0, j);
-	}
-
-	private void initFinale() {
-		Journee j = new Journee(this, null, null, Etape.Finale);
-		j.getMatchsAJouerPourJournee().add(new Match());
 		this.JourneesAJouerFinales.add(0, j);
 	}
 

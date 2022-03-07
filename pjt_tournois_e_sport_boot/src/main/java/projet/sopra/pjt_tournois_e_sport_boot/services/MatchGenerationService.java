@@ -75,7 +75,7 @@ public class MatchGenerationService {
 			topsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
 		}
 
-		// Repartition des top 1 et top 2
+		// Repartition des top 1 et top 2 des poules
 		for (int i = 0; i < champ.getNbPoules(); i++) {
 			List<Inscription> inscriptionsMatch = new ArrayList<Inscription>();
 			inscriptionsMatch.add(topsOfPoules.get(i).get(0));

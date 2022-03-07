@@ -4,9 +4,13 @@ public enum Etape {
 	
 	Finale(1), Demi(2), Quart(4), Huitieme(8), Poule(0), Ligue(0);
 
-	Etape(int i) {
-		// TODO Auto-generated constructor stub
+	private int nbMatches;
+	
+	Etape(int nbMatches) {
+		this.nbMatches = nbMatches;
 	} 
 
-	
+	public int getNbMatches() {
+		return this.nbMatches;
+	}
 }

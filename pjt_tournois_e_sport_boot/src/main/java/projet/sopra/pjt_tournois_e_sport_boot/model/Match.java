@@ -19,8 +19,6 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import projet.sopra.pjt_tournois_e_sport_boot.model.Views.Common;
-
 @Entity
 @Table(name="Match")
 @SequenceGenerator(name="seqMatch", sequenceName = "seq_match",initialValue=100,allocationSize = 1)
