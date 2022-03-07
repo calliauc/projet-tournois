@@ -30,7 +30,7 @@ public class Match {
 	@Id
 	@Column(name="match_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMatch")
-	@JsonView(Views.Common.class)
+	@JsonView({Views.MatchWithJourneeAndResultat.class, Views.ResultatWithInscriptionAndMatch.class,Views.JourneeWithTournoiAndMatch.class})
 	private Long id;
 	
 	@OneToMany(mappedBy = "prochainMatch")
@@ -39,10 +39,11 @@ public class Match {
 	
 	@ManyToOne
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
-	@JsonView(Views.Common.class)
+	@JsonView(Views.MatchWithJourneeAndResultat.class)
 	private Journee journee;
 	
 	@OneToMany(mappedBy = "match")
+	@JsonView(Views.MatchWithJourneeAndResultat.class)
 	private List<Resultat> resultats;
 	
 	/// CONSTRUCTOR

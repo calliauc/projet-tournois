@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "journee")
 @SequenceGenerator(name = "seqJournee", sequenceName = "seq_journee", initialValue = 100, allocationSize = 1)
@@ -30,22 +32,28 @@ public class Journee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqJournee")
+	@JsonView({Views.JourneeWithTournoiAndMatch.class,Views.MatchWithJourneeAndResultat.class})
 	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "journee_tournoi", foreignKey = @ForeignKey(name = "journee_tournoi_fk"))
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private Tournoi tournoi;
 
 	@OneToMany(mappedBy = "journee")
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private Set<Match> matchsAJouerPourJournee;
 	@FutureOrPresent
 	@Column(name = "journee_date_debut")
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private LocalDateTime dateDebutJournee;
 	@Future
 	@Column(name = "journee_date_fin")
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private LocalDateTime dateFinJournee;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "journee_etape")
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private Etape etape;
 
 	/// CONSTRUCTOR

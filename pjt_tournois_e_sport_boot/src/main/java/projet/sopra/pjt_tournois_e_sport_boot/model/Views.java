@@ -5,7 +5,25 @@ public class Views {
 	public static class Common {
 
 	}
-
 	
+	public static class InscriptionWithId{
+		
+	}
+	
+	public static class MatchWithJourneeAndResultat{
+		
+	}
+	
+	public static class ResultatWithInscriptionAndMatch {
+		
+	}
+	
+	public static class TournoiWithInscriptions{
+		
+	}
+	
+	public static class JourneeWithTournoiAndMatch{
+		
+	}
 	
 }

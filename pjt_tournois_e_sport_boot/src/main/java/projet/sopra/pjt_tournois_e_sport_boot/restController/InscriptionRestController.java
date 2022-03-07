@@ -27,57 +27,90 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 
 @RestController
 @RequestMapping("api/inscription")
 public class InscriptionRestController {
 	//TO DO :
-// getById composé --> id joueur et tournoi en parametre
-//	Meme chose delete
-//	Meme chose update
-//Validation
+//  getById composé
+//  delete
+//	update
+//  create
 	
 	@Autowired
 	private InscriptionService inscriptionService;
+	@Autowired
+	private UtilisateurService utilisateurService;
+	@Autowired
+	private TournoiService tournoiService;
 	
 	//CRUD
 	
 	@GetMapping("")
-	@JsonView(Views.Common.class)
+	@JsonView(Views.InscriptionWithId.class)
 	public List<Inscription> getAll() {
 		return inscriptionService.getAll();
 	}
 	
-	@GetMapping("/avecId")
+	@GetMapping("/avecDto")
 	public List<InscriptionDto> getAllWithKey(){
 		return inscriptionListToInscriptionDTOList(inscriptionService.getAll());
 	}
 	
-	@GetMapping("/{id}")
-	public Inscription getById(@PathVariable InscriptionKey id) {
-		return inscriptionService.getById(id);
+	@GetMapping("/{idJoueur}&{idTournoi}")
+	@JsonView(Views.InscriptionWithId.class)
+	public Inscription getById(@PathVariable Long idJoueur, @PathVariable Long idTournoi) {
+		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idTournoi));
+		return inscriptionService.getById(key);
 	}
 	
+	//TO DO
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
 	public Inscription create(@Valid @RequestBody Inscription inscription, BindingResult br) {
 		return save(inscription,br);
 	}
 	
-	@PutMapping("/{id}")
-	public Inscription update(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable InscriptionKey id) {
-		if(!inscriptionService.exist(id)) {
+	// TO DO (exception cause tournoi classe abstraite)
+	@PutMapping("/{idJoueur}&{idTournoi}")
+	public Inscription update(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idTournoi) {
+		if(!inscriptionService.exist(inscription.getId())) {
+			throw new InscriptionException(" \n Id pas normal " + inscription.getId().toString());
+		}
+		return save(inscription,br);
+	}
+	
+	/*
+	@PutMapping("/ligue/{idJoueur}&{idLigue}")
+	public Inscription updateOfLigue(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idLigue) {
+		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idLigue));
+		if(!inscriptionService.exist(key)) {
 			throw new InscriptionException();
 		}
 		return save(inscription,br);
 	}
-	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	@DeleteMapping("/{id}")
-	public void delete(@PathVariable InscriptionKey id) {
-		if(!inscriptionService.exist(id)) {
+	
+	@PutMapping("/champ/{idJoueur}&{idChampionnat}")
+	public Inscription updateOfChampionnat(@Valid @RequestBody Inscription inscription, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idChampionnat) {
+		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idChampionnat));
+		if(!inscriptionService.exist(key)) {
 			throw new InscriptionException();
 		}
-		inscriptionService.deleteById(id);
+		return save(inscription,br);
+	} 
+	*/
+	
+	// TO DO (conflit avec table Resultat)
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	@DeleteMapping("/{idJoueur}&{idTournoi}")
+	public void delete(@PathVariable Long idJoueur, @PathVariable Long idTournoi) {
+		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idTournoi));
+		if(!inscriptionService.exist(key)) {
+			throw new InscriptionException();
+		}
+		inscriptionService.deleteById(key);
 	}
 	
 	//METHODS
@@ -104,7 +137,7 @@ public class InscriptionRestController {
 	
 	// SPECIAL QUERIES
 	
-	@GetMapping("/{score1}/{score2}")
+	@GetMapping("/score/{score1}&{score2}")
 	public List<InscriptionDto> getAllByScore(@PathVariable int score1, @PathVariable int score2){
 		return inscriptionListToInscriptionDTOList(inscriptionService.getAllByScoreBetween(score1, score2));
 	}

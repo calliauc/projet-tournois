@@ -8,3 +8,4 @@ bin/
 .projet
 .settings/
 target/
+pjt_tournois_e_sport_boot/src/main/resources/application.yml
