@@ -70,6 +70,14 @@ public class Journee {
 
 	}
 
+	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape) {
+		super();
+		this.tournoi = tournoi;
+		this.dateDebutJournee = dateDebutJournee;
+		this.dateFinJournee = dateFinJournee;
+		this.etape = etape;
+	}
+	
 	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape, int numero) {
 		super();
 		this.tournoi = tournoi;

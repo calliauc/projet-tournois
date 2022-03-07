@@ -1,7 +1,9 @@
 package projet.sopra.pjt_tournois_e_sport_boot.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,6 @@ public class MatchGenerationService {
 
 		////// TO DO : INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
 
-
 		Set<Journee> journees = new HashSet<Journee>();
 		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(ligue.getListeInscriptions());
 		int isPair = (ligue.getListeInscriptions().size() + 1) % 2;
@@ -44,7 +45,7 @@ public class MatchGenerationService {
 			Journee jour = new Journee();
 			jour.setTournoi(ligue);
 			jour.setEtape(Etape.Ligue);
-			jour.setNumero(i+1);
+			jour.setNumero(i + 1);
 			journeeRepo.save(jour);
 			Set<Match> matchsJournee = new HashSet<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {
@@ -66,12 +67,19 @@ public class MatchGenerationService {
 		ligue.setJourneesAJouer(journees);
 		tournoiRepo.save(ligue);
 	}
-	
-	
-	public void generateJourneesChampionatFinales(Championnat champ) {
+
+	public void initChampionatFinales(Championnat champ) {
+		Journee jour = new Journee(champ, null, null, champ.getProchaineEtape());
+
+		// Creation d'une liste avec les 2 premiers de chaque poule
+		List<List<Inscription>> topInscriptionsOfPoules = new ArrayList<List<Inscription>>();
 		for (Poule poule : champ.getPoules()) {
-			inscriptionRepo.getClassementLigue(poule.getIdTournoi());
-			champ.get
+			topInscriptionsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
+		}
+
+		// Repartition des top 1 et top 2 de chaque poule dans leur premier match de phase finale
+		for (int i = 0; i < champ.getNbPoules(); i++) {
+			
 		}
 	}
 

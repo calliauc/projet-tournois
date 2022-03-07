@@ -24,7 +24,7 @@ public class Championnat extends Tournoi {
 	private Set<Journee> JourneesAJouerFinales;
 	@Transient
 	private Set<Poule> poules = new HashSet<Poule>();
-	@Column(name="prochaine_etape_finale")
+	@Column(name = "prochaine_etape_finale")
 	private Etape prochaineEtape;
 
 	private int nbPoules = 0;
@@ -57,6 +57,13 @@ public class Championnat extends Tournoi {
 		return poules;
 	}
 
+	public Etape getProchaineEtape() {
+		return prochaineEtape;
+	}
+
+	public int getNbPoules() {
+		return nbPoules;
+	}
 	/// SETTERS
 
 	public void setJourneesAJouerPoules(Set<Journee> journeesAJouerPoules) {
@@ -69,6 +76,14 @@ public class Championnat extends Tournoi {
 
 	public void setPoules(Set<Poule> poules) {
 		this.poules = poules;
+	}
+
+	public void setProchaineEtape(Etape prochaineEtape) {
+		this.prochaineEtape = prochaineEtape;
+	}
+
+	public void setNbPoules(int nbPoules) {
+		this.nbPoules = nbPoules;
 	}
 
 	/// GESTION POULES
@@ -163,16 +178,14 @@ public class Championnat extends Tournoi {
 
 	/// GESTION PHASES FINALES
 
-	
 	/*
-	 * TODO
-	 * - Démarrer les phases finales sur la bonne journée (huitième/quart/demi)
+	 * TODO - Démarrer les phases finales sur la bonne journée (huitième/quart/demi)
 	 * 
-	 * 			!!	La suite sera probablement déportée dans la classe journée  !!
+	 * !! La suite sera probablement déportée dans la classe journée !!
 	 * 
-	 * - Récupérer le premier et second de chaque poule et les répartir dans la première jouurnée de phase finale
-	 * - Créer les matches
-	 * - Récupérer les résultats (rest controller) et générer la journée suivante
+	 * - Récupérer le premier et second de chaque poule et les répartir dans la
+	 * première jouurnée de phase finale - Créer les matches - Récupérer les
+	 * résultats (rest controller) et générer la journée suivante
 	 */
-	
+
 }
