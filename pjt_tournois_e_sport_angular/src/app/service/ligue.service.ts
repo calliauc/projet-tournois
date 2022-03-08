@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Classement } from '../model/classement';
 import { Ligue } from '../model/ligue';
 
 @Injectable({
@@ -20,6 +21,10 @@ export class LigueService {
 
   get(id: number): Observable<Ligue> {
     return this.http.get<Ligue>(LigueService.URL + '/' + id);
+  }
+
+  getClassement(id: number): Observable<[]> {
+    return this.http.get<[]>(LigueService.URL + '/ligue_classement/' + id);
   }
 
   update(ligue: Ligue): Observable<Ligue> {

@@ -1,3 +1,4 @@
+import { Classement } from './classement';
 import { StatutInscriptions } from './statutInscriptions.enum';
 import { StatutTemps } from './statutTemps.enum';
 export abstract class Tournoi {
@@ -13,6 +14,7 @@ export abstract class Tournoi {
   protected _nbParticipantsParMatch: number | undefined;
   protected _nbParticipantsTotal: number | undefined;
   //protected _organisateur: Utilisateur | undefined;
+  protected _classement: Classement | undefined;
 
   constructor(
     type?: string,
@@ -213,4 +215,11 @@ export abstract class Tournoi {
   //public set organisateur(value: Utilisateur | undefined) {
   //  this._organisateur = value;
   //}
+
+  public get classement(): Classement | undefined {
+    return this._classement;
+  }
+  public set classement(value: Classement | undefined) {
+    this._classement = value;
+  }
 }

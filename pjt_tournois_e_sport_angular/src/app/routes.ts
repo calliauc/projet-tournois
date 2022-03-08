@@ -8,6 +8,7 @@ import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
 import { ResultatComponent } from './component/resultat/resultat.component';
 import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
+import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
 
 export const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -33,4 +34,6 @@ export const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
 
   { path: 'utilisateur', component: UtilisateurComponent },
+
+  { path: 'ligue/classement/:idTournoi', component: LigueClassementComponent },
 ];

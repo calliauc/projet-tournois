@@ -53,7 +53,12 @@
       </button>
     </td>
     <td>
-      <button class="btn btn-outline-success">classement</button>
+      <a
+        [routerLink]="['/ligue', 'classement', t.idTournoi]"
+        routerLinkActive="active"
+        class="btn btn-outline-success"
+        >classement</a
+      >
     </td>
   </tr>
 </table>
