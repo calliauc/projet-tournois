@@ -184,7 +184,9 @@ public class Championnat extends Tournoi {
 	private void initEtape(Etape etape) {
 		Journee j = new Journee(this, null, null, etape);
 		for (int i = 0; i < etape.getNbMatchs(); i++) {
-			j.getMatchsAJouerPourJournee().add(new Match());
+			Match m = new Match();
+			m.setJournee(j);
+			j.getMatchsAJouerPourJournee().add(m);
 		}
 		this.JourneesAJouerFinales.add(j);
 	}
