@@ -21,16 +21,4 @@ export class TournoiService {
   get(id: number): Observable<Tournoi> {
     return this.http.get<Tournoi>(TournoiService.URL + '/' + id);
   }
-
-  update(tournoi: Tournoi): Observable<Tournoi> {
-    return this.http.put<Tournoi>(
-      TournoiService.URL + '/' + tournoi.idTournoi,
-      tournoi
-    );
-  }
-
-  create(tournoi: Tournoi): Observable<Tournoi> {
-    const tournoiEnJson = { nom: tournoi.nom };
-    return this.http.post<Tournoi>(TournoiService.URL, tournoiEnJson);
-  }
 }
