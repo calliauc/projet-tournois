@@ -89,10 +89,11 @@ public class MatchGenerationService {
 
 	/// GESTION POULES
 
-	/*
+	/* @formatter:off
 	 * CREATION POULES S'il y avait un nombre infini de participation j'aurais
-	 * cherché un moyen d'automatiser mieux tout ça, mais pas la peine pour 8 poules
-	 * max
+	 * cherché un moyen d'automatiser mieux tout ça
+	 * mais pas la peine pour 8 poules max
+	 * @formatter:on
 	 */
 	public void splitInPoule(Championnat champ) {
 		int nb_players = champ.getListeInscriptions().size();
@@ -115,6 +116,7 @@ public class MatchGenerationService {
 		} else {
 			System.out.println("Trop de joueurs");
 		}
+		tournoiRepo.save(champ);
 	}
 
 	private void createTwoPoule(Championnat champ) {
@@ -201,8 +203,10 @@ public class MatchGenerationService {
 		for (int i = 0; i < etape.getNbMatchs(); i++) {
 			Match m = new Match();
 			m.setJournee(j);
+			matchRepo.save(m);
 			j.getMatchsAJouerPourJournee().add(m);
 		}
+		journeeRepo.save(j);
 		champ.getJourneesAJouerFinales().add(j);
 	}
 

@@ -22,6 +22,7 @@ public class Championnat extends Tournoi {
 	@OneToMany(mappedBy = "id")
 	private List<Journee> JourneesAJouerFinales = new ArrayList<Journee>();
 	@Transient
+//	@OneToMany(mappedBy = "id")
 	private List<Poule> poules = new ArrayList<Poule>();
 	@Column(name = "prochaine_etape_finale")
 	private Etape prochaineEtape;
@@ -81,8 +82,5 @@ public class Championnat extends Tournoi {
 //	public void setNbPoules(int nbPoules) {
 //		this.nbPoules = nbPoules;
 //	}
-
-	
-	
 
 }
