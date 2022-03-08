@@ -17,6 +17,7 @@ import { InscriptionComponent } from './component/inscription/inscription.compon
 import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilisateur.component';
 import { LigueEditComponent } from './component/tournoi/ligue-edit/ligue-edit.component';
 import { ChampionnatEditComponent } from './component/tournoi/championnat-edit/championnat-edit.component';
+import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ChampionnatEditComponent } from './component/tournoi/championnat-edit/c
     UtilisateurComponent,
     LigueEditComponent,
     ChampionnatEditComponent,
+    ResultatEditComponent,
   ],
   imports: [
     BrowserModule,
