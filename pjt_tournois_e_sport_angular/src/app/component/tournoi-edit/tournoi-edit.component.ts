@@ -1,3 +1,4 @@
+import { Ligue } from './../../model/ligue';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Tournoi } from '../../model/tournoi';
@@ -9,7 +10,7 @@ import { TournoiService } from '../../service/tournoi.service';
   styleUrls: ['./tournoi-edit.component.css'],
 })
 export class EditTournoiComponent implements OnInit {
-  tournoi: Tournoi = new Tournoi();
+  tournoi: Tournoi = new Ligue();
 
   constructor(
     private activatedRoute: ActivatedRoute,
