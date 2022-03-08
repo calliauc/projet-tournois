@@ -3,26 +3,36 @@
     <h3>Resultats</h3>
   </div>
   <div class="card-body">
-    <div>Rechercher un resultat avec son id :</div>
     <table class="table">
-      <p>
-        <input
-          class="form-control"
-          type="number"
-          id="idResultat"
-          name="idResultat"
-          [(ngModel)]="idResultat"
-        />
-      </p>
-      <button
-        type="button"
-        class="btn btn-primary"
-        (click)="getById(idResultat)"
-      >
-        Enregistrer
-      </button>
-      <br />
-      <br />
+      <tr>
+        <th colspan="2"><p>Rechercher un resultat avec son id</p></th>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            <input
+              class="form-control"
+              type="number"
+              id="idResultat"
+              name="idResultat"
+              [(ngModel)]="idResultat"
+            />
+          </p>
+        </td>
+        <td>
+          <p>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="getById(idResultat)"
+            >
+              Rechercher
+            </button>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <table class="table">
       <tr *ngIf="resultat.id">
         <th>id</th>
         <th>matchId</th>
