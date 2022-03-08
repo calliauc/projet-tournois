@@ -20,6 +20,7 @@ export class LigueEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.tournoi.type = 'ligue';
+    this.tournoi.nbParticipantsParMatch = 2;
     this.activatedRoute.params.subscribe((params) => {
       if (params['idTournoi']) {
         this.ligueService.get(params['idTournoi']).subscribe((result) => {

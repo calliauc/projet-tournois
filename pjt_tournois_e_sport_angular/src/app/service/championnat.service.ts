@@ -29,7 +29,15 @@ export class ChampionnatService {
   }
 
   create(tournoi: Championnat): Observable<Championnat> {
-    const championnatEnJson = { nom: tournoi.nom };
+    const championnatEnJson = {
+      type: tournoi.type,
+      nom: tournoi.nom,
+      dateDeDebut: tournoi.dateDeDebut,
+      jeu: tournoi.jeu,
+      nbParticipantsParMatch: tournoi.nbParticipantsParMatch,
+      nbParticipantsTotal: tournoi.nbParticipantsTotal,
+      /*       organisateur : ligue.organisateur,  */
+    };
     return this.http.post<Championnat>(
       ChampionnatService.URL + '/championnat',
       championnatEnJson

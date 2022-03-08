@@ -30,7 +30,16 @@ export class LigueService {
   }
 
   create(ligue: Ligue): Observable<Ligue> {
-    const tournoiEnJson = { type: ligue.type, nom: ligue.nom };
+    const tournoiEnJson = {
+      type: ligue.type,
+      nom: ligue.nom,
+      dateDeDebut: ligue.dateDeDebut,
+      jeu: ligue.jeu,
+      nbParticipantsParMatch: ligue.nbParticipantsParMatch,
+      nbParticipantsTotal: ligue.nbParticipantsTotal,
+      /*       organisateur : ligue.organisateur,  */
+      isMatchRetour: ligue.isMatchRetour,
+    };
 
     return this.http.post<Ligue>(LigueService.URL + '/ligue', tournoiEnJson);
   }

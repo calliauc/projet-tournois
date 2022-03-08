@@ -1,29 +1,49 @@
 <div>
   <div class="form-group">
-    <label>Creation de ligue</label>
-    <input class="form-control" [(ngModel)]="tournoi.type" readonly />
-    <label>idTournoi:</label>
+    <div>
+      <h3>Edition de ligue</h3>
+    </div>
+    <label>Id :</label>
     <input class="form-control" [(ngModel)]="tournoi.idTournoi" readonly />
   </div>
   <div class="form-group">
-    <label>nom:</label>
+    <label>Nom :</label>
     <input class="form-control" [(ngModel)]="tournoi.nom" />
   </div>
   <div class="form-group">
-    <label>dateDeCreation:</label>
-    <input
-      type="date"
-      class="form-control"
-      [(ngModel)]="tournoi.dateDeCreation"
-    />
-  </div>
-  <div class="form-group">
-    <label>dateDeDebut:</label>
+    <label>Date de début :</label>
     <input type="date" class="form-control" [(ngModel)]="tournoi.dateDeDebut" />
   </div>
   <div class="form-group">
-    <label>jeu:</label>
-    <input class="form-control" [(ngModel)]="tournoi.jeu" />
+    <label>Jeu :</label>
+    <select
+      class="form-select"
+      [(ngModel)]="tournoi.jeu"
+      aria-label="Default select example"
+    >
+      <option value="Mario Kart">Mario Kart</option>
+      <option value="Smash Bros">Smash Bros</option>
+      <option value="Rocket League">Rocket League</option>
+    </select>
+    <!--     <input class="form-control" [(ngModel)]="tournoi.jeu" /> -->
+  </div>
+  <div class="form-group">
+    <label>Nombre de participants :</label>
+    <input
+      type="number"
+      class="form-control"
+      [(ngModel)]="tournoi.nbParticipantsTotal"
+    />
+  </div>
+  <div class="form-group">
+    <label>Nombre de participants :</label>
+    <input
+      type="number"
+      value="2"
+      class="form-control"
+      [(ngModel)]="tournoi.nbParticipantsParMatch"
+      readonly
+    />
   </div>
   <div>
     <button (click)="save()" class="btn btn-outline-success">

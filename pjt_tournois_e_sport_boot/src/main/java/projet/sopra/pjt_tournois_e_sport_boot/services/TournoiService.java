@@ -92,6 +92,9 @@ public class TournoiService {
 		if (tournoi.getListeInscriptions().size() == tournoi.getNbParticipantsTotal()) {
 			tournoi.setStatutInscriptions(StatutInscriptions.Inscriptions_Terminées);
 		}
+		else if (tournoi.getListeInscriptions().size() < tournoi.getNbParticipantsTotal()) {
+			tournoi.setStatutInscriptions(StatutInscriptions.Inscription_En_Cours);
+		}
 		if (LocalDate.now().isAfter(tournoi.getDateDeDebut()) || LocalDate.now().isEqual(tournoi.getDateDeDebut())) {
 			tournoi.setStatutTemps(StatutTemps.En_cours);
 		}
