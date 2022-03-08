@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
@@ -17,6 +16,8 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 	Optional<Utilisateur> findById(Long id);
 
 	Optional<Utilisateur> findByUsername(String username);
+	
+	Optional<Utilisateur> findByMail(String mail);
 
 	List<Utilisateur> findByUsernameLike(String username);
 

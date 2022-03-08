@@ -12,17 +12,22 @@ import {
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
-  selector: 'app-inscription',
-  templateUrl: './inscription.component.html',
-  styleUrls: ['./inscription.component.css'],
+  selector: 'app-creation-compte',
+  templateUrl: './creation-compte.component.html',
+  styleUrls: ['./creation-compte.component.css'],
 })
-export class InscriptionComponent implements OnInit {
+export class CreationCompteComponent implements OnInit {
   form!: FormGroup;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
+      mail: new FormControl(
+        '',
+        [Validators.required, Validators.email],
+        this.checkMail()
+      ),
       login: new FormControl(
         '',
         [
@@ -57,6 +62,17 @@ export class InscriptionComponent implements OnInit {
       formGroup.controls['confirm'].value
       ? null
       : { checkNotEquals: true };
+  }
+
+  checkMail(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return this.authService.checkMail(control.value).pipe(
+        debounceTime(1000),
+        map((res: boolean) => {
+          return res ? { mailAlreadyUsed: true } : null;
+        })
+      );
+    };
   }
 
   checkLogin(): AsyncValidatorFn {
