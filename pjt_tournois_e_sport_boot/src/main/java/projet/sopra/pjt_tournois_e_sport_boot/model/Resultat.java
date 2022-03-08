@@ -14,6 +14,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -25,11 +26,13 @@ public class Resultat {
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqResultat")
 	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.Match.class,Views.InscriptionWithId.class})
+	@NotEmpty
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resultat_match_id", foreignKey = @ForeignKey(name="resultat_match_fk"))
 	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
+	@NotEmpty
 	//@OnDelete( action = OnDeleteAction.CASCADE)
 	private Match match;
 	
@@ -38,15 +41,18 @@ public class Resultat {
 			{@JoinColumn(name = "resultat_participant_id", foreignKey = @ForeignKey(name="resultat_participant_fk")),
 			@JoinColumn(name="resultat_tournoi_id",  foreignKey = @ForeignKey(name="resultat_tournoi_fk"))})
 	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.Match.class})
+	@NotEmpty
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Inscription participant;
 	
 	@Column(name="position_match")
 	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
+	@NotEmpty
 	private int positionMatch;
 	
 	@Column(name="score_match")
 	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
+	@NotEmpty
 	private int scoreMatch;
 
 	public Resultat() {
