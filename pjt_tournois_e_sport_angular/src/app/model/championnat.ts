@@ -4,15 +4,11 @@ export class Championnat extends Tournoi {
   /*   private _JourneesAJouerFinales?: Journee[] | undefined;   */
   /* private _poules?: Poule[] | undefined;
   private _prochaineEtape?: Etape | undefined; */
-  constructor(
-    isMatchRetour?: boolean,
-    isPoule?: boolean,
-    nbPhase?: number
-    /*   JourneesAJouerPoules?: Journee[]  */
-    /*   JourneesAJouerFinales?: Journee[]  */
-    /*   poules?: Poule[]  */
-    /*   prochaineEtape?: Etape  */
-  ) {
+  constructor() /*   JourneesAJouerPoules?: Journee[]  */
+  /*   JourneesAJouerFinales?: Journee[]  */
+  /*   poules?: Poule[]  */
+  /*   prochaineEtape?: Etape  */
+  {
     super();
 
     /*   this._JourneesAJouerPoules = JourneeAJouerPoules; */

@@ -1,6 +1,6 @@
 import { InscriptionKey } from './inscription-key';
 export class Inscription {
-  private _key: InscriptionKey | undefined;
+  private _id: InscriptionKey | undefined;
   private _position: number | undefined;
   private _score: number | undefined;
   private _scoreDifference: number | undefined;
@@ -9,12 +9,12 @@ export class Inscription {
   //private _resultats:
 
   constructor(
-    key: InscriptionKey,
-    position: number,
-    score: number,
-    scoreDifference: number
+    id?: InscriptionKey,
+    position?: number,
+    score?: number,
+    scoreDifference?: number
   ) {
-    this._key = key;
+    this._id = id;
     this._position = position;
     this._score = score;
     this._scoreDifference = scoreDifference;
@@ -25,7 +25,7 @@ export class Inscription {
    * @return {InscriptionKey }
    */
   public get key(): InscriptionKey | undefined {
-    return this._key;
+    return this._id;
   }
 
   /**
@@ -56,8 +56,8 @@ export class Inscription {
    * Setter key
    * @param {InscriptionKey } value
    */
-  public set key(value: InscriptionKey | undefined) {
-    this._key = value;
+  public set id(value: InscriptionKey | undefined) {
+    this._id = value;
   }
 
   /**

@@ -6,8 +6,8 @@
     <th>Score global</th>
   </tr>
   <tr *ngFor="let i of inscriptionsObservable | async">
-    <td>{{ i.key!.joueur!.id }}</td>
-    <td>{{ i.key!.tournoi!.idTournoi }}</td>
+    <td>{{ i.id!.joueur!.id }}</td>
+    <td>{{ i.id!.tournoi!.idTournoi }}</td>
     <td>{{ i.position }}</td>
     <td>{{ i.score }}</td>
     <!--<td><a [routerLink]=""></a></td>-->
