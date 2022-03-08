@@ -2,6 +2,7 @@
 
 <table class="table">
   <tr>
+    <th>type</th>
     <th>idTournoi</th>
     <th>nom</th>
     <th>dateDeCreation</th>
@@ -9,6 +10,7 @@
     <th>jeu</th>
   </tr>
   <tr *ngFor="let t of tournoisObservable | async">
+    <td>{{ t.type }}</td>
     <td>{{ t.idTournoi }}</td>
     <td>{{ t.nom }}</td>
     <td>{{ t.dateDeCreation }}</td>

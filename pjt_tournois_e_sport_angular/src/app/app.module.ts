@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { routes } from './routes';
 import { TournoiComponent } from './component/tournoi/tournoi.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InscriptionComponent } from './component/inscription/inscription.component';
+import { CreationCompteComponent } from './component/creation-compte/creation-compte.component';
 import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
 import { EditTournoiComponent } from './component/tournoi-edit/tournoi-edit.component';
@@ -18,7 +18,7 @@ import { BlackWhiteTextDirective } from './directive/black-white-text.directive'
   declarations: [
     AppComponent,
     TournoiComponent,
-    InscriptionComponent,
+    CreationCompteComponent,
     LoginComponent,
     AccueilComponent,
     EditTournoiComponent,

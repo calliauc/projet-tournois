@@ -10,13 +10,18 @@ export class AuthService {
 
   public checkUsername(username: string): Observable<boolean> {
     return this.http.get<boolean>(
-      'http://localhost:8080/tournoi_esport/api/auth/search/' + username
+      'http://localhost:8080/tournoi_esport/api/auth/searchByLogin/' + username
+    );
+  }
+  public checkMail(mail: string): Observable<boolean> {
+    return this.http.get<boolean>(
+      'http://localhost:8080/tournoi_esport/api/auth/searchByMail/' + mail
     );
   }
 
   public inscription(user: any): Observable<any> {
     return this.http.post(
-      'http://localhost:8080/tournoi_esport/api/auth/inscription',
+      'http://localhost:8080/tournoi_esport/api/auth/signup',
       user
     );
   }

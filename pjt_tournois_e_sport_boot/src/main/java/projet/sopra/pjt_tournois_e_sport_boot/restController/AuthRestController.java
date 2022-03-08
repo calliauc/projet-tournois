@@ -3,7 +3,6 @@ package projet.sopra.pjt_tournois_e_sport_boot.restController;
 import java.util.Arrays;
 import java.util.HashSet;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Role;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.UtilisateurRepository;
-import projet.sopra.pjt_tournois_e_sport_boot.model.Role;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -48,7 +47,7 @@ public class AuthRestController {
 
 	@PreAuthorize("isAnonymous()")
 	@JsonView(Views.Common.class)
-	@PostMapping("/inscription")
+	@PostMapping("/signup")
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST, value = HttpStatus.BAD_REQUEST)
 	public Utilisateur inscription(@Valid @RequestBody Utilisateur utilisateur, BindingResult br) {
 		if (br.hasErrors()) {
@@ -62,8 +61,12 @@ public class AuthRestController {
 		return utilisateurRepo.save(utilisateur);
 	}
 	
-	@GetMapping("/search/{username}")
+	@GetMapping("/searchByLogin/{username}")
 	public boolean usernameDejaUtilise(@PathVariable String username) {
 		return utilisateurRepo.findByUsername(username).isPresent();
+	}
+	@GetMapping("/searchByMail/{mail}")
+	public boolean mailDejaUtilise(@PathVariable String mail) {
+		return utilisateurRepo.findByMail(mail).isPresent();
 	}
 }
