@@ -1,0 +1,35 @@
+<div>
+  <div class="form-group">
+    <label>id:</label>
+    <input class="form-control" [(ngModel)]="resultat.id" readonly />
+  </div>
+  <div class="form-group">
+    <label>matchId:</label>
+    <input class="form-control" [(ngModel)]="resultat.match!.id" />
+  </div>
+  <!--<div class="form-group">
+    <label>ParticipantId:</label>
+    <input class="form-control" [(ngModel)]="resultat.participant.joueur.id" />
+  </div>
+  <div class="form-group">
+    <label>TournoiId:</label>
+    <input
+      class="form-control"
+      [(ngModel)]="resultat.participant.tournoi.idTournoi"
+    />
+  </div>-->
+  <div class="form-group">
+    <label>positionMatch:</label>
+    <input class="form-control" [(ngModel)]="resultat.positionMatch" />
+  </div>
+  <div class="form-group">
+    <label>scoreMatch:</label>
+    <input class="form-control" [(ngModel)]="resultat.scoreMatch" />
+  </div>
+  <div>
+    <button (click)="save()" class="btn btn-outline-success">
+      enregistrer
+    </button>
+    <a routerLink="/resultat" routerLinkActive="active" btn-warning>annuler</a>
+  </div>
+</div>
