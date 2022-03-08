@@ -14,6 +14,8 @@ import { AccueilComponent } from './component/accueil/accueil.component';
 import { EditTournoiComponent } from './component/tournoi-edit/tournoi-edit.component';
 import { BlackWhiteTextDirective } from './directive/black-white-text.directive';
 import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilisateur.component';
+import { LigueEditComponent } from './component/tournoi/ligue-edit/ligue-edit.component';
+import { ChampionnatEditComponent } from './component/tournoi/championnat-edit/championnat-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilis
     EditTournoiComponent,
     BlackWhiteTextDirective,
     UtilisateurComponent,
+    LigueEditComponent,
+    ChampionnatEditComponent,
   ],
   imports: [
     BrowserModule,

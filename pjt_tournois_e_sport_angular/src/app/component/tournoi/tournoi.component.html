@@ -21,12 +21,22 @@
     <td>{{ t.nbParticipantsTotal }}</td>
     <!--<td>{{ t.organisateur }}</td>-->
     <td>
-      <a
-        [routerLink]="['/tournoi', 'edit', t.idTournoi]"
-        routerLinkActive="active"
-        class="btn btn-outline-primary"
-        >editer</a
-      >
+      <div *ngIf="t.type == 'ligue'">
+        <a
+          [routerLink]="['/tournoi', 'edit', t.idTournoi]"
+          routerLinkActive="active"
+          class="btn btn-outline-primary"
+          >editer</a
+        >
+      </div>
+      <div *ngIf="t.type == 'championnat'">
+        <a
+          [routerLink]="['/championnat', 'edit', t.idTournoi]"
+          routerLinkActive="active"
+          class="btn btn-outline-primary"
+          >editer</a
+        >
+      </div>
     </td>
     <td>
       <button (click)="delete(t.idTournoi!)" class="btn btn-outline-danger">
@@ -49,7 +59,7 @@
     <li value="ligue">
       <a
         class="dropdown-item"
-        routerLink="/tournoi/edit"
+        routerLink="/ligue/edit"
         routerLinkActive="active"
         >Ligue</a
       >
@@ -57,7 +67,7 @@
     <li value="championnat">
       <a
         class="dropdown-item"
-        [routerLink]="['/tournoi/edit']"
+        [routerLink]="['/championnat/edit']"
         routerLinkActive="active"
         >Championnat</a
       >

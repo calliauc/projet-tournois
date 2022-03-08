@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Tournoi } from './../../model/tournoi';
 import { TournoiService } from './../../service/tournoi.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tournoi',
