@@ -1,26 +1,22 @@
 package projet.sopra.pjt_tournois_e_sport_boot.services;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.Validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import javax.validation.Validator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.MatchException;
+import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
-import projet.sopra.pjt_tournois_e_sport_boot.exceptions.TournoiException;
-import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
-import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
-import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.ResultatRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
@@ -41,9 +37,12 @@ public class MatchService {
 
 	@Autowired
 	private InscriptionRepository inscriptionRepo;
+	@Autowired
+	private ResultatRepository resultatRepo;
 
 	@Autowired
 	private ResultatService resultatService;
+	
 	@Autowired
 	private Validator validator;
 	
