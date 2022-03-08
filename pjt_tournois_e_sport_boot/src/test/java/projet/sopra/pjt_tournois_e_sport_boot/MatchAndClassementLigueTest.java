@@ -27,6 +27,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.repositories.ResultatRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.UtilisateurRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.services.MatchGenerationService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.MatchService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.SetClassementTournoiService;
 
 @SpringBootTest
@@ -49,6 +50,8 @@ public class MatchAndClassementLigueTest {
 	private MatchGenerationService matchGenerationService;
 	@Autowired
 	private SetClassementTournoiService setClassementTournoiService;
+	@Autowired
+	private MatchService matchService;
 
 	public Utilisateur CreationUser(String username, String mail, String password) {
 		Utilisateur user = new Utilisateur(username, mail, password);
@@ -152,9 +155,10 @@ public class MatchAndClassementLigueTest {
 		}
 		LOGGER.info("Fin de la création des resultats et du classement");
 		LOGGER.info("FIN DE LA LIGUE");
-		
+		matchService.setAllProchainMatch(ligueTest.getIdTournoi());
 		LOGGER.info(inscriptionRepo.getClassementLigue(ligueTest.getIdTournoi()).toString());
-
+		
+		
 		
 		
 	}

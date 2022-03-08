@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -32,9 +33,12 @@ public class Match {
 	@JsonView({Views.Match.class, Views.ResultatWithInscriptionAndMatch.class,Views.JourneeWithTournoiAndMatch.class})
 	private Long id;
 	
-	@OneToMany(mappedBy = "prochainMatch")
+	@ManyToMany(mappedBy = "matchs")
 	@JsonView(Views.MatchWithIncriptions.class)
 	private List<Inscription> inscriptions = new ArrayList<Inscription>();
+	
+	@OneToMany(mappedBy = "prochainMatch")
+	private List<Inscription> prochainMatchs = new ArrayList<Inscription>();
 	
 	@ManyToOne
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
@@ -60,6 +64,16 @@ public class Match {
 
 	/// GETTERS
 	
+	public List<Inscription> getProchainMatchs() {
+		return prochainMatchs;
+	}
+
+
+	public void setProchainMatchs(List<Inscription> prochainMatchs) {
+		this.prochainMatchs = prochainMatchs;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
@@ -131,5 +145,5 @@ public class Match {
 		Inscription w = new Inscription(); // Pour pas que ça plante
 		return w;
 	}
-	
+
 }
