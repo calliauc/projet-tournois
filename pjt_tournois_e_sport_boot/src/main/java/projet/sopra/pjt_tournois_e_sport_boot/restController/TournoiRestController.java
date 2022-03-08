@@ -58,6 +58,12 @@ public class TournoiRestController {
 	public Tournoi getById(@PathVariable Long id) {
 		return tournoiService.getById(id);
 	}
+	
+	@GetMapping("/ligue_classement/{id}")
+	@JsonView(Views.Classement.class)
+	public List<Inscription> getClassementDeLigue(@PathVariable Long id){
+		return tournoiService.getClassementLigue(id);
+	}
 
 	// TO-DO
 	@ResponseStatus(code = HttpStatus.CREATED)
