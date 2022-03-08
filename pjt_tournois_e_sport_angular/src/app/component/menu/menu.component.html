@@ -1,0 +1,122 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a
+          routerLink="/accueil"
+          routerLinkActive="active"
+          class="nav-link active"
+        >
+          Accueil</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="!authenticated"
+          routerLink="/signup"
+          routerLinkActive="active"
+          class="nav-link active"
+          >Créer un compte</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="!authenticated"
+          routerLink="/login"
+          routerLinkActive="active"
+          class="nav-link active"
+          >Se connecter</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="authenticated"
+          routerLink="/tournoi"
+          routerLinkActive="active"
+          class="nav-link active"
+          >Tournois</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="authenticated"
+          routerLink="/resultat"
+          routerLinkActive="active"
+          class="nav-link active"
+          >Resultats</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="authenticated"
+          routerLink="/utilisateur"
+          routerLinkActive="active"
+          class="nav-link active"
+          >Utilisateurs</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="authenticated"
+          routerLink="/inscription"
+          class="nav-link active"
+          >Inscriptions</a
+        >
+      </li>
+      <li class="nav-item">
+        <a *ngIf="authenticated" class="nav-link active" (click)="logout()"
+          >Deconnexion</a
+        >
+      </li>
+    </ul>
+  </div>
+  <!-- 
+  <a routerLink="/accueil" routerLinkActive="active" class="btn btn-link">
+    Accueil</a
+  >
+  <a
+    *ngIf="!authenticated"
+    routerLink="/signup"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >Créer un compte</a
+  >
+  <a
+    *ngIf="!authenticated"
+    routerLink="/login"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >Se connecter</a
+  >
+  <a
+    *ngIf="authenticated"
+    routerLink="/tournoi"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >Tournois</a
+  >
+
+  <a
+    *ngIf="authenticated"
+    routerLink="/resultat"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >Resultats</a
+  >
+
+  <a
+    *ngIf="authenticated"
+    routerLink="/utilisateur"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >Utilisateurs</a
+  >
+
+  <a *ngIf="authenticated" routerLink="/inscription" class="btn btn-link"
+    >Inscriptions</a
+  >
+
+  <a *ngIf="authenticated" class="btn btn-link" (click)="logout()"
+    >Deconnexion</a
+  > -->
+</nav>
