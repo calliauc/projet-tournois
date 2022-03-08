@@ -13,6 +13,7 @@ import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
 import { EditTournoiComponent } from './component/tournoi-edit/tournoi-edit.component';
 import { BlackWhiteTextDirective } from './directive/black-white-text.directive';
+import { InscriptionComponent } from './component/inscription/inscription.component';
 import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilisateur.component';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilis
     AccueilComponent,
     EditTournoiComponent,
     BlackWhiteTextDirective,
+    InscriptionComponent,
     UtilisateurComponent,
   ],
   imports: [
