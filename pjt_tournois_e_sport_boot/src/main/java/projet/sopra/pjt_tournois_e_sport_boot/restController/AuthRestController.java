@@ -48,7 +48,7 @@ public class AuthRestController {
 	@PreAuthorize("isAnonymous()")
 	@JsonView(Views.Common.class)
 	@PostMapping("/signup")
-	@ResponseStatus(code = HttpStatus.BAD_REQUEST, value = HttpStatus.BAD_REQUEST)
+	@ResponseStatus(code = HttpStatus.CREATED, value = HttpStatus.CREATED)
 	public Utilisateur inscription(@Valid @RequestBody Utilisateur utilisateur, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new UtilisateurException();
