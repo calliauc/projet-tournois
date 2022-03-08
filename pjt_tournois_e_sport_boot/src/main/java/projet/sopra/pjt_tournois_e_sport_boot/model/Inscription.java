@@ -1,14 +1,17 @@
 package projet.sopra.pjt_tournois_e_sport_boot.model;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -48,6 +51,10 @@ public class Inscription {
 	@ManyToOne
 	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name = "inscription_prochain_match_fk"))
 	private Match prochainMatch;
+	
+	@OneToMany(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonView(Views.InscriptionWithId.class)
+	private List<Resultat> resultats;
 
 	/// CONSTRUCTOR
 	public Inscription() {
@@ -124,6 +131,19 @@ public class Inscription {
 	public void setScoreDifference(int score_difference) {
 		this.scoreDifference = score_difference;
 	}
+	
+
+	public List<Resultat> getResultats() {
+		return resultats;
+	}
+
+
+
+	public void setResultats(List<Resultat> resultats) {
+		this.resultats = resultats;
+	}
+
+
 
 	@Override
 	public int hashCode() {

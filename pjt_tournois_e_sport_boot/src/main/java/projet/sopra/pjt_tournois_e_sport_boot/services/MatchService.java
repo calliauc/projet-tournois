@@ -11,7 +11,6 @@ import projet.sopra.pjt_tournois_e_sport_boot.exceptions.MatchException;
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.TournoiException;
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
-import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 
 @Service
@@ -19,8 +18,6 @@ public class MatchService {
 
 	@Autowired
 	private MatchRepository matchRepo;
-	@Autowired
-	private ResultatService resultatService;
 	@Autowired
 	private Validator validator;
 	
@@ -59,11 +56,8 @@ public class MatchService {
 		matchRepo.delete(tournoiEnBase);
 	}
 	
-	public void delete(Long id) {
-		for(Resultat r : this.getById(id).getResultats()) {
-			resultatService.delete(r);
-		}
-		delete(this.getById(id));
+	public void deleteById(Long id) {
+		matchRepo.deleteById(id);
 	}
 
 	private void checkData(Match m) {
