@@ -31,7 +31,8 @@ public class Resultat {
 	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.Match.class})
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "resultat_match_id", foreignKey = @ForeignKey(name="resultat_match_fk"))
 	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
 	@OnDelete( action = OnDeleteAction.CASCADE)

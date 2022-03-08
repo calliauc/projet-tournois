@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.exceptions.ResultatException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.ResultatService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 
 
 @RestController
@@ -34,6 +38,8 @@ public class ResultatRestController {
 	
 	@Autowired
 	private ResultatService resultatService; 
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ResultatService.class);
 	
 	////CRUD
 	
@@ -51,14 +57,17 @@ public class ResultatRestController {
 	}
 	
 	// TO-DO
-	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	@JsonView(Views.Common.class)
 	public Resultat create(@Valid @RequestBody Resultat resultat, BindingResult br) {
+		LOGGER.info(resultat.getMatch().toString());
 		return save(resultat, br); 
 	}
 	// TO-DO
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	@PutMapping("/{id}")
+	@JsonView(Views.Common.class)
 	public Resultat update(@Valid @RequestBody Resultat resultat, BindingResult br, @PathVariable Long id) {
 		if (!resultatService.exist(id)) {
 			throw new ResultatException(); 

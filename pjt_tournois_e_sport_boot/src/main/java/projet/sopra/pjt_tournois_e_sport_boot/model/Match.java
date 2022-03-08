@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -41,7 +42,8 @@ public class Match {
 	@JsonView(Views.Match.class)
 	private Journee journee;
 	
-	@OneToMany(mappedBy = "match")
+	@OneToMany(mappedBy = "match", cascade = CascadeType.MERGE)
+	@OnDelete(action=OnDeleteAction.CASCADE)
 	@JsonView(Views.Match.class)
 	private List<Resultat> resultats;
 	
