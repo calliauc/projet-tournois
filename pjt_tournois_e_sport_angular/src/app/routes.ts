@@ -4,6 +4,7 @@ import { EditTournoiComponent } from './component/tournoi-edit/tournoi-edit.comp
 import { InscriptionComponent } from './component/inscription/inscription.component';
 import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
+import { ResultatComponent } from './component/resultat/resultat.component';
 
 export const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -11,6 +12,8 @@ export const routes: Routes = [
   { path: 'tournoi', component: TournoiComponent },
 
   { path: 'tournoi/edit', component: EditTournoiComponent },
+
+  { path: 'resultat', component: ResultatComponent },
 
   { path: 'inscription', component: InscriptionComponent },
 

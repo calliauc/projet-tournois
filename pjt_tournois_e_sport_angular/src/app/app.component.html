@@ -24,6 +24,14 @@
     >tournoi</a
   >
 
+  <a
+    *ngIf="authenticated"
+    routerLink="/resultat"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >resultats</a
+  >
+
   <a *ngIf="authenticated" class="btn btn-link" (click)="logout()"
     >deconnection</a
   >
