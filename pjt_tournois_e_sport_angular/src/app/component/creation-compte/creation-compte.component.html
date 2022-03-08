@@ -1,7 +1,23 @@
 <div>
   <form (ngSubmit)="save()" [formGroup]="form">
     <div class="form-group">
-      <label>login:</label>
+      <label>Mail :</label>
+      <input type="email" class="form-control" formControlName="mail" />
+      <div
+        class="alert alert-danger"
+        *ngIf="form.controls['mail'].dirty && form.controls['mail'].invalid"
+      >
+        <span *ngIf="form.controls['mail'].hasError('required')"
+          >mail obligatoire</span
+        >
+        <span *ngIf="form.controls['mail'].hasError('email')"
+          >veuillez saisir un mail valide</span
+        >
+        <span *ngIf="form.controls['mail'].hasError('mailAlreadyUsed')"
+          >Oups, ce mail est deja utilisé !
+        </span>
+      </div>
+      <label>Login :</label>
       <input class="form-control" formControlName="login" />
       <div
         class="alert alert-danger"
@@ -11,19 +27,19 @@
           >login obligatoire</span
         >
         <span *ngIf="form.controls['login'].hasError('minlength')"
-          >le login doit faire 3 careteres minimum</span
+          >le login doit faire 3 caracteres minimum</span
         >
         <span *ngIf="form.controls['login'].hasError('maxlength')"
           >le login ne doit pas faire plus de 255 caracteres</span
         >
         <span *ngIf="form.controls['login'].hasError('loginAlreadyUsed')"
-          >le login est deja utilisé
+          >Oups, ce login est deja utilisé !
         </span>
       </div>
     </div>
     <ng-container formGroupName="passwordGrp">
       <div class="form-group">
-        <label>mot de passe:</label>
+        <label>Mot de passe :</label>
         <input
           type="password"
           class="form-control"
@@ -40,7 +56,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label>confirmation:</label>
+        <label>Confirmation du mot de passe :</label>
         <input type="password" class="form-control" formControlName="confirm" />
         <div
           class="alert alert-danger"
@@ -49,7 +65,7 @@
             form.controls['passwordGrp'].invalid
           "
         >
-          <span>le mot de passe et la confirmation ne sont pas identiques</span>
+          <span>Oups, les deux mots de passe ne sont pas identiques</span>
         </div>
       </div>
     </ng-container>
@@ -59,9 +75,9 @@
         class="btn btn-outline-success"
         [disabled]="form.invalid"
       >
-        enregistrer
+        Enregistrer
       </button>
-      <a routerLink="/accueil" class="btn btn-link">annuler</a>
+      <a routerLink="/accueil" class="btn btn-link">Annuler</a>
     </div>
   </form>
 </div>
