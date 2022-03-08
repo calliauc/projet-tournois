@@ -1,7 +1,5 @@
 package projet.sopra.pjt_tournois_e_sport_boot.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,29 +26,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// gestion des regles sur les URL
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+
 		///// ADAPTER
-		
-		http.antMatcher("/**")
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and()
-			.csrf().disable()
-			.authorizeHttpRequests()
-				.antMatchers(HttpMethod.GET, "/api/auth/search/**").permitAll()
-				.antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
-				.antMatchers(HttpMethod.POST,"/api/auth/inscription").permitAll()
-				.antMatchers(HttpMethod.GET).hasAnyRole("ADMIN")
-				.antMatchers(HttpMethod.POST).hasRole("ADMIN")
-				.antMatchers(HttpMethod.PUT).hasRole("ADMIN")
-				.antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-			.and()
-			.httpBasic();
+
+		http.antMatcher("/**").sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf()
+				.disable().authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/auth/search/**").permitAll()
+				.antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/auth/inscription").permitAll().antMatchers(HttpMethod.GET)
+				.hasAnyRole("ADMIN").antMatchers(HttpMethod.POST).hasRole("ADMIN").antMatchers(HttpMethod.PUT)
+				.hasRole("ADMIN").antMatchers(HttpMethod.DELETE).hasRole("ADMIN").and().httpBasic();
 	}
 
 	// gestion des utilisateurs
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
+
 		auth.userDetailsService(userDetailsService);
 	}
 
