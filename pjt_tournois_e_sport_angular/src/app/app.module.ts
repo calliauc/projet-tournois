@@ -11,12 +11,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CreationCompteComponent } from './component/creation-compte/creation-compte.component';
 import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
-import { EditTournoiComponent } from './component/tournoi-edit/tournoi-edit.component';
 import { BlackWhiteTextDirective } from './directive/black-white-text.directive';
 import { ResultatComponent } from './component/resultat/resultat.component';
 import { InscriptionComponent } from './component/inscription/inscription.component';
 import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilisateur.component';
+import { LigueEditComponent } from './component/tournoi/ligue-edit/ligue-edit.component';
+import { ChampionnatEditComponent } from './component/tournoi/championnat-edit/championnat-edit.component';
 import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
+import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.c
     CreationCompteComponent,
     LoginComponent,
     AccueilComponent,
-    EditTournoiComponent,
     BlackWhiteTextDirective,
     ResultatComponent,
     InscriptionComponent,
     UtilisateurComponent,
+    LigueEditComponent,
+    ChampionnatEditComponent,
     ResultatEditComponent,
+    LigueClassementComponent,
   ],
   imports: [
     BrowserModule,
