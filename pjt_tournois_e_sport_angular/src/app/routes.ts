@@ -1,3 +1,4 @@
+import { InscriptionComponent } from './component/inscription/inscription.component';
 import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilisateur.component';
 import { Routes } from '@angular/router';
 import { TournoiComponent } from './component/tournoi/tournoi.component';
@@ -26,4 +27,6 @@ export const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
 
   { path: 'utilisateur', component: UtilisateurComponent },
+
+  { path: 'inscription', component: InscriptionComponent },
 ];

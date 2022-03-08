@@ -1,1 +1,24 @@
-<p>inscription works!</p>
+<table class="table">
+  <tr>
+    <th>ID Joueur</th>
+    <th>ID Tournoi</th>
+    <th>Position joueur</th>
+    <th>Score global</th>
+  </tr>
+  <tr *ngFor="let i of inscriptionsObservable | async">
+    <td>{{ i.key!.joueur!.id }}</td>
+    <td>{{ i.key!.tournoi!.idTournoi }}</td>
+    <td>{{ i.position }}</td>
+    <td>{{ i.score }}</td>
+    <!--<td><a [routerLink]=""></a></td>-->
+
+    <td>
+      <button
+        (click)="delete(i.key!.joueur!.id!, i.key!.tournoi!.idTournoi!)"
+        class="btn btn-outline-danger"
+      >
+        Supprimer l'inscription
+      </button>
+    </td>
+  </tr>
+</table>
