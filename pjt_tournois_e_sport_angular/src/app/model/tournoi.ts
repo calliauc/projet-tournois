@@ -1,21 +1,29 @@
-export class Tournoi {
-  private _idTournoi: number | undefined;
-  private _nom: string | undefined;
-  private _dateDeCreation: Date | undefined;
-  private _dateDeDebut: Date | undefined;
-  private _jeu: string | undefined;
-  //private _listeInscriptions: //////TO DO
-  private _nbParticipantsParMatch: number | undefined;
-  private _nbParticipantsTotal: number | undefined;
-  //private _organisateur: Utilisateur | undefined;
+import { StatutInscriptions } from './statutInscriptions.enum';
+import { StatutTemps } from './statutTemps.enum';
+export abstract class Tournoi {
+  protected _type: string | undefined;
+  protected _idTournoi: number | undefined;
+  protected _nom: string | undefined;
+  protected _dateDeCreation: Date | undefined;
+  protected _dateDeDebut: Date | undefined;
+  protected _jeu: string | undefined;
+  protected _statutTemps: StatutTemps | undefined;
+  protected _statutInscriptions: StatutInscriptions | undefined;
+  //protected _listeInscriptions: //////TO DO
+  protected _nbParticipantsParMatch: number | undefined;
+  protected _nbParticipantsTotal: number | undefined;
+  //protected _organisateur: Utilisateur | undefined;
 
   constructor(
+    type?: string,
     idTournoi?: number,
     nom?: string,
     dateDeCreation?: Date,
     dateDeDebut?: Date,
     jeu?: string,
     //listeInscriptions?:
+    statutTemps?: StatutTemps,
+    statutInscriptions?: StatutInscriptions,
     nbParticipantsParMatch?: number,
     nbParticipantsTotal?: number
     //organisateur?:
@@ -37,6 +45,14 @@ export class Tournoi {
    */
   public get idTournoi(): number | undefined {
     return this._idTournoi;
+  }
+
+  /**
+   * Getter type
+   * @return {string }
+   */
+  public get type(): string | undefined {
+    return this._type;
   }
 
   /**
@@ -70,6 +86,21 @@ export class Tournoi {
   public get jeu(): string | undefined {
     return this._jeu;
   }
+  /**
+   * Getter statut temps
+   * @return {StatutTemps }
+   */
+  public get statutTemps(): StatutTemps | undefined {
+    return this._statutTemps;
+  }
+
+  /**
+   * Getter statut inscriptions
+   * @return {StatutTemps }
+   */
+  public get statutInscriptions(): StatutInscriptions | undefined {
+    return this._statutInscriptions;
+  }
 
   /**
    * Getter nbParticipantsParMatch
@@ -94,6 +125,14 @@ export class Tournoi {
   //public get organisateur(): Utilisateur | undefined {
   //  return this._organisateur;
   //}
+
+  /**
+   * Setter idTournoi
+   * @param {string } value
+   */
+  public set type(value: string | undefined) {
+    this._type = value;
+  }
 
   /**
    * Setter idTournoi
@@ -133,6 +172,22 @@ export class Tournoi {
    */
   public set jeu(value: string | undefined) {
     this._jeu = value;
+  }
+
+  /**
+   * Setter statut temps
+   * @param {StatutTemps} value
+   */
+  public set statutTemps(value: StatutTemps | undefined) {
+    this._statutTemps = value;
+  }
+
+  /**
+   * Setter statut temps
+   * @param {StatutInscriptions} value
+   */
+  public set statutInscriptions(value: StatutInscriptions | undefined) {
+    this._statutInscriptions = value;
   }
 
   /**
