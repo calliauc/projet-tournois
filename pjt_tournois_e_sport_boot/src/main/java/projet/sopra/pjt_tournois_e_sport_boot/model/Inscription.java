@@ -171,10 +171,6 @@ public class Inscription {
 		}
 	};
 
-	@Override
-	public String toString() {
-		return "Inscription [id=" + id + ", position=" + position + ", score=" + score + ", scoreDifference="
-				+ scoreDifference + ", prochainMatch=" + prochainMatch + "]";
-	}
+	
 
 }
