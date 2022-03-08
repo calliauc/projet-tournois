@@ -22,6 +22,8 @@ public class Ligue extends Tournoi {
 
 	/// ATTRIBUTES
 
+	@Column(name = "isMatchRetour")
+	protected boolean isMatchRetour;
 	@Column(name = "isPoule")
 	protected boolean isPoule;
 	@Column(name = "nbPhase")
@@ -52,6 +54,10 @@ public class Ligue extends Tournoi {
 		return isPoule;
 	}
 
+	public boolean isMatchRetour() {
+		return isMatchRetour;
+	}
+
 	public Set<Journee> getJourneesAJouer() {
 		return JourneesAJouer;
 	}
@@ -64,6 +70,10 @@ public class Ligue extends Tournoi {
 
 	public void setPoule(boolean isPoule) {
 		this.isPoule = isPoule;
+	}
+
+	public void setMatchRetour(boolean isMatchRetour) {
+		this.isMatchRetour = isMatchRetour;
 	}
 
 	public void setJourneesAJouer(Set<Journee> journeesAJouer) {

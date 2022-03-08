@@ -111,6 +111,7 @@ public class MatchService {
 		int numProchaineJournee = resultatRepo.findByParticipant(inscription).size() + 1;
 		while (isProchainMatchFound != true) {
 			if (journeeRepo.findByNumeroAndTournoi(numProchaineJournee, inscription.getId().getTournoi()) == null) {
+				inscription.setProchainMatch(null);
 				break;
 			} else {
 				Journee jProchainMatch = journeeRepo.findByNumeroAndTournoi(numProchaineJournee,
