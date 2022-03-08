@@ -75,6 +75,7 @@ public class MatchGenerationService {
 			inscriptionsLigue.add(isPair, inscriptionsLigue.pollLast());
 		}
 		ligue.setJourneesAJouer(journees);
+		matchService.setAllProchainMatch(ligue.getIdTournoi());
 		tournoiRepo.save(ligue);
 	}
 

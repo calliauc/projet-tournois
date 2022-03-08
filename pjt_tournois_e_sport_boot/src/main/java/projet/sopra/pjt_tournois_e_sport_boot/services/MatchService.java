@@ -37,16 +37,14 @@ public class MatchService {
 
 	@Autowired
 	private InscriptionRepository inscriptionRepo;
+
 	@Autowired
 	private ResultatRepository resultatRepo;
 
 	@Autowired
-	private ResultatService resultatService;
-	
-	@Autowired
 	private Validator validator;
-	
-	public List<Match> getAll(){
+
+	public List<Match> getAll() {
 		return matchRepo.findAll();
 	}
 
@@ -86,12 +84,17 @@ public class MatchService {
 		}
 		matchRepo.delete(matchEnBase);
 	}
-	
+
 	public void delete(Long id) {
-		for(Resultat r : this.getById(id).getResultats()) {
-			resultatService.delete(r);
+		if (this.getById(id).getResultats() == null) {
+			delete(this.getById(id));
+		} 
+		else {
+			for (Resultat r : this.getById(id).getResultats()) {
+				resultatRepo.delete(r);
+			}
 		}
-		delete(this.getById(id));
+
 	}
 
 	private void checkData(Match m) {
@@ -113,19 +116,28 @@ public class MatchService {
 
 	public void setProchainMatch(Inscription inscription) {
 		boolean isProchainMatchFound = false;
-		int numProchaineJournee = resultatRepo.findByParticipant(inscription).size();
+		int numProchaineJournee = resultatRepo.findByParticipant(inscription).size() + 1;
 		while (isProchainMatchFound != true) {
-			Journee jProchainMatch = journeeRepo.findByNumeroAndTournoi(numProchaineJournee + 1,
-					inscription.getId().getTournoi());
-			for (Match m : jProchainMatch.getMatchsAJouerPourJournee()) {
-				if (m.getInscriptions().contains(inscription)) {
-					inscription.setProchainMatch(m);
-					inscriptionRepo.save(inscription);
-					isProchainMatchFound = true;
+			if (journeeRepo.findByNumeroAndTournoi(numProchaineJournee, inscription.getId().getTournoi()) == null) {
+				break;
+			} else {
+				Journee jProchainMatch = journeeRepo.findByNumeroAndTournoi(numProchaineJournee,
+						inscription.getId().getTournoi());
+				for (Match m : jProchainMatch.getMatchsAJouerPourJournee()) {
+					if (m.getInscriptions().contains(inscription)) {
+						inscription.setProchainMatch(m);
+						inscriptionRepo.save(inscription);
+						isProchainMatchFound = true;
+						break;
+					}
+				}
+				numProchaineJournee++;
+				if (numProchaineJournee > inscription.getId().getTournoi().getListeInscriptions().size() - 1) {
+					/// a modifier par un attribut calculé qui nous donne le nombre précis de
+					/// journées à jouer dans un tournoi
 					break;
 				}
 			}
-			numProchaineJournee++;
 
 		}
 

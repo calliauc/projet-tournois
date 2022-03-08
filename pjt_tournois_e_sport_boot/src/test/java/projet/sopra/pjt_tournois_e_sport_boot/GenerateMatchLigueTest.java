@@ -195,7 +195,7 @@ public class GenerateMatchLigueTest {
 		matchGenerationService.generateJourneesLigueDuels(ligueTest);
 		LOGGER.info("Fin de la generation des matches");
 		LOGGER.info("Get prochains matches");
-		matchService.setAllProchainMatch(ligueTest.getIdTournoi());
+		
 		
 	}
 }
