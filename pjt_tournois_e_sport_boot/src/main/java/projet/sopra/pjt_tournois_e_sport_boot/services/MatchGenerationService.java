@@ -16,7 +16,6 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Ligue;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Poule;
-import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
@@ -31,7 +30,7 @@ public class MatchGenerationService {
 	private MatchRepository matchRepo;
 	@Autowired
 	private JourneeRepository journeeRepo;
-	
+
 	@Autowired
 	private MatchService matchService;
 	@Autowired
@@ -40,11 +39,10 @@ public class MatchGenerationService {
 	public void generateJourneesLigueDuels(Ligue ligue) {
 
 		////// TO DO : INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
-		int matchRetour; 
-		if (ligue.isMatchRetour()==true) {
+		int matchRetour;
+		if (ligue.isMatchRetour() == true) {
 			matchRetour = 2;
-		}
-		else {
+		} else {
 			matchRetour = 1;
 		}
 		Set<Journee> journees = new HashSet<Journee>();
@@ -52,7 +50,7 @@ public class MatchGenerationService {
 		System.out.println("inscriptions : " + inscriptionsLigue.toString());
 		int isPair = (ligue.getListeInscriptions().size() + 1) % 2;
 
-		for (int i = 0; i < (inscriptionsLigue.size() - isPair)*matchRetour; i++) {
+		for (int i = 0; i < (inscriptionsLigue.size() - isPair) * matchRetour; i++) {
 			Journee jour = new Journee();
 			jour.setTournoi(ligue);
 			jour.setEtape(Etape.Ligue);
@@ -60,13 +58,13 @@ public class MatchGenerationService {
 			journeeRepo.save(jour);
 			List<Match> matchsJournee = new ArrayList<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {
-				System.out.println("Match : "+j);
+				System.out.println("Match : " + j);
 				Match m = new Match();
 				m.setJournee(jour);
 				m.getInscriptions().add(inscriptionsLigue.get(j));
 				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
 				for (Inscription x : m.getInscriptions()) {
-					
+
 					System.out.println(x.getId().getJoueur().getId());
 				}
 				matchsJournee.add(m);
@@ -104,9 +102,13 @@ public class MatchGenerationService {
 			inscriptionsMatch.add(topsOfPoules.get(i).get(0));
 			inscriptionsMatch.add(topsOfPoules.get(nbMatchs - i).get(1));
 			nextDay.getMatchsAJouerPourJournee().get(i).setInscriptions(inscriptionsMatch);
+			matchRepo.save(nextDay.getMatchsAJouerPourJournee().get(i));
 		}
+		journeeRepo.save(nextDay);
 		// "increment" de l'etape
 		champ.getProchaineEtape().next();
+//		champ.setProchaineEtape(champ.getProchaineEtape().next());
+		tournoiRepo.save(champ);
 	}
 
 	/* @formatter:off
@@ -123,8 +125,12 @@ public class MatchGenerationService {
 			inscriptionsMatch.add(pastDay.getMatchsAJouerPourJournee().get(2 * i).getPremier()); // win 1
 			inscriptionsMatch.add(pastDay.getMatchsAJouerPourJournee().get((2 * i) + 1).getPremier()); // win 2
 			nextDay.getMatchsAJouerPourJournee().get(i).setInscriptions(inscriptionsMatch);
+			matchRepo.save(nextDay.getMatchsAJouerPourJournee().get(i));
 		}
+		journeeRepo.save(nextDay);
 		champ.getProchaineEtape().next();
+//		champ.setProchaineEtape(champ.getProchaineEtape().next());
+		tournoiRepo.save(champ);
 	}
 
 }
