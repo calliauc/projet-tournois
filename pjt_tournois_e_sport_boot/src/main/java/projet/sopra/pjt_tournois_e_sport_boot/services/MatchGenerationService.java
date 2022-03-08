@@ -47,7 +47,7 @@ public class MatchGenerationService {
 			jour.setEtape(Etape.Ligue);
 			jour.setNumero(i + 1);
 			journeeRepo.save(jour);
-			Set<Match> matchsJournee = new HashSet<Match>();
+			List<Match> matchsJournee = new ArrayList<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {
 				Match m = new Match();
 				m.setJournee(jour);
@@ -68,22 +68,46 @@ public class MatchGenerationService {
 		tournoiRepo.save(ligue);
 	}
 
+	/* @formatter:off
+	 * Boucle sur le nombre de matchs de l'étape à venir
+	 * Ajout des premiers de chaque poule dans l'odre
+	 * Ajout des seconds de chaque poule dans l'odre inverse
+	 * @formatter:on
+	 */
 	public void initChampionatFinales(Championnat champ) {
-		// Creation d'une liste avec les 2 premiers de chaque poule
+		// Creation d'une liste de listes avec les 2 premiers de chaque poule
 		List<List<Inscription>> topsOfPoules = new ArrayList<List<Inscription>>();
 		for (Poule poule : champ.getPoules()) {
 			topsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
 		}
-
-		// Repartition des top 1 et top 2 des poules
-		for (int i = 0; i < champ.getNbPoules(); i++) {
+		Journee nextDay = champ.getJourneesAJouerFinales().get(champ.getProchaineEtape().getIndex());
+		int nbMatchs = champ.getProchaineEtape().getNbMatches();
+		for (int i = 0; i < nbMatchs; i++) {
 			List<Inscription> inscriptionsMatch = new ArrayList<Inscription>();
 			inscriptionsMatch.add(topsOfPoules.get(i).get(0));
-			inscriptionsMatch.add(topsOfPoules.get(champ.getNbPoules() - i).get(1));
-			Match m = new Match();
-			m.setInscriptions(inscriptionsMatch);
+			inscriptionsMatch.add(topsOfPoules.get(nbMatchs - i).get(1));
+			nextDay.getMatchsAJouerPourJournee().get(i).setInscriptions(inscriptionsMatch);
 		}
+		// "increment" de l'etape
+		champ.getProchaineEtape().next();
 	}
-	
+
+	/* @formatter:off
+	 * Boucle sur le nombre de matchs de l'étape à venir
+	 * Ajoute les gagnants des matchs de k'étape précédante
+	 * @formatter:on
+	 */
+	public void etapeSuivanteChampionnat(Championnat champ) {
+		Journee nextDay = champ.getJourneesAJouerFinales().get(champ.getProchaineEtape().getIndex());
+		Journee pastDay = champ.getJourneesAJouerFinales().get(champ.getProchaineEtape().getIndex() - 1);
+		int nbMatchs = champ.getProchaineEtape().getNbMatches();
+		for (int i = 0; i < nbMatchs; i++) {
+			List<Inscription> inscriptionsMatch = new ArrayList<Inscription>();
+			inscriptionsMatch.add(pastDay.getMatchsAJouerPourJournee().get(2 * i).getPremier()); // win 1
+			inscriptionsMatch.add(pastDay.getMatchsAJouerPourJournee().get((2 * i) + 1).getPremier()); // win 2
+			nextDay.getMatchsAJouerPourJournee().get(i).setInscriptions(inscriptionsMatch);
+		}
+		champ.getProchaineEtape().next();
+	}
 
 }
