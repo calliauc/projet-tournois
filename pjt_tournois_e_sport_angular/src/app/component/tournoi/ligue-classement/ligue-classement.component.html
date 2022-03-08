@@ -1,18 +1,22 @@
-<div>
-  <h3>Classement de {{ tournoi.nom }}</h3>
+<div class="card bg-dark text-white">
+  <div class="card-header">
+    <h3>Classement de {{ tournoi.nom }}</h3>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tr>
+        <th>position</th>
+        <th>joueur</th>
+        <th>score</th>
+        <th>scorediff</th>
+      </tr>
+      <tr *ngFor="let c of classement">
+        <td>{{ c.position }}</td>
+        <td>{{ c.id?.joueur?.username }}</td>
+        <td>{{ c.score }}</td>
+        <td>{{ c.scoreDifference }}</td>
+      </tr>
+    </table>
+    <a routerLink="/tournoi" routerLinkActive="active" btn-warning>retour</a>
+  </div>
 </div>
-<table class="table">
-  <tr>
-    <th>position</th>
-    <th>joueur</th>
-    <th>score</th>
-    <th>scorediff</th>
-  </tr>
-  <tr *ngFor="let c of classement">
-    <td>{{ c.position }}</td>
-    <td>{{ c.id?.joueur?.username }}</td>
-    <td>{{ c.score }}</td>
-    <td>{{ c.scoreDifference }}</td>
-  </tr>
-</table>
-<a routerLink="/tournoi" routerLinkActive="active" btn-warning>retour</a>
