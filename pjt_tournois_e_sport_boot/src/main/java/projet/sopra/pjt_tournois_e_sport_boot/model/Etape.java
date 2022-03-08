@@ -10,14 +10,14 @@ public enum Etape {
         };
     };
 
-	private int nbMatches;
+	private int nbMatchs;
 	private int index;
 
 	Etape(int nbMatches, int index) {
 	}
 
-	public int getNbMatches() {
-		return this.nbMatches;
+	public int getNbMatchs() {
+		return this.nbMatchs;
 	}
 
 	public int getIndex() {

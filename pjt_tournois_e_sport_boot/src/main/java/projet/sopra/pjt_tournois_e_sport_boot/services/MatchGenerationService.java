@@ -81,7 +81,7 @@ public class MatchGenerationService {
 			topsOfPoules.add(inscriptionRepo.getClassementLigue(poule.getIdTournoi()).subList(0, 1));
 		}
 		Journee nextDay = champ.getJourneesAJouerFinales().get(champ.getProchaineEtape().getIndex());
-		int nbMatchs = champ.getProchaineEtape().getNbMatches();
+		int nbMatchs = champ.getProchaineEtape().getNbMatchs();
 		for (int i = 0; i < nbMatchs; i++) {
 			List<Inscription> inscriptionsMatch = new ArrayList<Inscription>();
 			inscriptionsMatch.add(topsOfPoules.get(i).get(0));
@@ -94,13 +94,13 @@ public class MatchGenerationService {
 
 	/* @formatter:off
 	 * Boucle sur le nombre de matchs de l'étape à venir
-	 * Ajoute les gagnants des matchs de k'étape précédante
+	 * Ajoute les gagnants des matchs de l'étape précédante
 	 * @formatter:on
 	 */
 	public void etapeSuivanteChampionnat(Championnat champ) {
 		Journee nextDay = champ.getJourneesAJouerFinales().get(champ.getProchaineEtape().getIndex());
 		Journee pastDay = champ.getJourneesAJouerFinales().get(champ.getProchaineEtape().getIndex() - 1);
-		int nbMatchs = champ.getProchaineEtape().getNbMatches();
+		int nbMatchs = champ.getProchaineEtape().getNbMatchs();
 		for (int i = 0; i < nbMatchs; i++) {
 			List<Inscription> inscriptionsMatch = new ArrayList<Inscription>();
 			inscriptionsMatch.add(pastDay.getMatchsAJouerPourJournee().get(2 * i).getPremier()); // win 1
