@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
-import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
-import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
