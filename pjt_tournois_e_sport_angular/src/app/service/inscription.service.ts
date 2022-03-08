@@ -23,7 +23,7 @@ export class InscriptionService {
 
   public delete(idJoueur: number, idTournoi: number): Observable<void> {
     return this.httpClient.delete<void>(
-      `${InscriptionService.URL}/${idJoueur}/${idTournoi}`
+      `${InscriptionService.URL}/${idJoueur}&${idTournoi}`
     );
   }
 
