@@ -2,17 +2,31 @@ package projet.sopra.pjt_tournois_e_sport_boot.services;
 
 import java.util.List;
 
+import javax.validation.Validator;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.ResultatException;
+import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
+import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.ResultatRepository;
 
 @Service
 public class ResultatService {
 	@Autowired
 	private ResultatRepository resultatRepo;
+	
+	@Autowired
+	private Validator validator;
+	
+	@Autowired
+	private MatchRepository matchRepo;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ResultatService.class);
 	
 	public List<Resultat> getAll() {
 		return resultatRepo.findAll();
@@ -28,9 +42,12 @@ public class ResultatService {
 		if (r == null) {
 			throw new ResultatException();
 		}
+		LOGGER.info(r.toString());
 		Resultat resultatEnBase = null;
+		checkData(r);
+		LOGGER.info("données OK");
 		if (r.getId() == null) {
-			checkData(r);
+			LOGGER.info(r.getMatch().toString());
 			return resultatRepo.save(r);
 		} else {
 			resultatEnBase = this.getById(r.getId());
@@ -38,14 +55,13 @@ public class ResultatService {
 			resultatEnBase.setParticipant(r.getParticipant());
 			resultatEnBase.setScoreMatch(r.getScoreMatch());
 			resultatEnBase.setPositionMatch(r.getPositionMatch());
-			checkData(r);
 			return resultatRepo.save(resultatEnBase);
 		}
 	}
 	
 	private void checkData(Resultat r) {
-		if (r.getMatch() == null || r.getParticipant() == null || r.getScoreMatch()<0 || r.getPositionMatch()<1) {
-			throw new ResultatException("données incorrectes");
+		if (!validator.validate(r).isEmpty()) {
+			throw new UtilisateurException();
 		}
 	}
 	
@@ -57,7 +73,10 @@ public class ResultatService {
 	}
 	
 	public void delete(Long id) {
-		delete(getById(id)); 
+		//matchRepo.delete(getById(id).getMatch());
+		if(resultatRepo.existsById(id)) {
+			delete(getById(id)); 
+		}
 	}
 	
 	public boolean exist(Long id) {
