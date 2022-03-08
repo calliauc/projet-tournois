@@ -1,27 +1,27 @@
 <nav>
   <a routerLink="/accueil" routerLinkActive="active" class="btn btn-link"
-    >accueil</a
+    >Accueil</a
   >
   <a
     *ngIf="!authenticated"
     routerLink="/signup"
     routerLinkActive="active"
     class="btn btn-link"
-    >creer un compte</a
+    >Créer un compte</a
   >
   <a
     *ngIf="!authenticated"
     routerLink="/login"
     routerLinkActive="active"
     class="btn btn-link"
-    >login</a
+    >Se connecter</a
   >
   <a
     *ngIf="authenticated"
     routerLink="/tournoi"
     routerLinkActive="active"
     class="btn btn-link"
-    >tournoi</a
+    >Tournois</a
   >
 
   <a
@@ -29,19 +29,23 @@
     routerLink="/resultat"
     routerLinkActive="active"
     class="btn btn-link"
-    >resultats</a
+    >Resultats</a
   >
 
   <a
-  *ngIf="authenticated"
-  routerLink="/utilisateur"
-  routerLinkActive="active"
-  class="btn btn-link"
-  >Utilisateur</a
->
+    *ngIf="authenticated"
+    routerLink="/utilisateur"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >Utilisateurs</a
+  >
+
+  <a *ngIf="authenticated" routerLink="/inscription" class="btn btn-link"
+    >Inscriptions</a
+  >
 
   <a *ngIf="authenticated" class="btn btn-link" (click)="logout()"
-    >deconnexion</a
+    >Deconnexion</a
   >
 </nav>
 <router-outlet></router-outlet>
