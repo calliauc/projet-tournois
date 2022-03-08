@@ -1,5 +1,6 @@
 package projet.sopra.pjt_tournois_e_sport_boot.model;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -10,6 +11,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -44,13 +47,13 @@ public class Inscription {
 	@JsonView(Views.InscriptionWithId.class)
 	@Column(name = "score_difference")
 	private int scoreDifference;
-	/*
-	 * TODO Score total pour départager
-	 */
-	@JsonView({Views.InscriptionWithId.class,Views.MatchWithIncriptions.class})
+	@JsonView(Views.InscriptionWithId.class)
 	@ManyToOne
 	@JoinColumn(name = "inscription_prochain_match_id", foreignKey = @ForeignKey(name = "inscription_prochain_match_fk"))
 	private Match prochainMatch;
+	@ManyToMany
+	private List<Match> matchs = new ArrayList<Match>();
+	
 	
 	@OneToMany(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonView(Views.InscriptionWithId.class)
@@ -90,8 +93,17 @@ public class Inscription {
 
 
 	/// GETTERS
+	
 	public int getPosition() {
 		return position;
+	}
+
+	public List<Match> getMatchs() {
+		return matchs;
+	}
+
+	public void setMatchs(List<Match> matchs) {
+		this.matchs = matchs;
 	}
 
 	public int getScore() {
@@ -179,10 +191,6 @@ public class Inscription {
 		}
 	};
 
-	@Override
-	public String toString() {
-		return "Inscription [id=" + id + ", position=" + position + ", score=" + score + ", scoreDifference="
-				+ scoreDifference + ", prochainMatch=" + prochainMatch + "]";
-	}
+	
 
 }

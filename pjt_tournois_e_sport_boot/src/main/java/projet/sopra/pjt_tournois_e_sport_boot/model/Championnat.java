@@ -175,18 +175,18 @@ public class Championnat extends Tournoi {
 	/// GESTION PHASES FINALES
 
 	public void generatePhaseFinale() {
-		initEtape(Etape.Finale);
+		initEtape(Etape.Huitieme);
+		initEtape(Etape.Quart);
 		initEtape(Etape.Demi);
-			initEtape(Etape.Quart);
-				initEtape(Etape.Huitieme);
+		initEtape(Etape.Finale);
 	}
 
 	private void initEtape(Etape etape) {
 		Journee j = new Journee(this, null, null, etape);
-		for (int i = 0; i < etape.getNbMatches(); i++) {
+		for (int i = 0; i < etape.getNbMatchs(); i++) {
 			j.getMatchsAJouerPourJournee().add(new Match());
 		}
-		this.JourneesAJouerFinales.add(0, j);
+		this.JourneesAJouerFinales.add(j);
 	}
 
 }

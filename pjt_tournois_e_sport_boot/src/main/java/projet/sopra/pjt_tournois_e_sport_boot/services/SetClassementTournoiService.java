@@ -49,7 +49,7 @@ public class SetClassementTournoiService {
 		/// J'ai opté pour mettre en place une difference de score pour départager
 		/// les joueurs ayant le meme classement mais on peut faire autrement
 		int diffPosition = resultatJ1.getPositionMatch() - resultatJ2.getPositionMatch();
-		int diffScore = resultatJ1.getScoreMatch() - resultatJ2.getScoreMatch();
+		int diffScore = Math.abs(resultatJ1.getScoreMatch() - resultatJ2.getScoreMatch());
 
 		if (diffPosition < 0) {
 			j1EnBase.setScore(j1EnBase.getScore() + ptGagnesWinDuel);
