@@ -40,13 +40,19 @@ public class MatchGenerationService {
 	public void generateJourneesLigueDuels(Ligue ligue) {
 
 		////// TO DO : INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
-
+		int matchRetour; 
+		if (ligue.isMatchRetour()==true) {
+			matchRetour = 2;
+		}
+		else {
+			matchRetour = 1;
+		}
 		Set<Journee> journees = new HashSet<Journee>();
 		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(ligue.getListeInscriptions());
 		System.out.println("inscriptions : " + inscriptionsLigue.toString());
 		int isPair = (ligue.getListeInscriptions().size() + 1) % 2;
 
-		for (int i = 0; i < inscriptionsLigue.size() - isPair; i++) {
+		for (int i = 0; i < (inscriptionsLigue.size() - isPair)*matchRetour; i++) {
 			Journee jour = new Journee();
 			jour.setTournoi(ligue);
 			jour.setEtape(Etape.Ligue);
