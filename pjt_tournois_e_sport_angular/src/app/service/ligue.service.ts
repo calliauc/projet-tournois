@@ -22,6 +22,10 @@ export class LigueService {
     return this.http.get<Ligue>(LigueService.URL + '/' + id);
   }
 
+  getClassement(id: number): Observable<[]> {
+    return this.http.get<[]>(LigueService.URL + '/ligue_classement/' + id);
+  }
+
   update(ligue: Ligue): Observable<Ligue> {
     return this.http.put<Ligue>(
       LigueService.URL + '/ligue_' + ligue.idTournoi,
