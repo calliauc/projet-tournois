@@ -59,6 +59,7 @@ public class JourneeRestController {
 	//TO-DO
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	public Journee create(@Valid @RequestBody Journee journee, BindingResult br) {
 		return save(journee, br); 
 	}
@@ -66,6 +67,7 @@ public class JourneeRestController {
 	//TO-DO
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	@PutMapping("/{id}")
+	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	public Journee update(@Valid @RequestBody Journee journee, BindingResult br, @PathVariable Long id) {
 		if (!journeeService.exist(id)) {
 			throw new JourneeException(); 
@@ -81,11 +83,6 @@ public class JourneeRestController {
 	}
 	
 	//// TO DO - SPECIAL QUERIES
-	
-	
-	
-	
-	
 	
 	//// METHODS
 	

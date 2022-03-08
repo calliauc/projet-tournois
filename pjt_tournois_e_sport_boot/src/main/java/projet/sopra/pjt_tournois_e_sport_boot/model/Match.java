@@ -12,12 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -33,17 +32,19 @@ public class Match {
 	@JsonView({Views.Match.class, Views.ResultatWithInscriptionAndMatch.class,Views.JourneeWithTournoiAndMatch.class})
 	private Long id;
 	
-	@OneToMany(mappedBy = "prochainMatch")
+	@ManyToMany(mappedBy = "matchs")
 	@JsonView(Views.MatchWithIncriptions.class)
 	private List<Inscription> inscriptions = new ArrayList<Inscription>();
+	
+	@OneToMany(mappedBy = "prochainMatch")
+	private List<Inscription> prochainMatchs = new ArrayList<Inscription>();
 	
 	@ManyToOne
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
 	@JsonView(Views.Match.class)
 	private Journee journee;
 	
-	@OneToMany(mappedBy = "match", cascade = CascadeType.MERGE)
-	@OnDelete(action=OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonView(Views.Match.class)
 	private List<Resultat> resultats;
 	
@@ -62,6 +63,16 @@ public class Match {
 
 	/// GETTERS
 	
+	public List<Inscription> getProchainMatchs() {
+		return prochainMatchs;
+	}
+
+
+	public void setProchainMatchs(List<Inscription> prochainMatchs) {
+		this.prochainMatchs = prochainMatchs;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
@@ -133,5 +144,5 @@ public class Match {
 		Inscription w = new Inscription(); // Pour pas que ça plante
 		return w;
 	}
-	
+
 }

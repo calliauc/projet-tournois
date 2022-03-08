@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
@@ -17,6 +19,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.UtilisateurRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.services.MatchGenerationService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.MatchService;
 
 @SpringBootTest
 public class GenerateMatchLigueTest {
@@ -34,9 +37,13 @@ public class GenerateMatchLigueTest {
 	private TournoiRepository tournoiRepo;
 	@Autowired
 	private MatchGenerationService matchGenerationService;
+	@Autowired
+	private MatchService matchService;
 	
 	
 	@Test
+	@Transactional
+	@Commit
 	@Disabled
 	public void testGenerateMatchsPair() {
 		LOGGER.info("Debut du test");
@@ -105,10 +112,13 @@ public class GenerateMatchLigueTest {
 //		ligueTest.generateJourneesLigueDuels(); 
 		matchGenerationService.generateJourneesLigueDuels(ligueTest);
 		LOGGER.info("Fin de la generation des matches");
-		
+		LOGGER.info("Get prochains matches");
+		matchService.setAllProchainMatch(ligueTest.getIdTournoi());
 	}
 	
 	@Test
+	@Transactional
+	@Commit
 //	@Disabled
 	public void testGenerateMatchsImpair() {
 		LOGGER.info("Debut du test");
@@ -184,6 +194,8 @@ public class GenerateMatchLigueTest {
 //		ligueTest.generateJourneesLigueDuels(); 
 		matchGenerationService.generateJourneesLigueDuels(ligueTest);
 		LOGGER.info("Fin de la generation des matches");
+		LOGGER.info("Get prochains matches");
+		
 		
 	}
 }

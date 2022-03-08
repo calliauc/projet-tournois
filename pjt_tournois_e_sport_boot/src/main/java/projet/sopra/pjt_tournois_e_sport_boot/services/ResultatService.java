@@ -69,8 +69,7 @@ public class ResultatService {
 		if (r == null || r.getId() == null) {
 			throw new ResultatException();
 		}
-		Resultat resultatEnBase = resultatRepo.findById(r.getId()).orElseThrow(ResultatException::new);
-		resultatRepo.delete(resultatEnBase);
+		resultatRepo.delete(r);
 	}
 	
 	public void delete(Long id) {
