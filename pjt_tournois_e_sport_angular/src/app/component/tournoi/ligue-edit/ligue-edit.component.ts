@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Tournoi } from 'src/app/model/tournoi';
 import { Ligue } from 'src/app/model/ligue';
-import { TournoiService } from 'src/app/service/tournoi.service';
+import { LigueService } from 'src/app/service/ligue.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-ligue-edit',
@@ -10,18 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./ligue-edit.component.css'],
 })
 export class LigueEditComponent implements OnInit {
-  tournoi: Tournoi = new Ligue();
+  tournoi: Ligue = new Ligue();
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private tournoiService: TournoiService,
+    private ligueService: LigueService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.tournoi.type = 'ligue';
     this.activatedRoute.params.subscribe((params) => {
       if (params['idTournoi']) {
-        this.tournoiService.get(params['idTournoi']).subscribe((result) => {
+        this.ligueService.get(params['idTournoi']).subscribe((result) => {
           console.log(result);
           this.tournoi = result;
         });
@@ -31,11 +32,11 @@ export class LigueEditComponent implements OnInit {
 
   save() {
     if (this.tournoi.idTournoi) {
-      this.tournoiService.update(this.tournoi).subscribe((ok) => {
+      this.ligueService.update(this.tournoi).subscribe((ok) => {
         this.router.navigate(['/tournoi']);
       });
     } else {
-      this.tournoiService.create(this.tournoi).subscribe((ok) => {
+      this.ligueService.create(this.tournoi).subscribe((ok) => {
         this.router.navigate(['/tournoi']);
       });
     }

@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Tournoi } from './../../model/tournoi';
 import { TournoiService } from './../../service/tournoi.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-tournoi',
