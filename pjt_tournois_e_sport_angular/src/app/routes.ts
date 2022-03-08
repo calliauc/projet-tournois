@@ -1,3 +1,4 @@
+import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilisateur.component';
 import { Routes } from '@angular/router';
 import { TournoiComponent } from './component/tournoi/tournoi.component';
 import { EditTournoiComponent } from './component/tournoi-edit/tournoi-edit.component';
@@ -17,4 +18,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+
+  { path: 'utilisateur', component: UtilisateurComponent },
 ];

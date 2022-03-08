@@ -1,0 +1,14 @@
+<table class="table">
+  <tr>
+    <th>Id</th>
+    <th>Username</th>
+    <th>Mail</th>
+    <th>Role</th>
+  </tr>
+  <tr *ngFor="let user of uObservable | async">
+    <td>{{user.id}}</td>
+    <td>{{user.username}}</td>
+    <td>{{user.mail}}</td>
+    <td>{{user.roles}}</td>
+  </tr>
+</table>
