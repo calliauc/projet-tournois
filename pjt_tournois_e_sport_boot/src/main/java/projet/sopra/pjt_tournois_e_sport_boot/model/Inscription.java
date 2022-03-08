@@ -31,19 +31,19 @@ public class Inscription {
 	/// ATTRIBUTES
 	@EmbeddedId
 	@JsonView({ Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
-			Views.TournoiWithInscriptions.class, Views.UserWithIncriptions.class, Views.Match.class })
+			Views.TournoiWithInscriptions.class, Views.UserWithIncriptions.class, Views.Match.class, Views.Classement.class })
 	private InscriptionKey id;
-	@JsonView(Views.InscriptionWithId.class)
+	@JsonView({Views.InscriptionWithId.class, Views.Classement.class})
 	@Column(name = "position")
 	@PositiveOrZero
 	private int position;
-	@JsonView(Views.InscriptionWithId.class)
+	@JsonView({Views.InscriptionWithId.class, Views.Classement.class})
 	@Column(name = "score")
 	@PositiveOrZero
 	private int score;
 	/// somme des differences de scores de chaque match -- > sigma (score_joueur -
 	/// score_adversaire) /!\ ne marche que pour les duels
-	@JsonView(Views.InscriptionWithId.class)
+	@JsonView({Views.InscriptionWithId.class, Views.Classement.class})
 	@Column(name = "score_difference")
 	private int scoreDifference;
 	@JsonView(Views.InscriptionWithId.class)

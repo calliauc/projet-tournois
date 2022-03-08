@@ -2,12 +2,17 @@
 
 <table class="table">
   <tr>
-    <th>type</th>
-    <th>idTournoi</th>
-    <th>nom</th>
-    <th>dateDeCreation</th>
-    <th>dateDeDebut</th>
-    <th>jeu</th>
+    <th>Type de tournoi</th>
+    <th>ID du tournoi</th>
+    <th>Nom</th>
+    <th>Date de création</th>
+    <th>Date de début</th>
+    <th>Jeu</th>
+    <th>Nombre de participants par match</th>
+    <th>Nombre de participants total</th>
+    <th>Etat des inscriptions</th>
+    <th>Avancement</th>
+    <th>Organisateur</th>
   </tr>
   <tr *ngFor="let t of tournoisObservable | async">
     <td>{{ t.type }}</td>
@@ -19,22 +24,65 @@
     <!--<td>{{ t.listeInscriptions }}</td>-->
     <td>{{ t.nbParticipantsParMatch }}</td>
     <td>{{ t.nbParticipantsTotal }}</td>
+    <td>{{ t.statutInscriptions }}</td>
+    <td>{{ t.statutTemps }}</td>
     <!--<td>{{ t.organisateur }}</td>-->
+    <td></td>
+    <td></td>
     <td>
-      <a
-        [routerLink]="['/tournoi', 'edit', t.idTournoi]"
-        routerLinkActive="active"
-        class="btn btn-outline-primary"
-        >editer</a
-      >
+      <div *ngIf="t.type == 'ligue'">
+        <a
+          [routerLink]="['/ligue', 'edit', t.idTournoi]"
+          routerLinkActive="active"
+          class="btn btn-outline-primary"
+          >editer</a
+        >
+      </div>
+      <div *ngIf="t.type == 'championnat'">
+        <a
+          [routerLink]="['/championnat', 'edit', t.idTournoi]"
+          routerLinkActive="active"
+          class="btn btn-outline-primary"
+          >editer</a
+        >
+      </div>
     </td>
     <td>
       <button (click)="delete(t.idTournoi!)" class="btn btn-outline-danger">
         supprimer
       </button>
     </td>
+    <td>
+      <button class="btn btn-outline-success">classement</button>
+    </td>
   </tr>
 </table>
-<a routerLink="/tournoi/edit" routerLinkActive="active" class="btn btn-link"
-  >ajouter un tournoi</a
->
+<div class="btn-group" role="group">
+  <button
+    id="createNewTournoi"
+    type="button"
+    class="btn btn-primary dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Créer un nouveau tournoi
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+    <li value="ligue">
+      <a
+        class="dropdown-item"
+        routerLink="/ligue/edit"
+        routerLinkActive="active"
+        >Ligue</a
+      >
+    </li>
+    <li value="championnat">
+      <a
+        class="dropdown-item"
+        [routerLink]="['/championnat/edit']"
+        routerLinkActive="active"
+        >Championnat</a
+      >
+    </li>
+  </ul>
+</div>
