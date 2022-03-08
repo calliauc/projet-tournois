@@ -60,11 +60,12 @@ public class AuthRestController {
 		utilisateur.setRoles(new HashSet<Role>(Arrays.asList(Role.ROLE_USER)));
 		return utilisateurRepo.save(utilisateur);
 	}
-	
+
 	@GetMapping("/searchByLogin/{username}")
 	public boolean usernameDejaUtilise(@PathVariable String username) {
 		return utilisateurRepo.findByUsername(username).isPresent();
 	}
+
 	@GetMapping("/searchByMail/{mail}")
 	public boolean mailDejaUtilise(@PathVariable String mail) {
 		return utilisateurRepo.findByMail(mail).isPresent();

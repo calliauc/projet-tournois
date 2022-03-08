@@ -28,7 +28,6 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
-import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 
 @RestController
 @RequestMapping("api/tournoi")

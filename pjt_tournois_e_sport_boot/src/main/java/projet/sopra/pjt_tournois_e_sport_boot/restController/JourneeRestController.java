@@ -28,76 +28,69 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 @RestController
 @RequestMapping("api/journee")
 public class JourneeRestController {
-	
-	
-	//// TO-DO 
+
+	//// TO-DO
 //	Create
 //	Update
 //	Delete en conflit avec prochain match
 
 	@Autowired
-	private JourneeService journeeService; 
-	
+	private JourneeService journeeService;
+
 	@Autowired
-	private TournoiService tournoiService; 
-	
+	private TournoiService tournoiService;
+
 	//// CRUD
-	
+
 	@GetMapping("")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	public List<Journee> getAll() {
-		List<Journee> list = journeeService.getAll(); 
-		return list; 
+		List<Journee> list = journeeService.getAll();
+		return list;
 	}
-	
+
 	@GetMapping("/{id}")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	public Journee getById(@PathVariable Long id) {
 		return journeeService.getById(id);
 	}
-	
-	//TO-DO
+
+	// TO-DO
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	public Journee create(@Valid @RequestBody Journee journee, BindingResult br) {
-		return save(journee, br); 
+		return save(journee, br);
 	}
-	
-	//TO-DO
+
+	// TO-DO
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	@PutMapping("/{id}")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	public Journee update(@Valid @RequestBody Journee journee, BindingResult br, @PathVariable Long id) {
 		if (!journeeService.exist(id)) {
-			throw new JourneeException(); 
+			throw new JourneeException();
 		}
 		return save(journee, br);
 	}
-	
+
 //	TO-DO (Conflit avec prochain match)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	private void delete(@PathVariable Long id) {
-		journeeService.delete(id); 
+		journeeService.delete(id);
 	}
-	
+
 	//// TO DO - SPECIAL QUERIES
-	
+
 	//// METHODS
-	
+
 	private Journee save(Journee journee, BindingResult br) {
 		if (br.hasErrors()) {
-			throw new JourneeException(); 
+			throw new JourneeException();
 		}
-		return journeeService.createOrUpdate(journee); 
-		
+		return journeeService.createOrUpdate(journee);
+
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
