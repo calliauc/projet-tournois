@@ -3,6 +3,7 @@ package projet.sopra.pjt_tournois_e_sport_boot.restController;
 import java.util.List;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -74,7 +75,7 @@ public class MatchRestController {
 		if(!matchService.exist(id)) {
 			throw new MatchException();
 		}
-		matchService.delete(id);
+		matchService.deleteById(id);
 	}
 	
 	//METHODS

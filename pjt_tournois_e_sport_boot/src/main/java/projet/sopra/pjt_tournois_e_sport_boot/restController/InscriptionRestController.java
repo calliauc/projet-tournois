@@ -90,6 +90,7 @@ public class InscriptionRestController {
 		
 	// TO DO (conflit avec table Resultat)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	@JsonView(Views.InscriptionWithId.class)
 	@DeleteMapping("/{idJoueur}&{idTournoi}")
 	public void delete(@PathVariable Long idJoueur, @PathVariable Long idTournoi) {
 		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idTournoi));

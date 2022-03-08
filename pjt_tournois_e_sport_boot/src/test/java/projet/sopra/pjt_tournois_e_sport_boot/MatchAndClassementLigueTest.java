@@ -69,6 +69,7 @@ public class MatchAndClassementLigueTest {
 		ligueTest.setDateDeDebut(LocalDate.of(2022, 2, 20));
 		ligueTest.setJeu("Mariokart");
 		ligueTest.setNbParticipantsParMatch(2);
+		ligueTest.setMatchRetour(true);
 		LOGGER.info("Fin du remplissage");
 
 		LOGGER.info("Sauvegarde en base");

@@ -84,17 +84,9 @@ public class MatchService {
 		}
 		matchRepo.delete(matchEnBase);
 	}
-
-	public void delete(Long id) {
-		if (this.getById(id).getResultats() == null) {
-			delete(this.getById(id));
-		} 
-		else {
-			for (Resultat r : this.getById(id).getResultats()) {
-				resultatRepo.delete(r);
-			}
-		}
-
+	
+	public void deleteById(Long id) {
+		matchRepo.deleteById(id);
 	}
 
 	private void checkData(Match m) {
@@ -119,6 +111,7 @@ public class MatchService {
 		int numProchaineJournee = resultatRepo.findByParticipant(inscription).size() + 1;
 		while (isProchainMatchFound != true) {
 			if (journeeRepo.findByNumeroAndTournoi(numProchaineJournee, inscription.getId().getTournoi()) == null) {
+				inscription.setProchainMatch(null);
 				break;
 			} else {
 				Journee jProchainMatch = journeeRepo.findByNumeroAndTournoi(numProchaineJournee,

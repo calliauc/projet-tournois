@@ -2,9 +2,9 @@ package projet.sopra.pjt_tournois_e_sport_boot.model;
 
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,12 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -28,28 +25,33 @@ public class Resultat {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqResultat")
-	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.Match.class})
+	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.Match.class,Views.InscriptionWithId.class})
+	@NotEmpty
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "resultat_match_id", foreignKey = @ForeignKey(name="resultat_match_fk"))
 	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
-	@OnDelete( action = OnDeleteAction.CASCADE)
+	@NotEmpty
+	//@OnDelete( action = OnDeleteAction.CASCADE)
 	private Match match;
 	
-	@OneToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns(
 			{@JoinColumn(name = "resultat_participant_id", foreignKey = @ForeignKey(name="resultat_participant_fk")),
 			@JoinColumn(name="resultat_tournoi_id",  foreignKey = @ForeignKey(name="resultat_tournoi_fk"))})
-	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.Match.class})
+	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
+	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Inscription participant;
 	
 	@Column(name="position_match")
 	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
+	@NotEmpty
 	private int positionMatch;
 	
 	@Column(name="score_match")
 	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
+	@NotEmpty
 	private int scoreMatch;
 
 	public Resultat() {

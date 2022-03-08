@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -16,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -45,7 +44,7 @@ public class Match {
 	@JsonView(Views.Match.class)
 	private Journee journee;
 	
-	@OneToMany(mappedBy = "match")
+	@OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonView(Views.Match.class)
 	private List<Resultat> resultats;
 	
