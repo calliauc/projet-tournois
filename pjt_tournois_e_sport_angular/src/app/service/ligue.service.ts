@@ -30,7 +30,7 @@ export class LigueService {
   }
 
   create(ligue: Ligue): Observable<Ligue> {
-    const tournoiEnJson = { nom: ligue.nom };
+    const tournoiEnJson = { type: ligue.type, nom: ligue.nom };
 
     return this.http.post<Ligue>(LigueService.URL + '/ligue', tournoiEnJson);
   }

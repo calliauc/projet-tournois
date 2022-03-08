@@ -95,6 +95,10 @@ public class TournoiService {
 		if (LocalDate.now().isAfter(tournoi.getDateDeDebut()) || LocalDate.now().isEqual(tournoi.getDateDeDebut())) {
 			tournoi.setStatutTemps(StatutTemps.En_cours);
 		}
+		else if (LocalDate.now().isBefore(tournoi.getDateDeDebut()))
+		{
+			tournoi.setStatutTemps(StatutTemps.A_venir);
+		}
 		tournoiRepo.save(tournoi);
 	}
 	
