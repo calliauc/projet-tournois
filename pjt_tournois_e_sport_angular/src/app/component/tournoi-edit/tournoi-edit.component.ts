@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Tournoi } from './../../model/tournoi';
-import { TournoiService } from './../../service/tournoi.service';
+import { Tournoi } from '../../model/tournoi';
+import { TournoiService } from '../../service/tournoi.service';
 
 @Component({
   selector: 'app-tournoi-edit',

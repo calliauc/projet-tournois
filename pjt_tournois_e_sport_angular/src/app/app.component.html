@@ -4,10 +4,10 @@
   >
   <a
     *ngIf="!authenticated"
-    routerLink="/inscription"
+    routerLink="/signup"
     routerLinkActive="active"
     class="btn btn-link"
-    >inscription</a
+    >creer un compte</a
   >
   <a
     *ngIf="!authenticated"
@@ -24,8 +24,16 @@
     >tournoi</a
   >
 
+  <a
+  *ngIf="authenticated"
+  routerLink="/utilisateur"
+  routerLinkActive="active"
+  class="btn btn-link"
+  >Utilisateur</a
+>
+
   <a *ngIf="authenticated" class="btn btn-link" (click)="logout()"
-    >deconnection</a
+    >deconnexion</a
   >
 </nav>
 <router-outlet></router-outlet>
