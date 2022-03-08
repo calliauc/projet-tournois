@@ -15,41 +15,39 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
-@Table(name="Match")
-@SequenceGenerator(name="seqMatch", sequenceName = "seq_match",initialValue=100,allocationSize = 1)
+@Table(name = "Match")
+@SequenceGenerator(name = "seqMatch", sequenceName = "seq_match", initialValue = 100, allocationSize = 1)
 public class Match {
 
 	/// ATTRIBUTES
 	@Id
-	@Column(name="match_id")
+	@Column(name = "match_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMatch")
-	@JsonView({Views.Match.class, Views.ResultatWithInscriptionAndMatch.class,Views.JourneeWithTournoiAndMatch.class})
+	@JsonView({ Views.Match.class, Views.ResultatWithInscriptionAndMatch.class,
+			Views.JourneeWithTournoiAndMatch.class })
 	private Long id;
-	
+
 	@OneToMany(mappedBy = "prochainMatch")
 	@JsonView(Views.MatchWithIncriptions.class)
 	private List<Inscription> inscriptions = new ArrayList<Inscription>();
-	
+
 	@ManyToOne
-	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name="inscription_prochain_match_fk"))
+	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name = "inscription_prochain_match_fk"))
 	@JsonView(Views.Match.class)
 	private Journee journee;
-	
+
 	@OneToMany(mappedBy = "match")
 	@JsonView(Views.Match.class)
 	private List<Resultat> resultats;
-	
+
 	/// CONSTRUCTOR
 	public Match() {
 	}
 
-	
 	public Match(List<Inscription> inscriptions, Journee journee, List<Resultat> resultats) {
 		super();
 		this.inscriptions = inscriptions;
@@ -57,9 +55,8 @@ public class Match {
 		this.resultats = resultats;
 	}
 
-
 	/// GETTERS
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -76,16 +73,11 @@ public class Match {
 		return resultats;
 	}
 
-
-	
 	/// SETTERS
-	
-
 
 	public void setResultats(List<Resultat> resultats) {
 		this.resultats = resultats;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
@@ -99,10 +91,8 @@ public class Match {
 		this.journee = journee;
 	}
 
-
-		
 	/// METHODS
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -119,17 +109,16 @@ public class Match {
 		Match other = (Match) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 	/// GESTION CUSTOM
-	
+
 	/*
 	 * TODO récupérer le premier selon la liste de resultats
 	 */
-	
+
 	public Inscription getPremier() {
 		Inscription w = new Inscription(); // Pour pas que ça plante
 		return w;
 	}
-	
+
 }
