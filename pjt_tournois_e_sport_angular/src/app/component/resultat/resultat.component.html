@@ -3,12 +3,61 @@
     <h3>Resultats</h3>
   </div>
   <div class="card-body">
+    <div>Rechercher un resultat avec son id :</div>
     <table class="table">
+      <p>
+        <input
+          class="form-control"
+          type="number"
+          id="idResultat"
+          name="idResultat"
+          [(ngModel)]="idResultat"
+        />
+      </p>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="getById(idResultat)"
+      >
+        Enregistrer
+      </button>
+      <br />
+      <br />
+      <tr *ngIf="resultat.id">
+        <th>id</th>
+        <th>matchId</th>
+        <!--<th>ParticipantId</th>
+    <th>TournoiId</th>-->
+        <th>positionMatch</th>
+        <th>scoreMatch</th>
+      </tr>
+      <tr *ngIf="resultat.id">
+        <td>{{ resultat.id }}</td>
+        <td>{{ resultat.match?.id }}</td>
+        <td>{{ resultat.positionMatch }}</td>
+        <td>{{ resultat.scoreMatch }}</td>
+        <td>
+          <a
+            [routerLink]="['/resultat', 'edit', resultat.id]"
+            routerLinkActive="active"
+            class="btn btn-outline-primary"
+            >editer</a
+          >
+        </td>
+        <td>
+          <button (click)="delete(resultat.id!)" class="btn btn-outline-danger">
+            supprimer
+          </button>
+        </td>
+      </tr>
+      <br *ngIf="resultat.id" />
+      <br *ngIf="resultat.id" />
+
       <tr>
         <th>id</th>
         <th>matchId</th>
         <!--<th>ParticipantId</th>
-        <th>TournoiId</th>-->
+    <th>TournoiId</th>-->
         <th>positionMatch</th>
         <th>scoreMatch</th>
       </tr>
