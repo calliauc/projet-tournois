@@ -3,12 +3,18 @@ package projet.sopra.pjt_tournois_e_sport_boot.model;
 import java.time.LocalDate;
 import java.util.Set;
 
-import javax.persistence.Transient;
-import javax.transaction.Transactional;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-public class Poule extends Ligue{
+@Entity
+@Table(name = "poule")
+public class Poule extends Ligue {
 
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "poule_championnat", foreignKey = @ForeignKey(name = "poule_championnat_fk"))
 	private Championnat championnat;
 
 	public Poule() {
@@ -34,5 +40,4 @@ public class Poule extends Ligue{
 		return "Poule [championnat=" + championnat + ", idTournoi=" + idTournoi + ", nom=" + nom + "]";
 	}
 
-	
 }

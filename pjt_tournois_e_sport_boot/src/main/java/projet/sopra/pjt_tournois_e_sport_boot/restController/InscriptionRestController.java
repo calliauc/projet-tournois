@@ -33,116 +33,120 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 @RestController
 @RequestMapping("api/inscription")
 public class InscriptionRestController {
-	//TO DO :
+	// TO DO :
 //  getById composé
 //  delete
 //	update
 //  create
-	
+
 	@Autowired
 	private InscriptionService inscriptionService;
 	@Autowired
 	private UtilisateurService utilisateurService;
 	@Autowired
 	private TournoiService tournoiService;
-	
-	//CRUD
-	
+
+	// CRUD
+
 	@GetMapping("")
 	@JsonView(Views.InscriptionWithId.class)
 	public List<Inscription> getAll() {
 		return inscriptionService.getAll();
 	}
-	
+
 	@GetMapping("/avecDto")
-	public List<InscriptionDto> getAllWithKey(){
+	public List<InscriptionDto> getAllWithKey() {
 		return inscriptionListToInscriptionDTOList(inscriptionService.getAll());
 	}
-	
+
 	@GetMapping("/{idJoueur}&{idTournoi}")
 	@JsonView(Views.InscriptionWithId.class)
 	public Inscription getById(@PathVariable Long idJoueur, @PathVariable Long idTournoi) {
-		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idTournoi));
+		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),
+				tournoiService.getById(idTournoi));
 		return inscriptionService.getById(key);
 	}
-	
+
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@JsonView(Views.InscriptionWithId.class)
 	@PostMapping("")
 	public Inscription create(@Valid @RequestBody InscriptionKeyDto ikDto, BindingResult br) {
-		Inscription i =new Inscription(InscriptionKeyDtoToInscriptionKey(ikDto));
-		return save(i,br);
+		Inscription i = new Inscription(InscriptionKeyDtoToInscriptionKey(ikDto));
+		return save(i, br);
 	}
-	
+
 	@JsonView(Views.InscriptionWithId.class)
 	@PutMapping("/{idJoueur}&{idTournoi}")
-	public Inscription update(@Valid @RequestBody InscriptionDto inscriptionDto, BindingResult br, @PathVariable Long idJoueur, @PathVariable Long idTournoi) {
+	public Inscription update(@Valid @RequestBody InscriptionDto inscriptionDto, BindingResult br,
+			@PathVariable Long idJoueur, @PathVariable Long idTournoi) {
 		Inscription inscription = InscriptionDtoToInscription(inscriptionDto);
-		if(!inscriptionService.exist(inscription.getId())) {
+		if (!inscriptionService.exist(inscription.getId())) {
 			throw new InscriptionException("\n\n Id absent base : " + inscription.getId().toString() + "\n\n");
 		}
-		if(inscription.getId().getJoueur().getId() != idJoueur || inscription.getId().getTournoi().getIdTournoi() != idTournoi) {
+		if (inscription.getId().getJoueur().getId() != idJoueur
+				|| inscription.getId().getTournoi().getIdTournoi() != idTournoi) {
 			throw new InscriptionException("Les id ne correspondent pas");
 		}
-		return save(inscription,br);
+		return save(inscription, br);
 	}
-	
-		
+
 	// TO DO (conflit avec table Resultat)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@JsonView(Views.InscriptionWithId.class)
 	@DeleteMapping("/{idJoueur}&{idTournoi}")
 	public void delete(@PathVariable Long idJoueur, @PathVariable Long idTournoi) {
-		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),tournoiService.getById(idTournoi));
-		if(!inscriptionService.exist(key)) {
+		InscriptionKey key = new InscriptionKey(utilisateurService.getById(idJoueur),
+				tournoiService.getById(idTournoi));
+		if (!inscriptionService.exist(key)) {
 			throw new InscriptionException();
 		}
 		inscriptionService.deleteById(key);
 	}
-	
-	//METHODS
-	
+
+	// METHODS
+
 	private Inscription save(Inscription inscription, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new InscriptionException();
 		}
 		return inscriptionService.createOrUpdate(inscription);
 	}
-	
-	//DTO
-	
+
+	// DTO
+
 	private InscriptionDto inscriptionToInscriptionDTO(Inscription i) {
-		InscriptionKeyDto ikDto = new InscriptionKeyDto(i.getId().getJoueur().getId(), i.getId().getTournoi().getIdTournoi());
+		InscriptionKeyDto ikDto = new InscriptionKeyDto(i.getId().getJoueur().getId(),
+				i.getId().getTournoi().getIdTournoi());
 		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getScoreDifference(), i.getProchainMatch());
 	}
-	
-	private List<InscriptionDto> inscriptionListToInscriptionDTOList(List<Inscription> inscriptions){
+
+	private List<InscriptionDto> inscriptionListToInscriptionDTOList(List<Inscription> inscriptions) {
 		List<InscriptionDto> inscriptionsWithKey = new ArrayList<InscriptionDto>();
-		for(Inscription i : inscriptions) {
+		for (Inscription i : inscriptions) {
 			inscriptionsWithKey.add(inscriptionToInscriptionDTO(i));
 		}
 		return inscriptionsWithKey;
 	}
-	
+
 	private InscriptionKey InscriptionKeyDtoToInscriptionKey(InscriptionKeyDto ikDto) {
 		InscriptionKey ik = new InscriptionKey();
 		ik.setJoueur(utilisateurService.getById(ikDto.getIdJoueur()));
 		ik.setTournoi(tournoiService.getById(ikDto.getIdTournoi()));
-		//BeanUtils.copyProperties(ikDto, ik);
+		// BeanUtils.copyProperties(ikDto, ik);
 		return ik;
 	}
-	
-	private Inscription InscriptionDtoToInscription (InscriptionDto iDto) {
-		Inscription i = new Inscription(InscriptionKeyDtoToInscriptionKey(iDto.getId()),iDto.getPosition(), iDto.getScore(), iDto.getScoreDifference(), iDto.getProchainMatch());
+
+	private Inscription InscriptionDtoToInscription(InscriptionDto iDto) {
+		Inscription i = new Inscription(InscriptionKeyDtoToInscriptionKey(iDto.getId()), iDto.getPosition(),
+				iDto.getScore(), iDto.getScoreDifference(), iDto.getProchainMatch());
 		return i;
 	}
-	
+
 	// SPECIAL QUERIES
-	
+
 	@GetMapping("/score/{score1}&{score2}")
-	public List<InscriptionDto> getAllByScore(@PathVariable int score1, @PathVariable int score2){
+	public List<InscriptionDto> getAllByScore(@PathVariable int score1, @PathVariable int score2) {
 		return inscriptionListToInscriptionDTOList(inscriptionService.getAllByScoreBetween(score1, score2));
 	}
-	
-	
+
 }

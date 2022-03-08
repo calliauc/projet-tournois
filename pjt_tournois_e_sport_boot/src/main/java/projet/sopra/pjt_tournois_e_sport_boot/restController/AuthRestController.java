@@ -48,7 +48,7 @@ public class AuthRestController {
 	@PreAuthorize("isAnonymous()")
 	@JsonView(Views.Common.class)
 	@PostMapping("/signup")
-	@ResponseStatus(code = HttpStatus.BAD_REQUEST, value = HttpStatus.BAD_REQUEST)
+	@ResponseStatus(code = HttpStatus.CREATED, value = HttpStatus.CREATED)
 	public Utilisateur inscription(@Valid @RequestBody Utilisateur utilisateur, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new UtilisateurException();
@@ -60,11 +60,12 @@ public class AuthRestController {
 		utilisateur.setRoles(new HashSet<Role>(Arrays.asList(Role.ROLE_USER)));
 		return utilisateurRepo.save(utilisateur);
 	}
-	
+
 	@GetMapping("/searchByLogin/{username}")
 	public boolean usernameDejaUtilise(@PathVariable String username) {
 		return utilisateurRepo.findByUsername(username).isPresent();
 	}
+
 	@GetMapping("/searchByMail/{mail}")
 	public boolean mailDejaUtilise(@PathVariable String mail) {
 		return utilisateurRepo.findByMail(mail).isPresent();

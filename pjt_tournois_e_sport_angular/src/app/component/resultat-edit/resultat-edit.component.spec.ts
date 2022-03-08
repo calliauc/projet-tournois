@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TournoiEditComponent } from './tournoi-edit.component';
+import { ResultatEditComponent } from './resultat-edit.component';
 
-describe('TournoiEditComponent', () => {
-  let component: TournoiEditComponent;
-  let fixture: ComponentFixture<TournoiEditComponent>;
+describe('ResultatEditComponent', () => {
+  let component: ResultatEditComponent;
+  let fixture: ComponentFixture<ResultatEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TournoiEditComponent ]
+      declarations: [ ResultatEditComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TournoiEditComponent);
+    fixture = TestBed.createComponent(ResultatEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

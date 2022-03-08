@@ -3,7 +3,6 @@ package projet.sopra.pjt_tournois_e_sport_boot.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;

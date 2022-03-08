@@ -7,7 +7,7 @@ import { Utilisateur } from '../model/utilisateur';
   providedIn: 'root',
 })
 export class UtilisateurService {
-  private static URL = 'http://localhost:8080/boot/api/utilisateur';
+  private static URL = 'http://localhost:8080/tournoi_esport/api/utilisateur';
 
   constructor(private httpClient: HttpClient) {}
 

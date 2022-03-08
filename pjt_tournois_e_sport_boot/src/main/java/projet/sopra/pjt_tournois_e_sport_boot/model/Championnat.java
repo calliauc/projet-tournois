@@ -2,7 +2,6 @@ package projet.sopra.pjt_tournois_e_sport_boot.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "championnat")
@@ -19,14 +17,15 @@ public class Championnat extends Tournoi {
 	/// ATTRIBUTES
 	@OneToMany(mappedBy = "tournoi")
 	private List<Journee> JourneesAJouerPoules = new ArrayList<Journee>();
-	@OneToMany(mappedBy = "id")
+	@OneToMany(mappedBy = "tournoi")
 	private List<Journee> JourneesAJouerFinales = new ArrayList<Journee>();
-	@Transient
+	@OneToMany(mappedBy = "championnat")
 	private List<Poule> poules = new ArrayList<Poule>();
+
 	@Column(name = "prochaine_etape_finale")
 	private Etape prochaineEtape;
 
-//	private int nbPoules = 0; remplace par prochaineEtape.getNbMatches();
+//	private int nbPoules = 0; remplace par prochaineEtape.getNbMatchs();
 
 	/// CONSTRUCTORS
 
@@ -81,8 +80,5 @@ public class Championnat extends Tournoi {
 //	public void setNbPoules(int nbPoules) {
 //		this.nbPoules = nbPoules;
 //	}
-
-	
-	
 
 }

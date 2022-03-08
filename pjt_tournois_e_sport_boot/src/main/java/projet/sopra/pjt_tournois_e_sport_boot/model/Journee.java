@@ -3,7 +3,6 @@ package projet.sopra.pjt_tournois_e_sport_boot.model;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +31,7 @@ public class Journee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqJournee")
-	@JsonView({Views.JourneeWithTournoiAndMatch.class,Views.Match.class})
+	@JsonView({ Views.JourneeWithTournoiAndMatch.class, Views.Match.class })
 	private Long id;
 
 	@ManyToOne
@@ -57,14 +56,13 @@ public class Journee {
 	@Column(name = "journee_etape")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
 	private Etape etape;
-	
-	/// attribut pour connaitre l'ordre des journées d'une ligue/poule sans passer par les dates 
-	@Column(name="journee_numero")
+
+	/// attribut pour connaitre l'ordre des journées d'une ligue/poule sans passer
+	/// par les dates
+	@Column(name = "journee_numero")
 	@JsonView(Views.JourneeWithTournoiAndMatch.class)
-	private int numero; 
-	
-	
-	
+	private int numero;
+
 	/// CONSTRUCTOR
 
 	public Journee() {
@@ -78,14 +76,15 @@ public class Journee {
 		this.dateFinJournee = dateFinJournee;
 		this.etape = etape;
 	}
-	
-	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape, int numero) {
+
+	public Journee(Tournoi tournoi, LocalDateTime dateDebutJournee, LocalDateTime dateFinJournee, Etape etape,
+			int numero) {
 		super();
 		this.tournoi = tournoi;
 		this.dateDebutJournee = dateDebutJournee;
 		this.dateFinJournee = dateFinJournee;
 		this.etape = etape;
-		this.numero = numero; 
+		this.numero = numero;
 	}
 
 	/// GETTERS
@@ -113,7 +112,7 @@ public class Journee {
 	public Etape getEtape() {
 		return etape;
 	}
-	
+
 	public int getNumero() {
 		return numero;
 	}
@@ -147,10 +146,8 @@ public class Journee {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-	
-	/// METHODS
 
-	
+	/// METHODS
 
 	@Override
 	public int hashCode() {
@@ -168,6 +165,5 @@ public class Journee {
 		Journee other = (Journee) obj;
 		return Objects.equals(id, other.id);
 	}
-
 
 }

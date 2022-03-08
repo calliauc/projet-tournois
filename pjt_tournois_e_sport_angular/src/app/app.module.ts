@@ -16,6 +16,7 @@ import { BlackWhiteTextDirective } from './directive/black-white-text.directive'
 import { ResultatComponent } from './component/resultat/resultat.component';
 import { InscriptionComponent } from './component/inscription/inscription.component';
 import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilisateur.component';
+import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilis
     ResultatComponent,
     InscriptionComponent,
     UtilisateurComponent,
+    ResultatEditComponent,
   ],
   imports: [
     BrowserModule,
