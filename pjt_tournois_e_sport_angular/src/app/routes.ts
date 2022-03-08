@@ -6,6 +6,7 @@ import { CreationCompteComponent } from './component/creation-compte/creation-co
 import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
 import { ResultatComponent } from './component/resultat/resultat.component';
+import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
 
 export const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -15,6 +16,8 @@ export const routes: Routes = [
   { path: 'tournoi/edit', component: EditTournoiComponent },
 
   { path: 'resultat', component: ResultatComponent },
+
+  { path: 'resultat/edit', component: ResultatEditComponent },
 
   { path: 'signup', component: CreationCompteComponent },
 

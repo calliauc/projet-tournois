@@ -12,14 +12,14 @@
     <td>{{ r.match?.id }}</td>
     <td>{{ r.positionMatch }}</td>
     <td>{{ r.scoreMatch }}</td>
-    <!--<td>
+    <td>
       <a
-        [routerLink]="['/employe', 'edit', e.id]"
+        [routerLink]="['/resultat', 'edit', r.id]"
         routerLinkActive="active"
         class="btn btn-outline-primary"
         >editer</a
       >
-    </td>-->
+    </td>
     <td>
       <button (click)="delete(r.id!)" class="btn btn-outline-danger">
         supprimer
@@ -27,6 +27,6 @@
     </td>
   </tr>
 </table>
-<!--<a routerLink="/employe/edit" routerLinkActive="active" class="btn btn-link"
-  >ajouter un employe</a
->-->
+<a routerLink="/resultat/edit" routerLinkActive="active" class="btn btn-link"
+  >ajouter un resultat</a
+>
