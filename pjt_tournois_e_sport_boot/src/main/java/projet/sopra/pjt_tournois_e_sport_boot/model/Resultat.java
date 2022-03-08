@@ -37,7 +37,7 @@ public class Resultat {
 	@JoinColumns(
 			{@JoinColumn(name = "resultat_participant_id", foreignKey = @ForeignKey(name="resultat_participant_fk")),
 			@JoinColumn(name="resultat_tournoi_id",  foreignKey = @ForeignKey(name="resultat_tournoi_fk"))})
-	@JsonView({Views.ResultatWithInscriptionAndMatch.class,Views.Match.class})
+	@JsonView(Views.ResultatWithInscriptionAndMatch.class)
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Inscription participant;
 	
