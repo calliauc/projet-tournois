@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Classement } from '../model/classement';
 import { Ligue } from '../model/ligue';
 
 @Injectable({

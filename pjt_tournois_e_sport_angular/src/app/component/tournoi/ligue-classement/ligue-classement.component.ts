@@ -1,8 +1,8 @@
-import { Classement } from './../../../model/classement';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ligue } from 'src/app/model/ligue';
 import { LigueService } from 'src/app/service/ligue.service';
+import { PositionLigue } from 'src/app/model/positionLigue';
 
 @Component({
   selector: 'app-ligue-classement',
@@ -11,7 +11,7 @@ import { LigueService } from 'src/app/service/ligue.service';
 })
 export class LigueClassementComponent implements OnInit {
   tournoi: Ligue = new Ligue();
-  classmt?: string[] = [];
+  classement?: PositionLigue[];
   constructor(
     private activatedRoute: ActivatedRoute,
     private ligueService: LigueService,
@@ -30,7 +30,7 @@ export class LigueClassementComponent implements OnInit {
           .subscribe((result) => {
             console.log('classement');
             console.log(result);
-            this.classmt = result;
+            this.classement = result;
           });
       }
     });

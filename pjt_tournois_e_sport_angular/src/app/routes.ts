@@ -37,6 +37,6 @@ export const routes: Routes = [
   { path: 'utilisateur', component: UtilisateurComponent },
 
   { path: 'ligue/classement/:idTournoi', component: LigueClassementComponent },
-  { path: 'inscription', component: InscriptionComponent },
 
+  { path: 'inscription', component: InscriptionComponent },
 ];

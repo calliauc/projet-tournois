@@ -1,11 +1,12 @@
+import { InscriptionKey } from './inscription-key';
 import { Utilisateur } from './utilisateur';
 export class PositionLigue {
-  private _id: Utilisateur | undefined;
+  private _id: InscriptionKey | undefined;
   private _position: number | undefined;
   private _score: number | undefined;
   private _scoreDifference: number | undefined;
   constructor(
-    id?: Utilisateur,
+    id?: InscriptionKey,
     position?: number,
     score?: number,
     scoreDifference?: number
@@ -16,10 +17,10 @@ export class PositionLigue {
       (this._scoreDifference = scoreDifference);
   }
 
-  public get id(): Utilisateur | undefined {
+  public get id(): InscriptionKey | undefined {
     return this._id;
   }
-  public set id(value: Utilisateur | undefined) {
+  public set id(value: InscriptionKey | undefined) {
     this._id = value;
   }
 
