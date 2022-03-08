@@ -7,8 +7,20 @@ import org.junit.jupiter.api.Test;
 class ChampionnatTest {
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testChamp() {
+		/*
+		 * TODO:
+		 * Creer championnat
+		 * Set liste inscriptions
+		 * Creer toutes les étapes
+		 * 	Poules
+		 * 	Finales
+		 * Simuler les résultats poules
+		 * Passer aux phases finales
+		 * Simuler resultats finales
+		 */
+		
+		
 	}
 
 }

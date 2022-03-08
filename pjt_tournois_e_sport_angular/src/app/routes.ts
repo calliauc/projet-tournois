@@ -7,6 +7,7 @@ import { EditTournoiComponent } from './component/tournoi-edit/tournoi-edit.comp
 import { CreationCompteComponent } from './component/creation-compte/creation-compte.component';
 import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
+import { ResultatComponent } from './component/resultat/resultat.component';
 
 export const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
