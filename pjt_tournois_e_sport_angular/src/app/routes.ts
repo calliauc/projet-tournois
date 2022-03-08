@@ -1,7 +1,8 @@
+import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilisateur.component';
 import { Routes } from '@angular/router';
 import { TournoiComponent } from './component/tournoi/tournoi.component';
 import { EditTournoiComponent } from './component/tournoi-edit/tournoi-edit.component';
-import { InscriptionComponent } from './component/inscription/inscription.component';
+import { CreationCompteComponent } from './component/creation-compte/creation-compte.component';
 import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
 import { ResultatComponent } from './component/resultat/resultat.component';
@@ -16,8 +17,11 @@ export const routes: Routes = [
   { path: 'resultat', component: ResultatComponent },
 
   { path: 'inscription', component: InscriptionComponent },
+  { path: 'signup', component: CreationCompteComponent },
 
   { path: 'login', component: LoginComponent },
 
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+
+  { path: 'utilisateur', component: UtilisateurComponent },
 ];
