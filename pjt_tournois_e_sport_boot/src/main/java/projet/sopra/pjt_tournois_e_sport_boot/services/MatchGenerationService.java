@@ -1,6 +1,8 @@
 package projet.sopra.pjt_tournois_e_sport_boot.services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +37,8 @@ public class MatchGenerationService {
 	private MatchService matchService;
 	@Autowired
 	private InscriptionRepository inscriptionRepo;
+
+	/// GESTION LIGUE
 
 	public void generateJourneesLigueDuels(Ligue ligue) {
 
@@ -81,6 +85,125 @@ public class MatchGenerationService {
 		ligue.setJourneesAJouer(journees);
 		matchService.setAllProchainMatch(ligue.getIdTournoi());
 		tournoiRepo.save(ligue);
+	}
+
+	/// GESTION POULES
+
+	/*
+	 * CREATION POULES S'il y avait un nombre infini de participation j'aurais
+	 * cherché un moyen d'automatiser mieux tout ça, mais pas la peine pour 8 poules
+	 * max
+	 */
+	public void splitInPoule(Championnat champ) {
+		int nb_players = champ.getListeInscriptions().size();
+		if (nb_players < 6) {
+			System.out.println("Pas assez de joueurs, passez en ligue ?");
+		} else if (nb_players < 12) {
+			createTwoPoule(champ);
+			champ.setProchaineEtape(Etape.Demi);
+			System.out.println(nb_players + " joueurs : 2 poules \nLes 2 premiers de chaque poule en demi-finales");
+		} else if (nb_players < 24) {
+			createFourPoule(champ);
+			champ.setProchaineEtape(Etape.Quart);
+			System.out
+					.println(nb_players + " joueurs : 4 poules \nLes 2 premiers de chaque poule en quarts de finales");
+		} else if (nb_players <= 48) {
+			createEightPoule(champ);
+			champ.setProchaineEtape(Etape.Huitieme);
+			System.out.println(
+					nb_players + " joueurs : 8 poules \nLes 2 premiers de chaque poule en huitieme de finales");
+		} else {
+			System.out.println("Trop de joueurs");
+		}
+	}
+
+	private void createTwoPoule(Championnat champ) {
+		List<Inscription> players = new ArrayList<Inscription>(champ.getListeInscriptions());
+		Collections.shuffle(players);
+
+		Set<Inscription> tempA = Set.copyOf(players.subList(0 * players.size() / 2, 1 * players.size() / 2));
+		Set<Inscription> tempB = Set.copyOf(players.subList(1 * players.size() / 2, 2 * players.size() / 2));
+
+		Poule pouleA = new Poule("PouleA", LocalDate.now(), champ.getJeu(), tempA, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleB = new Poule("PouleB", LocalDate.now(), champ.getJeu(), tempB, true,
+				champ.getNbParticipantsParMatch(), champ);
+
+		Collections.addAll(champ.getPoules(), pouleA, pouleB);
+	}
+
+	private void createFourPoule(Championnat champ) {
+		List<Inscription> players = new ArrayList<Inscription>(champ.getListeInscriptions());
+		Collections.shuffle(players);
+
+		Set<Inscription> tempA = Set.copyOf(players.subList(0 * players.size() / 4, 1 * players.size() / 4));
+		Set<Inscription> tempB = Set.copyOf(players.subList(1 * players.size() / 4, 2 * players.size() / 4));
+		Set<Inscription> tempC = Set.copyOf(players.subList(2 * players.size() / 4, 3 * players.size() / 4));
+		Set<Inscription> tempD = Set.copyOf(players.subList(3 * players.size() / 4, 4 * players.size() / 4));
+
+		Poule pouleA = new Poule("PouleA", LocalDate.now(), champ.getJeu(), tempA, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleB = new Poule("PouleB", LocalDate.now(), champ.getJeu(), tempB, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleC = new Poule("PouleC", LocalDate.now(), champ.getJeu(), tempC, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleD = new Poule("PouleD", LocalDate.now(), champ.getJeu(), tempD, true,
+				champ.getNbParticipantsParMatch(), champ);
+
+		Collections.addAll(champ.getPoules(), pouleA, pouleB, pouleC, pouleD);
+	}
+
+	private void createEightPoule(Championnat champ) {
+		List<Inscription> players = new ArrayList<Inscription>(champ.getListeInscriptions());
+		Collections.shuffle(players);
+
+		Set<Inscription> tempA = Set.copyOf(players.subList(0 * players.size() / 8, 1 * players.size() / 8));
+		Set<Inscription> tempB = Set.copyOf(players.subList(1 * players.size() / 8, 2 * players.size() / 8));
+		Set<Inscription> tempC = Set.copyOf(players.subList(2 * players.size() / 8, 3 * players.size() / 8));
+		Set<Inscription> tempD = Set.copyOf(players.subList(3 * players.size() / 8, 4 * players.size() / 8));
+		Set<Inscription> tempE = Set.copyOf(players.subList(4 * players.size() / 8, 5 * players.size() / 8));
+		Set<Inscription> tempF = Set.copyOf(players.subList(5 * players.size() / 8, 6 * players.size() / 8));
+		Set<Inscription> tempG = Set.copyOf(players.subList(6 * players.size() / 8, 7 * players.size() / 8));
+		Set<Inscription> tempH = Set.copyOf(players.subList(7 * players.size() / 8, 8 * players.size() / 8));
+
+		Poule pouleA = new Poule("PouleA", LocalDate.now(), champ.getJeu(), tempA, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleB = new Poule("PouleB", LocalDate.now(), champ.getJeu(), tempB, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleC = new Poule("PouleC", LocalDate.now(), champ.getJeu(), tempC, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleD = new Poule("PouleD", LocalDate.now(), champ.getJeu(), tempD, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleE = new Poule("PouleE", LocalDate.now(), champ.getJeu(), tempE, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleF = new Poule("PouleF", LocalDate.now(), champ.getJeu(), tempF, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleG = new Poule("PouleG", LocalDate.now(), champ.getJeu(), tempG, true,
+				champ.getNbParticipantsParMatch(), champ);
+		Poule pouleH = new Poule("PouleH", LocalDate.now(), champ.getJeu(), tempH, true,
+				champ.getNbParticipantsParMatch(), champ);
+
+		Collections.addAll(champ.getPoules(), pouleA, pouleB, pouleC, pouleD, pouleE, pouleF, pouleG, pouleH);
+
+	}
+
+	/// GESTION PHASES FINALES
+
+	public void generatePhaseFinale(Championnat champ) {
+		initEtape(champ, Etape.Huitieme);
+		initEtape(champ, Etape.Quart);
+		initEtape(champ, Etape.Demi);
+		initEtape(champ, Etape.Finale);
+	}
+
+	private void initEtape(Championnat champ, Etape etape) {
+		Journee j = new Journee(champ, null, null, etape);
+		for (int i = 0; i < etape.getNbMatchs(); i++) {
+			Match m = new Match();
+			m.setJournee(j);
+			j.getMatchsAJouerPourJournee().add(m);
+		}
+		champ.getJourneesAJouerFinales().add(j);
 	}
 
 	/* @formatter:off
