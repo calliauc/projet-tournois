@@ -45,6 +45,10 @@
       readonly
     />
   </div>
+  <div class="form-group">
+    <label>Matchs retour :</label>
+    <input type="checkbox" [(ngModel)]="tournoi.isMatchRetour" />
+  </div>
   <div>
     <button (click)="save()" class="btn btn-outline-success">
       enregistrer

@@ -18,6 +18,7 @@ import { UtilisateurComponent } from './component/utilisateur/utilisateur/utilis
 import { LigueEditComponent } from './component/tournoi/ligue-edit/ligue-edit.component';
 import { ChampionnatEditComponent } from './component/tournoi/championnat-edit/championnat-edit.component';
 import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
+import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.c
     LigueEditComponent,
     ChampionnatEditComponent,
     ResultatEditComponent,
+    LigueClassementComponent,
   ],
   imports: [
     BrowserModule,
