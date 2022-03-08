@@ -16,7 +16,6 @@ export const routes: Routes = [
 
   { path: 'resultat', component: ResultatComponent },
 
-  { path: 'inscription', component: InscriptionComponent },
   { path: 'signup', component: CreationCompteComponent },
 
   { path: 'login', component: LoginComponent },
