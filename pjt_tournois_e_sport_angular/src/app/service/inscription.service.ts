@@ -31,7 +31,7 @@ export class InscriptionService {
   public create(inscription: Inscription): Observable<Inscription> {
     return this.httpClient.post<Inscription>(
       InscriptionService.URL,
-      this.inscriptionToJson(inscription)
+      this.inscriptionToJsonCreate(inscription)
     );
   }
 
@@ -40,12 +40,12 @@ export class InscriptionService {
       `${InscriptionService.URL}/${inscription.id!.joueur!.id}&${
         inscription.id!.tournoi!.idTournoi
       }`,
-      this.inscriptionToJson(inscription)
+      this.inscriptionToJsonUpdate(inscription)
     );
   }
 
-  //METHODS
-  private inscriptionToJson(inscription: Inscription): any {
+  //METHODS CRUD
+  private inscriptionToJsonUpdate(inscription: Inscription): any {
     const obj = {
       id: {
         idJoueur: inscription.id!.joueur!.id,
@@ -53,6 +53,14 @@ export class InscriptionService {
       },
       position: inscription.position,
       score: inscription.score,
+    };
+    return obj;
+  }
+
+  private inscriptionToJsonCreate(inscription: Inscription): any {
+    const obj = {
+      idJoueur: inscription.id!.joueur!.id,
+      idTournoi: inscription.id!.tournoi!.idTournoi,
     };
     return obj;
   }

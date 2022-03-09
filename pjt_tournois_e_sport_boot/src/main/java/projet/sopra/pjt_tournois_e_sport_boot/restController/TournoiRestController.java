@@ -113,6 +113,11 @@ public class TournoiRestController {
 	private void delete(@PathVariable Long id) {
 		tournoiService.delete(id);
 	}
+	
+	@GetMapping("/searchById/{id}")
+	public boolean idPresentEnBase(@PathVariable Long id) {
+		return !tournoiService.exist(id);
+	}
 
 	//// TO DO - SPECIAL QUERIES
 	@JsonView(Views.InscriptionWithId.class)
