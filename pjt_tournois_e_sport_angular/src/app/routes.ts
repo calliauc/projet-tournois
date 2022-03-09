@@ -1,3 +1,4 @@
+import { JourneeComponent } from './component/journee/journee.component';
 import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
 import { InscriptionEditComponent } from './component/inscription-edit/inscription-edit.component';
 import { InscriptionComponent } from './component/inscription/inscription.component';
@@ -44,9 +45,11 @@ export const routes: Routes = [
   { path: 'inscription/edit', component: InscriptionEditComponent },
 
   {
-    path: 'inscription/edit/:idJoueur&:idTournoi',
+    path: 'inscription/edit/:idJoueur/:idTournoi',
     component: InscriptionEditComponent,
   },
 
   { path: 'utilisateur/utilisateur-edit', component: UtilisateurEditComponent },
+
+  { path: 'journee', component: JourneeComponent },
 ];

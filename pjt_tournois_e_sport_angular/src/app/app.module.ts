@@ -21,6 +21,7 @@ import { InscriptionEditComponent } from './component/inscription-edit/inscripti
 import { MenuComponent } from './component/menu/menu.component';
 import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
 import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
+import { JourneeComponent } from './component/journee/journee.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-l
     LigueClassementComponent,
     InscriptionEditComponent,
     MenuComponent,
+    JourneeComponent,
   ],
   imports: [
     BrowserModule,
