@@ -1,3 +1,18 @@
 /* html {
   background-color: black;
 } */
+body {
+  /* background-color: #1d1d1d; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  color: lightblue;
+}
+
+a,
+h1,
+p,
+th,
+tr {
+  color: lightblue;
+}

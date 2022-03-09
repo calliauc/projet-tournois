@@ -3,18 +3,12 @@ import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css'],
 })
-export class AppComponent {
-  title = 'pjt_tournois_e_sport_angular';
-
-  constructor() {}
-
-  // Contenu déplacé vers le component menu
-
-  /*  constructor(private authService: AuthService, private router: Router) {}
+export class MenuComponent {
+  constructor(private authService: AuthService, private router: Router) {}
 
   get authenticated() {
     return this.authService.isAuthenticated();
@@ -27,5 +21,5 @@ export class AppComponent {
 
   get login() {
     return localStorage.getItem('login');
-  }*/
+  }
 }
