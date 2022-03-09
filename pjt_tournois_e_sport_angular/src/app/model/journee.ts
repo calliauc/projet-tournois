@@ -16,11 +16,11 @@ export class Journee {
     etape?: Etape,
     numero?: number
   ) {
-    (this._id = id),
-      (this._tournoi = tournoi),
-      (this._matchsAJouerPourJournee = matchsAJouerPourJournee),
-      (this._etape = etape),
-      (this._numero = numero);
+    this._id = id;
+    this._tournoi = tournoi;
+    this._matchsAJouerPourJournee = matchsAJouerPourJournee;
+    this._etape = etape;
+    this._numero = numero;
   }
 
   public get id(): number | undefined {
