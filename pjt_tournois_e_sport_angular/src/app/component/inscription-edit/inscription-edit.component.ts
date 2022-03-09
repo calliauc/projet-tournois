@@ -56,12 +56,12 @@ export class InscriptionEditComponent implements OnInit {
   initForm(): void {
     this.myForm = new FormGroup({
       keyJoueur: new FormControl(
-        this.inscription.id?.joueur?.id,
+        this.inscription.idJoueur,
         [Validators.required],
         this.checkJoueurEnBase()
       ),
       keyTournoi: new FormControl(
-        this.inscription.id?.tournoi?.idTournoi,
+        this.inscription.idTournoi,
         [Validators.required],
         this.checkTournoiEnBase()
       ),
@@ -71,18 +71,8 @@ export class InscriptionEditComponent implements OnInit {
   }
 
   save() {
-    this.utilisateurService
-      .get(this.myForm.controls['keyJoueur'].value)
-      .subscribe((result) => {
-        this.inscription.id!.joueur = result;
-      });
-    this.tournoiService
-      .get(this.myForm.controls['keyTournoi'].value)
-      .subscribe((result) => {
-        this.inscription.id!.tournoi = result;
-      });
-    // this.inscription.id!.tournoi!.idTournoi =
-    //   this.myForm.controls['keyTournoi'].value;
+    this.inscription.idJoueur = this.myForm.controls['keyJoueur'].value;
+    this.inscription.idTournoi = this.myForm.controls['keyTournoi'].value;
     if (!this.creation) {
       this.inscription.position = this.myForm.controls['position'].value;
       this.inscription.score = this.myForm.controls['score'].value;
