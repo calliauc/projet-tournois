@@ -40,6 +40,15 @@
       <li class="nav-item">
         <a
           *ngIf="authenticated"
+          routerLink="/journee"
+          routerLinkActive="active"
+          class="nav-link active"
+          >Journees</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="authenticated"
           routerLink="/resultat"
           routerLinkActive="active"
           class="nav-link active"
@@ -70,7 +79,7 @@
       </li>
     </ul>
   </div>
-  <!-- 
+  <!--
   <a routerLink="/accueil" routerLinkActive="active" class="btn btn-link">
     Accueil</a
   >
