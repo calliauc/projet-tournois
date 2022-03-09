@@ -2,7 +2,6 @@ package projet.sopra.pjt_tournois_e_sport_boot;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,17 +12,15 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
 import projet.sopra.pjt_tournois_e_sport_boot.model.Championnat;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
-import projet.sopra.pjt_tournois_e_sport_boot.model.Role;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
-import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.MatchGenerationService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 
@@ -38,6 +35,8 @@ class ChampionnatTest {
 	private TournoiService tournoiService;
 	@Autowired
 	private UtilisateurService utilisateurService;
+	@Autowired
+	private MatchGenerationService matchGenService;
 
 	@Test
 	@Transactional
@@ -92,6 +91,8 @@ class ChampionnatTest {
 		tournoiService.createOrUpdate(champ);
 		LOGGER.debug("Tournoi sauvegardé");
 		
+		matchGenService.initChampionnat(champ);
+
 	}
 
 }
