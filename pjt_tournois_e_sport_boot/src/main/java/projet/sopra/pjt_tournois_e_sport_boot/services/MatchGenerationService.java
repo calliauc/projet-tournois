@@ -52,12 +52,11 @@ public class MatchGenerationService {
 		}
 	}
 
-	
 	private void afficheLigue(Ligue l) {
-			LOGGER.debug("Poule : " + l.getNom());
-			for (Inscription i : l.getListeInscriptions()) {
-				LOGGER.debug("Isncrit : " + i.getId().getJoueur().getUsername());
-			}
+		LOGGER.debug("Poule : " + l.getNom());
+		for (Inscription i : l.getListeInscriptions()) {
+			LOGGER.debug("Isncrit : " + i.getId().getJoueur().getUsername());
+		}
 	}
 
 	/// GESTION LIGUE
@@ -65,6 +64,9 @@ public class MatchGenerationService {
 	public void generateJourneesLigueDuels(Ligue ligue) {
 		LOGGER.debug("Debut generate");
 		this.afficheLigue(ligue);
+		LOGGER.debug("test save ligue");
+		tournoiRepo.save(ligue);
+		LOGGER.debug("fin test save ligue");
 
 		////// TO DO : INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
 		int matchRetour;
@@ -97,7 +99,7 @@ public class MatchGenerationService {
 				m.getInscriptions().add(inscriptionsLigue.get(j));
 				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
 				for (Inscription x : m.getInscriptions()) {
-					LOGGER.debug(""+x.getId().getJoueur().getId());
+					LOGGER.debug("" + x.getId().getJoueur().getUsername());
 				}
 				matchsJournee.add(m);
 				matchRepo.save(m);
@@ -179,9 +181,11 @@ public class MatchGenerationService {
 		Poule pouleA = new Poule("PouleA", LocalDate.now(), champ.getJeu(), tempA, true,
 				champ.getNbParticipantsParMatch(), champ);
 		pouleA.setNbParticipantsTotal(tempA.size());
+		pouleA.setChampionnat(champ);
 		Poule pouleB = new Poule("PouleB", LocalDate.now(), champ.getJeu(), tempB, true,
 				champ.getNbParticipantsParMatch(), champ);
 		pouleB.setNbParticipantsTotal(tempB.size());
+		pouleB.setChampionnat(champ);
 
 		tournoiRepo.save(pouleA);
 		tournoiRepo.save(pouleB);
@@ -190,7 +194,6 @@ public class MatchGenerationService {
 		Collections.addAll(champ.getPoules(), pouleA, pouleB);
 
 		tournoiRepo.save(champ);
-
 	}
 
 	private void createFourPoule(Championnat champ) {
@@ -253,10 +256,75 @@ public class MatchGenerationService {
 		affichePoules(champ);
 		for (Poule p : champ.getPoules()) {
 			LOGGER.debug(p.getListeInscriptions().toString());
-			this.generateJourneesLigueDuels((Ligue) p);
+			this.generateJourneesPoules(p);
 		}
 		LOGGER.debug("Matchs de poule créés");
+	}
 
+	private void generateJourneesPoules(Poule poule) {
+		LOGGER.debug("Debut generate");
+		this.afficheLigue(poule);
+		LOGGER.debug("test save ligue");
+		tournoiRepo.save(poule);
+		LOGGER.debug("fin test save ligue");
+
+		////// TO DO : INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
+		int matchRetour;
+		if (poule.isMatchRetour() == true) {
+			matchRetour = 2;
+		} else {
+			matchRetour = 1;
+		}
+		Set<Journee> journees = new HashSet<Journee>();
+		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(poule.getListeInscriptions());
+		LOGGER.debug("List to linked list");
+		int isPair = (poule.getListeInscriptions().size() + 1) % 2;
+		LOGGER.debug("Parité du nombre d'inscrits dans la ligue/poule : " + isPair);
+		LOGGER.debug("nb iter : " + (inscriptionsLigue.size() - isPair));
+
+		for (int i = 0; i < (inscriptionsLigue.size() - isPair) * matchRetour; i++) {
+			LOGGER.debug("Journéé : " + i);
+			Journee jour = new Journee();
+			jour.setTournoi(poule);
+			jour.setEtape(Etape.Ligue);
+			jour.setNumero(i + 1);
+			LOGGER.debug("Journéé créée");
+			journeeRepo.save(jour);
+			LOGGER.debug("Journée sauvegardée");
+			List<Match> matchsJournee = new ArrayList<Match>();
+			for (int j = 0; j < poule.getListeInscriptions().size() / 2; j++) {
+				LOGGER.debug("Match : " + j);
+				Match m = new Match();
+				m.setJournee(jour);
+				m.getInscriptions().add(inscriptionsLigue.get(j));
+				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
+				for (Inscription x : m.getInscriptions()) {
+					LOGGER.debug("" + x.getId().getJoueur().getUsername());
+				}
+				matchsJournee.add(m);
+				matchRepo.save(m);
+			}
+			if (isPair != 1) {
+				LOGGER.debug("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
+			}
+			LOGGER.debug("Set match dans journee");
+			jour.setMatchsAJouerPourJournee(matchsJournee);
+			LOGGER.debug("Sauvegarde journee");
+			journeeRepo.save(jour);
+			LOGGER.debug("Add journéee à la liste");
+			journees.add(jour);
+			LOGGER.debug("Rotation des inscrits");
+			inscriptionsLigue.add(isPair, inscriptionsLigue.pollLast());
+		}
+		LOGGER.debug("Tout les matchs sont générés");
+
+		LOGGER.debug("Set la list des journée dans la ligue");
+		poule.setJourneesAJouer(journees);
+		LOGGER.debug("Set les prochains matchs");
+		matchService.setAllProchainMatch(poule.getIdTournoi());
+		LOGGER.debug("Save la ligue NOT OK");
+		tournoiRepo.save(poule);
+		LOGGER.debug("Fin");
 	}
 
 	/// GESTION PHASES FINALES
