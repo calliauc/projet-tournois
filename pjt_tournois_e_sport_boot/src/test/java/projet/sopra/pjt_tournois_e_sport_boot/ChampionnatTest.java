@@ -19,6 +19,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 
 @SpringBootTest
 class ChampionnatTest {
@@ -29,6 +30,8 @@ class ChampionnatTest {
 	private InscriptionService inscriptionService;
 	@Autowired
 	private TournoiService tournoiService;
+	@Autowired
+	private UtilisateurService utilisateurService;
 
 	@Test
 	@Transactional
@@ -57,13 +60,15 @@ class ChampionnatTest {
 		LOGGER.debug("Debut de la sauvegarde");
 		tournoiService.createOrUpdate(champ);
 		LOGGER.debug("Sauvegarde finie");
+		
 
-		LOGGER.debug("Creation de l'inscription");
+		LOGGER.debug("Creation user");
+		Utilisateur u1 = new Utilisateur("toto", "a@b.c", "toto");
 		Inscription p1 = new Inscription();
-		p1.setId(new InscriptionKey(new Utilisateur("toto", "a@b.c", "toto"), champ));
-		LOGGER.debug("Inscription créé");
+		p1.setId(new InscriptionKey(u1, champ));
 
 		LOGGER.debug("Debut de la sauvegarde");
+		utilisateurService.save(u1);
 		inscriptionService.createOrUpdate(p1);
 		LOGGER.debug("Sauvegarde finie");
 
