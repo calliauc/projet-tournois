@@ -13,7 +13,7 @@ export class UtilisateurService {
 
   public getAll(): Observable<Utilisateur[]> {
     return this.httpClient.get<Utilisateur[]>(
-      UtilisateurService.URL + '/membres'
+      `${UtilisateurService.URL}/membres`
     );
   }
 
@@ -22,22 +22,22 @@ export class UtilisateurService {
   }
 
   public create(utilisateur: Utilisateur): Observable<Utilisateur> {
-    console.log(utilisateur);
+    console.log(' POST : ' + utilisateur);
     return this.httpClient.post<Utilisateur>(
-      UtilisateurService.URL + '/signup',
+      `${UtilisateurService.URL}/signup`,
       this.utilisateurToJson(utilisateur)
     );
   }
 
   public update(utilisateur: Utilisateur): Observable<Utilisateur> {
     return this.httpClient.put<Utilisateur>(
-      UtilisateurService.URL + '/{id}',
+      `${UtilisateurService.URL}/${utilisateur.id}`,
       this.utilisateurToJson(utilisateur)
     );
   }
 
   public delete(id: number): Observable<void> {
-    return this.httpClient.delete<void>(UtilisateurService.URL + '/{id}');
+    return this.httpClient.delete<void>(`${UtilisateurService.URL}/${id}`);
   }
 
   public authentication(login: string, password: string): Observable<void> {
@@ -45,7 +45,7 @@ export class UtilisateurService {
       Authorization: 'Basic ' + btoa(login + ':' + password),
     });
     return this.httpClient.get<void>(
-      UtilisateurService.URL + '/authentification',
+      `${UtilisateurService.URL}/authentification`,
       {
         headers: headers,
       }
@@ -58,12 +58,12 @@ export class UtilisateurService {
 
   public checkUsername(username: string): Observable<boolean> {
     return this.httpClient.get<boolean>(
-      UtilisateurService.URL + '/searchByLogin/' + username
+      `${UtilisateurService.URL}/searchByLogin/${username}`
     );
   }
   public checkMail(mail: string): Observable<boolean> {
     return this.httpClient.get<boolean>(
-      UtilisateurService.URL + '/searchByMail/' + mail
+      `${UtilisateurService.URL}/searchByMail/${mail}`
     );
   }
 
