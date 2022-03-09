@@ -1,0 +1,34 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">
+    <h3>Editeur de journee</h3>
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label>Id :</label>
+      <input class="form-control" [(ngModel)]="journee.id" readonly />
+    </div>
+    <div class="form-group">
+      <label>Id du tournoi:</label>
+      <input class="form-control" [(ngModel)]="journee.tournoi!.idTournoi" />
+    </div>
+    <div class="form-group">
+      <label>Etape :</label>
+      <input class="form-control" [(ngModel)]="journee.etape" />
+    </div>
+    <div class="form-group">
+      <label>Numero :</label>
+      <input class="form-control" type="number" [(ngModel)]="journee.numero" />
+    </div>
+    <div>
+      <button (click)="save()" class="btn btn-outline-success">
+        enregistrer
+      </button>
+      <a
+        routerLink="/journee"
+        routerLinkActive="active"
+        class="btn btn-outline-warning"
+        >annuler</a
+      >
+    </div>
+  </div>
+</div>

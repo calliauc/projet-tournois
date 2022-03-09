@@ -1,3 +1,4 @@
+import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
 import { JourneeComponent } from './component/journee/journee.component';
 import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
@@ -59,4 +60,8 @@ export const routes: Routes = [
   { path: 'journee', component: JourneeComponent },
 
   { path: 'journee/detail/:id', component: JourneeDetailComponent },
+
+  { path: 'journee/edit', component: JourneeEditComponent },
+
+  { path: 'journee/edit/:id', component: JourneeEditComponent },
 ];
