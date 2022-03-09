@@ -21,7 +21,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class InscriptionEditComponent implements OnInit {
   inscription: Inscription = new Inscription();
-  creation: boolean = true;
+  creation!: boolean;
   myForm!: FormGroup;
   inscriptionObservable!: Observable<Inscription>;
 
@@ -34,6 +34,7 @@ export class InscriptionEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.creation = true;
     this.activatedRoute.params.subscribe((params) => {
       if (params['idJoueur'] && params['idTournoi']) {
         this.creation = false;
@@ -56,12 +57,12 @@ export class InscriptionEditComponent implements OnInit {
   initForm(): void {
     this.myForm = new FormGroup({
       keyJoueur: new FormControl(
-        this.inscription.idJoueur,
+        this.inscription.id?.joueur?.id,
         [Validators.required],
         this.checkJoueurEnBase()
       ),
       keyTournoi: new FormControl(
-        this.inscription.idTournoi,
+        this.inscription.id?.tournoi?.idTournoi,
         [Validators.required],
         this.checkTournoiEnBase()
       ),
@@ -71,20 +72,23 @@ export class InscriptionEditComponent implements OnInit {
   }
 
   save() {
-    this.inscription.idJoueur = this.myForm.controls['keyJoueur'].value;
-    this.inscription.idTournoi = this.myForm.controls['keyTournoi'].value;
     if (!this.creation) {
+      this.inscription.id!.joueur!.id = this.myForm.controls['keyJoueur'].value;
+      console.log(this.inscription.id!.joueur!.id);
+      this.inscription.id!.tournoi!.idTournoi =
+        this.myForm.controls['keyTournoi'].value;
       this.inscription.position = this.myForm.controls['position'].value;
       this.inscription.score = this.myForm.controls['score'].value;
       this.inscriptionService.update(this.inscription).subscribe((ok) => {
         this.router.navigate(['/inscription']);
       });
     } else {
+      this.inscription.idJoueur = this.myForm.controls['keyJoueur'].value;
+      this.inscription.idTournoi = this.myForm.controls['keyTournoi'].value;
       this.inscriptionService.create(this.inscription).subscribe((ok) => {
         this.router.navigate(['/inscription']);
       });
     }
-    this.creation = true;
   }
 
   checkJoueurEnBase(): AsyncValidatorFn {
