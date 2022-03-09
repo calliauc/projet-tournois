@@ -16,4 +16,5 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Inscri
 
 	@Query("select i from Inscription as i where i.id.tournoi.id = :id_tournoi order by i.score desc, i.scoreDifference desc ")
 	List<Inscription> getClassementLigue(@Param("id_tournoi") long idTournoi);
+
 }

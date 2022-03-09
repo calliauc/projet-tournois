@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.InscriptionException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 
 @Service
@@ -72,4 +73,5 @@ public class InscriptionService {
 	public List<Inscription> getClassementLigue(Inscription i) {
 		return inscriptionRepo.getClassementLigue(i.getId().getTournoi().getIdTournoi());
 	}
+	
 }

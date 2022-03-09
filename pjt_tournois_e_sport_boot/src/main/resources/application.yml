@@ -1,7 +1,10 @@
 logging:
   level:
     root: info
-    
+    projet: 
+      sopra: debug
+
+
 server:
   servlet:
     context-path: /tournoi_esport
