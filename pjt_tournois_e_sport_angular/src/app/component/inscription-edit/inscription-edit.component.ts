@@ -1,7 +1,7 @@
 import { InscriptionService } from './../../service/inscription.service';
 import { Inscription } from './../../model/inscription';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-inscription-edit',
@@ -19,11 +19,10 @@ export class InscriptionEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
-      if (params['idJoueur&idTournoi']) {
+      if (params['idJoueur'] && params['idTournoi']) {
         this.inscriptionService
-          .get(params['id.joueur.id'], params['id.tournoi.idTournoi'])
+          .get(params['idJoueur'], params['idTournoi'])
           .subscribe((result) => {
-            console.log(result);
             this.inscription = result;
           });
       }
