@@ -1,5 +1,3 @@
-import { MatchService } from './../../service/match.service';
-import { async } from '@angular/core/testing';
 import { Journee } from './../../model/journee';
 import { Component, OnInit } from '@angular/core';
 import { JourneeService } from 'src/app/service/journee.service';
@@ -15,10 +13,7 @@ export class JourneeComponent implements OnInit {
   journeesObservable!: Observable<Journee[]>;
   nMatchList = new Array();
   nbMatchJournee!: number;
-  constructor(
-    private journeeService: JourneeService,
-    private matchService: MatchService
-  ) {}
+  constructor(private journeeService: JourneeService) {}
 
   ngOnInit(): void {
     this.journeesObservable = this.journeeService.getAll();
