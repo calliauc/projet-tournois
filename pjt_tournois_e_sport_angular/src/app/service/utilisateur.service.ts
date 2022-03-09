@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Utilisateur } from '../model/utilisateur';
 
@@ -21,7 +21,7 @@ export class UtilisateurService {
 
   public create(utilisateur: Utilisateur): Observable<Utilisateur> {
     return this.httpClient.post<Utilisateur>(
-      UtilisateurService.URL,
+      UtilisateurService.URL + '/signup',
       this.utilisateurToJson(utilisateur)
     );
   }
@@ -35,6 +35,33 @@ export class UtilisateurService {
 
   public delete(id: number): Observable<void> {
     return this.httpClient.delete<void>(UtilisateurService.URL + '/{id}');
+  }
+
+  public authentication(login: string, password: string): Observable<void> {
+    let headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa(login + ':' + password),
+    });
+    return this.httpClient.get<void>(
+      UtilisateurService.URL + '/authentification',
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  public isAuthenticated(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  public checkUsername(username: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(
+      UtilisateurService.URL + '/searchByLogin/' + username
+    );
+  }
+  public checkMail(mail: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(
+      UtilisateurService.URL + '/searchByMail/' + mail
+    );
   }
 
   private utilisateurToJson(utilisateur: Utilisateur): any {

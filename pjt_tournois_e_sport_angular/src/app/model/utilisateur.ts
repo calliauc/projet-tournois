@@ -4,14 +4,14 @@ export class Utilisateur {
   private _username: string | undefined;
   private _mail: string | undefined;
   private _password: string | undefined;
-  private _roles: Role | undefined;
+  private _roles: Role[] | undefined;
 
   constructor(
     id?: number,
     username?: string,
     mail?: string,
     password?: string,
-    roles?: Role
+    roles?: Role[]
   ) {
     this._id = id;
     this._username = username;
@@ -87,7 +87,7 @@ export class Utilisateur {
    * Getter roles
    * @return {Role }
    */
-  public get roles(): Role | undefined {
+  public get roles(): Role[] | undefined {
     return this._roles;
   }
 
@@ -95,7 +95,7 @@ export class Utilisateur {
    * Setter roles
    * @param {Role } value
    */
-  public set roles(value: Role | undefined) {
+  public set roles(value: Role[] | undefined) {
     this._roles = value;
   }
 }

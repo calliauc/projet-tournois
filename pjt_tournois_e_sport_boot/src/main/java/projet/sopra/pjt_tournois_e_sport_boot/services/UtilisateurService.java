@@ -70,6 +70,12 @@ public class UtilisateurService {
 		});
 	}
 
+	public Utilisateur getByMail(String username) {
+		return utilisateurRepo.findByMail(username).orElseThrow(() -> {
+			throw new UtilisateurException("Can't find by Mail");
+		});
+	}
+
 	public List<Utilisateur> getByUsernameLike(String username) {
 		return utilisateurRepo.findByUsernameLike(username);
 	}
@@ -102,7 +108,7 @@ public class UtilisateurService {
 			throw new UtilisateurException("can't find orga by tournoi");
 		});
 	}
-	
+
 	// QUERY ROLES
 
 	public Utilisateur getByUsernameWithRoles(String username) {
@@ -110,8 +116,6 @@ public class UtilisateurService {
 			throw new UtilisateurException("can't find roles with username");
 		});
 	}
-	
-	
 
 	// Fonctions propres au service
 	private void check(Utilisateur user) {
@@ -140,4 +144,11 @@ public class UtilisateurService {
 		return utilisateurEnBase;
 	}
 
+	public boolean isPresentByUsername(String username) {
+		return utilisateurRepo.findByUsername(username).isPresent();
+	}
+
+	public boolean isPresentByMail(String mail) {
+		return utilisateurRepo.findByMail(mail).isPresent();
+	}
 }
