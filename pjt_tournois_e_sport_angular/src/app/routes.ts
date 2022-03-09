@@ -44,7 +44,7 @@ export const routes: Routes = [
   { path: 'inscription/edit', component: InscriptionEditComponent },
 
   {
-    path: 'inscription/edit/:idJoueur&:idTournoi',
+    path: 'inscription/edit/:idJoueur/:idTournoi',
     component: InscriptionEditComponent,
   },
 
