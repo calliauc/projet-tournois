@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptor/auth-interceptor';
 import { AppComponent } from './app.component';
 import { routes } from './routes';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 import { TournoiComponent } from './component/tournoi/tournoi.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccueilComponent } from './component/accueil/accueil.component';
