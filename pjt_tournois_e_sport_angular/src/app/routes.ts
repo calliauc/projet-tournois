@@ -31,6 +31,8 @@ export const routes: Routes = [
 
   { path: 'resultat/edit', component: ResultatEditComponent },
 
+  { path: 'resultat/edit/:id', component: ResultatEditComponent },
+
   { path: 'signup', component: UtilisateurEditComponent },
 
   { path: 'login', component: UtilisateurLoginComponent },
@@ -38,6 +40,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
 
   { path: 'utilisateur', component: UtilisateurComponent },
+
+  { path: 'utilisateur/edit/:id', component: UtilisateurEditComponent },
 
   { path: 'ligue/classement/:idTournoi', component: LigueClassementComponent },
 
