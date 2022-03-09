@@ -29,5 +29,6 @@ export class JourneeDetailComponent implements OnInit {
       }
     });
     this.matchObservable = this.journee.matchsAJouerPourJournee!;
+    console.log(this.matchObservable);
   }
 }
