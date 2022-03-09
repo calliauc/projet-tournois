@@ -93,16 +93,29 @@ public class MatchGenerationService {
 			LOGGER.debug("Journée sauvegardée");
 			List<Match> matchsJournee = new ArrayList<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {
-				LOGGER.debug("Match : " + j);
+				System.out.println("Match : " + j);
+				List<Inscription> inscriptionMatch = new ArrayList(); 
+				Inscription j1 = inscriptionsLigue.get(j);
+				Inscription j2 = inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1));
+				inscriptionMatch.add(j1);
+				inscriptionMatch.add(j2);
 				Match m = new Match();
 				m.setJournee(jour);
-				m.getInscriptions().add(inscriptionsLigue.get(j));
-				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
-				for (Inscription x : m.getInscriptions()) {
-					LOGGER.debug("" + x.getId().getJoueur().getUsername());
-				}
+				m.setInscriptions(inscriptionMatch); 
 				matchsJournee.add(m);
 				matchRepo.save(m);
+				j1.getMatchs().add(m);
+				j2.getMatchs().add(m);
+				inscriptionRepo.save(j1);
+				inscriptionRepo.save(j2);
+				
+//				m.getInscriptions().add(inscriptionsLigue.get(j));
+//				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
+				for (Inscription x : m.getInscriptions()) {
+
+					System.out.println(x.getId().getJoueur().getId());
+				}
+				
 			}
 			if (isPair != 1) {
 				LOGGER.debug("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
