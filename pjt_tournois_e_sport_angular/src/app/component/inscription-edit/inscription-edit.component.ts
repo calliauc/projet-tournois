@@ -71,9 +71,18 @@ export class InscriptionEditComponent implements OnInit {
   }
 
   save() {
-    this.inscription.id!.joueur!.id = this.myForm.controls['keyJoueur'].value;
-    this.inscription.id!.tournoi!.idTournoi =
-      this.myForm.controls['keyTournoi'].value;
+    this.utilisateurService
+      .get(this.myForm.controls['keyJoueur'].value)
+      .subscribe((result) => {
+        this.inscription.id!.joueur = result;
+      });
+    this.tournoiService
+      .get(this.myForm.controls['keyTournoi'].value)
+      .subscribe((result) => {
+        this.inscription.id!.tournoi = result;
+      });
+    // this.inscription.id!.tournoi!.idTournoi =
+    //   this.myForm.controls['keyTournoi'].value;
     if (!this.creation) {
       this.inscription.position = this.myForm.controls['position'].value;
       this.inscription.score = this.myForm.controls['score'].value;
