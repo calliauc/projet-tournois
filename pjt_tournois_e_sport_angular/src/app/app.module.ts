@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { routes } from './routes';
 import { TournoiComponent } from './component/tournoi/tournoi.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CreationCompteComponent } from './component/creation-compte/creation-compte.component';
-import { LoginComponent } from './component/login/login.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
 import { BlackWhiteTextDirective } from './directive/black-white-text.directive';
 import { ResultatComponent } from './component/resultat/resultat.component';
@@ -23,13 +21,12 @@ import { InscriptionEditComponent } from './component/inscription-edit/inscripti
 import { MenuComponent } from './component/menu/menu.component';
 import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
 import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
+import { JourneeComponent } from './component/journee/journee.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TournoiComponent,
-    CreationCompteComponent,
-    LoginComponent,
     AccueilComponent,
     BlackWhiteTextDirective,
     ResultatComponent,
@@ -43,6 +40,7 @@ import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-l
     LigueClassementComponent,
     InscriptionEditComponent,
     MenuComponent,
+    JourneeComponent,
   ],
   imports: [
     BrowserModule,

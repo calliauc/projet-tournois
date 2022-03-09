@@ -20,7 +20,8 @@
             [routerLink]="[
               '/inscription',
               'edit',
-              i.id!.joueur!.id + '&' + i.id!.tournoi!.idTournoi
+              i.id!.joueur!.id,
+              i.id!.tournoi!.idTournoi
             ]"
             routerLinkActive="active"
             class="btn btn-outline-primary"
