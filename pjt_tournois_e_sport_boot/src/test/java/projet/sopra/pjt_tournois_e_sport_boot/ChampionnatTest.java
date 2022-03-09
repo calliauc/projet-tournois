@@ -98,7 +98,6 @@ class ChampionnatTest {
 		
 		matchGenService.initChampionnat(champ);
 		
-		
 
 	}
 
