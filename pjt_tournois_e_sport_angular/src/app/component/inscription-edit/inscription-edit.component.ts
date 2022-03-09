@@ -71,7 +71,12 @@ export class InscriptionEditComponent implements OnInit {
   }
 
   save() {
+    this.inscription.id!.joueur!.id = this.myForm.controls['keyJoueur'].value;
+    this.inscription.id!.tournoi!.idTournoi =
+      this.myForm.controls['keyTournoi'].value;
     if (!this.creation) {
+      this.inscription.position = this.myForm.controls['position'].value;
+      this.inscription.score = this.myForm.controls['score'].value;
       this.inscriptionService.update(this.inscription).subscribe((ok) => {
         this.router.navigate(['/inscription']);
       });
