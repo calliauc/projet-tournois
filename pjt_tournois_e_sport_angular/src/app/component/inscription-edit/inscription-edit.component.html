@@ -4,13 +4,13 @@
     <input
       *ngIf="!creation"
       class="form-control"
-      [(ngModel)]="utilisateur!.id"
+      [(ngModel)]="inscription.id!.joueur!.id"
       readonly
     />
     <input
       *ngIf="creation"
       class="form-control"
-      [(ngModel)]="utilisateur!.id"
+      [(ngModel)]="inscription.id!.joueur!.id"
     />
   </div>
   <div class="form-group">
@@ -18,13 +18,13 @@
     <input
       *ngIf="!creation"
       class="form-control"
-      [(ngModel)]="tournoi!.idTournoi"
+      [(ngModel)]="inscription.id!.tournoi!.idTournoi"
       readonly
     />
     <input
       *ngIf="creation"
       class="form-control"
-      [(ngModel)]="tournoi!.idTournoi"
+      [(ngModel)]="inscription.id!.tournoi!.idTournoi"
     />
   </div>
   <ng-container *ngIf="!creation">

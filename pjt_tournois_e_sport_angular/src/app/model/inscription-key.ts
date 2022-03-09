@@ -1,10 +1,10 @@
 import { Tournoi } from './tournoi';
 import { Utilisateur } from './utilisateur';
 export class InscriptionKey {
-  private _joueur: Utilisateur;
-  private _tournoi: Tournoi;
+  private _joueur: Utilisateur | undefined;
+  private _tournoi: Tournoi | undefined;
 
-  constructor(joueur: Utilisateur, tournoi: Tournoi) {
+  constructor(joueur?: Utilisateur, tournoi?: Tournoi) {
     this._joueur = joueur;
     this._tournoi = tournoi;
   }
@@ -13,7 +13,7 @@ export class InscriptionKey {
    * Getter joueur
    * @return {Utilisateur }
    */
-  public get joueur(): Utilisateur {
+  public get joueur(): Utilisateur | undefined {
     return this._joueur;
   }
 
@@ -21,7 +21,7 @@ export class InscriptionKey {
    * Getter tournoi
    * @return {Tournoi }
    */
-  public get tournoi(): Tournoi {
+  public get tournoi(): Tournoi | undefined {
     return this._tournoi;
   }
 
@@ -29,7 +29,7 @@ export class InscriptionKey {
    * Setter joueur
    * @param {Utilisateur } value
    */
-  public set joueur(value: Utilisateur) {
+  public set joueur(value: Utilisateur | undefined) {
     this._joueur = value;
   }
 
@@ -37,7 +37,7 @@ export class InscriptionKey {
    * Setter tournoi
    * @param {Tournoi } value
    */
-  public set tournoi(value: Tournoi) {
+  public set tournoi(value: Tournoi | undefined) {
     this._tournoi = value;
   }
 }

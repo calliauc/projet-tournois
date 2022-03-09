@@ -1,4 +1,3 @@
-import { InscriptionKey } from './../model/inscription-key';
 import { Inscription } from './../model/inscription';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
