@@ -23,6 +23,7 @@ import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-ed
 import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
 import { JourneeComponent } from './component/journee/journee.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
+import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { JourneeDetailComponent } from './component/journee/journee-detail/journ
     MenuComponent,
     JourneeComponent,
     JourneeDetailComponent,
+    JourneeEditComponent,
   ],
   imports: [
     BrowserModule,

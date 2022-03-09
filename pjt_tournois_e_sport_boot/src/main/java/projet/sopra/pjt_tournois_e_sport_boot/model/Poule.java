@@ -25,6 +25,7 @@ public class Poule extends Ligue {
 			int nbPhase, Championnat championnat) {
 		super(nom, dateDeDebut, jeu, listeInscriptions, isPoule, nbPhase);
 		this.championnat = championnat;
+		this.isMatchRetour = false;
 	}
 
 	public Championnat getChampionnat() {

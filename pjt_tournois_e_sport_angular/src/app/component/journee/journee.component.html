@@ -17,13 +17,17 @@
         <td>{{ j.tournoi?.type }}</td>
         <td>{{ j.etape }}</td>
         <td>{{ j.numero }}</td>
-        <!-- <td *ngFor="let i of nMatchList">
-          <tr>
-            {{
-              j.matchsAJouerPourJournee![i].id
-            }}
-          </tr>
-        </td> -->
+        <td>
+          <div>
+            <a
+              [routerLink]="['/journee', 'edit', j.id]"
+              routerLinkActive="active"
+              class="btn btn-outline-primary"
+            >
+              edit
+            </a>
+          </div>
+        </td>
         <td>
           <div>
             <a
