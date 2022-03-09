@@ -303,16 +303,6 @@ public class MatchGenerationService {
 		LOGGER.debug("Liste des poules pour créer les matchs");
 		affichePoules(champ);
 		for (Poule p : champ.getPoules()) {
-			try {
-				LOGGER.info("TEST SAUVEGARDE POULE");
-				tournoiRepo.save(p);
-				LOGGER.debug("Sauvegarde ok");
-			} catch (Exception e) {
-				LOGGER.error("Sauvegarde NOT OK");
-				LOGGER.error("Erreur : " + e);
-				System.exit(1);
-			}
-
 			this.generateMatchsInPoule(p);
 		}
 		LOGGER.debug("Matchs de poule créés");
@@ -374,8 +364,16 @@ public class MatchGenerationService {
 		poule.setJourneesAJouer(journees);
 		LOGGER.trace("Set les prochains matchs");
 		matchService.setAllProchainMatch(poule.getIdTournoi());
-		LOGGER.error("Save la ligue NOT OK");
-		tournoiRepo.save(poule);
+//		try {
+//			LOGGER.info("TEST SAUVEGARDE POULE");
+//			tournoiRepo.save(poule);
+//			LOGGER.debug("Sauvegarde ok");
+//		} catch (Exception e) {
+//			LOGGER.error("Sauvegarde NOT OK");
+//			LOGGER.error("Erreur : " + e);
+//			System.exit(1);
+//		}
+//
 		LOGGER.info("Fin generation match poule");
 	}
 

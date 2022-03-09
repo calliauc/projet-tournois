@@ -40,6 +40,8 @@ public class Match {
 	@JsonView({Views.MatchWithIncriptions.class, Views.JourneeWithTournoiAndMatch.class})
 	private List<Inscription> inscriptionsProchainMatch = new ArrayList<Inscription>();
 
+	@Column(name = "match_is_fini")
+	private boolean isFini = false;
 	
 	@ManyToOne
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name = "inscription_prochain_match_fk"))
@@ -83,7 +85,9 @@ public class Match {
 		return inscriptionsProchainMatch;
 	}
 
-	
+	public boolean isFini() {
+		return this.isFini;
+	}
 
 
 	/// SETTERS
@@ -108,6 +112,10 @@ public class Match {
 		this.inscriptionsProchainMatch = inscriptionsProchainMatch;
 	}
 
+	public void setIsFini(boolean isFini) {
+		this.isFini = isFini;
+	}
+	
 	/// METHODS
 
 	@Override
