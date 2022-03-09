@@ -19,6 +19,7 @@ import { LigueEditComponent } from './component/tournoi/ligue-edit/ligue-edit.co
 import { ChampionnatEditComponent } from './component/tournoi/championnat-edit/championnat-edit.component';
 import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
 import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
+import { InscriptionEditComponent } from './component/inscription-edit/inscription-edit.component';
 import { MenuComponent } from './component/menu/menu.component';
 import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
 import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
@@ -40,6 +41,7 @@ import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-l
     ChampionnatEditComponent,
     ResultatEditComponent,
     LigueClassementComponent,
+    InscriptionEditComponent,
     MenuComponent,
   ],
   imports: [

@@ -15,11 +15,22 @@
         <td>{{ i.id!.tournoi!.idTournoi }}</td>
         <td>{{ i.position }}</td>
         <td>{{ i.score }}</td>
-        <!--<td><a [routerLink]=""></a></td>-->
+        <td>
+          <a
+            [routerLink]="[
+              '/inscription',
+              'edit',
+              i.id!.joueur!.id + '&' + i.id!.tournoi!.idTournoi
+            ]"
+            routerLinkActive="active"
+            class="btn btn-outline-primary"
+            >Editer</a
+          >
+        </td>
 
         <td>
           <button
-            (click)="delete(i.key!.joueur!.id!, i.key!.tournoi!.idTournoi!)"
+            (click)="delete(i.id!.joueur!.id!, i.id!.tournoi!.idTournoi!)"
             class="btn btn-outline-danger"
           >
             Supprimer l'inscription
@@ -27,5 +38,11 @@
         </td>
       </tr>
     </table>
+    <a
+      routerLink="/inscription/edit"
+      routerLinkActive="active"
+      class="btn btn-outline-primary"
+      >Créer une inscription</a
+    >
   </div>
 </div>
