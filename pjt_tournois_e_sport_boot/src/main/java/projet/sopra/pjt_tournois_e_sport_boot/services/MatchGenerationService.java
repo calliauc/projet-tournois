@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
 
 @Service
 public class MatchGenerationService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(MatchGenerationService.class);
 
 	@Autowired
 	private TournoiRepository tournoiRepo;
@@ -41,6 +44,10 @@ public class MatchGenerationService {
 	/// GESTION LIGUE
 
 	public void generateJourneesLigueDuels(Ligue ligue) {
+		for (Inscription i : ligue.getListeInscriptions()) {
+			LOGGER.debug("Inscription : " + i.getId());
+
+		}
 
 		////// TO DO : INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
 		int matchRetour;
@@ -51,15 +58,20 @@ public class MatchGenerationService {
 		}
 		Set<Journee> journees = new HashSet<Journee>();
 		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(ligue.getListeInscriptions());
-		System.out.println("inscriptions : " + inscriptionsLigue.toString());
+		LOGGER.debug("inscriptions : " + inscriptionsLigue.toString());
 		int isPair = (ligue.getListeInscriptions().size() + 1) % 2;
+		LOGGER.debug("Parité du nombre d'inscrits dans la ligue/poule : " + isPair);
+		LOGGER.debug("nb iter : " + (inscriptionsLigue.size() - isPair));
 
 		for (int i = 0; i < (inscriptionsLigue.size() - isPair) * matchRetour; i++) {
+			LOGGER.debug("Journéé : " + i);
 			Journee jour = new Journee();
 			jour.setTournoi(ligue);
 			jour.setEtape(Etape.Ligue);
 			jour.setNumero(i + 1);
+			LOGGER.debug("Journéé créée");
 			journeeRepo.save(jour);
+			LOGGER.debug("Journée sauvegardée");
 			List<Match> matchsJournee = new ArrayList<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {
 				System.out.println("Match : " + j);
@@ -68,7 +80,6 @@ public class MatchGenerationService {
 				m.getInscriptions().add(inscriptionsLigue.get(j));
 				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
 				for (Inscription x : m.getInscriptions()) {
-
 					System.out.println(x.getId().getJoueur().getId());
 				}
 				matchsJournee.add(m);
@@ -87,13 +98,15 @@ public class MatchGenerationService {
 		tournoiRepo.save(ligue);
 	}
 
-	
 	/// GESTION CHAMPIONNAT
-	
+
 	public void initChampionnat(Championnat champ) {
-		
+		this.initPoules(champ);
+		this.createMatchsPoules(champ);
+		this.initPhaseFinale(champ);
+
 	}
-	
+
 	/// GESTION POULES
 
 	/* @formatter:off
@@ -102,14 +115,14 @@ public class MatchGenerationService {
 	 * mais pas la peine pour 8 poules max
 	 * @formatter:on
 	 */
-	public void splitInPoule(Championnat champ) {
+	private void initPoules(Championnat champ) {
 		int nb_players = champ.getListeInscriptions().size();
 		if (nb_players < 6) {
-			System.out.println("Pas assez de joueurs, passez en ligue ?");
+			LOGGER.debug("Pas assez de joueurs, passez en ligue ?");
 		} else if (nb_players < 12) {
 			createTwoPoule(champ);
 			champ.setProchaineEtape(Etape.Demi);
-			System.out.println(nb_players + " joueurs : 2 poules \nLes 2 premiers de chaque poule en demi-finales");
+			LOGGER.debug(nb_players + " joueurs : 2 poules \nLes 2 premiers de chaque poule en demi-finales");
 		} else if (nb_players < 24) {
 			createFourPoule(champ);
 			champ.setProchaineEtape(Etape.Quart);
@@ -118,26 +131,29 @@ public class MatchGenerationService {
 		} else if (nb_players <= 48) {
 			createEightPoule(champ);
 			champ.setProchaineEtape(Etape.Huitieme);
-			System.out.println(
-					nb_players + " joueurs : 8 poules \nLes 2 premiers de chaque poule en huitieme de finales");
+			LOGGER.debug(nb_players + " joueurs : 8 poules \nLes 2 premiers de chaque poule en huitieme de finales");
 		} else {
-			System.out.println("Trop de joueurs");
+			LOGGER.debug("Trop de joueurs");
 		}
 		tournoiRepo.save(champ);
 	}
 
 	private void createTwoPoule(Championnat champ) {
+		LOGGER.debug("Creation de 2 poules");
 		List<Inscription> players = new ArrayList<Inscription>(champ.getListeInscriptions());
 		Collections.shuffle(players);
 
+		LOGGER.debug("Creation des sets d'inscriptions");
 		Set<Inscription> tempA = Set.copyOf(players.subList(0 * players.size() / 2, 1 * players.size() / 2));
 		Set<Inscription> tempB = Set.copyOf(players.subList(1 * players.size() / 2, 2 * players.size() / 2));
 
+		LOGGER.debug("Creation des poules avec les set d'inscription");
 		Poule pouleA = new Poule("PouleA", LocalDate.now(), champ.getJeu(), tempA, true,
 				champ.getNbParticipantsParMatch(), champ);
 		Poule pouleB = new Poule("PouleB", LocalDate.now(), champ.getJeu(), tempB, true,
 				champ.getNbParticipantsParMatch(), champ);
 
+		LOGGER.debug("Ajout des poules dans le championnat");
 		Collections.addAll(champ.getPoules(), pouleA, pouleB);
 	}
 
@@ -196,9 +212,18 @@ public class MatchGenerationService {
 
 	}
 
+	private void createMatchsPoules(Championnat champ) {
+		LOGGER.debug("Création des matchs de poule");
+		for (Poule p : champ.getPoules()) {
+			this.generateJourneesLigueDuels((Ligue)p);
+		}
+		LOGGER.debug("Matchs de poule créés");
+
+	}
+
 	/// GESTION PHASES FINALES
 
-	public void generatePhaseFinale(Championnat champ) {
+	private void initPhaseFinale(Championnat champ) {
 		initEtape(champ, Etape.Huitieme);
 		initEtape(champ, Etape.Quart);
 		initEtape(champ, Etape.Demi);
@@ -223,7 +248,7 @@ public class MatchGenerationService {
 	 * Ajout des seconds de chaque poule dans l'odre inverse
 	 * @formatter:on
 	 */
-	public void initChampionatFinales(Championnat champ) {
+	public void firstPhaseFinale(Championnat champ) {
 		// Creation d'une liste de listes avec les 2 premiers de chaque poule
 		List<List<Inscription>> topsOfPoules = new ArrayList<List<Inscription>>();
 		for (Poule poule : champ.getPoules()) {
@@ -250,7 +275,7 @@ public class MatchGenerationService {
 	 * Ajoute les gagnants des matchs de l'étape précédante
 	 * @formatter:on
 	 */
-	public void etapeSuivanteChampionnat(Championnat champ) {
+	public void nextPhaseFinale(Championnat champ) {
 		Journee nextDay = champ.getJourneesAJouerFinales().get(champ.getProchaineEtape().getIndex());
 		Journee pastDay = champ.getJourneesAJouerFinales().get(champ.getProchaineEtape().getIndex() - 1);
 		int nbMatchs = champ.getProchaineEtape().getNbMatchs();

@@ -91,6 +91,7 @@ class ChampionnatTest {
 		tournoiService.createOrUpdate(champ);
 		LOGGER.debug("Tournoi sauvegardé");
 		
+		matchGenService.initChampionnat(champ);
 
 	}
 
