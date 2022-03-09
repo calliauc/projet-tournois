@@ -18,7 +18,24 @@
         <td>{{ j.tournoi?.type }}</td>
         <td>{{ j.etape }}</td>
         <td>{{ j.numero }}</td>
-        <td></td>
+        <!-- <td *ngFor="let i of nMatchList">
+          <tr>
+            {{
+              j.matchsAJouerPourJournee![i].id
+            }}
+          </tr>
+        </td> -->
+        <td>
+          <div>
+            <a
+              class="btn btn-outline-primary"
+              [routerLink]="['/journee', 'detail', j.id]"
+              routerLinkActive="active"
+            >
+              détails
+            </a>
+          </div>
+        </td>
         <td>
           <div>
             <button (click)="delete(j.id!)" class="btn btn-outline-danger">
