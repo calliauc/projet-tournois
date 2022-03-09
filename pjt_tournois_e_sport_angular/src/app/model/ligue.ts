@@ -1,20 +1,21 @@
+import { Journee } from './journee';
 import { Tournoi } from './tournoi';
 export class Ligue extends Tournoi {
   protected _isMatchRetour?: boolean | undefined;
   protected _isPoule?: boolean | undefined;
   protected _nbPhase?: number | undefined;
-  /*   protected _JourneesAJouer?: Journee[] | undefined;   */
+  protected _JourneesAJouer?: Journee[] | undefined;
   constructor(
     isMatchRetour?: boolean,
     isPoule?: boolean,
-    nbPhase?: number
-    /*   JourneesAJouer?: Journee[]  */
+    nbPhase?: number,
+    JourneesAJouer?: Journee[]
   ) {
     super();
     this._isMatchRetour = isMatchRetour;
     this._isPoule = isPoule;
     this._nbPhase = nbPhase;
-    /*   this._JourneesAJouer = JourneeAJouer; */
+    this._JourneesAJouer = JourneesAJouer;
   }
 
   /**
@@ -43,11 +44,10 @@ export class Ligue extends Tournoi {
    * Getter JourneesAJouer
    * @return {Journee[]}
    */
-  /*
-   public get JourneesAJouer(): Journee[] | undefined {
+
+  public get JourneesAJouer(): Journee[] | undefined {
     return this._JourneesAJouer;
   }
- */
 
   /**
    * Setter isMatchRetour
@@ -77,7 +77,7 @@ export class Ligue extends Tournoi {
    * Setter nbPhase
    * @param {Journee[]} value
    */
-  /* public set JourneesAJouer(value: Journee[] | undefined) {
+  public set JourneesAJouer(value: Journee[] | undefined) {
     this._JourneesAJouer = value;
-  } */
+  }
 }
