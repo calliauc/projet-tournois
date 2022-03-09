@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeHttpRequests()
 				.antMatchers(HttpMethod.GET, "/api/utilisateur/search/**").permitAll()
 				.antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
-				.antMatchers(HttpMethod.POST,"/api/utilisateur/inscription").permitAll() // ce lien existe-t-il vraiment ?
+				.antMatchers(HttpMethod.POST,"/api/utilisateur/signup").permitAll() // ce lien existe-t-il vraiment ?
 				.antMatchers(HttpMethod.GET).hasAnyRole("ADMIN")
 				.antMatchers(HttpMethod.POST).hasRole("ADMIN")
 				.antMatchers(HttpMethod.PUT).hasRole("ADMIN")

@@ -97,12 +97,15 @@ export class UtilisateurEditComponent implements OnInit {
   }
 
   save() {
-    // this.utilisateur = {
-    //   _username: this.form.get('login')!.value as string,
-    //   _mail: this.form.get('mail')!.value as string,
-    //   _password: this.form.get('passwordGrp')!.get('password')?.value as string,
-    //   _roles: [Role.ROLE_JOUEUR, Role.ROLE_ADMIN, Role.ROLE_ORGANISATEUR],
-    // };
+    this.utilisateur.username = this.form.get('login')!.value as string;
+    this.utilisateur.mail = this.form.get('mail')!.value as string;
+    this.utilisateur.password = this.form.get('passwordGrp')!.get('password')
+      ?.value as string;
+    this.utilisateur.roles = [
+      Role.ROLE_JOUEUR,
+      Role.ROLE_ADMIN,
+      Role.ROLE_ORGANISATEUR,
+    ];
     console.log(this.utilisateur);
     this.utilisateurService.create(this.utilisateur).subscribe((ok) => {
       this.router.navigateByUrl('/acceuil');
