@@ -111,6 +111,10 @@ public class TournoiService {
 		}
 	}
 	
+	public int getNbInscriptionTournoi(Tournoi t) {
+		return tournoiRepo.getNbInscriptionTournoi(t.getIdTournoi());
+	}
+
 	
 }
 

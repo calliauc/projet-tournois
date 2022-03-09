@@ -1,7 +1,11 @@
 package projet.sopra.pjt_tournois_e_sport_boot;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -9,12 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
 import projet.sopra.pjt_tournois_e_sport_boot.model.Championnat;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Role;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
@@ -35,7 +41,7 @@ class ChampionnatTest {
 
 	@Test
 	@Transactional
-//	@Commit
+	@Commit
 	void testChamp() {
 
 		/* @formatter:off
@@ -62,16 +68,30 @@ class ChampionnatTest {
 		LOGGER.debug("Sauvegarde finie");
 		
 
-		LOGGER.debug("Creation user");
-		Utilisateur u1 = new Utilisateur("toto", "a@b.c", "toto");
-		Inscription p1 = new Inscription();
-		p1.setId(new InscriptionKey(u1, champ));
-
-		LOGGER.debug("Debut de la sauvegarde");
-		utilisateurService.save(u1);
-		inscriptionService.createOrUpdate(p1);
-		LOGGER.debug("Sauvegarde finie");
-
+		LOGGER.debug("Creation users & inscription");
+		List<Utilisateur> users = new ArrayList<Utilisateur>();
+		Set<Inscription> inscrits = new HashSet<Inscription>();
+		for (int i = 0; i < 8; i++) {
+			Utilisateur u = new Utilisateur("User"+ i, "u"+i+"@b.c", "toto" + i);
+			users.add(u);
+		}
+		 
+		LOGGER.debug("Generation des inscriptions a partir des users");
+		for (Utilisateur u : users) {
+			Inscription i = new Inscription();
+			i.setId(new InscriptionKey(u, champ));
+			inscrits.add(i);
+			utilisateurService.save(u);
+			inscriptionService.createOrUpdate(i);
+		}
+		LOGGER.debug("Inscrits sauvegardés");
+		
+		LOGGER.debug("Inscrits dans le tournoi");
+		champ.setListeInscriptions(inscrits);
+		champ.setNbParticipantsTotal(tournoiService.getNbInscriptionTournoi(champ));
+		tournoiService.createOrUpdate(champ);
+		LOGGER.debug("Tournoi sauvegardé");
+		
 	}
 
 }
