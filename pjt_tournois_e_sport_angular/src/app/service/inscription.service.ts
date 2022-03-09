@@ -18,7 +18,7 @@ export class InscriptionService {
 
   public get(idJoueur: number, idTournoi: number): Observable<Inscription> {
     return this.httpClient.get<Inscription>(
-      `${InscriptionService.URL}/${idJoueur}/${idTournoi}`
+      `${InscriptionService.URL}/${idJoueur}&${idTournoi}`
     );
   }
 
@@ -37,7 +37,7 @@ export class InscriptionService {
 
   public update(inscription: Inscription): Observable<Inscription> {
     return this.httpClient.put<Inscription>(
-      `${InscriptionService.URL}/${inscription.id!.joueur!.id}+"&"+${
+      `${InscriptionService.URL}/${inscription.id!.joueur!.id}&${
         inscription.id!.tournoi!.idTournoi
       }`,
       this.inscriptionToJson(inscription)
