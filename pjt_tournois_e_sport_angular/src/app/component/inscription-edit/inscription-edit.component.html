@@ -1,51 +1,93 @@
 <div>
-  <div class="form-group">
-    <label>ID Joueur :</label>
-    <input
-      *ngIf="!creation"
-      class="form-control"
-      [(ngModel)]="inscription.id!.joueur!.id"
-      readonly
-    />
-    <input
-      *ngIf="creation"
-      class="form-control"
-      [(ngModel)]="inscription.id!.joueur!.id"
-    />
-  </div>
-  <div class="form-group">
-    <label>ID Tournoi :</label>
-    <input
-      *ngIf="!creation"
-      class="form-control"
-      [(ngModel)]="inscription.id!.tournoi!.idTournoi"
-      readonly
-    />
-    <input
-      *ngIf="creation"
-      class="form-control"
-      [(ngModel)]="inscription.id!.tournoi!.idTournoi"
-    />
-  </div>
-  <ng-container *ngIf="!creation">
+  <form (ngSubmit)="save()" [formGroup]="myForm">
     <div class="form-group">
-      <label>Position joueur :</label>
-      <input class="form-control" [(ngModel)]="inscription.position" />
+      <label>ID Joueur :</label>
+      <input
+        *ngIf="!creation"
+        class="form-control"
+        formControlName="keyJoueur"
+        readonly
+      />
+      <input
+        *ngIf="creation"
+        class="form-control"
+        formControlName="keyJoueur"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['keyJoueur'].dirty &&
+          myForm.controls['keyJoueur'].invalid
+        "
+      >
+        <span *ngIf="myForm.controls['keyJoueur'].hasError('required')"
+          >ID du joueur obligatoire</span
+        ><span *ngIf="myForm.controls['keyJoueur'].hasError('joueurAbsentBase')"
+          >Ce joueur n'existe pas</span
+        >
+      </div>
     </div>
+
     <div class="form-group">
-      <label>Score global :</label>
-      <input class="form-control" [(ngModel)]="inscription.score" />
+      <label>ID Tournoi :</label>
+      <input
+        *ngIf="!creation"
+        class="form-control"
+        formControlName="keyTournoi"
+        readonly
+      />
+      <input
+        *ngIf="creation"
+        class="form-control"
+        formControlName="keyTournoi"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['keyTournoi'].dirty &&
+          myForm.controls['keyTournoi'].invalid
+        "
+      >
+        <span *ngIf="myForm.controls['keyTournoi'].hasError('required')"
+          >ID du joueur obligatoire</span
+        ><span
+          *ngIf="myForm.controls['keyTournoi'].hasError('tournoiAbsentBase')"
+          >Ce tournoi n'existe pas</span
+        >
+      </div>
     </div>
-  </ng-container>
-  <div>
-    <button (click)="save()" class="btn btn-outline-success">
-      enregistrer
-    </button>
-    <a
-      routerLink="/inscription"
-      routerLinkActive="active"
-      class="btn btn-warning"
-      >Annuler</a
-    >
-  </div>
+
+    <ng-container *ngIf="!creation">
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['position'].dirty &&
+          myForm.controls['position'].invalid
+        "
+      >
+        <span *ngIf="myForm.controls['position'].hasError('minimum')"
+          >Le score ne peut pas être négatif</span
+        >
+      </div>
+      <div class="form-group">
+        <label>Position joueur :</label>
+        <input class="form-control" formControlName="position" />
+      </div>
+      <div class="form-group">
+        <label>Score global :</label>
+        <input class="form-control" formControlName="score" />
+      </div>
+    </ng-container>
+    <div>
+      <button (click)="save()" class="btn btn-outline-success">
+        enregistrer
+      </button>
+      <a
+        routerLink="/inscription"
+        routerLinkActive="active"
+        class="btn btn-warning"
+        >Annuler</a
+      >
+    </div>
+  </form>
 </div>

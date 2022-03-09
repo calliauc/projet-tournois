@@ -67,6 +67,12 @@ export class UtilisateurService {
     );
   }
 
+  public checkId(id: number): Observable<boolean> {
+    return this.httpClient.get<boolean>(
+      `${UtilisateurService.URL}/searchById/${id}`
+    );
+  }
+
   public utilisateurToJson(utilisateur: Utilisateur): any {
     const obj = {
       id: utilisateur.id,

@@ -44,7 +44,7 @@ export class InscriptionService {
     );
   }
 
-  //METHODS
+  //METHODS CRUD
   private inscriptionToJsonUpdate(inscription: Inscription): any {
     const obj = {
       id: {
