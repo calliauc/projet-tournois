@@ -87,6 +87,13 @@ public class MatchGenerationService {
 		tournoiRepo.save(ligue);
 	}
 
+	
+	/// GESTION CHAMPIONNAT
+	
+	public void initChampionnat(Championnat champ) {
+		
+	}
+	
 	/// GESTION POULES
 
 	/* @formatter:off
