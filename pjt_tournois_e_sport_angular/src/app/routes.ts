@@ -30,6 +30,8 @@ export const routes: Routes = [
 
   { path: 'resultat/edit', component: ResultatEditComponent },
 
+  { path: 'resultat/edit/:id', component: ResultatEditComponent },
+
   { path: 'signup', component: CreationCompteComponent },
 
   { path: 'login', component: LoginComponent },
