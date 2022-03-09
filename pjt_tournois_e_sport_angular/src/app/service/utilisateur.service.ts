@@ -20,6 +20,7 @@ export class UtilisateurService {
   }
 
   public create(utilisateur: Utilisateur): Observable<Utilisateur> {
+    console.log(utilisateur);
     return this.httpClient.post<Utilisateur>(
       UtilisateurService.URL + '/signup',
       this.utilisateurToJson(utilisateur)
@@ -64,7 +65,7 @@ export class UtilisateurService {
     );
   }
 
-  private utilisateurToJson(utilisateur: Utilisateur): any {
+  public utilisateurToJson(utilisateur: Utilisateur): any {
     const obj = {
       id: utilisateur.id,
       username: utilisateur.username,
