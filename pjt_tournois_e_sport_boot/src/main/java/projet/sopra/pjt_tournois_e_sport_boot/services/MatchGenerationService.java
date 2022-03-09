@@ -47,7 +47,7 @@ public class MatchGenerationService {
 		for (Poule p : champ.getPoules()) {
 			LOGGER.debug("Poule : " + p.getNom());
 			for (Inscription i : p.getListeInscriptions()) {
-				LOGGER.debug("Isncrit : " + i.getId().getJoueur().getUsername());
+				LOGGER.debug("Inscrit : " + i.getId().getJoueur().getUsername());
 			}
 		}
 	}
@@ -55,7 +55,7 @@ public class MatchGenerationService {
 	private void afficheLigue(Ligue l) {
 		LOGGER.debug("Poule : " + l.getNom());
 		for (Inscription i : l.getListeInscriptions()) {
-			LOGGER.debug("Isncrit : " + i.getId().getJoueur().getUsername());
+			LOGGER.debug("Inscrit : " + i.getId().getJoueur().getUsername());
 		}
 	}
 
@@ -145,7 +145,7 @@ public class MatchGenerationService {
 	public void initChampionnat(Championnat champ) {
 		champ = (Championnat) tournoiRepo.getById(champ.getIdTournoi());
 		this.initPoules(champ);
-		this.createMatchsPoules(champ);
+		this.listPoulesForGenerateMatchs(champ);
 		this.initPhaseFinale(champ);
 
 	}
@@ -194,12 +194,11 @@ public class MatchGenerationService {
 		Poule pouleA = new Poule("PouleA", LocalDate.now(), champ.getJeu(), tempA, true,
 				champ.getNbParticipantsParMatch(), champ);
 		pouleA.setNbParticipantsTotal(tempA.size());
-		pouleA.setChampionnat(champ);
 		Poule pouleB = new Poule("PouleB", LocalDate.now(), champ.getJeu(), tempB, true,
 				champ.getNbParticipantsParMatch(), champ);
 		pouleB.setNbParticipantsTotal(tempB.size());
-		pouleB.setChampionnat(champ);
 
+		LOGGER.debug("Sauvegarde des poules en base");
 		tournoiRepo.save(pouleA);
 		tournoiRepo.save(pouleB);
 
@@ -210,30 +209,46 @@ public class MatchGenerationService {
 	}
 
 	private void createFourPoule(Championnat champ) {
+		LOGGER.debug("Creation de 4 poules");
 		List<Inscription> players = new ArrayList<Inscription>(champ.getListeInscriptions());
 		Collections.shuffle(players);
 
+		LOGGER.debug("Creation des sets d'inscriptions");
 		Set<Inscription> tempA = Set.copyOf(players.subList(0 * players.size() / 4, 1 * players.size() / 4));
 		Set<Inscription> tempB = Set.copyOf(players.subList(1 * players.size() / 4, 2 * players.size() / 4));
 		Set<Inscription> tempC = Set.copyOf(players.subList(2 * players.size() / 4, 3 * players.size() / 4));
 		Set<Inscription> tempD = Set.copyOf(players.subList(3 * players.size() / 4, 4 * players.size() / 4));
 
+		LOGGER.debug("Creation des poules avec les set d'inscription");
 		Poule pouleA = new Poule("PouleA", LocalDate.now(), champ.getJeu(), tempA, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleA.setNbParticipantsTotal(tempA.size());
 		Poule pouleB = new Poule("PouleB", LocalDate.now(), champ.getJeu(), tempB, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleB.setNbParticipantsTotal(tempB.size());
 		Poule pouleC = new Poule("PouleC", LocalDate.now(), champ.getJeu(), tempC, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleC.setNbParticipantsTotal(tempC.size());
 		Poule pouleD = new Poule("PouleD", LocalDate.now(), champ.getJeu(), tempD, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleD.setNbParticipantsTotal(tempD.size());
 
+		LOGGER.debug("Sauvegarde des poules en base");
+		tournoiRepo.save(pouleA);
+		tournoiRepo.save(pouleB);
+		tournoiRepo.save(pouleC);
+		tournoiRepo.save(pouleD);
+
+		LOGGER.debug("Ajout des poules dans le championnat");
 		Collections.addAll(champ.getPoules(), pouleA, pouleB, pouleC, pouleD);
 	}
 
 	private void createEightPoule(Championnat champ) {
+		LOGGER.debug("Creation de 8 poules");
 		List<Inscription> players = new ArrayList<Inscription>(champ.getListeInscriptions());
 		Collections.shuffle(players);
 
+		LOGGER.debug("Creation des sets d'inscriptions");
 		Set<Inscription> tempA = Set.copyOf(players.subList(0 * players.size() / 8, 1 * players.size() / 8));
 		Set<Inscription> tempB = Set.copyOf(players.subList(1 * players.size() / 8, 2 * players.size() / 8));
 		Set<Inscription> tempC = Set.copyOf(players.subList(2 * players.size() / 8, 3 * players.size() / 8));
@@ -243,45 +258,69 @@ public class MatchGenerationService {
 		Set<Inscription> tempG = Set.copyOf(players.subList(6 * players.size() / 8, 7 * players.size() / 8));
 		Set<Inscription> tempH = Set.copyOf(players.subList(7 * players.size() / 8, 8 * players.size() / 8));
 
+		LOGGER.debug("Creation des poules avec les set d'inscription");
 		Poule pouleA = new Poule("PouleA", LocalDate.now(), champ.getJeu(), tempA, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleA.setNbParticipantsTotal(tempA.size());
 		Poule pouleB = new Poule("PouleB", LocalDate.now(), champ.getJeu(), tempB, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleB.setNbParticipantsTotal(tempB.size());
 		Poule pouleC = new Poule("PouleC", LocalDate.now(), champ.getJeu(), tempC, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleC.setNbParticipantsTotal(tempC.size());
 		Poule pouleD = new Poule("PouleD", LocalDate.now(), champ.getJeu(), tempD, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleD.setNbParticipantsTotal(tempD.size());
 		Poule pouleE = new Poule("PouleE", LocalDate.now(), champ.getJeu(), tempE, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleE.setNbParticipantsTotal(tempE.size());
 		Poule pouleF = new Poule("PouleF", LocalDate.now(), champ.getJeu(), tempF, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleF.setNbParticipantsTotal(tempF.size());
 		Poule pouleG = new Poule("PouleG", LocalDate.now(), champ.getJeu(), tempG, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleG.setNbParticipantsTotal(tempG.size());
 		Poule pouleH = new Poule("PouleH", LocalDate.now(), champ.getJeu(), tempH, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleF.setNbParticipantsTotal(tempF.size());
 
+		LOGGER.debug("Sauvegarde des poules en base");
+		tournoiRepo.save(pouleA);
+		tournoiRepo.save(pouleB);
+		tournoiRepo.save(pouleC);
+		tournoiRepo.save(pouleD);
+		tournoiRepo.save(pouleE);
+		tournoiRepo.save(pouleF);
+		tournoiRepo.save(pouleG);
+		tournoiRepo.save(pouleH);
+
+		LOGGER.debug("Ajout des poules dans le championnat");
 		Collections.addAll(champ.getPoules(), pouleA, pouleB, pouleC, pouleD, pouleE, pouleF, pouleG, pouleH);
 
 	}
 
-	private void createMatchsPoules(Championnat champ) {
-		LOGGER.debug("Création des matchs de poule");
+	private void listPoulesForGenerateMatchs(Championnat champ) {
+		LOGGER.debug("Liste des poules pour créer les matchs");
 		affichePoules(champ);
 		for (Poule p : champ.getPoules()) {
-			LOGGER.debug(p.getListeInscriptions().toString());
-			this.generateJourneesPoules(p);
+			try {
+				LOGGER.info("TEST SAUVEGARDE POULE");
+				tournoiRepo.save(p);
+				LOGGER.debug("Sauvegarde ok");
+			} catch (Exception e) {
+				LOGGER.error("Sauvegarde NOT OK");
+				LOGGER.error("Erreur : " + e);
+				System.exit(1);
+			}
+
+			this.generateMatchsInPoule(p);
 		}
 		LOGGER.debug("Matchs de poule créés");
 	}
 
-	private void generateJourneesPoules(Poule poule) {
-		LOGGER.debug("Debut generate");
+	private void generateMatchsInPoule(Poule poule) {
+		LOGGER.info("Debut generation matchs poules");
 		this.afficheLigue(poule);
-		LOGGER.debug("test save ligue");
-		tournoiRepo.save(poule);
-		LOGGER.debug("fin test save ligue");
-
-		////// TO DO : INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
 		int matchRetour;
 		if (poule.isMatchRetour() == true) {
 			matchRetour = 2;
@@ -290,54 +329,54 @@ public class MatchGenerationService {
 		}
 		Set<Journee> journees = new HashSet<Journee>();
 		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(poule.getListeInscriptions());
-		LOGGER.debug("List to linked list");
+		LOGGER.trace("List to linked list");
 		int isPair = (poule.getListeInscriptions().size() + 1) % 2;
-		LOGGER.debug("Parité du nombre d'inscrits dans la ligue/poule : " + isPair);
-		LOGGER.debug("nb iter : " + (inscriptionsLigue.size() - isPair));
+		LOGGER.trace("Parité du nombre d'inscrits dans la ligue/poule : " + isPair);
+		LOGGER.debug("nb journées : " + (inscriptionsLigue.size() - isPair));
 
 		for (int i = 0; i < (inscriptionsLigue.size() - isPair) * matchRetour; i++) {
 			LOGGER.debug("Journéé : " + i);
 			Journee jour = new Journee();
 			jour.setTournoi(poule);
-			jour.setEtape(Etape.Ligue);
+			jour.setEtape(Etape.Poule);
 			jour.setNumero(i + 1);
-			LOGGER.debug("Journéé créée");
+			LOGGER.trace("Journéé créée");
 			journeeRepo.save(jour);
 			LOGGER.debug("Journée sauvegardée");
 			List<Match> matchsJournee = new ArrayList<Match>();
 			for (int j = 0; j < poule.getListeInscriptions().size() / 2; j++) {
-				LOGGER.debug("Match : " + j);
+				LOGGER.trace("Match : " + j);
 				Match m = new Match();
 				m.setJournee(jour);
 				m.getInscriptions().add(inscriptionsLigue.get(j));
 				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
 				for (Inscription x : m.getInscriptions()) {
-					LOGGER.debug("" + x.getId().getJoueur().getUsername());
+					LOGGER.trace("" + x.getId().getJoueur().getUsername());
 				}
 				matchsJournee.add(m);
 				matchRepo.save(m);
 			}
 			if (isPair != 1) {
-				LOGGER.debug("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
+				LOGGER.trace("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
 			}
-			LOGGER.debug("Set match dans journee");
+			LOGGER.trace("Set match dans journee");
 			jour.setMatchsAJouerPourJournee(matchsJournee);
 			LOGGER.debug("Sauvegarde journee");
 			journeeRepo.save(jour);
-			LOGGER.debug("Add journéee à la liste");
+			LOGGER.trace("Add journéee à la liste");
 			journees.add(jour);
-			LOGGER.debug("Rotation des inscrits");
+			LOGGER.trace("Rotation des inscrits");
 			inscriptionsLigue.add(isPair, inscriptionsLigue.pollLast());
 		}
 		LOGGER.debug("Tout les matchs sont générés");
 
-		LOGGER.debug("Set la list des journée dans la ligue");
+		LOGGER.trace("Set la list des journée dans la ligue");
 		poule.setJourneesAJouer(journees);
-		LOGGER.debug("Set les prochains matchs");
+		LOGGER.trace("Set les prochains matchs");
 		matchService.setAllProchainMatch(poule.getIdTournoi());
-		LOGGER.debug("Save la ligue NOT OK");
+		LOGGER.error("Save la ligue NOT OK");
 		tournoiRepo.save(poule);
-		LOGGER.debug("Fin");
+		LOGGER.info("Fin generation match poule");
 	}
 
 	/// GESTION PHASES FINALES
