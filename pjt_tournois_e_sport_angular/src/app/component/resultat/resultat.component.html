@@ -1,77 +1,101 @@
-<div>Rechercher un resultat avec son id :</div>
-<table class="table">
-  <p>
-    <input
-      class="form-control"
-      type="number"
-      id="idResultat"
-      name="idResultat"
-      [(ngModel)]="idResultat"
-    />
-  </p>
-  <button type="button" class="btn btn-primary" (click)="getById(idResultat)">
-    Enregistrer
-  </button>
-  <br />
-  <br />
-  <tr *ngIf="resultat.id">
-    <th>id</th>
-    <th>matchId</th>
-    <!--<th>ParticipantId</th>
+<div class="card bg-dark text-white">
+  <div class="card-header">
+    <h3>Resultats</h3>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tr>
+        <th colspan="2"><p>Rechercher un resultat avec son id</p></th>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            <input
+              class="form-control"
+              type="number"
+              id="idResultat"
+              name="idResultat"
+              [(ngModel)]="idResultat"
+            />
+          </p>
+        </td>
+        <td>
+          <p>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="getById(idResultat)"
+            >
+              Rechercher
+            </button>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <table class="table">
+      <tr *ngIf="resultat.id">
+        <th>id</th>
+        <th>matchId</th>
+        <!--<th>ParticipantId</th>
     <th>TournoiId</th>-->
-    <th>positionMatch</th>
-    <th>scoreMatch</th>
-  </tr>
-  <tr *ngIf="resultat.id">
-    <td>{{ resultat.id }}</td>
-    <td>{{ resultat.match?.id }}</td>
-    <td>{{ resultat.positionMatch }}</td>
-    <td>{{ resultat.scoreMatch }}</td>
-    <td>
-      <a
-        [routerLink]="['/resultat', 'edit', resultat.id]"
-        routerLinkActive="active"
-        class="btn btn-outline-primary"
-        >editer</a
-      >
-    </td>
-    <td>
-      <button (click)="delete(resultat.id!)" class="btn btn-outline-danger">
-        supprimer
-      </button>
-    </td>
-  </tr>
-  <br *ngIf="resultat.id" />
-  <br *ngIf="resultat.id" />
+        <th>positionMatch</th>
+        <th>scoreMatch</th>
+      </tr>
+      <tr *ngIf="resultat.id">
+        <td>{{ resultat.id }}</td>
+        <td>{{ resultat.match?.id }}</td>
+        <td>{{ resultat.positionMatch }}</td>
+        <td>{{ resultat.scoreMatch }}</td>
+        <td>
+          <a
+            [routerLink]="['/resultat', 'edit', resultat.id]"
+            routerLinkActive="active"
+            class="btn btn-outline-primary"
+            >editer</a
+          >
+        </td>
+        <td>
+          <button (click)="delete(resultat.id!)" class="btn btn-outline-danger">
+            supprimer
+          </button>
+        </td>
+      </tr>
+      <br *ngIf="resultat.id" />
+      <br *ngIf="resultat.id" />
 
-  <tr>
-    <th>id</th>
-    <th>matchId</th>
-    <!--<th>ParticipantId</th>
+      <tr>
+        <th>id</th>
+        <th>matchId</th>
+        <!--<th>ParticipantId</th>
     <th>TournoiId</th>-->
-    <th>positionMatch</th>
-    <th>scoreMatch</th>
-  </tr>
-  <tr *ngFor="let r of resultatsObservable | async">
-    <td>{{ r.id }}</td>
-    <td>{{ r.match?.id }}</td>
-    <td>{{ r.positionMatch }}</td>
-    <td>{{ r.scoreMatch }}</td>
-    <td>
-      <a
-        [routerLink]="['/resultat', 'edit', r.id]"
-        routerLinkActive="active"
-        class="btn btn-outline-primary"
-        >editer</a
-      >
-    </td>
-    <td>
-      <button (click)="delete(r.id!)" class="btn btn-outline-danger">
-        supprimer
-      </button>
-    </td>
-  </tr>
-</table>
-<a routerLink="/resultat/edit" routerLinkActive="active" class="btn btn-link"
-  >ajouter un resultat</a
->
+        <th>positionMatch</th>
+        <th>scoreMatch</th>
+      </tr>
+      <tr *ngFor="let r of resultatsObservable | async">
+        <td>{{ r.id }}</td>
+        <td>{{ r.match?.id }}</td>
+        <td>{{ r.positionMatch }}</td>
+        <td>{{ r.scoreMatch }}</td>
+        <td>
+          <a
+            [routerLink]="['/resultat', 'edit', r.id]"
+            routerLinkActive="active"
+            class="btn btn-outline-primary"
+            >editer</a
+          >
+        </td>
+        <td>
+          <button (click)="delete(r.id!)" class="btn btn-outline-danger">
+            supprimer
+          </button>
+        </td>
+      </tr>
+    </table>
+    <a
+      routerLink="/resultat/edit"
+      routerLinkActive="active"
+      class="btn btn-link"
+      >ajouter un resultat</a
+    >
+  </div>
+</div>

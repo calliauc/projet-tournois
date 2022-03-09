@@ -19,6 +19,7 @@ import { LigueEditComponent } from './component/tournoi/ligue-edit/ligue-edit.co
 import { ChampionnatEditComponent } from './component/tournoi/championnat-edit/championnat-edit.component';
 import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
 import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
+import { InscriptionEditComponent } from './component/inscription-edit/inscription-edit.component';
 import { MenuComponent } from './component/menu/menu.component';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { MenuComponent } from './component/menu/menu.component';
     ChampionnatEditComponent,
     ResultatEditComponent,
     LigueClassementComponent,
+    InscriptionEditComponent,
     MenuComponent,
   ],
   imports: [
