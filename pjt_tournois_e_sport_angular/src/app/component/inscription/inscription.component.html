@@ -1,3 +1,21 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">
+    <h3>Liste des inscriptions</h3>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tr>
+        <th>ID Joueur</th>
+        <th>ID Tournoi</th>
+        <th>Position joueur</th>
+        <th>Score global</th>
+      </tr>
+      <tr *ngFor="let i of inscriptionsObservable | async">
+        <td>{{ i.id!.joueur!.id }}</td>
+        <td>{{ i.id!.tournoi!.idTournoi }}</td>
+        <td>{{ i.position }}</td>
+        <td>{{ i.score }}</td>
+        <!--<td><a [routerLink]=""></a></td>-->
 <table class="table">
   <tr>
     <th>ID Joueur</th>
@@ -23,6 +41,18 @@
       >
     </td>
 
+        <td>
+          <button
+            (click)="delete(i.key!.joueur!.id!, i.key!.tournoi!.idTournoi!)"
+            class="btn btn-outline-danger"
+          >
+            Supprimer l'inscription
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
     <td>
       <button
         (click)="delete(i.id!.joueur!.id!, i.id!.tournoi!.idTournoi!)"

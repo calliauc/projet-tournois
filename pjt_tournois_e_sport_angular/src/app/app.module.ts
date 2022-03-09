@@ -20,6 +20,7 @@ import { ChampionnatEditComponent } from './component/tournoi/championnat-edit/c
 import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
 import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
 import { InscriptionEditComponent } from './component/inscription-edit/inscription-edit.component';
+import { MenuComponent } from './component/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { InscriptionEditComponent } from './component/inscription-edit/inscripti
     ResultatEditComponent,
     LigueClassementComponent,
     InscriptionEditComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "ligue")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -22,6 +24,7 @@ public class Ligue extends Tournoi {
 	/// ATTRIBUTES
 
 	@Column(name = "isMatchRetour")
+	@JsonView(Views.TournoiWithInscriptions.class)
 	protected boolean isMatchRetour;
 	@Column(name = "isPoule")
 	protected boolean isPoule;
