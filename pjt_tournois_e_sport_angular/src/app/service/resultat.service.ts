@@ -52,14 +52,14 @@ export class ResultatService {
       });
     }
 
-    //if (resultat.participant) {
-    //  Object.assign(obj, {
-    //    participant: {
-    //      idParticipant: resultat.participant.joueur.id,
-    //      idTournoi: resultat.participant.tournoi.idTournoi,
-    //    },
-    //  });
-    //}
+    if (resultat.participant) {
+      Object.assign(obj, {
+        participant: {
+          idTournoi: resultat.participant.id?.tournoi?.idTournoi,
+          idParticipant: resultat.participant.id?.joueur?.id,
+        },
+      });
+    }
     return obj;
   }
 }

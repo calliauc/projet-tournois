@@ -36,14 +36,16 @@
       <tr *ngIf="resultat.id">
         <th>id</th>
         <th>matchId</th>
-        <!--<th>ParticipantId</th>
-    <th>TournoiId</th>-->
+        <th>ParticipantId</th>
+        <th>TournoiId</th>
         <th>positionMatch</th>
         <th>scoreMatch</th>
       </tr>
       <tr *ngIf="resultat.id">
         <td>{{ resultat.id }}</td>
         <td>{{ resultat.match?.id }}</td>
+        <td>{{ resultat.participant?.id?.joueur?.id }}</td>
+        <td>{{ resultat.participant?.id?.tournoi?.idTournoi }}</td>
         <td>{{ resultat.positionMatch }}</td>
         <td>{{ resultat.scoreMatch }}</td>
         <td>
@@ -66,14 +68,16 @@
       <tr>
         <th>id</th>
         <th>matchId</th>
-        <!--<th>ParticipantId</th>
-    <th>TournoiId</th>-->
+        <th>ParticipantId</th>
+        <th>TournoiId</th>
         <th>positionMatch</th>
         <th>scoreMatch</th>
       </tr>
       <tr *ngFor="let r of resultatsObservable | async">
         <td>{{ r.id }}</td>
         <td>{{ r.match?.id }}</td>
+        <td>{{ r.participant?.id?.joueur?.id }}</td>
+        <td>{{ r.participant?.id?.tournoi?.idTournoi }}</td>
         <td>{{ r.positionMatch }}</td>
         <td>{{ r.scoreMatch }}</td>
         <td>

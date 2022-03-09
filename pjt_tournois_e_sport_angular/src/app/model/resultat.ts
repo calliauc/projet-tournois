@@ -1,23 +1,23 @@
 import { Match } from './match';
-//import { Inscription } from './inscription';
+import { Inscription } from './inscription';
 
 export class Resultat {
   private _id: number | undefined;
   private _match: Match | undefined;
-  //private _participant: Inscription | undefined;
+  private _participant: Inscription | undefined;
   private _positionMatch: number | undefined;
   private _scoreMatch: number | undefined;
 
   constructor(
     id?: number,
     match?: Match,
-    //participant?: Inscription,
+    participant?: Inscription,
     positionMatch?: number,
     scoreMatch?: number
   ) {
     this._id = id;
     this._match = match;
-    //this._participant = participant;
+    this._participant = participant;
     this._positionMatch = positionMatch;
     this._scoreMatch = scoreMatch;
   }
@@ -42,9 +42,9 @@ export class Resultat {
    * Getter participant
    * @return {Inscription }
    */
-  // public get participant(): Inscription | undefined {
-  //   return this._participant;
-  // }
+  public get participant(): Inscription | undefined {
+    return this._participant;
+  }
 
   /**
    * Getter positionMatch
@@ -82,9 +82,9 @@ export class Resultat {
    * Setter participant
    * @param {Inscription } value
    */
-  // public set participant(value: Inscription | undefined) {
-  //  this._participant = value;
-  // }
+  public set participant(value: Inscription | undefined) {
+    this._participant = value;
+  }
 
   /**
    * Setter positionMatch
