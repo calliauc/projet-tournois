@@ -1,6 +1,6 @@
 <div class="card bg-dark text-white">
   <div class="card-header">
-    <h3>Liste des utilisateurs</h3>
+    <h3>Membres de la communauté</h3>
   </div>
   <div class="card-body">
     <table class="table">
@@ -15,6 +15,12 @@
         <td>{{ user.username }}</td>
         <td>{{ user.mail }}</td>
         <td>{{ user.roles }}</td>
+        <td> <a
+          [routerLink]="['/utilisateur','edit', user.id]"
+          routerLinkActive="active"
+          class="btn btn-outline-primary"
+          >editer</a>
+        </td>
       </tr>
     </table>
   </div>

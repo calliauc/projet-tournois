@@ -4,6 +4,7 @@ import { Tournoi } from 'src/app/model/tournoi';
 import { Ligue } from 'src/app/model/ligue';
 import { LigueService } from 'src/app/service/ligue.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-ligue-edit',
   templateUrl: './ligue-edit.component.html',

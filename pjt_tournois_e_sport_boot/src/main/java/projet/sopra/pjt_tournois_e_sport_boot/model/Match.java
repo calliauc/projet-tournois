@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -31,10 +32,15 @@ public class Match {
 			Views.JourneeWithTournoiAndMatch.class })
 	private Long id;
 
-	@OneToMany(mappedBy = "prochainMatch")
-	@JsonView(Views.MatchWithIncriptions.class)
+	@ManyToMany(mappedBy="matchs")
+	@JsonView({Views.MatchWithIncriptions.class, Views.JourneeWithTournoiAndMatch.class})
 	private List<Inscription> inscriptions = new ArrayList<Inscription>();
+	
+	@OneToMany(mappedBy = "prochainMatch")
+	@JsonView({Views.MatchWithIncriptions.class, Views.JourneeWithTournoiAndMatch.class})
+	private List<Inscription> inscriptionsProchainMatch = new ArrayList<Inscription>();
 
+	
 	@ManyToOne
 	@JoinColumn(name = "match_journee_id", foreignKey = @ForeignKey(name = "inscription_prochain_match_fk"))
 	@JsonView(Views.Match.class)
@@ -72,6 +78,13 @@ public class Match {
 	public List<Resultat> getResultats() {
 		return resultats;
 	}
+	
+	public List<Inscription> getInscriptionsProchainMatch() {
+		return inscriptionsProchainMatch;
+	}
+
+	
+
 
 	/// SETTERS
 
@@ -89,6 +102,10 @@ public class Match {
 
 	public void setJournee(Journee journee) {
 		this.journee = journee;
+	}
+	
+	public void setInscriptionsProchainMatch(List<Inscription> inscriptionsProchainMatch) {
+		this.inscriptionsProchainMatch = inscriptionsProchainMatch;
 	}
 
 	/// METHODS

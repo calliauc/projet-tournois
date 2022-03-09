@@ -115,6 +115,11 @@ public class UtilisateurRestController {
 		return uService.isPresentByUsername(mail);
 	}
 
+	@GetMapping("/searchById/{id}")
+	public boolean idPresentEnBase(@PathVariable Long id) {
+		return !uService.exists(id);
+	}
+	
 	// Requete pour Collections
 
 	@GetMapping("/inscriptions_{idJoueur}")

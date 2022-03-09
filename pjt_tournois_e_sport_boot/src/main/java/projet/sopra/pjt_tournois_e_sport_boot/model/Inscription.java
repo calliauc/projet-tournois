@@ -31,7 +31,7 @@ public class Inscription {
 	/// ATTRIBUTES
 	@EmbeddedId
 	@JsonView({ Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
-			Views.TournoiWithInscriptions.class, Views.UserWithIncriptions.class, Views.Match.class, Views.Classement.class })
+			Views.TournoiWithInscriptions.class, Views.UserWithIncriptions.class, Views.Match.class, Views.Classement.class, Views.JourneeWithTournoiAndMatch.class})
 	private InscriptionKey id;
 	@JsonView({Views.InscriptionWithId.class, Views.Classement.class})
 	@Column(name = "position")

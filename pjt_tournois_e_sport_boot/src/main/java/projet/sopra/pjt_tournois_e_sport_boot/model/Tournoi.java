@@ -46,7 +46,7 @@ public abstract class Tournoi {
 	@JsonView({Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,Views.TournoiWithInscriptions.class,Views.JourneeWithTournoiAndMatch.class,Views.UserWithTournois.class, Views.UserWithIncriptions.class })
 	protected Long idTournoi;
 	@Column(name = "tournoi_nom", length = 50, nullable = false)
-	@JsonView(Views.TournoiWithInscriptions.class)
+	@JsonView({Views.TournoiWithInscriptions.class, Views.JourneeWithTournoiAndMatch.class})
 	protected String nom;
 	@Column(name = "tournoi_date_creation", nullable = false)
 	@JsonView(Views.TournoiWithInscriptions.class)
@@ -83,11 +83,7 @@ public abstract class Tournoi {
 	public Tournoi() {
 	}
 
-	/*
-	 * EDIT (comm à supprimer)
-	 * Suppression de dateCreation dans les parametres du constructeur.
-	 * Ce sera toujours le moment de création de l'ojet par défaut.
-	 */
+	
 	public Tournoi(String nom, LocalDate dateDeDebut, String jeu,
 			Set<Inscription> listeInscriptions) {
 		super();

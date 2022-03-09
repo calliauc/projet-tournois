@@ -39,7 +39,5 @@ public class ConsoleService implements CommandLineRunner {
 			jojo.setRoles(new HashSet<Role>(Arrays.asList(Role.ROLE_ADMIN)));
 			utilisateurRepo.save(jojo);
 		}
-
 	}
-
 }

@@ -21,4 +21,8 @@ export class TournoiService {
   get(id: number): Observable<Tournoi> {
     return this.http.get<Tournoi>(TournoiService.URL + '/' + id);
   }
+
+  public checkId(id: number): Observable<boolean> {
+    return this.http.get<boolean>(`${TournoiService.URL}/searchById/${id}`);
+  }
 }

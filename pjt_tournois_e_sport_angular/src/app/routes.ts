@@ -1,3 +1,5 @@
+import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
+import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
 import { JourneeComponent } from './component/journee/journee.component';
 import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
 import { InscriptionEditComponent } from './component/inscription-edit/inscription-edit.component';
@@ -30,6 +32,8 @@ export const routes: Routes = [
 
   { path: 'resultat/edit', component: ResultatEditComponent },
 
+  { path: 'resultat/edit/:id', component: ResultatEditComponent },
+
   { path: 'signup', component: UtilisateurEditComponent },
 
   { path: 'login', component: UtilisateurLoginComponent },
@@ -37,6 +41,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
 
   { path: 'utilisateur', component: UtilisateurComponent },
+
+  { path: 'utilisateur/edit/:id', component: UtilisateurEditComponent },
 
   { path: 'ligue/classement/:idTournoi', component: LigueClassementComponent },
 
@@ -52,4 +58,10 @@ export const routes: Routes = [
   { path: 'utilisateur/utilisateur-edit', component: UtilisateurEditComponent },
 
   { path: 'journee', component: JourneeComponent },
+
+  { path: 'journee/detail/:id', component: JourneeDetailComponent },
+
+  { path: 'journee/edit', component: JourneeEditComponent },
+
+  { path: 'journee/edit/:id', component: JourneeEditComponent },
 ];
