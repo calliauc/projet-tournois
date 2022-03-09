@@ -1,5 +1,5 @@
+import { UtilisateurService } from 'src/app/service/utilisateur.service';
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,10 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private utilisateurService: UtilisateurService,
+    private router: Router
+  ) {}
 
   get authenticated() {
-    return this.authService.isAuthenticated();
+    return this.utilisateurService.isAuthenticated();
   }
 
   logout() {

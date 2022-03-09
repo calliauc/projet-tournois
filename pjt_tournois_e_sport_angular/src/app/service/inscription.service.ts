@@ -18,7 +18,7 @@ export class InscriptionService {
 
   public get(idJoueur: number, idTournoi: number): Observable<Inscription> {
     return this.httpClient.get<Inscription>(
-      `${InscriptionService.URL}/${idJoueur}/${idTournoi}`
+      `${InscriptionService.URL}/${idJoueur}&${idTournoi}`
     );
   }
 
@@ -28,16 +28,16 @@ export class InscriptionService {
     );
   }
 
-  public create(inscrition: Inscription): Observable<Inscription> {
+  public create(inscription: Inscription): Observable<Inscription> {
     return this.httpClient.post<Inscription>(
       InscriptionService.URL,
-      this.inscriptionToJson(inscrition)
+      this.inscriptionToJson(inscription)
     );
   }
 
   public update(inscription: Inscription): Observable<Inscription> {
     return this.httpClient.put<Inscription>(
-      `${InscriptionService.URL}/${inscription.id!.joueur!.id}+"&"+${
+      `${InscriptionService.URL}/${inscription.id!.joueur!.id}&${
         inscription.id!.tournoi!.idTournoi
       }`,
       this.inscriptionToJson(inscription)
@@ -48,12 +48,8 @@ export class InscriptionService {
   private inscriptionToJson(inscription: Inscription): any {
     const obj = {
       id: {
-        joueur: {
-          id: inscription.id!.joueur!.id,
-        },
-        tournoi: {
-          id: inscription.id!.tournoi!.idTournoi,
-        },
+        idJoueur: inscription.id!.joueur!.id,
+        idTournoi: inscription.id!.tournoi!.idTournoi,
       },
       position: inscription.position,
       score: inscription.score,

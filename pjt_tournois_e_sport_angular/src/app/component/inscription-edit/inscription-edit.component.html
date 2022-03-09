@@ -3,7 +3,7 @@
     <label>ID Joueur :</label>
     <input
       class="form-control"
-      [(ngModel)]="inscription.id!.joueur!.id"
+      [(ngModel)]="(inscription.id?.joueur)!.id"
       readonly
     />
   </div>
@@ -11,7 +11,7 @@
     <label>ID Tournoi :</label>
     <input
       class="form-control"
-      [(ngModel)]="inscription.id!.tournoi!.idTournoi"
+      [(ngModel)]="(inscription.id?.tournoi)!.idTournoi"
       readonly
     />
   </div>
