@@ -22,6 +22,7 @@ import { MenuComponent } from './component/menu/menu.component';
 import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
 import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
 import { JourneeComponent } from './component/journee/journee.component';
+import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { JourneeComponent } from './component/journee/journee.component';
     InscriptionEditComponent,
     MenuComponent,
     JourneeComponent,
+    JourneeDetailComponent,
   ],
   imports: [
     BrowserModule,

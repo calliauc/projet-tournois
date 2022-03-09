@@ -1,3 +1,4 @@
+import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
 import { JourneeComponent } from './component/journee/journee.component';
 import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
 import { InscriptionEditComponent } from './component/inscription-edit/inscription-edit.component';
@@ -40,6 +41,8 @@ export const routes: Routes = [
 
   { path: 'utilisateur', component: UtilisateurComponent },
 
+  { path: 'utilisateur/edit/:id', component: UtilisateurEditComponent },
+
   { path: 'ligue/classement/:idTournoi', component: LigueClassementComponent },
 
   { path: 'inscription', component: InscriptionComponent },
@@ -54,4 +57,6 @@ export const routes: Routes = [
   { path: 'utilisateur/utilisateur-edit', component: UtilisateurEditComponent },
 
   { path: 'journee', component: JourneeComponent },
+
+  { path: 'journee/detail/:id', component: JourneeDetailComponent },
 ];

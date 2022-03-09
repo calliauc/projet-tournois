@@ -22,8 +22,7 @@ import { Observable, debounceTime, map } from 'rxjs';
 export class UtilisateurEditComponent implements OnInit {
   form!: FormGroup;
   utilisateur: Utilisateur = new Utilisateur();
-
-  roles: any;
+  userObservable!: Observable<Utilisateur>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,14 +31,35 @@ export class UtilisateurEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // RECHERCHE D'UTILISATEUR'
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['id']) {
+        console.log(params['id']);
+        this.utilisateurService.get(params['id']).subscribe((result) => {
+          console.log(result);
+          this.utilisateur = result;
+          this.initForm();
+        });
+      }
+    });
+
+    // INIT FORMULAIRE
+    this.initForm();
+
+    this.userObservable = this.form.valueChanges.pipe(
+      map((formValue) => this.utilisateur)
+    );
+  }
+
+  initForm(): void {
     this.form = new FormGroup({
       mail: new FormControl(
-        '',
+        this.utilisateur.mail,
         [Validators.required, Validators.email],
         this.checkMail()
       ),
       login: new FormControl(
-        '',
+        this.utilisateur.username,
         [
           Validators.required,
           Validators.minLength(3),
@@ -49,7 +69,7 @@ export class UtilisateurEditComponent implements OnInit {
       ),
       passwordGrp: new FormGroup(
         {
-          password: new FormControl('', [
+          password: new FormControl(this.utilisateur.password, [
             Validators.required,
             Validators.pattern(
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@#_-])(?=.*[0-9])([a-zA-Z0-9$@#_-]{4,25})$/
@@ -97,19 +117,26 @@ export class UtilisateurEditComponent implements OnInit {
   }
 
   save() {
-    this.utilisateur.username = this.form.get('login')!.value as string;
-    this.utilisateur.mail = this.form.get('mail')!.value as string;
-    this.utilisateur.password = this.form.get('passwordGrp')!.get('password')
-      ?.value as string;
-    this.utilisateur.roles = [
-      Role.ROLE_JOUEUR,
-      Role.ROLE_ADMIN,
-      Role.ROLE_ORGANISATEUR,
-    ];
     console.log(this.utilisateur);
-    this.utilisateurService.create(this.utilisateur).subscribe((ok) => {
-      this.router.navigateByUrl('/acceuil');
-    });
+    if (this.utilisateur.id) {
+      this.utilisateurService.update(this.utilisateur).subscribe((ok) => {
+        this.router.navigate(['/utilisateur']);
+      });
+    } else {
+      this.utilisateur.username = this.form.get('login')!.value as string;
+      this.utilisateur.mail = this.form.get('mail')!.value as string;
+      this.utilisateur.password = this.form.get('passwordGrp')!.get('password')
+        ?.value as string;
+      this.utilisateur.roles = [
+        Role.ROLE_JOUEUR,
+        Role.ROLE_ADMIN,
+        Role.ROLE_ORGANISATEUR,
+      ];
+      console.log(this.utilisateur);
+      this.utilisateurService.create(this.utilisateur).subscribe((ok) => {
+        this.router.navigate(['/acceuil']);
+      });
+    }
   }
 
   get errorPassword(): string {

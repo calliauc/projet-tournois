@@ -12,11 +12,13 @@ export class UtilisateurService {
   constructor(private httpClient: HttpClient) {}
 
   public getAll(): Observable<Utilisateur[]> {
-    return this.httpClient.get<Utilisateur[]>(UtilisateurService.URL);
+    return this.httpClient.get<Utilisateur[]>(
+      UtilisateurService.URL + '/membres'
+    );
   }
 
   public get(id: number): Observable<Utilisateur> {
-    return this.httpClient.get<Utilisateur>(UtilisateurService.URL + '/{id}');
+    return this.httpClient.get<Utilisateur>(`${UtilisateurService.URL}/${id}`);
   }
 
   public create(utilisateur: Utilisateur): Observable<Utilisateur> {
