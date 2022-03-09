@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,10 +44,16 @@ public class UtilisateurRestController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UtilisateurRestController.class);
 
-	@GetMapping("")
+	// Pour la Page Membres
+	@GetMapping("/membres")
 	@JsonView(Views.Common.class)
 	public List<Utilisateur> getAll() {
 		return uService.getAll();
+	}
+
+	// Pour l'authentification à la connection
+	@GetMapping("/authentification")
+	public void auth(@AuthenticationPrincipal Utilisateur user) {
 	}
 
 	@GetMapping("/{id}")
@@ -55,7 +62,8 @@ public class UtilisateurRestController {
 		return uService.getById(id);
 	}
 
-	@PostMapping("")
+	// Création d'un compte
+	@PostMapping("/signup")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@JsonView(Views.Common.class)
 	public Utilisateur create(@Valid @RequestBody Utilisateur u, BindingResult br) {
@@ -93,32 +101,23 @@ public class UtilisateurRestController {
 		return uService.getByUsernameLike(username);
 	}
 
-//	@GetMapping("/{username}")
-//	@JsonView(Views.Common.class)
-//	public List<Utilisateur> getByUsernameStartingWith(@PathVariable String username) {
-//		return uService.getByUsernameStartingWith(username);
-//	}
-//
-//	@GetMapping("/{username}")
-//	@JsonView(Views.Common.class)
-//	public List<Utilisateur> getByUsernameContaining(@PathVariable String username) {
-//		return uService.getByUsernameStartingWith(username);
-//	}
-//
-//	@GetMapping("/{id}/{username}")
-//	@JsonView(Views.Common.class)
-//	public Utilisateur getByIdAndUsername(@PathVariable Long id, @PathVariable String username) {
-//		return uService.getByIdCompteAndUsername(id, username);
-//	}
+	// Pour vérifier l'exitence d'un username dans la base à la connection
+	@GetMapping("/searchByLogin/{username}")
+	public boolean usernameDejaUtilise(@PathVariable String username) {
+		return uService.isPresentByUsername(username);
+	}
+
+	// Pour vérifier l'exitence d'un mail dans la base à la connection
+	@GetMapping("/searchByMail/{mail}")
+	public boolean mailDejaUtilise(@PathVariable String mail) {
+		return uService.isPresentByUsername(mail);
+	}
 
 	// Requete pour Collections
 
 	@GetMapping("/inscriptions_{idJoueur}")
 	@JsonView(Views.UserWithIncriptions.class)
 	public Utilisateur getUtilisateurWithIncriptions(@PathVariable Long idJoueur) {
-//		LOGGER.info("idTournoi="+idTournoi+" idJoueur="+idJoueur);
-//		Inscription i = inscriptionService.getById(new InscriptionKey(uService.getById(idJoueur),tournoiService.getById(idTournoi)));
-//		LOGGER.info("InscriptionKey="+i);
 		return uService.getUtilisateurWithInscriptions(idJoueur);
 	}
 
@@ -143,5 +142,23 @@ public class UtilisateurRestController {
 		LOGGER.info("Validator OK => on save");
 		return uService.save(u);
 	}
+
+//	@GetMapping("/{username}")
+//	@JsonView(Views.Common.class)
+//	public List<Utilisateur> getByUsernameStartingWith(@PathVariable String username) {
+//		return uService.getByUsernameStartingWith(username);
+//	}
+//
+//	@GetMapping("/{username}")
+//	@JsonView(Views.Common.class)
+//	public List<Utilisateur> getByUsernameContaining(@PathVariable String username) {
+//		return uService.getByUsernameStartingWith(username);
+//	}
+//
+//	@GetMapping("/{id}/{username}")
+//	@JsonView(Views.Common.class)
+//	public Utilisateur getByIdAndUsername(@PathVariable Long id, @PathVariable String username) {
+//		return uService.getByIdCompteAndUsername(id, username);
+//	}
 
 }
