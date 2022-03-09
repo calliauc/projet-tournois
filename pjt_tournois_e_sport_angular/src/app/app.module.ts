@@ -24,6 +24,8 @@ import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-l
 import { JourneeComponent } from './component/journee/journee.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
+import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
+import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { JourneeEditComponent } from './component/journee/journee-edit/journee-e
     JourneeComponent,
     JourneeDetailComponent,
     JourneeEditComponent,
+    TournoiResumeComponent,
+    TournoiDetailsComponent,
   ],
   imports: [
     BrowserModule,
