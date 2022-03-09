@@ -8,28 +8,15 @@
         <th>Type de tournoi</th>
         <th>ID du tournoi</th>
         <th>Nom</th>
-        <th>Date de création</th>
-        <th>Date de début</th>
         <th>Jeu</th>
-        <th>Nombre de participants par match</th>
-        <th>Nombre de participants total</th>
         <th>Etat des inscriptions</th>
-        <th>Avancement</th>
-        <th>Organisateur</th>
       </tr>
       <tr *ngFor="let t of tournoisObservable | async">
         <td>{{ t.type }}</td>
         <td>{{ t.idTournoi }}</td>
         <td>{{ t.nom }}</td>
-        <td>{{ t.dateDeCreation }}</td>
-        <td>{{ t.dateDeDebut }}</td>
         <td>{{ t.jeu }}</td>
-        <!--<td>{{ t.listeInscriptions }}</td>-->
-        <td>{{ t.nbParticipantsParMatch }}</td>
-        <td>{{ t.nbParticipantsTotal }}</td>
         <td>{{ t.statutInscriptions }}</td>
-        <td>{{ t.statutTemps }}</td>
-        <!--<td>{{ t.organisateur }}</td>-->
         <td></td>
         <td></td>
         <td>
@@ -49,6 +36,14 @@
               >editer</a
             >
           </div>
+        </td>
+        <td>
+          <a
+            [routerLink]="['/tournoi', 'details', t.idTournoi]"
+            routerLinkActive="active"
+            class="btn btn-outline-primary"
+            >Details</a
+          >
         </td>
         <td>
           <div>

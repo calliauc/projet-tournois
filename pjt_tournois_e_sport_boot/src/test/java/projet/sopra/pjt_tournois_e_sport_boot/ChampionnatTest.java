@@ -21,6 +21,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.MatchGenerationService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.MatchService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 
@@ -37,11 +38,15 @@ class ChampionnatTest {
 	private UtilisateurService utilisateurService;
 	@Autowired
 	private MatchGenerationService matchGenService;
-
+	@Autowired
+	private MatchService matchService;
+	
 	@Test
 	@Transactional
 	@Commit
 	void testChamp() {
+		
+		final int NB_INSCRIPTION_TEST = 6;
 
 		/* @formatter:off
 		 * TODO:
@@ -70,7 +75,7 @@ class ChampionnatTest {
 		LOGGER.debug("Creation users & inscription");
 		List<Utilisateur> users = new ArrayList<Utilisateur>();
 		Set<Inscription> inscrits = new HashSet<Inscription>();
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < NB_INSCRIPTION_TEST; i++) {
 			Utilisateur u = new Utilisateur("User"+ i, "u"+i+"@b.c", "toto" + i);
 			users.add(u);
 		}
@@ -92,6 +97,7 @@ class ChampionnatTest {
 		LOGGER.debug("Tournoi sauvegardé");
 		
 		matchGenService.initChampionnat(champ);
+		
 
 	}
 

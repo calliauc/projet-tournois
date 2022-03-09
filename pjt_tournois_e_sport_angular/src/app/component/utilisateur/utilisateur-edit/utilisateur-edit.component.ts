@@ -23,6 +23,8 @@ export class UtilisateurEditComponent implements OnInit {
   form!: FormGroup;
   utilisateur: Utilisateur = new Utilisateur();
   userObservable!: Observable<Utilisateur>;
+  roles = Role;
+  values = Object.keys(Role);
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,7 +47,7 @@ export class UtilisateurEditComponent implements OnInit {
 
     // INIT FORMULAIRE
     this.initForm();
-
+    //REMPLIT LES CHAMPS DANS LE CAS D'UN UPDATE
     this.userObservable = this.form.valueChanges.pipe(
       map((formValue) => this.utilisateur)
     );
@@ -80,7 +82,20 @@ export class UtilisateurEditComponent implements OnInit {
         },
         this.checkNotEquals
       ),
+      roles: new FormArray([]),
     });
+  }
+
+  onCheckChange(event: any) {
+    const formArray = this.form.get('roles') as FormArray;
+    if (event.target.checked) {
+      formArray.push(new FormControl(event.target.value));
+    } else {
+      const index = formArray.controls.findIndex(
+        (x) => x.value === event.target.value
+      );
+      formArray.removeAt(index);
+    }
   }
 
   checkMail(): AsyncValidatorFn {
@@ -120,21 +135,18 @@ export class UtilisateurEditComponent implements OnInit {
     console.log(this.utilisateur);
     if (this.utilisateur.id) {
       this.utilisateurService.update(this.utilisateur).subscribe((ok) => {
-        this.router.navigate(['/utilisateur']);
+        this.router.navigate(['utilisateur']);
       });
     } else {
       this.utilisateur.username = this.form.get('login')!.value as string;
       this.utilisateur.mail = this.form.get('mail')!.value as string;
       this.utilisateur.password = this.form.get('passwordGrp')!.get('password')
         ?.value as string;
-      this.utilisateur.roles = [
-        Role.ROLE_JOUEUR,
-        Role.ROLE_ADMIN,
-        Role.ROLE_ORGANISATEUR,
-      ];
+      this.utilisateur.roles = this.form.get('roles')!.value as Role[];
       console.log(this.utilisateur);
+
       this.utilisateurService.create(this.utilisateur).subscribe((ok) => {
-        this.router.navigate(['/acceuil']);
+        this.router.navigate(['acceuil']);
       });
     }
   }

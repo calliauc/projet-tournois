@@ -14,11 +14,17 @@ import { ResultatComponent } from './component/resultat/resultat.component';
 import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.component';
 import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
 import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
+import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
+import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
 
 export const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
 
   { path: 'tournoi', component: TournoiComponent },
+
+  { path: 'tournoi-resume', component: TournoiResumeComponent },
+
+  { path: 'tournoi/details/:idTournoi', component: TournoiDetailsComponent },
 
   { path: 'ligue/edit', component: LigueEditComponent },
 

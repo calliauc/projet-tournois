@@ -53,6 +53,7 @@ public class Resultat {
 	@NotNull
 	private int scoreMatch;
 
+	
 	public Resultat() {
 	}
 
@@ -64,6 +65,7 @@ public class Resultat {
 		this.scoreMatch = scoreMatch;
 	}
 
+	
 	public Long getId() {
 		return id;
 	}
