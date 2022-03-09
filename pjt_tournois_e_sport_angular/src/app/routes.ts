@@ -40,6 +40,8 @@ export const routes: Routes = [
 
   { path: 'utilisateur', component: UtilisateurComponent },
 
+  { path: 'utilisateur/edit/:id', component: UtilisateurEditComponent },
+
   { path: 'ligue/classement/:idTournoi', component: LigueClassementComponent },
 
   { path: 'inscription', component: InscriptionComponent },
