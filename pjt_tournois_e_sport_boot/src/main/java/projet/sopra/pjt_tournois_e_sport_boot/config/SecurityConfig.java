@@ -28,13 +28,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		///// ADAPTER
-
-		http.antMatcher("/**").sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf()
-				.disable().authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/auth/search/**").permitAll()
-				.antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/auth/inscription").permitAll().antMatchers(HttpMethod.GET)
-				.hasAnyRole("ADMIN").antMatchers(HttpMethod.POST).hasRole("ADMIN").antMatchers(HttpMethod.PUT)
-				.hasRole("ADMIN").antMatchers(HttpMethod.DELETE).hasRole("ADMIN").and().httpBasic();
+		
+		http.antMatcher("/**")
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
+			.csrf().disable()
+			.authorizeHttpRequests()
+				.antMatchers(HttpMethod.GET, "/api/utilisateur/search/**").permitAll()
+				.antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
+				.antMatchers(HttpMethod.POST,"/api/utilisateur/inscription").permitAll() // ce lien existe-t-il vraiment ?
+				.antMatchers(HttpMethod.GET).hasAnyRole("ADMIN")
+				.antMatchers(HttpMethod.POST).hasRole("ADMIN")
+				.antMatchers(HttpMethod.PUT).hasRole("ADMIN")
+				.antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+			.and()
+			.httpBasic();
 	}
 
 	// gestion des utilisateurs

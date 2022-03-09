@@ -21,6 +21,8 @@ import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.c
 import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
 import { InscriptionEditComponent } from './component/inscription-edit/inscription-edit.component';
 import { MenuComponent } from './component/menu/menu.component';
+import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
+import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-login/utilisateur-login.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { MenuComponent } from './component/menu/menu.component';
     ResultatComponent,
     InscriptionComponent,
     UtilisateurComponent,
+    UtilisateurEditComponent,
+    UtilisateurLoginComponent,
     LigueEditComponent,
     ChampionnatEditComponent,
     ResultatEditComponent,

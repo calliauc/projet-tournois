@@ -1,4 +1,5 @@
 import { InscriptionEditComponent } from './component/inscription-edit/inscription-edit.component';
+import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
 import { InscriptionComponent } from './component/inscription/inscription.component';
 import { ChampionnatEditComponent } from './component/tournoi/championnat-edit/championnat-edit.component';
 import { LigueEditComponent } from './component/tournoi/ligue-edit/ligue-edit.component';
@@ -47,4 +48,6 @@ export const routes: Routes = [
     path: 'inscription/edit/:idJoueur&:idTournoi',
     component: InscriptionEditComponent,
   },
+
+  { path: 'utilisateur/utilisateur-edit', component: UtilisateurEditComponent },
 ];
