@@ -41,13 +41,30 @@ public class MatchGenerationService {
 	@Autowired
 	private InscriptionRepository inscriptionRepo;
 
+	/// DIVERS
+
+	private void affichePoules(Championnat champ) {
+		for (Poule p : champ.getPoules()) {
+			LOGGER.debug("Poule : " + p.getNom());
+			for (Inscription i : p.getListeInscriptions()) {
+				LOGGER.debug("Isncrit : " + i.getId().getJoueur().getUsername());
+			}
+		}
+	}
+
+	
+	private void afficheLigue(Ligue l) {
+			LOGGER.debug("Poule : " + l.getNom());
+			for (Inscription i : l.getListeInscriptions()) {
+				LOGGER.debug("Isncrit : " + i.getId().getJoueur().getUsername());
+			}
+	}
+
 	/// GESTION LIGUE
 
 	public void generateJourneesLigueDuels(Ligue ligue) {
-		for (Inscription i : ligue.getListeInscriptions()) {
-			LOGGER.debug("Inscription : " + i.getId());
-
-		}
+		LOGGER.debug("Debut generate");
+		this.afficheLigue(ligue);
 
 		////// TO DO : INCLURE LES DATES DE DEBUT/FIN DES MATCHS ET JOURNEES
 		int matchRetour;
@@ -58,7 +75,7 @@ public class MatchGenerationService {
 		}
 		Set<Journee> journees = new HashSet<Journee>();
 		LinkedList<Inscription> inscriptionsLigue = new LinkedList<Inscription>(ligue.getListeInscriptions());
-		LOGGER.debug("inscriptions : " + inscriptionsLigue.toString());
+		LOGGER.debug("List to linked list");
 		int isPair = (ligue.getListeInscriptions().size() + 1) % 2;
 		LOGGER.debug("Parité du nombre d'inscrits dans la ligue/poule : " + isPair);
 		LOGGER.debug("nb iter : " + (inscriptionsLigue.size() - isPair));
@@ -74,33 +91,44 @@ public class MatchGenerationService {
 			LOGGER.debug("Journée sauvegardée");
 			List<Match> matchsJournee = new ArrayList<Match>();
 			for (int j = 0; j < ligue.getListeInscriptions().size() / 2; j++) {
-				System.out.println("Match : " + j);
+				LOGGER.debug("Match : " + j);
 				Match m = new Match();
 				m.setJournee(jour);
 				m.getInscriptions().add(inscriptionsLigue.get(j));
 				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
 				for (Inscription x : m.getInscriptions()) {
-					System.out.println(x.getId().getJoueur().getId());
+					LOGGER.debug(""+x.getId().getJoueur().getId());
 				}
 				matchsJournee.add(m);
 				matchRepo.save(m);
 			}
 			if (isPair != 1) {
-				System.out.println("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
+				LOGGER.debug("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
 			}
+			LOGGER.debug("Set match dans journee");
 			jour.setMatchsAJouerPourJournee(matchsJournee);
+			LOGGER.debug("Sauvegarde journee");
 			journeeRepo.save(jour);
+			LOGGER.debug("Add journéee à la liste");
 			journees.add(jour);
+			LOGGER.debug("Rotation des inscrits");
 			inscriptionsLigue.add(isPair, inscriptionsLigue.pollLast());
 		}
+		LOGGER.debug("Tout les matchs sont générés");
+
+		LOGGER.debug("Set la list des journée dans la ligue");
 		ligue.setJourneesAJouer(journees);
+		LOGGER.debug("Set les prochains matchs");
 		matchService.setAllProchainMatch(ligue.getIdTournoi());
+		LOGGER.debug("Save la ligue NOT OK");
 		tournoiRepo.save(ligue);
+		LOGGER.debug("Fin");
 	}
 
 	/// GESTION CHAMPIONNAT
 
 	public void initChampionnat(Championnat champ) {
+		champ = (Championnat) tournoiRepo.getById(champ.getIdTournoi());
 		this.initPoules(champ);
 		this.createMatchsPoules(champ);
 		this.initPhaseFinale(champ);
@@ -150,11 +178,19 @@ public class MatchGenerationService {
 		LOGGER.debug("Creation des poules avec les set d'inscription");
 		Poule pouleA = new Poule("PouleA", LocalDate.now(), champ.getJeu(), tempA, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleA.setNbParticipantsTotal(tempA.size());
 		Poule pouleB = new Poule("PouleB", LocalDate.now(), champ.getJeu(), tempB, true,
 				champ.getNbParticipantsParMatch(), champ);
+		pouleB.setNbParticipantsTotal(tempB.size());
+
+		tournoiRepo.save(pouleA);
+		tournoiRepo.save(pouleB);
 
 		LOGGER.debug("Ajout des poules dans le championnat");
 		Collections.addAll(champ.getPoules(), pouleA, pouleB);
+
+		tournoiRepo.save(champ);
+
 	}
 
 	private void createFourPoule(Championnat champ) {
@@ -214,8 +250,10 @@ public class MatchGenerationService {
 
 	private void createMatchsPoules(Championnat champ) {
 		LOGGER.debug("Création des matchs de poule");
+		affichePoules(champ);
 		for (Poule p : champ.getPoules()) {
-			this.generateJourneesLigueDuels((Ligue)p);
+			LOGGER.debug(p.getListeInscriptions().toString());
+			this.generateJourneesLigueDuels((Ligue) p);
 		}
 		LOGGER.debug("Matchs de poule créés");
 
