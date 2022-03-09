@@ -20,6 +20,17 @@
         <td>{{ journee.tournoi?.type }}</td>
         <td>{{ journee.etape }}</td>
         <td>{{ journee.numero }}</td>
+        <td>
+          <div>
+            <a
+              [routerLink]="['/journee', 'edit', journee.id]"
+              routerLinkActive="active"
+              class="btn btn-outline-primary"
+            >
+              edit
+            </a>
+          </div>
+        </td>
       </tr>
     </table>
     <table *ngFor="let m of journee.matchsAJouerPourJournee">
@@ -28,7 +39,17 @@
       </tr>
       <tr *ngFor="let i of m.inscriptions">
         <td>{{ i.id?.joueur?.username }}</td>
+        <td>id : {{ i.id?.joueur?.id }}</td>
       </tr>
     </table>
+  </div>
+  <div>
+    <a
+      routerLink="/journee"
+      routerLinkActive="active"
+      class="btn btn-outline-warning"
+    >
+      retour
+    </a>
   </div>
 </div>

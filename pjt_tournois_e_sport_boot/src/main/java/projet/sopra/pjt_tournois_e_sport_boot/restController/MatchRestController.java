@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.MatchService;
 
 @RestController
 @RequestMapping("api/match")
+@CrossOrigin(origins = "*")
 public class MatchRestController {
 //	TO-DO :
 //  delete
@@ -46,7 +48,7 @@ public class MatchRestController {
 	}
 	
 	@GetMapping("/{id}")
-	@JsonView(Views.Match.class)
+	@JsonView(Views.MatchWithIncriptions.class)
 	public Match getById(@PathVariable Long id) {
 		return matchService.getById(id);
 	}
