@@ -25,6 +25,7 @@ export class UtilisateurLoginComponent implements OnInit {
   }
 
   save() {
+    console.log('In save() : utilisateur-login');
     this.utilisateurService
       .authentication(
         this.form.controls['login'].value,
