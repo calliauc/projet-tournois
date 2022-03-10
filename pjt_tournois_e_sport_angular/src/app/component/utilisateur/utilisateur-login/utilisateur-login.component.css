@@ -1,0 +1,13 @@
+img {
+  display: flex;
+  justify-content: center;
+  float: left;
+  margin-inline-start: 350px;
+  margin-top: 80px;
+  width: 600px;
+  height: 300px;
+  border: none;
+  -moz-border-radius: 75px;
+  -webkit-border-radius: 75px;
+  border-radius: 75px;
+}
