@@ -1,6 +1,6 @@
 import { Inscription } from './../../model/inscription';
 import { InscriptionService } from './../../service/inscription.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class InscriptionComponent implements OnInit {
   inscriptionsObservable!: Observable<Inscription[]>;
+  @Input() title = 'Liste des inscriptions';
+
   constructor(private inscriptionService: InscriptionService) {}
 
   ngOnInit(): void {

@@ -42,10 +42,10 @@ export class LigueEditComponent implements OnInit {
         console.log(result);
         this.orga = result;
       });
-    this.tournoi.organisateur = this.orga;
   }
 
   save() {
+    this.tournoi.organisateur = this.orga;
     if (this.tournoi.idTournoi) {
       this.ligueService.update(this.tournoi).subscribe((ok) => {
         this.router.navigate(['/tournoi']);
