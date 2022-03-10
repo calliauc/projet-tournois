@@ -5,39 +5,21 @@
   <div class="card-body">
     <table class="table">
       <tr>
+        <th>ID</th>
         <th>Type de tournoi</th>
-        <th>ID du tournoi</th>
         <th>Nom</th>
         <th>Jeu</th>
         <th>Etat des inscriptions</th>
       </tr>
       <ng-container *ngFor="let t of tournoisObservable | async">
         <tr *ngIf="t.type !== 'Poule'">
-          <td>{{ t.type }}</td>
           <td>{{ t.idTournoi }}</td>
+          <td>{{ t.type }}</td>
           <td>{{ t.nom }}</td>
           <td>{{ t.jeu }}</td>
           <td>{{ t.statutInscriptions }}</td>
           <td></td>
           <td></td>
-          <td>
-            <div *ngIf="t.type == 'ligue'">
-              <a
-                [routerLink]="['/ligue', 'edit', t.idTournoi]"
-                routerLinkActive="active"
-                class="btn btn-outline-primary"
-                >editer</a
-              >
-            </div>
-            <div *ngIf="t.type == 'championnat'">
-              <a
-                [routerLink]="['/championnat', 'edit', t.idTournoi]"
-                routerLinkActive="active"
-                class="btn btn-outline-primary"
-                >editer</a
-              >
-            </div>
-          </td>
           <td>
             <a
               [routerLink]="['/tournoi', 'details', t.idTournoi]"
@@ -45,16 +27,6 @@
               class="btn btn-outline-primary"
               >Details</a
             >
-          </td>
-          <td>
-            <div>
-              <button
-                (click)="delete(t.idTournoi!)"
-                class="btn btn-outline-danger"
-              >
-                supprimer
-              </button>
-            </div>
           </td>
           <td>
             <div>
