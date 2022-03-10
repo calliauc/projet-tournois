@@ -20,9 +20,17 @@
           <td>{{ t.statutInscriptions }}</td>
           <td></td>
           <td></td>
-          <td>
+          <td *ngIf="t.type == 'championnat'">
             <a
-              [routerLink]="['/tournoi', 'details', t.idTournoi]"
+              [routerLink]="['/tournoi', 'champ', 'details', t.idTournoi]"
+              routerLinkActive="active"
+              class="btn btn-outline-primary"
+              >Details</a
+            >
+          </td>
+          <td *ngIf="t.type == 'ligue'">
+            <a
+              [routerLink]="['/tournoi', 'ligue', 'details', t.idTournoi]"
               routerLinkActive="active"
               class="btn btn-outline-primary"
               >Details</a
