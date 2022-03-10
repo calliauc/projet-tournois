@@ -36,7 +36,7 @@ public class Journee {
 
 	@ManyToOne
 	@JoinColumn(name = "journee_tournoi", foreignKey = @ForeignKey(name = "journee_tournoi_fk"))
-	@JsonView(Views.JourneeWithTournoiAndMatch.class)
+	@JsonView({Views.JourneeWithTournoiAndMatch.class, Views.MatchWithIncriptions.class})
 	private Tournoi tournoi;
 
 	@OneToMany(mappedBy = "journee")

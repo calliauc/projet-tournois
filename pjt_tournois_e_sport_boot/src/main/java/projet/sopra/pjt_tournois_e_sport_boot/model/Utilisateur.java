@@ -45,7 +45,7 @@ public class Utilisateur implements UserDetails {
 	private Long id;
 
 	@Column(name = "username", nullable = false)
-	@JsonView({Views.Common.class, Views.Classement.class, Views.JourneeWithTournoiAndMatch.class})
+	@JsonView({Views.Common.class, Views.Classement.class, Views.MatchWithIncriptions.class, Views.JourneeWithTournoiAndMatch.class})
 	@NotEmpty
 	private String username;
 
