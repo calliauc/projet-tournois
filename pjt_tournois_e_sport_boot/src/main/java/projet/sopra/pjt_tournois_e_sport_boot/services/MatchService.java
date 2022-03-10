@@ -57,6 +57,12 @@ public class MatchService {
 			throw new MatchException("match inconnu");
 		});
 	}
+	
+	public List<Match> getByJourn(Long id) {
+		Journee j = new Journee(); 
+		j = journeeRepo.getById(id);
+		return matchRepo.findByJournee(j);
+	}
 
 	public Match createOrUpdate(Match m) {
 		checkData(m);

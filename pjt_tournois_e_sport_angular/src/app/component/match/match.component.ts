@@ -11,6 +11,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class MatchComponent implements OnInit {
   matchObservable!: Observable<Match[]>;
+  rechercheMatch!: Observable<Match[]>;
+  match!: Observable<Match>;
+  typeRecherche!: string;
+  idRecherche!: number;
 
   constructor(
     private matchService: MatchService,
@@ -21,6 +25,20 @@ export class MatchComponent implements OnInit {
 
   ngOnInit(): void {
     this.matchObservable = this.matchService.getAll();
+  }
+
+  getByIdMatch(idMatch: number) {
+    if (idMatch) {
+      this.match = this.matchService.get(idMatch);
+    }
+  }
+
+  getByIdTournoi(idTournoi: number) {}
+
+  getByJournee(idJournee: number) {
+    if (idJournee) {
+      this.rechercheMatch = this.matchService.getByJournee(idJournee);
+    }
   }
 
   delete(id: number) {

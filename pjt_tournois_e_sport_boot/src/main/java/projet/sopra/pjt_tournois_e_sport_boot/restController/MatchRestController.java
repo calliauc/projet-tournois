@@ -53,6 +53,12 @@ public class MatchRestController {
 		return matchService.getById(id);
 	}
 	
+	@GetMapping("/journee/{id}")
+	@JsonView(Views.MatchWithIncriptions.class)
+	public List<Match> getByJournee(@PathVariable Long id) {
+		return matchService.getByJourn(id);
+	}
+	
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
 	@JsonView(Views.Match.class)
