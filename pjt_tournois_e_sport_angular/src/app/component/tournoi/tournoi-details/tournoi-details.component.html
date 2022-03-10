@@ -6,15 +6,24 @@
     <ng-container>
       <div class="row">
         <div class="col">
-          <app-description></app-description>
+          <app-champ-description
+            *ngIf="tournoi.type === 'championnat'"
+          ></app-champ-description>
+          <app-ligue-description
+            *ngIf="tournoi.type === 'ligue'"
+          ></app-ligue-description>
           <app-matchs-next></app-matchs-next>
         </div>
         <div class="col">
-          <app-arbre-finales
+          <app-champ-arbre-finales
             *ngIf="tournoi.type == 'championnat'"
-          ></app-arbre-finales>
-          <app-poules *ngIf="tournoi.type == 'championnat'"></app-poules>
-          <app-journee *ngIf="tournoi.type == 'ligue'"></app-journee>
+          ></app-champ-arbre-finales>
+          <app-champ-poules
+            *ngIf="tournoi.type == 'championnat'"
+          ></app-champ-poules>
+          <app-ligue-journees
+            *ngIf="tournoi.type == 'ligue'"
+          ></app-ligue-journees>
         </div>
       </div>
     </ng-container>
