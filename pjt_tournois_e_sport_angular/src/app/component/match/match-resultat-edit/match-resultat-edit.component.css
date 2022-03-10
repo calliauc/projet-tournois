@@ -1,3 +1,6 @@
 .cachecache {
   display: none;
 }
+input {
+  width: 5%;
+}

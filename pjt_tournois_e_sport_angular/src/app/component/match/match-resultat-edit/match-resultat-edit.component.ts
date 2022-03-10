@@ -4,6 +4,8 @@ import { MatchService } from './../../../service/match.service';
 import { Match } from './../../../model/match';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-match-resultat-edit',
