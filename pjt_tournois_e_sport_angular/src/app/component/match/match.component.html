@@ -47,34 +47,38 @@
         </ng-template>
         <td></td>
 
-        <td>
-          <a
-            *ngIf="
-              m.resultats![0] == undefined || m.resultats![0] == null;
-              else gogo
-            "
-            [routerLink]="['/match', 'resultat', m.id]"
-            routerLinkActive="active"
-            class="btn btn-outline-primary"
-          >
-            enregistrer le résultat
-          </a>
-
-          <ng-template #gogo>
+        <td colspan="2">
+          <div style.display="flex" style.justify-content="flex-start">
             <a
-              [routerLink]="[
-                '/match',
-                'resultat',
-                m.id,
-                (m?.resultats)![0].id!,
-                (m?.resultats)![1].id!
-              ]"
+              *ngIf="
+                m.resultats![0] == undefined || m.resultats![0] == null;
+                else gogo
+              "
+              [routerLink]="['/match', 'resultat', m.id]"
               routerLinkActive="active"
               class="btn btn-outline-primary"
+              style.display="flex"
             >
-              modifier le résultat
+              enregistrer le résultat
             </a>
-          </ng-template>
+
+            <ng-template #gogo>
+              <a
+                [routerLink]="[
+                  '/match',
+                  'resultat',
+                  m.id,
+                  (m?.resultats)![0].id!,
+                  (m?.resultats)![1].id!
+                ]"
+                routerLinkActive="active"
+                class="btn btn-outline-primary"
+                style.display="flex"
+              >
+                modifier le résultat
+              </a>
+            </ng-template>
+          </div>
         </td>
         <td></td>
       </tr>
