@@ -28,6 +28,12 @@ import { JourneeDetailComponent } from './component/journee/journee-detail/journ
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
 import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
+import { MatchComponent } from './component/match/match.component';
+import { ArbreFinalesComponent } from './component/tournoi/details/champ/arbre-finales/arbre-finales.component';
+import { PoulesComponent } from './component/tournoi/details/champ/poules/poules.component';
+import { JourneesComponent } from './component/tournoi/details/ligue/journees/journees.component';
+import { DescriptionComponent } from './component/tournoi/details/description/description.component';
+import { MatchsNextComponent } from './component/tournoi/details/matchs-next/matchs-next.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +57,12 @@ import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tou
     JourneeEditComponent,
     TournoiResumeComponent,
     TournoiDetailsComponent,
+    MatchComponent,
+    ArbreFinalesComponent,
+    PoulesComponent,
+    JourneesComponent,
+    DescriptionComponent,
+    MatchsNextComponent,
   ],
   imports: [
     BrowserModule,

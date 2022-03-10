@@ -1,3 +1,4 @@
+import { MatchComponent } from './component/match/match.component';
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
 import { JourneeComponent } from './component/journee/journee.component';
@@ -70,4 +71,10 @@ export const routes: Routes = [
   { path: 'journee/edit', component: JourneeEditComponent },
 
   { path: 'journee/edit/:id', component: JourneeEditComponent },
+
+  { path: 'match', component: MatchComponent },
+
+  { path: 'match/edit', component: MatchComponent },
+
+  { path: 'match/edit/:id', component: MatchComponent },
 ];
