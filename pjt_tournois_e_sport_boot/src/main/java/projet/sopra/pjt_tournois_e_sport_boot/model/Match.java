@@ -41,6 +41,7 @@ public class Match {
 	private List<Inscription> inscriptionsProchainMatch = new ArrayList<Inscription>();
 
 	@Column(name = "match_is_fini")
+	@JsonView(Views.Match.class)
 	private boolean isFini = false;
 	
 	@ManyToOne

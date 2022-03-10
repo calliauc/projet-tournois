@@ -43,7 +43,7 @@ public abstract class Tournoi {
 	/// ATTRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTournoi")
-	@JsonView({Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,Views.TournoiWithInscriptions.class,Views.JourneeWithTournoiAndMatch.class,Views.UserWithTournois.class, Views.UserWithIncriptions.class })
+	@JsonView({Views.InscriptionWithId.class, Views.MatchWithIncriptions.class, Views.ResultatWithInscriptionAndMatch.class,Views.TournoiWithInscriptions.class,Views.JourneeWithTournoiAndMatch.class,Views.UserWithTournois.class, Views.UserWithIncriptions.class })
 	protected Long idTournoi;
 	@Column(name = "tournoi_nom", length = 50, nullable = false)
 	@JsonView({Views.TournoiWithInscriptions.class, Views.JourneeWithTournoiAndMatch.class})
