@@ -44,43 +44,39 @@
           <td *ngFor="let r of m.resultats">
             <div>{{ r?.scoreMatch }}</div>
           </td>
-
-          <td></td>
-          <td></td>
-          <td></td>
         </ng-template>
         <td></td>
+
         <td>
-          <div>
-            <a
-              [routerLink]="['/match', 'edit', m.id]"
-              routerLinkActive="active"
-              class="btn btn-outline-primary"
-            >
-              edit
-            </a>
+          <a
+            *ngIf="
+              m.resultats![0] == undefined || m.resultats![0] == null;
+              else gogo
+            "
+            [routerLink]="['/match', 'resultat', m.id]"
+            routerLinkActive="active"
+            class="btn btn-outline-primary"
+          >
+            enregistrer le résultat
+          </a>
+
+          <ng-template #gogo>
             <a
               [routerLink]="[
                 '/match',
                 'resultat',
                 m.id,
-                m!.resultats![0].id!,
-                m!.resultats![1].id!
+                (m?.resultats)![0].id!,
+                (m?.resultats)![1].id!
               ]"
               routerLinkActive="active"
               class="btn btn-outline-primary"
             >
-              modifier/enregistrer le résultat
+              modifier le résultat
             </a>
-          </div>
+          </ng-template>
         </td>
-        <td>
-          <div>
-            <button (click)="delete(m.id!)" class="btn btn-outline-danger">
-              supprimer
-            </button>
-          </div>
-        </td>
+        <td></td>
       </tr>
     </table>
   </div>

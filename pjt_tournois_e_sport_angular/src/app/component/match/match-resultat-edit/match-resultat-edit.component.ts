@@ -11,26 +11,21 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./match-resultat-edit.component.css'],
 })
 export class MatchResultatEditComponent implements OnInit {
-  match: Match = new Match();
+  matchAFinir: Match = new Match();
   resultatJ1: Resultat = new Resultat();
   resultatJ2: Resultat = new Resultat();
+  listResultats: Resultat[] = [this.resultatJ1, this.resultatJ2];
 
   constructor(
     private matchService: MatchService,
     private resultatService: ResultatService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.matchAFinir.resultats = this.listResultats;
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params['id']) {
-        this.matchService.get(params['id']).subscribe((result) => {
-          console.log(result);
-          this.match = result;
-        });
-      }
-    });
     this.activatedRoute.params.subscribe((params) => {
       if (params['idResultat1']) {
         this.resultatService.get(params['idResultat1']).subscribe((result) => {
@@ -38,6 +33,8 @@ export class MatchResultatEditComponent implements OnInit {
           console.log(result);
           this.resultatJ1 = result;
         });
+      } else {
+        console.log(this.resultatJ1);
       }
     });
     this.activatedRoute.params.subscribe((params) => {
@@ -47,23 +44,58 @@ export class MatchResultatEditComponent implements OnInit {
           console.log(result);
           this.resultatJ2 = result;
         });
+      } else {
+        console.log(this.resultatJ2);
+      }
+    });
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['id']) {
+        this.matchService.get(params['id']).subscribe((result) => {
+          console.log(result);
+          this.matchAFinir = result;
+          this.resultatJ1.match = result;
+          this.resultatJ2.match = result;
+          this.resultatJ1.participant = result.inscriptions![0];
+          this.resultatJ2.participant = result.inscriptions![1];
+          console.log(this.resultatJ1);
+        });
       }
     });
   }
 
   save() {
-    if (this.match.id) {
-      this.matchService.update(this.match).subscribe((ok) => {
+    this.matchAFinir.resultats = [this.resultatJ1, this.resultatJ2];
+    if (this.matchAFinir.id) {
+      this.matchService.update(this.matchAFinir).subscribe((ok) => {});
+    } else {
+      this.matchService.create(this.matchAFinir).subscribe((ok) => {});
+    }
+  }
+
+  saveMatch() {
+    if (this.matchAFinir.id) {
+      this.matchService.update(this.matchAFinir).subscribe((ok) => {
         this.router.navigate(['/match']);
       });
     } else {
-      this.matchService.create(this.match).subscribe((ok) => {
+      this.matchService.create(this.matchAFinir).subscribe((ok) => {
         this.router.navigate(['/match']);
       });
     }
   }
 
   saveResultsAndMatch() {
+    if (this.matchAFinir.id) {
+      this.matchAFinir.resultats = [this.resultatJ1, this.resultatJ2];
+      this.matchService.update(this.matchAFinir).subscribe((ok) => {
+        this.router.navigate(['/match']);
+      });
+    } else {
+      this.matchAFinir.resultats = [this.resultatJ1, this.resultatJ2];
+      this.matchService.create(this.matchAFinir).subscribe((ok) => {
+        this.router.navigate(['/match']);
+      });
+    }
     if (this.resultatJ1.id) {
       this.resultatService.update(this.resultatJ1).subscribe((ok) => {});
     } else {
