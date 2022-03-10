@@ -1,29 +1,34 @@
 <div class="card bg-dark">
   <div class="card-header">
-    <h2>{{ tournoi.nom }}</h2>
+    <!-- <h2>{{ tournoi.nom | async }}</h2> -->
   </div>
   <div class="card-body">
     <ng-container>
       <div class="row">
         <div class="col">
           <app-champ-description
+            [champ]="tournoi"
             *ngIf="tournoi.type === 'championnat'"
           ></app-champ-description>
-          <app-ligue-description
+          <!-- <app-ligue-description
+            [ligue]="tournoi"
             *ngIf="tournoi.type === 'ligue'"
-          ></app-ligue-description>
+          ></app-ligue-description> -->
           <app-matchs-next></app-matchs-next>
         </div>
         <div class="col">
           <app-champ-arbre-finales
+            [champ]="tournoi"
             *ngIf="tournoi.type == 'championnat'"
           ></app-champ-arbre-finales>
           <app-champ-poules
+            [champ]="tournoi"
             *ngIf="tournoi.type == 'championnat'"
           ></app-champ-poules>
-          <app-ligue-journees
+          <!-- <app-ligue-journees
+            [ligue]="tournoi"
             *ngIf="tournoi.type == 'ligue'"
-          ></app-ligue-journees>
+          ></app-ligue-journees> -->
         </div>
       </div>
     </ng-container>

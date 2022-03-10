@@ -22,24 +22,19 @@
               <table class="table">
                 <tr>
                   <td>Effectif :</td>
-                  <!-- <td>{{ tournoi.nbParticipantsTotal }}</td> -->
-                  <td>16</td>
+                  <td>{{ champ.nbParticipantsTotal }}</td>
+                  <!-- <td>16</td> -->
                 </tr>
                 <tr>
                   <td>Date de création :</td>
                   <td>
-                    <!-- {{
-                          tournoi.dateDeCreation
-                            | date: "EEEE dd MMMM YYYY"
-                        }} -->
+                    {{ champ.dateDeCreation | date: "EEEE dd MMMM YYYY" }}
                   </td>
                 </tr>
                 <tr>
                   <td>Date de début :</td>
                   <td>
-                    <!-- {{
-                          tournoi.dateDeDebut | date: "EEEE dd MMMM YYYY"
-                        }} -->
+                    {{ champ.dateDeDebut | date: "EEEE dd MMMM YYYY" }}
                   </td>
                 </tr>
               </table>

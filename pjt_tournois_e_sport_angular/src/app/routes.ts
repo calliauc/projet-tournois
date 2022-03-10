@@ -17,6 +17,8 @@ import { LigueClassementComponent } from './component/tournoi/ligue-classement/l
 import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
 import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
 import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
+import { ChampDetailsComponent } from './component/tournoi/details/champ/champ-details/champ-details.component';
+import { LigueDetailsComponent } from './component/tournoi/details/ligue/ligue-details/ligue-details.component';
 
 export const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -25,7 +27,15 @@ export const routes: Routes = [
 
   { path: 'tournoi-resume', component: TournoiResumeComponent },
 
-  { path: 'tournoi/details/:idTournoi', component: TournoiDetailsComponent },
+  {
+    path: 'tournoi/champ/details/:idTournoi',
+    component: ChampDetailsComponent,
+  },
+
+  {
+    path: 'tournoi/ligue/details/:idTournoi',
+    component: LigueDetailsComponent,
+  },
 
   { path: 'ligue/edit', component: LigueEditComponent },
 
