@@ -4,7 +4,7 @@ import { Utilisateur } from 'src/app/model/utilisateur';
 import { UtilisateurService } from 'src/app/service/utilisateur.service';
 import { Role } from 'src/app/model/role';
 import { Tournoi } from 'src/app/model/tournoi';
-import { isDeepStrictEqual } from 'util';
+// import { isDeepStrictEqual } from 'util';
 
 @Component({
   selector: 'app-utilisateur-compte',
