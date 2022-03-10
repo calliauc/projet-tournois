@@ -10,19 +10,25 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "championnat")
 public class Championnat extends Tournoi {
 
 	/// ATTRIBUTES
 	@OneToMany(mappedBy = "tournoi")
+	@JsonView(Views.TournoiWithInscriptions.class)
 	private List<Journee> JourneesAJouerPoules = new ArrayList<Journee>();
 	@OneToMany(mappedBy = "tournoi")
+	@JsonView(Views.TournoiWithInscriptions.class)
 	private List<Journee> JourneesAJouerFinales = new ArrayList<Journee>();
 	@OneToMany(mappedBy = "championnat")
+	@JsonView(Views.TournoiWithInscriptions.class)
 	private List<Poule> poules = new ArrayList<Poule>();
 
 	@Column(name = "prochaine_etape_finale")
+	@JsonView(Views.TournoiWithInscriptions.class)
 	private Etape prochaineEtape;
 
 //	private int nbPoules = 0; remplace par prochaineEtape.getNbMatchs();
