@@ -91,7 +91,11 @@
         >
       </li>
       <li class="nav-item">
-        <a *ngIf="authenticated" class="nav-link active" (click)="logout()"
+        <a
+          *ngIf="authenticated"
+          class="nav-link active"
+          (click)="logout()"
+          routerLink=""
           >Deconnexion</a
         >
       </li>
