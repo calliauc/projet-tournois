@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
@@ -125,13 +126,19 @@ public class UtilisateurRestController {
 	@GetMapping("/inscriptions_{idJoueur}")
 	@JsonView(Views.UserWithIncriptions.class)
 	public Utilisateur getUtilisateurWithIncriptions(@PathVariable Long idJoueur) {
-		return uService.getUtilisateurWithInscriptions(idJoueur);
+		LOGGER.info("GET Utilisateur With Incriptions");
+		Utilisateur temp = uService.getUtilisateurWithInscriptions(idJoueur);
+		LOGGER.info("Incriptions" + temp.getInscriptions().toString());
+		return temp;
 	}
 	// ici l'id correspond en réalité à celui du USER et non de l'inscriptions
 	@GetMapping("/tournoi_{idTournoi}")
 	@JsonView(Views.UserWithTournois.class)
 	public Utilisateur getOrganisateurWithTournois(@PathVariable Long idTournoi) {
-		return uService.getOrganisateurWithTournois(idTournoi);
+		LOGGER.info("GET Utilisateur With Tournois");
+		Utilisateur temp =  uService.getOrganisateurWithTournois(idTournoi);
+		LOGGER.info("Tournois" + temp.getTournois().toString());
+		return temp;
 	}
 
 	@GetMapping("/roles_{username}")
