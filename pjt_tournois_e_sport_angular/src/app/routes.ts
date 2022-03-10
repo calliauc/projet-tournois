@@ -81,4 +81,9 @@ export const routes: Routes = [
   { path: 'match/edit/:id', component: MatchEditComponent },
 
   { path: 'match/resultat/:id', component: MatchResultatEditComponent },
+
+  {
+    path: 'match/resultat/:id/:idResultat1/:idResultat2',
+    component: MatchResultatEditComponent,
+  },
 ];

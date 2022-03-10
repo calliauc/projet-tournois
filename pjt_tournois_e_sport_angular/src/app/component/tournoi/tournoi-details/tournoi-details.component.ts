@@ -11,7 +11,7 @@ import { TournoiService } from 'src/app/service/tournoi.service';
   styleUrls: ['./tournoi-details.component.css'],
 })
 export class TournoiDetailsComponent implements OnInit {
-  tournoi: Tournoi = new Championnat();
+  tournoi: Tournoi = new Tournoi();
 
   constructor(
     private activatedRoute: ActivatedRoute,

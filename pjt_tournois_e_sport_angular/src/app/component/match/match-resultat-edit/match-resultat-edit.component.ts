@@ -13,9 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MatchResultatEditComponent implements OnInit {
   match: Match = new Match();
   resultatJ1: Resultat = new Resultat();
-  resulatJ2: Resultat = new Resultat();
-  resultatJ1ID: string | undefined;
-  resultatJ2ID: number | undefined;
+  resultatJ2: Resultat = new Resultat();
 
   constructor(
     private matchService: MatchService,
@@ -33,9 +31,24 @@ export class MatchResultatEditComponent implements OnInit {
         });
       }
     });
-    if (this.match.resultats != null) {
-      this.resultatJ1ID = this.match.resultats[0]?.id?.toString();
-    }
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['idResultat1']) {
+        this.resultatService.get(params['idResultat1']).subscribe((result) => {
+          console.log('j1');
+          console.log(result);
+          this.resultatJ1 = result;
+        });
+      }
+    });
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['idResultat2']) {
+        this.resultatService.get(params['idResultat2']).subscribe((result) => {
+          console.log('j2');
+          console.log(result);
+          this.resultatJ2 = result;
+        });
+      }
+    });
   }
 
   save() {
@@ -50,7 +63,29 @@ export class MatchResultatEditComponent implements OnInit {
     }
   }
 
-  byId(obj1: Match, obj2: Match) {
+  saveResultsAndMatch() {
+    if (this.resultatJ1.id) {
+      this.resultatService.update(this.resultatJ1).subscribe((ok) => {});
+    } else {
+      this.resultatService.create(this.resultatJ1).subscribe((ok) => {});
+    }
+    if (this.resultatJ2.id) {
+      this.resultatService.update(this.resultatJ2).subscribe((ok) => {
+        this.router.navigate(['/match']);
+      });
+    } else {
+      this.resultatService.create(this.resultatJ2).subscribe((ok) => {
+        this.router.navigate(['/match']);
+      });
+    }
+  }
+
+  byIdMatch(obj1: Match, obj2: Match) {
+    if (obj1 && obj2) return obj1.id == obj2.id;
+    if (obj1 == obj2) return true;
+    return false;
+  }
+  byIdResultat(obj1: Resultat, obj2: Resultat) {
     if (obj1 && obj2) return obj1.id == obj2.id;
     if (obj1 == obj2) return true;
     return false;
