@@ -143,6 +143,7 @@ public class UtilisateurRestController {
 	// Methods
 
 	private Utilisateur save(Utilisateur u, BindingResult br) {
+		LOGGER.info(u.toString());
 		if (br.hasErrors()) {
 			throw new UtilisateurException("Utilisateur invalide");
 		}

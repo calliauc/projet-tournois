@@ -19,7 +19,12 @@
           [routerLink]="['/utilisateur','edit', user.id]"
           routerLinkActive="active"
           class="btn btn-outline-primary"
-          >editer</a>
+          >Editer</a>
+        </td>
+        <td>
+          <button (click)="delete(user.id!)" class="btn btn-outline-danger">
+            Supprimer
+          </button>
         </td>
       </tr>
     </table>
