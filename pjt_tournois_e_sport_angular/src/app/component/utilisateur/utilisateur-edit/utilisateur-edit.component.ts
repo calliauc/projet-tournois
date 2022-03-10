@@ -173,4 +173,8 @@ export class UtilisateurEditComponent implements OnInit {
     }
     return '';
   }
+
+  isAdmin(role: Role) {
+    return role == this.roles.Admin ? true : false;
+  }
 }

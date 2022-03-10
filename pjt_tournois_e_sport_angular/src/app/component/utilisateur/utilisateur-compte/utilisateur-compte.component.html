@@ -19,7 +19,7 @@
       </tr>
       <tr>
         <td>Mes roles dans la communnauté :</td>
-        <td *ngFor="let role of user.roles | keyvalue"> {{ role.key }}</td>
+        <td *ngFor="let role of user.roles | keyvalue"> <span> {{ role.value }} </span> </td>
       </tr>
       <tr>
         <td> <a
@@ -32,12 +32,11 @@
     </table>
 
     <ng-container *ngFor="let role of user.roles">
-      <div *ngIf="isAdmin(role) || isPlayer(role)">
-        <h4>Mes inscriptions</h4>
-        <app-inscription></app-inscription>
+      <div *ngIf=" isPlayer(role)">
+        <app-inscription title="Mes inscriptions"></app-inscription>
       </div>
 
-      <div *ngIf="isAdmin(role) || isOrga(role)">
+      <div *ngIf="isOrga(role)">
        <app-tournoi-resume title="Mes tournois" [fromMyProfile]=true [tournois]="user.tournois!"></app-tournoi-resume>
       </div>
 
