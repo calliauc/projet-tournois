@@ -2,11 +2,11 @@ import { Match } from './match';
 import { Inscription } from './inscription';
 
 export class Resultat {
-  private _id: number | undefined;
-  private _match: Match | undefined;
-  private _participant: Inscription | undefined;
-  private _positionMatch: number | undefined;
-  private _scoreMatch: number | undefined;
+  _id: number | undefined;
+  _match: Match | undefined;
+  _participant: Inscription | undefined;
+  _positionMatch: number | undefined;
+  _scoreMatch: number | undefined;
 
   constructor(
     id?: number,
