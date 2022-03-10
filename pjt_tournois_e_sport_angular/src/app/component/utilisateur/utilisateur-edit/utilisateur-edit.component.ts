@@ -25,6 +25,7 @@ export class UtilisateurEditComponent implements OnInit {
   userObservable!: Observable<Utilisateur>;
   roles = Role;
   values = Object.keys(Role);
+  isUpdate = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,8 +39,9 @@ export class UtilisateurEditComponent implements OnInit {
       if (params['id']) {
         console.log(params['id']);
         this.utilisateurService.get(params['id']).subscribe((result) => {
-          console.log(result);
+          console.log(' result Subscribe = ' + result);
           this.utilisateur = result;
+          this.isUpdate = true;
           this.initForm();
         });
       }
@@ -49,7 +51,7 @@ export class UtilisateurEditComponent implements OnInit {
     this.initForm();
     //REMPLIT LES CHAMPS DANS LE CAS D'UN UPDATE
     this.userObservable = this.form.valueChanges.pipe(
-      map((formValue) => this.utilisateur)
+      map((formValue) => (this.utilisateur = formValue))
     );
   }
 
@@ -58,7 +60,7 @@ export class UtilisateurEditComponent implements OnInit {
       mail: new FormControl(
         this.utilisateur.mail,
         [Validators.required, Validators.email],
-        this.checkMail()
+        this.isUpdate ? null : this.checkMail()
       ),
       login: new FormControl(
         this.utilisateur.username,
@@ -67,7 +69,7 @@ export class UtilisateurEditComponent implements OnInit {
           Validators.minLength(3),
           Validators.maxLength(255),
         ],
-        this.checkLogin()
+        this.isUpdate ? null : this.checkLogin()
       ),
       passwordGrp: new FormGroup(
         {
@@ -132,12 +134,17 @@ export class UtilisateurEditComponent implements OnInit {
   }
 
   save() {
-    console.log(this.utilisateur);
     if (this.utilisateur.id) {
+      console.log('In save() : update : ' + this.utilisateur);
+      this.utilisateur.password = this.form.get('passwordGrp')!.get('password')
+        ?.value as string;
+
       this.utilisateurService.update(this.utilisateur).subscribe((ok) => {
-        this.router.navigate(['utilisateur']);
+        this.isUpdate = false;
+        this.router.navigateByUrl('/utilisateur');
       });
     } else {
+      console.log('In save(): create');
       this.utilisateur.username = this.form.get('login')!.value as string;
       this.utilisateur.mail = this.form.get('mail')!.value as string;
       this.utilisateur.password = this.form.get('passwordGrp')!.get('password')
@@ -146,7 +153,7 @@ export class UtilisateurEditComponent implements OnInit {
       console.log(this.utilisateur);
 
       this.utilisateurService.create(this.utilisateur).subscribe((ok) => {
-        this.router.navigate(['acceuil']);
+        this.router.navigateByUrl('/accueil');
       });
     }
   }
