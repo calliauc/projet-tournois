@@ -41,6 +41,7 @@ import { ChampDetailsComponent } from './component/tournoi/details/champ/champ-d
 import { ChampMatchsNextComponent } from './component/tournoi/details/champ/champ-matchs-next/champ-matchs-next.component';
 import { LigueMatchsNextComponent } from './component/tournoi/details/ligue/ligue-matchs-next/ligue-matchs-next.component';
 import { LigueInscriptionComponent } from './component/tournoi/details/ligue/ligue-inscription/ligue-inscription.component';
+import { ChampInscriptionComponent } from './component/tournoi/details/champ/champ-inscription/champ-inscription.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { LigueInscriptionComponent } from './component/tournoi/details/ligue/lig
     ChampMatchsNextComponent,
     LigueMatchsNextComponent,
     LigueInscriptionComponent,
+    ChampInscriptionComponent,
   ],
   imports: [
     BrowserModule,
