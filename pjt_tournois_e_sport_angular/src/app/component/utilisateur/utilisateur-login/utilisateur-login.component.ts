@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UtilisateurService } from 'src/app/service/utilisateur.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class UtilisateurLoginComponent implements OnInit {
 
   constructor(
     private utilisateurService: UtilisateurService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {

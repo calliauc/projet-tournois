@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +35,12 @@ public class SetClassementTournoiService {
 	private static int ptGagnesWinDuel = 3;
 	private static int ptGagnesLoseDuel = 0;
 	private static int ptGagnesNulDuel = 1;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(SetClassementTournoiService.class);
 
 	public void setScoreClassementDuel(Match match) {
 		List<Inscription> participants = match.getInscriptions();
+		LOGGER.info(match.getInscriptions().get(0).toString());
 		Inscription j1EnBase = inscriptionRepo.getById(participants.get(0).getId());
 		Inscription j2EnBase = inscriptionRepo.getById(participants.get(1).getId());
 		Resultat resultatJ1 = resultatRepo.findByMatchAndParticipant(match, j1EnBase).orElseThrow(() -> {

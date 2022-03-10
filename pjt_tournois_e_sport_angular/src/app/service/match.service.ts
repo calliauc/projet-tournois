@@ -31,7 +31,6 @@ export class MatchService {
       id: match.id,
       inscriptions: match.inscriptions,
       journee: match.journee,
-      resultats: match.resultats,
     };
 
     return this.http.post<Match>(MatchService.URL + '/', matchEnJson);

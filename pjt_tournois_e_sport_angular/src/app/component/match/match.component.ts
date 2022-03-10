@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Match } from 'src/app/model/match';
 import { MatchService } from 'src/app/service/match.service';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-match',
   templateUrl: './match.component.html',
@@ -10,7 +12,12 @@ import { MatchService } from 'src/app/service/match.service';
 export class MatchComponent implements OnInit {
   matchObservable!: Observable<Match[]>;
 
-  constructor(private matchService: MatchService) {}
+  constructor(
+    private matchService: MatchService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private formModule: FormsModule
+  ) {}
 
   ngOnInit(): void {
     this.matchObservable = this.matchService.getAll();

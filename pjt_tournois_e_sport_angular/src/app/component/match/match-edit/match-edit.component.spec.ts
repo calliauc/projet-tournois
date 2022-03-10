@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatchsNextComponent } from './matchs-next.component';
+import { MatchEditComponent } from './match-edit.component';
 
-describe('MatchsNextComponent', () => {
-  let component: MatchsNextComponent;
-  let fixture: ComponentFixture<MatchsNextComponent>;
+describe('MatchEditComponent', () => {
+  let component: MatchEditComponent;
+  let fixture: ComponentFixture<MatchEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MatchsNextComponent ]
+      declarations: [ MatchEditComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MatchsNextComponent);
+    fixture = TestBed.createComponent(MatchEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

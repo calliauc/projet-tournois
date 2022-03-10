@@ -75,6 +75,7 @@ export class ResultatService {
     const obj = {
       positionMatch: resultat.positionMatch,
       scoreMatch: resultat.scoreMatch,
+      participant: resultat.participant,
     };
 
     if (resultat.match) {
