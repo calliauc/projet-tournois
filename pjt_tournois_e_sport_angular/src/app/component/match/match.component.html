@@ -17,31 +17,69 @@
         <td>{{ m.journee?.tournoi?.idTournoi }}</td>
         <td>{{ m.journee?.id }}</td>
         <td>{{ m.id }}</td>
-        <td *ngFor="let r of m.resultats">
-          {{ r?.participant?.id?.joueur?.username }}
-        </td>
-        <td *ngFor="let r of m.resultats">
-          <div>{{ r?.scoreMatch }}</div>
-        </td>
+        <div
+          class="cachecache"
+          *ngIf="
+            m.resultats![0] != undefined || m.resultats![0] != null;
+            else pas_resultat
+          "
+        >
+          cachecache
+        </div>
+        <ng-template #pas_resultat>
+          <td *ngFor="let p of m.inscriptions">
+            {{ p?.id?.joueur?.username }}
+          </td>
+          <td></td>
+        </ng-template>
+        <div
+          *ngIf="
+            m.resultats![0] == undefined || m.resultats![0] == null;
+            else resultat
+          "
+        ></div>
+        <td></td>
+        <ng-template #resultat>
+          <td *ngFor="let r of m.resultats">
+            <div>{{ r.participant?.id?.joueur?.username }}</div>
+          </td>
+          <td *ngFor="let r of m.resultats">
+            <div>{{ r?.scoreMatch }}</div>
+          </td>
+        </ng-template>
 
-        <td>
-          <div>
+        <div style.display="flex" style.justify-content="flex-start">
+          <td>
             <a
-              [routerLink]="['/match', 'edit', m.id]"
+              style.justify-content="flex-start"
+              [routerLink]="['/match', 'resultat', m.id]"
               routerLinkActive="active"
               class="btn btn-outline-primary"
+              style.display="flex"
             >
-              edit
+              enregistrer/modifier le résultat
             </a>
-          </div>
-        </td>
-        <td>
-          <div>
-            <button (click)="delete(m.id!)" class="btn btn-outline-danger">
-              supprimer
-            </button>
-          </div>
-        </td>
+
+            <!-- <a
+              style.justify-content="flex-start"
+              *ngIf="m.resultats![0] != undefined || m.resultats![0] != null"
+              [routerLink]="[
+                '/match',
+                'resultat',
+                m.id,
+                (m?.resultats)![0].id!,
+                (m?.resultats)![1].id!
+              ]"
+              routerLinkActive="active"
+              class="btn btn-outline-primary"
+              style.display="flex"
+            >
+              modifier le résultat
+            </a> -->
+          </td>
+        </div>
+
+        <td></td>
       </tr>
     </table>
   </div>

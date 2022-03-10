@@ -4,7 +4,6 @@ import { Utilisateur } from 'src/app/model/utilisateur';
 import { UtilisateurService } from 'src/app/service/utilisateur.service';
 import { Role } from 'src/app/model/role';
 import { Tournoi } from 'src/app/model/tournoi';
-// import { isDeepStrictEqual } from 'util';
 
 @Component({
   selector: 'app-utilisateur-compte',
@@ -35,23 +34,26 @@ export class UtilisateurCompteComponent implements OnInit {
         );
         console.log('mes tournois (orga) : ' + this.user.tournois);
         console.log('mes tournois (inscriptions) : ' + this.user.inscriptions);
+
+        this.userService
+          .getTournoisOfUser(this.user.id!)
+          .subscribe((result) => {
+            const userTemp = result;
+            this.user.tournois = userTemp.tournois;
+          });
       });
-
-    // this.getTournois();
-    // this.getInscriptions();
   }
 
-  get Tournois(): number[] {
-    this.userService.getTournoisOfUser(this.user.id!).subscribe((result) => {
-      this.user = result;
-    });
-    let ids: number[] = [];
-    for (let t of this.user.tournois!) {
-      console.log(t.idTournoi);
-      ids.push(t.idTournoi!);
-    }
-    return ids;
-  }
+  // get Tournois(): Tournoi[] {
+  //   console.log('mes tournois (orga) : ' + this.user.tournois);
+  //   let tournoi: Tournoi[] = [];
+  //   for (let t of this.user.tournois!) {
+  //     console.log('idTournoi = ' + t.idTournoi);
+  //     tournoi.push(t!);
+  //   }
+
+  //   return tournoi;
+  // }
 
   getInscriptions() {
     this.userService

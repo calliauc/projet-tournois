@@ -1,0 +1,23 @@
+img {
+  display: flex;
+  justify-content: center;
+  float: left;
+  margin-inline-start: 390px;
+  margin-top: 0px;
+  border: none;
+  -moz-border-radius: 75px;
+  -webkit-border-radius: 75px;
+  border-radius: 75px;
+}
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+#welcome {
+  display: flex;
+  font-family: "Impact";
+  justify-content: center;
+  font-style: bold;
+  margin-top: 60px;
+}

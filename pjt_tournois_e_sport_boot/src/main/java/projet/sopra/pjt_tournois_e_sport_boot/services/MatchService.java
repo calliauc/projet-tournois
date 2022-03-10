@@ -82,11 +82,26 @@ public class MatchService {
 				resultatRepo.delete(r);
 			}
 		}
+		Inscription i1 = inscriptionRepo.getById(matchEnBase.getInscriptions().get(0).getId()); 
+		Inscription i2 = inscriptionRepo.getById(matchEnBase.getInscriptions().get(1).getId());
+		if (i1.getProchainMatch() == matchEnBase) {
+			i1.setProchainMatch(null);
+			i1.getMatchs().remove(m);
+			inscriptionRepo.save(i1); 
+		}
+		if (i2.getProchainMatch() == matchEnBase) {
+			i2.setProchainMatch(null);
+			i2.getMatchs().remove(m);
+			inscriptionRepo.save(i2); 
+		}
+		
+		
 		matchRepo.delete(matchEnBase);
 	}
 	
 	public void deleteById(Long id) {
-		matchRepo.deleteById(id);
+		Match m = matchRepo.getById(id);
+		delete(m);
 	}
 
 	private void checkData(Match m) {

@@ -40,7 +40,7 @@ public class Journee {
 	private Tournoi tournoi;
 
 	@OneToMany(mappedBy = "journee")
-	@JsonView(Views.JourneeWithTournoiAndMatch.class)
+	@JsonView({Views.JourneeWithTournoiAndMatch.class, Views.TournoiWithInscriptions.class})
 	private List<Match> matchsAJouerPourJournee;
 //	@FutureOrPresent
 	@Transient
@@ -54,13 +54,13 @@ public class Journee {
 	private LocalDateTime dateFinJournee;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "journee_etape")
-	@JsonView(Views.JourneeWithTournoiAndMatch.class)
+	@JsonView({Views.JourneeWithTournoiAndMatch.class,  Views.MatchWithIncriptions.class})
 	private Etape etape;
 
 	/// attribut pour connaitre l'ordre des journées d'une ligue/poule sans passer
 	/// par les dates
 	@Column(name = "journee_numero")
-	@JsonView(Views.JourneeWithTournoiAndMatch.class)
+	@JsonView({Views.JourneeWithTournoiAndMatch.class,  Views.MatchWithIncriptions.class})
 	private int numero;
 
 	/// CONSTRUCTOR

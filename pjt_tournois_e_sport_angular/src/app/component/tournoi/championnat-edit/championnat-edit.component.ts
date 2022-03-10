@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Tournoi } from 'src/app/model/tournoi';
 import { Router } from '@angular/router';
 import { ChampionnatService } from 'src/app/service/championnat.service';
+import { Utilisateur } from 'src/app/model/utilisateur';
+import { UtilisateurService } from 'src/app/service/utilisateur.service';
 @Component({
   selector: 'app-championnat-edit',
   templateUrl: './championnat-edit.component.html',
@@ -11,10 +13,12 @@ import { ChampionnatService } from 'src/app/service/championnat.service';
 })
 export class ChampionnatEditComponent implements OnInit {
   tournoi: Championnat = new Championnat();
+  orga: Utilisateur = new Utilisateur();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private championnatService: ChampionnatService,
+    private userService: UtilisateurService,
     private router: Router
   ) {}
 
@@ -29,6 +33,14 @@ export class ChampionnatEditComponent implements OnInit {
         });
       }
     });
+
+    this.userService
+      .getByUsername(localStorage.getItem('login')!)
+      .subscribe((result) => {
+        console.log(result);
+        this.orga = result;
+      });
+    this.tournoi.organisateur = this.orga;
   }
 
   save() {

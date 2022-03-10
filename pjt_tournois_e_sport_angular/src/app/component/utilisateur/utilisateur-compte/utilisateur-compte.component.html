@@ -38,8 +38,7 @@
       </div>
 
       <div *ngIf="isAdmin(role) || isOrga(role)">
-        <h4>Mes tournois </h4>
-        <app-tournoi></app-tournoi>
+       <app-tournoi-resume title="Mes tournois" [fromMyProfile]=true [tournois]="user.tournois!"></app-tournoi-resume>
       </div>
 
     </ng-container>
