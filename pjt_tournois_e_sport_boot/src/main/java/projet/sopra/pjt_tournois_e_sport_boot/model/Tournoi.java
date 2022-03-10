@@ -46,7 +46,7 @@ public abstract class Tournoi {
 	@JsonView({Views.InscriptionWithId.class, Views.MatchWithIncriptions.class, Views.ResultatWithInscriptionAndMatch.class,Views.TournoiWithInscriptions.class,Views.JourneeWithTournoiAndMatch.class,Views.UserWithTournois.class, Views.UserWithIncriptions.class })
 	protected Long idTournoi;
 	@Column(name = "tournoi_nom", length = 50, nullable = false)
-	@JsonView({Views.TournoiWithInscriptions.class, Views.JourneeWithTournoiAndMatch.class, Views.MatchWithIncriptions.class})
+	@JsonView({Views.UserWithTournois.class, Views.TournoiWithInscriptions.class, Views.JourneeWithTournoiAndMatch.class, Views.MatchWithIncriptions.class})
 	protected String nom;
 	@Column(name = "tournoi_date_creation", nullable = false)
 	@JsonView(Views.TournoiWithInscriptions.class)
@@ -60,10 +60,10 @@ public abstract class Tournoi {
 	protected StatutTemps statutTemps;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tournoi_statut_inscriptions")
-	@JsonView(Views.TournoiWithInscriptions.class)
+	@JsonView({Views.TournoiWithInscriptions.class, Views.UserWithTournois.class})
 	protected StatutInscriptions statutInscriptions;
 	@Column(name = "tournoi_jeu", length = 50)
-	@JsonView(Views.TournoiWithInscriptions.class)
+	@JsonView({Views.TournoiWithInscriptions.class,Views.UserWithTournois.class})
 	protected String jeu;
 	@OneToMany(mappedBy = "id.tournoi")
 	@JsonView(Views.TournoiWithInscriptions.class)
