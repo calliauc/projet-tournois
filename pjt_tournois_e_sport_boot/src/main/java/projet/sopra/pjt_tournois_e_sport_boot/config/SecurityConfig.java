@@ -34,7 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.csrf().disable()
 			.authorizeHttpRequests()
-				.antMatchers(HttpMethod.GET, "/api/utilisateur/search/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/utilisateur/searchByLogin/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/utilisateur/searchByMail/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/utilisateur/authentification").permitAll()
 				.antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
 				.antMatchers(HttpMethod.POST,"/api/utilisateur/signup").permitAll() // ce lien existe-t-il vraiment ?
 				.antMatchers(HttpMethod.GET).hasAnyRole("ADMIN")

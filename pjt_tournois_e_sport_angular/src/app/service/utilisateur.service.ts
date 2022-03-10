@@ -1,7 +1,7 @@
+import { Utilisateur } from 'src/app/model/utilisateur';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Utilisateur } from '../model/utilisateur';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +41,7 @@ export class UtilisateurService {
   }
 
   public authentication(login: string, password: string): Observable<void> {
+    console.log('In Service: authentification');
     let headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(login + ':' + password),
     });
@@ -49,6 +50,12 @@ export class UtilisateurService {
       {
         headers: headers,
       }
+    );
+  }
+
+  public getByUsername(username: string): Observable<Utilisateur> {
+    return this.httpClient.get<Utilisateur>(
+      `${UtilisateurService.URL}/username_${username}`
     );
   }
 
