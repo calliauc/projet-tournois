@@ -28,7 +28,6 @@ import { JourneeDetailComponent } from './component/journee/journee-detail/journ
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
 import { MatchComponent } from './component/match/match.component';
-import { MatchsNextComponent } from './component/tournoi/details/matchs-next/matchs-next.component';
 import { UtilisateurCompteComponent } from './component/utilisateur/utilisateur-compte/utilisateur-compte.component';
 import { MatchEditComponent } from './component/match/match-edit/match-edit.component';
 import { MatchResultatEditComponent } from './component/match/match-resultat-edit/match-resultat-edit.component';
@@ -39,6 +38,8 @@ import { LigueDescriptionComponent } from './component/tournoi/details/ligue/lig
 import { LigueJourneesComponent } from './component/tournoi/details/ligue/ligue-journees/ligue-journees.component';
 import { LigueDetailsComponent } from './component/tournoi/details/ligue/ligue-details/ligue-details.component';
 import { ChampDetailsComponent } from './component/tournoi/details/champ/champ-details/champ-details.component';
+import { ChampMatchsNextComponent } from './component/tournoi/details/champ/champ-matchs-next/champ-matchs-next.component';
+import { LigueMatchsNextComponent } from './component/tournoi/details/ligue/ligue-matchs-next/ligue-matchs-next.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ChampDetailsComponent } from './component/tournoi/details/champ/champ-d
     TournoiResumeComponent,
     MatchComponent,
     MatchsNextComponent,
+    UtilisateurCompteComponent,
     ChampArbreFinalesComponent,
     ChampDescriptionComponent,
     ChampPoulesComponent,
@@ -70,6 +72,8 @@ import { ChampDetailsComponent } from './component/tournoi/details/champ/champ-d
     LigueJourneesComponent,
     LigueDetailsComponent,
     ChampDetailsComponent,
+    ChampMatchsNextComponent,
+    LigueMatchsNextComponent,
   ],
   imports: [
     BrowserModule,
