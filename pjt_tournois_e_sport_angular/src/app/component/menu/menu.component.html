@@ -10,24 +10,7 @@
           Accueil</a
         >
       </li>
-      <li class="nav-item">
-        <a
-          *ngIf="!authenticated"
-          routerLink="/signup"
-          routerLinkActive="active"
-          class="nav-link active"
-          >Créer un compte</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          *ngIf="!authenticated"
-          routerLink="/login"
-          routerLinkActive="active"
-          class="nav-link active"
-          >Se connecter</a
-        >
-      </li>
+
       <li class="nav-item">
         <a
           *ngIf="authenticated"
@@ -90,70 +73,49 @@
           >Inscriptions</a
         >
       </li>
+
+      <li class="nav-item dropdown">
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="nav-item">
         <a
-          *ngIf="authenticated"
-          routerLink="/my_profile"
-          class="nav-link active"
-          >Mon Compte</a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
         >
-      </li>
-      <li class="nav-item">
-        <a *ngIf="authenticated" class="nav-link active" (click)="logout()"
-          >Deconnexion</a
+          Compte
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-dark"
+          aria-labelledby="navbarDropdown"
         >
+          <li *ngIf="!authenticated" class="dropdown-item">
+            <a
+              routerLink="/signup"
+              routerLinkActive="active"
+              class="nav-link active"
+              >Créer un compte</a
+            >
+          </li>
+          <li *ngIf="!authenticated" class="dropdown-item">
+            <a
+              routerLink="/login"
+              routerLinkActive="active"
+              class="nav-link active"
+              >Se connecter</a
+            >
+          </li>
+          <li *ngIf="authenticated" class="dropdown-item">
+            <a routerLink="/my_profile" class="nav-link active">Mon Compte</a>
+          </li>
+          <li *ngIf="authenticated" class="dropdown-item">
+            <a class="nav-link active" (click)="logout()">Deconnexion</a>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
-  <!--
-  <a routerLink="/accueil" routerLinkActive="active" class="btn btn-link">
-    Accueil</a
-  >
-  <a
-    *ngIf="!authenticated"
-    routerLink="/signup"
-    routerLinkActive="active"
-    class="btn btn-link"
-    >Créer un compte</a
-  >
-  <a
-    *ngIf="!authenticated"
-    routerLink="/login"
-    routerLinkActive="active"
-    class="btn btn-link"
-    >Se connecter</a
-  >
-  <a
-    *ngIf="authenticated"
-    routerLink="/tournoi"
-    routerLinkActive="active"
-    class="btn btn-link"
-    >Tournois</a
-  >
-
-  <a
-    *ngIf="authenticated"
-    routerLink="/resultat"
-    routerLinkActive="active"
-    class="btn btn-link"
-    >Resultats</a
-  >
-
-  <a
-    *ngIf="authenticated"
-    routerLink="/utilisateur"
-    routerLinkActive="active"
-    class="btn btn-link"
-    >Utilisateurs</a
-  >
-
-  <a *ngIf="authenticated" routerLink="/inscription" class="btn btn-link"
-    >Inscriptions</a
-  >
-
-  <a *ngIf="authenticated" class="btn btn-link" (click)="logout()"
-    >Deconnexion</a
-  > -->
 </nav>
