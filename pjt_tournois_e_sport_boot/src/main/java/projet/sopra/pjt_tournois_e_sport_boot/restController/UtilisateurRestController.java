@@ -121,13 +121,13 @@ public class UtilisateurRestController {
 	}
 	
 	// Requete pour Collections
-
+	// ici l'id correspond en réalité à celui du USER et non du tournoi
 	@GetMapping("/inscriptions_{idJoueur}")
 	@JsonView(Views.UserWithIncriptions.class)
 	public Utilisateur getUtilisateurWithIncriptions(@PathVariable Long idJoueur) {
 		return uService.getUtilisateurWithInscriptions(idJoueur);
 	}
-
+	// ici l'id correspond en réalité à celui du USER et non de l'inscriptions
 	@GetMapping("/tournoi_{idTournoi}")
 	@JsonView(Views.UserWithTournois.class)
 	public Utilisateur getOrganisateurWithTournois(@PathVariable Long idTournoi) {

@@ -1,3 +1,4 @@
+import { UtilisateurCompteComponent } from './component/utilisateur/utilisateur-compte/utilisateur-compte.component';
 import { MatchComponent } from './component/match/match.component';
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
@@ -86,4 +87,6 @@ export const routes: Routes = [
   { path: 'match/edit', component: MatchComponent },
 
   { path: 'match/edit/:id', component: MatchComponent },
+
+  { path: 'my_profile', component: UtilisateurCompteComponent },
 ];
