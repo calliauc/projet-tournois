@@ -1,0 +1,43 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">
+    <h3>Editeur de match</h3>
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label>Id match :</label>
+      <input class="form-control" [(ngModel)]="match.id" readonly />
+    </div>
+    <div class="form-group">
+      <label>Tournoi :</label>
+      <input
+        class="form-control"
+        [(ngModel)]="match.journee!.tournoi!.nom"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <label>Numero de la journée :</label>
+      <input
+        class="form-control"
+        [(ngModel)]="match.journee!.numero"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <label>Etape de la journee :</label>
+      <input class="form-control" [(ngModel)]="match.journee!.etape" readonly />
+    </div>
+
+    <div>
+      <button (click)="save()" class="btn btn-outline-success">
+        enregistrer
+      </button>
+      <a
+        routerLink="/match"
+        routerLinkActive="active"
+        class="btn btn-outline-warning"
+        >annuler</a
+      >
+    </div>
+  </div>
+</div>
