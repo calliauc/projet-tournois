@@ -1,5 +1,6 @@
 import { StatutInscriptions } from './statutInscriptions.enum';
 import { StatutTemps } from './statutTemps.enum';
+import { Utilisateur } from './utilisateur';
 export class Tournoi {
   protected _type: string | undefined;
   protected _idTournoi: number | undefined;
@@ -12,7 +13,7 @@ export class Tournoi {
   //protected _listeInscriptions: //////TO DO
   protected _nbParticipantsParMatch: number | undefined;
   protected _nbParticipantsTotal: number | undefined;
-  //protected _organisateur: Utilisateur | undefined;
+  protected _organisateur: Utilisateur | undefined;
 
   constructor(
     type?: string,
@@ -25,8 +26,8 @@ export class Tournoi {
     statutTemps?: StatutTemps,
     statutInscriptions?: StatutInscriptions,
     nbParticipantsParMatch?: number,
-    nbParticipantsTotal?: number
-    //organisateur?:
+    nbParticipantsTotal?: number,
+    organisateur?: Utilisateur
   ) {
     this._idTournoi = idTournoi;
     this._nom = nom;
@@ -36,7 +37,7 @@ export class Tournoi {
     //this._listeInscriptions = listeInscriptions;
     this._nbParticipantsParMatch = nbParticipantsParMatch;
     this._nbParticipantsTotal = nbParticipantsTotal;
-    //this._organisateur = organisateur;
+    this._organisateur = organisateur;
   }
 
   /**
@@ -118,13 +119,13 @@ export class Tournoi {
     return this._nbParticipantsTotal;
   }
 
-  ///**
-  // * Getter organisateur
-  // * @return {Utilisateur }
-  // */
-  //public get organisateur(): Utilisateur | undefined {
-  //  return this._organisateur;
-  //}
+  /**
+   * Getter organisateur
+   * @return {Utilisateur }
+   */
+  public get organisateur(): Utilisateur | undefined {
+    return this._organisateur;
+  }
 
   /**
    * Setter idTournoi
@@ -206,11 +207,11 @@ export class Tournoi {
     this._nbParticipantsTotal = value;
   }
 
-  ///**
-  // * Setter organisateur
-  // * @param {Utilisateur } value
-  // */
-  //public set organisateur(value: Utilisateur | undefined) {
-  //  this._organisateur = value;
-  //}
+  /**
+   * Setter organisateur
+   * @param {Utilisateur } value
+   */
+  public set organisateur(value: Utilisateur | undefined) {
+    this._organisateur = value;
+  }
 }

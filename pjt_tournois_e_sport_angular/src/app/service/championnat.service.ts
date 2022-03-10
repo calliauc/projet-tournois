@@ -36,7 +36,7 @@ export class ChampionnatService {
       jeu: tournoi.jeu,
       nbParticipantsParMatch: tournoi.nbParticipantsParMatch,
       nbParticipantsTotal: tournoi.nbParticipantsTotal,
-      /*       organisateur : ligue.organisateur,  */
+      organisateur: tournoi.organisateur,
     };
     return this.http.post<Championnat>(
       ChampionnatService.URL + '/championnat',
