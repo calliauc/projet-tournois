@@ -80,9 +80,9 @@
     </ng-container>
 
     <!-- CHOIX ROLES -->
-    <div class="form-group">
-      <label>Choix du role: </label>
-      <p>Pour l'instant, t'as tous les roles BG</p>
+    <div class="form-group form-check form-check-inline" *ngFor="let role of roles | keyvalue">
+      <input class="form-check-input" [value]="role.value" type="checkbox" (change)="onCheckChange($event)" id="role">
+      <label class="form-check-label" for="role">{{role.key}}</label>
     </div>
 
 <!-- BOUTON ENREGISTRER -->

@@ -115,13 +115,15 @@ public class InscriptionRestController {
 	}
 
 	// DTO
-
+	
+	// Inscription --> inscription DTO
 	private InscriptionDto inscriptionToInscriptionDTO(Inscription i) {
 		InscriptionKeyDto ikDto = new InscriptionKeyDto(i.getId().getJoueur().getId(),
 				i.getId().getTournoi().getIdTournoi());
 		return new InscriptionDto(ikDto, i.getPosition(), i.getScore(), i.getScoreDifference(), i.getProchainMatch());
 	}
-
+	
+	// LIST d'inscriptions --> DTO
 	private List<InscriptionDto> inscriptionListToInscriptionDTOList(List<Inscription> inscriptions) {
 		List<InscriptionDto> inscriptionsWithKey = new ArrayList<InscriptionDto>();
 		for (Inscription i : inscriptions) {
@@ -129,7 +131,8 @@ public class InscriptionRestController {
 		}
 		return inscriptionsWithKey;
 	}
-
+	
+	//KEY DTO --> KEY
 	private InscriptionKey InscriptionKeyDtoToInscriptionKey(InscriptionKeyDto ikDto) {
 		InscriptionKey ik = new InscriptionKey();
 		ik.setJoueur(utilisateurService.getById(ikDto.getIdJoueur()));
@@ -137,7 +140,8 @@ public class InscriptionRestController {
 		// BeanUtils.copyProperties(ikDto, ik);
 		return ik;
 	}
-
+	
+	// Inscription DTO --> inscription
 	private Inscription InscriptionDtoToInscription(InscriptionDto iDto) {
 		Inscription i = new Inscription(InscriptionKeyDtoToInscriptionKey(iDto.getId()), iDto.getPosition(),
 				iDto.getScore(), iDto.getScoreDifference(), iDto.getProchainMatch());

@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptor/auth-interceptor';
 import { AppComponent } from './app.component';
 import { routes } from './routes';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 import { TournoiComponent } from './component/tournoi/tournoi.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccueilComponent } from './component/accueil/accueil.component';
@@ -24,6 +26,8 @@ import { UtilisateurLoginComponent } from './component/utilisateur/utilisateur-l
 import { JourneeComponent } from './component/journee/journee.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
+import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
+import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,8 @@ import { JourneeEditComponent } from './component/journee/journee-edit/journee-e
     JourneeComponent,
     JourneeDetailComponent,
     JourneeEditComponent,
+    TournoiResumeComponent,
+    TournoiDetailsComponent,
   ],
   imports: [
     BrowserModule,
