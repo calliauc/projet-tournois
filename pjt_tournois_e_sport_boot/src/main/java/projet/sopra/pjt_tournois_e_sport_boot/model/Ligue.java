@@ -31,7 +31,8 @@ public class Ligue extends Tournoi {
 	@Column(name = "nbPhase")
 	protected int nbPhase;
 	@OneToMany(mappedBy = "tournoi")
-	protected Set<Journee> JourneesAJouer = new HashSet<Journee>();
+	@JsonView(Views.TournoiWithInscriptions.class)
+	protected Set<Journee> journeesAJouer = new HashSet<Journee>();
 
 	/*
 	 * TODO gestion classement
@@ -61,7 +62,7 @@ public class Ligue extends Tournoi {
 	}
 
 	public Set<Journee> getJourneesAJouer() {
-		return JourneesAJouer;
+		return journeesAJouer;
 	}
 
 	public int getNbPhase() {
@@ -79,7 +80,7 @@ public class Ligue extends Tournoi {
 	}
 
 	public void setJourneesAJouer(Set<Journee> journeesAJouer) {
-		JourneesAJouer = journeesAJouer;
+		journeesAJouer = journeesAJouer;
 	}
 
 	public void setNbPhase(int nbPhase) {

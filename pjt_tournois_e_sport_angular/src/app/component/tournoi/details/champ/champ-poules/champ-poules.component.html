@@ -3,6 +3,17 @@
     <h3>Poules</h3>
   </div>
   <div class="card-body">
-    <p>Contenu</p>
+    <!-- <div *ngIf="champ.poules">Pas encore de poules</div> -->
+    <div *ngIf="champ.poules">
+      <div *ngFor="let poule of champ.poules">
+        <p>{{ poule.nom }}</p>
+        <div *ngFor="let journee of poule.journeesAJouer">
+          <p>Journée : {{ journee.id }}</p>
+          <div *ngFor="let match of journee.matchsAJouerPourJournee">
+            {{ match.id }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
