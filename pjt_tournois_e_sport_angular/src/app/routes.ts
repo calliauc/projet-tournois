@@ -16,7 +16,6 @@ import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.c
 import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
 import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
 import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
-import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
 import { ChampDetailsComponent } from './component/tournoi/details/champ/champ-details/champ-details.component';
 import { LigueDetailsComponent } from './component/tournoi/details/ligue/ligue-details/ligue-details.component';
 

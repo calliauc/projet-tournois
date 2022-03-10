@@ -27,7 +27,6 @@ import { JourneeComponent } from './component/journee/journee.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
-import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
 import { MatchComponent } from './component/match/match.component';
 import { MatchsNextComponent } from './component/tournoi/details/matchs-next/matchs-next.component';
 import { ChampArbreFinalesComponent } from './component/tournoi/details/champ/champ-arbre-finales/champ-arbre-finales.component';
@@ -59,7 +58,6 @@ import { ChampDetailsComponent } from './component/tournoi/details/champ/champ-d
     JourneeDetailComponent,
     JourneeEditComponent,
     TournoiResumeComponent,
-    TournoiDetailsComponent,
     MatchComponent,
     MatchsNextComponent,
     ChampArbreFinalesComponent,

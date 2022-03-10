@@ -1,6 +1,6 @@
 import { StatutInscriptions } from './statutInscriptions.enum';
 import { StatutTemps } from './statutTemps.enum';
-export class Tournoi {
+export abstract class Tournoi {
   protected _type: string | undefined;
   protected _idTournoi: number | undefined;
   protected _nom: string | undefined;
