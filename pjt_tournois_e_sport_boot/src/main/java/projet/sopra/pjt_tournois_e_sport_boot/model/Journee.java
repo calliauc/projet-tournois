@@ -40,7 +40,7 @@ public class Journee {
 	private Tournoi tournoi;
 
 	@OneToMany(mappedBy = "journee")
-	@JsonView(Views.JourneeWithTournoiAndMatch.class)
+	@JsonView({Views.JourneeWithTournoiAndMatch.class, Views.TournoiWithInscriptions.class})
 	private List<Match> matchsAJouerPourJournee;
 //	@FutureOrPresent
 	@Transient

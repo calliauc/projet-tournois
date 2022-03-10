@@ -40,15 +40,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/utilisateur/authentification").permitAll()
 				.antMatchers(HttpMethod.POST,"/api/utilisateur/signup").permitAll()
 				//API TOURNOI
-				.antMatchers(HttpMethod.GET, "/api/tournoi/**").hasAnyRole("ORGANISATEUR","ADMIN")
+				.antMatchers(HttpMethod.GET, "/api/tournoi/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/tournoi/**").hasAnyRole("ORGANISATEUR","ADMIN")
 				.antMatchers(HttpMethod.PUT, "/api/tournoi/**").hasAnyRole("ORGANISATEUR","ADMIN")
 				.antMatchers(HttpMethod.DELETE, "/api/tournoi/**").hasAnyRole("ORGANISATEUR","ADMIN")
 				//API INSCRIPTION
 				.antMatchers(HttpMethod.GET, "/api/inscription/**").hasAnyRole("JOUEUR","ADMIN")
-				.antMatchers(HttpMethod.POST, "/api/inscription/**").hasAnyRole("JOUEUR","ADMIN")
+				.antMatchers(HttpMethod.POST, "/api/inscription/**").permitAll()
 				.antMatchers(HttpMethod.PUT, "/api/inscription/**").hasAnyRole("JOUEUR","ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/api/inscription/**").hasAnyRole("JOUEUR","ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/api/inscription/**").permitAll()
 				// LE RESTE
 				.antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
 				.antMatchers(HttpMethod.GET).hasAnyRole("ADMIN")

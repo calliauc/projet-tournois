@@ -46,7 +46,7 @@ class ChampionnatTest {
 	@Commit
 	void testChamp() {
 		
-		final int NB_INSCRIPTION_TEST = 6;
+		final int NB_INSCRIPTION_TEST = 14;
 
 		/* @formatter:off
 		 * TODO:

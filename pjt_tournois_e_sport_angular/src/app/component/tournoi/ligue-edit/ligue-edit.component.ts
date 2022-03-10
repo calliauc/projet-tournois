@@ -1,9 +1,12 @@
+import { UtilisateurService } from 'src/app/service/utilisateur.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Tournoi } from 'src/app/model/tournoi';
 import { Ligue } from 'src/app/model/ligue';
 import { LigueService } from 'src/app/service/ligue.service';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
+import { Utilisateur } from 'src/app/model/utilisateur';
 
 @Component({
   selector: 'app-ligue-edit',
@@ -12,10 +15,12 @@ import { Router } from '@angular/router';
 })
 export class LigueEditComponent implements OnInit {
   tournoi: Ligue = new Ligue();
+  orga: Utilisateur = new Utilisateur();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private ligueService: LigueService,
+    private userService: UtilisateurService,
     private router: Router
   ) {}
 
@@ -30,6 +35,14 @@ export class LigueEditComponent implements OnInit {
         });
       }
     });
+
+    this.userService
+      .getByUsername(localStorage.getItem('login')!)
+      .subscribe((result) => {
+        console.log(result);
+        this.orga = result;
+      });
+    this.tournoi.organisateur = this.orga;
   }
 
   save() {
