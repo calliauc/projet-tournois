@@ -1,0 +1,41 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">
+    <h3>Liste des matchs</h3>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>ID Tournoi</th>
+        <th>ID Journee</th>
+        <th>Joueur 1</th>
+        <th>Joueur 2</th>
+      </tr>
+      <tr *ngFor="let m of matchObservable | async">
+        <td>{{ m.id }}</td>
+        <td>{{ m.journee?.id }}</td>
+        <td>{{ m.journee?.tournoi?.idTournoi }}</td>
+        <td *ngFor="let j of m.inscriptions">{{ j.id?.joueur?.username }}</td>
+
+        <td>
+          <div>
+            <a
+              [routerLink]="['/match', 'edit', m.id]"
+              routerLinkActive="active"
+              class="btn btn-outline-primary"
+            >
+              edit
+            </a>
+          </div>
+        </td>
+        <td>
+          <div>
+            <button (click)="delete(m.id!)" class="btn btn-outline-danger">
+              supprimer
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
