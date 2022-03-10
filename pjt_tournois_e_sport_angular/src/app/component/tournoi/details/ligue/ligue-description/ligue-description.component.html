@@ -1,7 +1,6 @@
 <div class="card bg-dark">
   <div class="card-header">
-    <!-- <h3>{{ tournoi.type | uppercase }} {{ tournoi.jeu }}</h3> -->
-    <h3>Champ mariokart</h3>
+    <h3>{{ ligue.type | uppercase }} {{ ligue.jeu }}</h3>
   </div>
   <div class="card-body">
     <ng-container>
@@ -22,24 +21,18 @@
               <table class="table">
                 <tr>
                   <td>Effectif :</td>
-                  <!-- <td>{{ tournoi.nbParticipantsTotal }}</td> -->
-                  <td>16</td>
+                  <td>{{ ligue.nbParticipantsTotal }}</td>
                 </tr>
                 <tr>
                   <td>Date de création :</td>
                   <td>
-                    <!-- {{
-                          tournoi.dateDeCreation
-                            | date: "EEEE dd MMMM YYYY"
-                        }} -->
+                    {{ ligue.dateDeCreation | date: "EEEE dd MMMM YYYY" }}
                   </td>
                 </tr>
                 <tr>
                   <td>Date de début :</td>
                   <td>
-                    <!-- {{
-                          tournoi.dateDeDebut | date: "EEEE dd MMMM YYYY"
-                        }} -->
+                    {{ ligue.dateDeDebut | date: "EEEE dd MMMM YYYY" }}
                   </td>
                 </tr>
               </table>
