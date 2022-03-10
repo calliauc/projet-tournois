@@ -1,6 +1,6 @@
 <div class="card bg-dark text-white">
   <div class="card-header">
-    <h3>Liste des tournois</h3>
+    <h3>{{title}}</h3>
   </div>
   <div class="card-body">
     <table class="table">
@@ -11,7 +11,7 @@
         <th>Jeu</th>
         <th>Etat des inscriptions</th>
       </tr>
-      <ng-container *ngFor="let t of tournoisObservable | async">
+      <ng-container *ngFor="let t of tournois">
         <tr *ngIf="t.type !== 'Poule'">
           <td>{{ t.idTournoi }}</td>
           <td>{{ t.type }}</td>

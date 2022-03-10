@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { Tournoi } from './../../model/tournoi';
 import { TournoiService } from './../../service/tournoi.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';

@@ -34,13 +34,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.csrf().disable()
 			.authorizeHttpRequests()
+			//API UTILISATEUR
 				.antMatchers(HttpMethod.GET, "/api/utilisateur/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/utilisateur/searchByMail/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/utilisateur/authentification").permitAll()
+				.antMatchers(HttpMethod.POST,"/api/utilisateur/signup").permitAll()
+				//API TOURNOI
 				.antMatchers(HttpMethod.GET, "/api/tournoi/**").hasAnyRole("ORGANISATEUR","ADMIN")
+				.antMatchers(HttpMethod.POST, "/api/tournoi/**").hasAnyRole("ORGANISATEUR","ADMIN")
+				.antMatchers(HttpMethod.PUT, "/api/tournoi/**").hasAnyRole("ORGANISATEUR","ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/api/tournoi/**").hasAnyRole("ORGANISATEUR","ADMIN")
+				//API INSCRIPTION
 				.antMatchers(HttpMethod.GET, "/api/inscription/**").hasAnyRole("JOUEUR","ADMIN")
+				.antMatchers(HttpMethod.POST, "/api/inscription/**").hasAnyRole("JOUEUR","ADMIN")
+				.antMatchers(HttpMethod.PUT, "/api/inscription/**").hasAnyRole("JOUEUR","ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/api/inscription/**").hasAnyRole("JOUEUR","ADMIN")
+				// LE RESTE
 				.antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
-				.antMatchers(HttpMethod.POST,"/api/utilisateur/signup").permitAll() 
 				.antMatchers(HttpMethod.GET).hasAnyRole("ADMIN")
 				.antMatchers(HttpMethod.POST).hasRole("ADMIN")
 				.antMatchers(HttpMethod.PUT).hasRole("ADMIN")
