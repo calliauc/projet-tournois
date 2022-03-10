@@ -1,6 +1,6 @@
 <div class="card bg-dark text-white">
   <div class="card-header">
-    <h3>{{title}}</h3>
+    <h3>{{ title }}</h3>
   </div>
   <div class="card-body">
     <table class="table">
@@ -19,12 +19,29 @@
           <td>{{ t.jeu }}</td>
           <td>{{ t.statutInscriptions }}</td>
           <td></td>
-          <td></td>
+          <td *ngIf="t.type == 'championnat'">
+            <a
+              href=""
+              [routerLink]="['/tournoi', 'champ', 'details', t.idTournoi]"
+              routerLinkActive="active"
+              class="btn btn-secondary"
+              >S'inscrire</a
+            >
+          </td>
+          <td *ngIf="t.type == 'ligue'">
+            <a
+              href=""
+              [routerLink]="['/tournoi', 'ligue', 'details', t.idTournoi]"
+              routerLinkActive="active"
+              class="btn btn-secondary"
+              >S'inscrire</a
+            >
+          </td>
           <td *ngIf="t.type == 'championnat'">
             <a
               [routerLink]="['/tournoi', 'champ', 'details', t.idTournoi]"
               routerLinkActive="active"
-              class="btn btn-outline-primary"
+              class="btn btn-primary"
               >Details</a
             >
           </td>
@@ -32,7 +49,7 @@
             <a
               [routerLink]="['/tournoi', 'ligue', 'details', t.idTournoi]"
               routerLinkActive="active"
-              class="btn btn-outline-primary"
+              class="btn btn-primary"
               >Details</a
             >
           </td>
