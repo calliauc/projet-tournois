@@ -34,12 +34,12 @@
     </table>
     <table class="table">
       <tr *ngIf="resultat.id">
-        <th>id</th>
-        <th>matchId</th>
-        <th>ParticipantId</th>
-        <th>TournoiId</th>
-        <th>positionMatch</th>
-        <th>scoreMatch</th>
+        <th>ID</th>
+        <th>ID Match</th>
+        <th>ID Participant</th>
+        <th>ID Tournoi</th>
+        <th>Position du match</th>
+        <th>Score du match</th>
       </tr>
       <tr *ngIf="resultat.id">
         <td>{{ resultat.id }}</td>
@@ -66,12 +66,12 @@
       <br *ngIf="resultat.id" />
 
       <tr>
-        <th>id</th>
-        <th>matchId</th>
-        <th>ParticipantId</th>
-        <th>TournoiId</th>
-        <th>positionMatch</th>
-        <th>scoreMatch</th>
+        <th>ID</th>
+        <th>ID Match</th>
+        <th>ID Participant</th>
+        <th>ID Tournoi</th>
+        <th>Position du match</th>
+        <th>Score du match</th>
       </tr>
       <tr *ngFor="let r of resultatsObservable | async">
         <td>{{ r.id }}</td>
@@ -95,11 +95,11 @@
         </td>
       </tr>
     </table>
-    <a
+    <!--<a
       routerLink="/resultat/edit"
       routerLinkActive="active"
       class="btn btn-outline-primary"
       >ajouter un resultat</a
-    >
+    >-->
   </div>
 </div>

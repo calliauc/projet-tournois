@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArbreFinalesComponent } from './arbre-finales.component';
+import { ChampDescriptionComponent } from './champ-description.component';
 
-describe('ArbreFinalesComponent', () => {
-  let component: ArbreFinalesComponent;
-  let fixture: ComponentFixture<ArbreFinalesComponent>;
+describe('ChampDescriptionComponent', () => {
+  let component: ChampDescriptionComponent;
+  let fixture: ComponentFixture<ChampDescriptionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ArbreFinalesComponent ]
+      declarations: [ ChampDescriptionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArbreFinalesComponent);
+    fixture = TestBed.createComponent(ChampDescriptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

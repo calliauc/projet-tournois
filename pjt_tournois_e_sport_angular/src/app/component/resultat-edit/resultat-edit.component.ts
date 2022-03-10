@@ -1,8 +1,12 @@
+import { Tournoi } from 'src/app/model/tournoi';
+import { Utilisateur } from 'src/app/model/utilisateur';
+import { InscriptionKey } from './../../model/inscription-key';
 import { Match } from './../../model/match';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Resultat } from './../../model/resultat';
 import { ResultatService } from './../../service/resultat.service';
 import { Component, OnInit } from '@angular/core';
+import { Inscription } from 'src/app/model/inscription';
 
 @Component({
   selector: 'app-resultat-edit',
@@ -18,16 +22,19 @@ export class ResultatEditComponent implements OnInit {
     private resultatService: ResultatService
   ) {
     this.resultat.match = new Match();
+    this.resultat.participant = new Inscription();
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['id']) {
         this.resultatService.get(params['id']).subscribe((result) => {
-          console.log(result);
           this.resultat = result;
           if (!this.resultat.match) {
             this.resultat.match = new Match();
+          }
+          if (!this.resultat.participant) {
+            this.resultat.participant = new Inscription();
           }
         });
       }
@@ -41,6 +48,7 @@ export class ResultatEditComponent implements OnInit {
       });
     } else {
       this.resultatService.create(this.resultat).subscribe((ok) => {
+        console.log(this.resultat);
         this.router.navigate(['/resultat']);
       });
     }
