@@ -1,5 +1,142 @@
 <div class="card bg-dark text-white">
   <div class="card-header">
+    <h4>Recherche de matchs :</h4>
+    <div class="searchBar">
+      <table>
+        <tr>
+          <td>
+            <input
+              class="form-control"
+              type="number"
+              id="idRecherche"
+              name="idRecherche"
+              [(ngModel)]="idRecherche"
+            />
+          </td>
+          <td>
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="searchMatch()"
+              >
+                Rechercher
+              </button>
+              <button
+                type="button"
+                [(ngModel)]="typeRecherche"
+                class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" (click)="setRechercheTournoi()">
+                    Tournoi
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="setRechercheJournee()"
+                    >Journee</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="setRechercheMatch()" y
+                    >Match</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-success" (click)="getAll()">
+              Voir tous les matchs
+            </button>
+          </td>
+        </tr>
+      </table>
+      <div *ngIf="match != undefined">
+        <table class="table" *ngIf="match != undefined">
+          <tr>
+            <th>ID Tournoi</th>
+            <th>ID Journee</th>
+            <th>ID Match</th>
+            <th>Joueur 1</th>
+            <th>Joueur 2</th>
+            <th>Score J1</th>
+            <th>Score J2</th>
+          </tr>
+          <tr>
+            <td>{{ match.journee?.tournoi?.idTournoi }}</td>
+            <td>{{ match.journee?.id }}</td>
+            <td>{{ match.id }}</td>
+            <div
+              class="cachecache"
+              *ngIf="
+                match.resultats![0] != undefined || match.resultats![0] != null;
+                else pas_resultat
+              "
+            >
+              cachecache
+            </div>
+            <ng-template #pas_resultat>
+              <td *ngFor="let p of match.inscriptions">
+                {{ p?.id?.joueur?.username }}
+              </td>
+              <td></td>
+            </ng-template>
+            <div
+              *ngIf="
+                match.resultats![0] == undefined || match.resultats![0] == null;
+                else resultat
+              "
+            ></div>
+            <td></td>
+            <ng-template #resultat>
+              <td *ngFor="let r of match.resultats">
+                <div>{{ r.participant?.id?.joueur?.username }}</div>
+              </td>
+              <td *ngFor="let r of match.resultats">
+                <div>{{ r?.scoreMatch }}</div>
+              </td>
+            </ng-template>
+            <td>
+              <a
+                style.justify-content="flex-start"
+                [routerLink]="['/match', 'resultat', match.id]"
+                routerLinkActive="active"
+                class="btn btn-outline-primary"
+                style.display="flex"
+              >
+                enregistrer/modifier le résultat
+              </a>
+
+              <!-- <a
+                  style.justify-content="flex-start"
+                  *ngIf="m.resultats![0] != undefined || m.resultats![0] != null"
+                  [routerLink]="[
+                    '/match',
+                    'resultat',
+                    m.id,
+                    (m?.resultats)![0].id!,
+                    (m?.resultats)![1].id!
+                  ]"
+                  routerLinkActive="active"
+                  class="btn btn-outline-primary"
+                  style.display="flex"
+                >
+                  modifier le résultat
+                </a> -->
+            </td>
+
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-header">
     <h3>Liste des matchs</h3>
   </div>
   <div class="card-body">
@@ -48,19 +185,18 @@
           </td>
         </ng-template>
 
-        <div style.display="flex" style.justify-content="flex-start">
-          <td>
-            <a
-              style.justify-content="flex-start"
-              [routerLink]="['/match', 'resultat', m.id]"
-              routerLinkActive="active"
-              class="btn btn-outline-primary"
-              style.display="flex"
-            >
-              enregistrer/modifier le résultat
-            </a>
+        <td>
+          <a
+            style.justify-content="flex-start"
+            [routerLink]="['/match', 'resultat', m.id]"
+            routerLinkActive="active"
+            class="btn btn-outline-primary"
+            style.display="flex"
+          >
+            enregistrer/modifier le résultat
+          </a>
 
-            <!-- <a
+          <!-- <a
               style.justify-content="flex-start"
               *ngIf="m.resultats![0] != undefined || m.resultats![0] != null"
               [routerLink]="[
@@ -76,8 +212,7 @@
             >
               modifier le résultat
             </a> -->
-          </td>
-        </div>
+        </td>
 
         <td></td>
       </tr>

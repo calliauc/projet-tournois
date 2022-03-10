@@ -31,7 +31,28 @@
           </p>
         </td>
       </tr>
+
+      <div class="btn-group" role="group">
+        <button
+          id="ordreResultatId"
+          type="button"
+          class="btn btn-primary dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Trier ID par
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li value="Ordre croissant">
+            <a class="dropdown-item" (click)="orderAsc()">Ordre croissant</a>
+          </li>
+          <li value="Ordre décroissant">
+            <a class="dropdown-item" (click)="orderDesc()">Ordre décroissant</a>
+          </li>
+        </ul>
+      </div>
     </table>
+
     <table class="table">
       <tr *ngIf="resultat.id">
         <th>ID</th>
