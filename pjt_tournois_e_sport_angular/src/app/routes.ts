@@ -1,3 +1,5 @@
+import { MatchResultatEditComponent } from './component/match/match-resultat-edit/match-resultat-edit.component';
+import { MatchEditComponent } from './component/match/match-edit/match-edit.component';
 import { MatchComponent } from './component/match/match.component';
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
@@ -74,7 +76,9 @@ export const routes: Routes = [
 
   { path: 'match', component: MatchComponent },
 
-  { path: 'match/edit', component: MatchComponent },
+  { path: 'match/edit', component: MatchEditComponent },
 
-  { path: 'match/edit/:id', component: MatchComponent },
+  { path: 'match/edit/:id', component: MatchEditComponent },
+
+  { path: 'match/resultat/:id', component: MatchResultatEditComponent },
 ];
