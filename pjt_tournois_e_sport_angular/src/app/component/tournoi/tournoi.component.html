@@ -16,6 +16,11 @@
         <th>Etat des inscriptions</th>
         <th>Avancement</th>
         <th>Organisateur</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <!-- <th></th> -->
       </tr>
       <tr *ngFor="let t of tournoisObservable | async">
         <td>{{ t.type }}</td>
@@ -30,8 +35,6 @@
         <td>{{ t.statutInscriptions }}</td>
         <td>{{ t.statutTemps }}</td>
         <td>{{ t.organisateur!.id }}</td>
-        <td></td>
-        <td></td>
         <td>
           <div *ngIf="t.type == 'ligue'">
             <a
