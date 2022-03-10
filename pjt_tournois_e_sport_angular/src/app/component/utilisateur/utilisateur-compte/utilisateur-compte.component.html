@@ -1,0 +1,49 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">
+    <h3>Mon compte </h3>
+  </div>
+  <div class="card-body">
+    <h4>Mes infos personnelles </h4>
+    <table class="table">
+      <tr>
+        <td>Mon id :</td>
+        <td>{{ user.id }}</td>
+      </tr>
+      <tr>
+        <td>Mon username:</td>
+        <td>{{ user.username }}</td>
+      </tr>
+      <tr>
+        <td>Mon mail :</td>
+        <td>{{ user.mail }}</td>
+      </tr>
+      <tr>
+        <td>Mes roles dans la communnauté :</td>
+        <td *ngFor="let role of user.roles | keyvalue"> {{ role.key }}</td>
+      </tr>
+      <tr>
+        <td> <a
+        [routerLink]="['/utilisateur','edit', user.id]"
+        routerLinkActive="active"
+        class="btn btn-outline-primary"
+        >Modifier mon profil </a>
+        </td>
+      </tr>
+    </table>
+
+    <ng-container *ngFor="let role of user.roles">
+      <div *ngIf="isAdmin(role) || isPlayer(role)">
+        <h4>Mes inscriptions</h4>
+        <app-inscription></app-inscription>
+      </div>
+
+      <div *ngIf="isAdmin(role) || isOrga(role)">
+        <h4>Mes tournois </h4>
+        <app-tournoi></app-tournoi>
+      </div>
+
+    </ng-container>
+
+
+ </div>
+</div>

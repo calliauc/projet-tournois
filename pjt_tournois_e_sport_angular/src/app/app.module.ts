@@ -27,14 +27,16 @@ import { JourneeComponent } from './component/journee/journee.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
-import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
 import { MatchComponent } from './component/match/match.component';
 import { MatchsNextComponent } from './component/tournoi/details/matchs-next/matchs-next.component';
+import { UtilisateurCompteComponent } from './component/utilisateur/utilisateur-compte/utilisateur-compte.component';
 import { ChampArbreFinalesComponent } from './component/tournoi/details/champ/champ-arbre-finales/champ-arbre-finales.component';
 import { ChampDescriptionComponent } from './component/tournoi/details/champ/champ-description/champ-description.component';
 import { ChampPoulesComponent } from './component/tournoi/details/champ/champ-poules/champ-poules.component';
 import { LigueDescriptionComponent } from './component/tournoi/details/ligue/ligue-description/ligue-description.component';
 import { LigueJourneesComponent } from './component/tournoi/details/ligue/ligue-journees/ligue-journees.component';
+import { LigueDetailsComponent } from './component/tournoi/details/ligue/ligue-details/ligue-details.component';
+import { ChampDetailsComponent } from './component/tournoi/details/champ/champ-details/champ-details.component';
 
 @NgModule({
   declarations: [
@@ -57,14 +59,16 @@ import { LigueJourneesComponent } from './component/tournoi/details/ligue/ligue-
     JourneeDetailComponent,
     JourneeEditComponent,
     TournoiResumeComponent,
-    TournoiDetailsComponent,
     MatchComponent,
     MatchsNextComponent,
+    UtilisateurCompteComponent,
     ChampArbreFinalesComponent,
     ChampDescriptionComponent,
     ChampPoulesComponent,
     LigueDescriptionComponent,
     LigueJourneesComponent,
+    LigueDetailsComponent,
+    ChampDetailsComponent,
   ],
   imports: [
     BrowserModule,

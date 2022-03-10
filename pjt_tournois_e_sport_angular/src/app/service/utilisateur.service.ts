@@ -11,6 +11,8 @@ export class UtilisateurService {
 
   constructor(private httpClient: HttpClient) {}
 
+  // GET *********************************
+
   public getAll(): Observable<Utilisateur[]> {
     return this.httpClient.get<Utilisateur[]>(
       `${UtilisateurService.URL}/membres`
@@ -20,6 +22,26 @@ export class UtilisateurService {
   public get(id: number): Observable<Utilisateur> {
     return this.httpClient.get<Utilisateur>(`${UtilisateurService.URL}/${id}`);
   }
+
+  public getByUsername(username: string): Observable<Utilisateur> {
+    return this.httpClient.get<Utilisateur>(
+      `${UtilisateurService.URL}/username_${username}`
+    );
+  }
+
+  public getTournoisOfUser(id: number): Observable<Utilisateur> {
+    return this.httpClient.get<Utilisateur>(
+      `${UtilisateurService.URL}/tournoi_${id}`
+    );
+  }
+
+  public getInscriptionsOfUser(id: number): Observable<Utilisateur> {
+    return this.httpClient.get<Utilisateur>(
+      `${UtilisateurService.URL}/inscriptions_${id}`
+    );
+  }
+
+  // POST + PUT  + DELETE ************************
 
   public create(utilisateur: Utilisateur): Observable<Utilisateur> {
     console.log(' POST : ' + utilisateur);
@@ -53,11 +75,7 @@ export class UtilisateurService {
     );
   }
 
-  public getByUsername(username: string): Observable<Utilisateur> {
-    return this.httpClient.get<Utilisateur>(
-      `${UtilisateurService.URL}/username_${username}`
-    );
-  }
+  // OTHER METHODS
 
   public isAuthenticated(): string | null {
     return localStorage.getItem('token');
