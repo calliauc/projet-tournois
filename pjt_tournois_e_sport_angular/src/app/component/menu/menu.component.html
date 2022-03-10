@@ -91,6 +91,14 @@
         >
       </li>
       <li class="nav-item">
+        <a
+          *ngIf="authenticated"
+          routerLink="/my_profile"
+          class="nav-link active"
+          >Mon Compte</a
+        >
+      </li>
+      <li class="nav-item">
         <a *ngIf="authenticated" class="nav-link active" (click)="logout()"
           >Deconnexion</a
         >

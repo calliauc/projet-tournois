@@ -1,23 +1,63 @@
+import { Inscription } from './inscription';
 import { Role } from './role';
+import { Tournoi } from './tournoi';
 export class Utilisateur {
   private _id: number | undefined;
   private _username: string | undefined;
   private _mail: string | undefined;
   private _password: string | undefined;
   private _roles: Role[] | undefined;
+  private _inscriptions: Inscription[] | undefined;
+  private _tournois: Tournoi[] | undefined;
 
   constructor(
     id?: number,
     username?: string,
     mail?: string,
     password?: string,
-    roles?: Role[]
+    roles?: Role[],
+    inscriptions?: Inscription[],
+    tournois?: Tournoi[]
   ) {
     this._id = id;
     this._username = username;
     this._mail = mail;
     this._password = password;
     this._roles = roles;
+    this._inscriptions = inscriptions;
+    this._tournois = tournois;
+  }
+
+  /**
+   * Getter inscriptions
+   * @return {Inscription[] }
+   */
+  public get inscriptions(): Inscription[] | undefined {
+    return this._inscriptions;
+  }
+
+  /**
+   * Setter inscriptions
+   * @param {Inscription[] } value
+   */
+  public set inscriptions(value: Inscription[] | undefined) {
+    this._inscriptions = value;
+  }
+
+  /**
+   * Getter tournois
+   * @return {Tournoi[] }
+   */
+  public get tournois(): Tournoi[] | undefined {
+    return this._tournois;
+  }
+
+  /**
+   * Setter tournois
+   * @param {Tournoi[] } value
+   */
+  public set tournois(value: Tournoi[] | undefined) {
+    this._tournois = value;
   }
 
   /**

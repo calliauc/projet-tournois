@@ -1,5 +1,6 @@
 import { MatchResultatEditComponent } from './component/match/match-resultat-edit/match-resultat-edit.component';
 import { MatchEditComponent } from './component/match/match-edit/match-edit.component';
+import { UtilisateurCompteComponent } from './component/utilisateur/utilisateur-compte/utilisateur-compte.component';
 import { MatchComponent } from './component/match/match.component';
 import { JourneeEditComponent } from './component/journee/journee-edit/journee-edit.component';
 import { JourneeDetailComponent } from './component/journee/journee-detail/journee-detail.component';
@@ -18,7 +19,8 @@ import { ResultatEditComponent } from './component/resultat-edit/resultat-edit.c
 import { LigueClassementComponent } from './component/tournoi/ligue-classement/ligue-classement.component';
 import { UtilisateurEditComponent } from './component/utilisateur/utilisateur-edit/utilisateur-edit.component';
 import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
-import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
+import { ChampDetailsComponent } from './component/tournoi/details/champ/champ-details/champ-details.component';
+import { LigueDetailsComponent } from './component/tournoi/details/ligue/ligue-details/ligue-details.component';
 
 export const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -27,7 +29,15 @@ export const routes: Routes = [
 
   { path: 'tournoi-resume', component: TournoiResumeComponent },
 
-  { path: 'tournoi/details/:idTournoi', component: TournoiDetailsComponent },
+  {
+    path: 'tournoi/champ/details/:idTournoi',
+    component: ChampDetailsComponent,
+  },
+
+  {
+    path: 'tournoi/ligue/details/:idTournoi',
+    component: LigueDetailsComponent,
+  },
 
   { path: 'ligue/edit', component: LigueEditComponent },
 
@@ -86,4 +96,7 @@ export const routes: Routes = [
     path: 'match/resultat/:id/:idResultat1/:idResultat2',
     component: MatchResultatEditComponent,
   },
+  { path: 'match/edit/:id', component: MatchComponent },
+
+  { path: 'my_profile', component: UtilisateurCompteComponent },
 ];
