@@ -29,11 +29,11 @@ public class Match {
 	@Column(name = "match_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMatch")
 	@JsonView({ Views.Match.class, Views.ResultatWithInscriptionAndMatch.class,
-			Views.JourneeWithTournoiAndMatch.class })
+			Views.JourneeWithTournoiAndMatch.class, Views.TournoiWithInscriptions.class })
 	private Long id;
 
 	@ManyToMany(mappedBy="matchs")
-	@JsonView({Views.MatchWithIncriptions.class, Views.JourneeWithTournoiAndMatch.class})
+	@JsonView({Views.MatchWithIncriptions.class, Views.JourneeWithTournoiAndMatch.class, Views.TournoiWithInscriptions.class})
 	private List<Inscription> inscriptions = new ArrayList<Inscription>();
 	
 	@OneToMany(mappedBy = "prochainMatch")
@@ -41,7 +41,7 @@ public class Match {
 	private List<Inscription> inscriptionsProchainMatch = new ArrayList<Inscription>();
 
 	@Column(name = "match_is_fini")
-	@JsonView(Views.Match.class)
+	@JsonView({Views.Match.class, Views.TournoiWithInscriptions.class})
 	private boolean isFini = false;
 	
 	@ManyToOne
@@ -50,7 +50,7 @@ public class Match {
 	private Journee journee;
 
 	@OneToMany(mappedBy = "match")
-	@JsonView(Views.Match.class)
+	@JsonView({Views.Match.class, Views.TournoiWithInscriptions.class})
 	private List<Resultat> resultats;
 
 	/// CONSTRUCTOR

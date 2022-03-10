@@ -41,7 +41,7 @@ export class LigueService {
       jeu: ligue.jeu,
       nbParticipantsParMatch: ligue.nbParticipantsParMatch,
       nbParticipantsTotal: ligue.nbParticipantsTotal,
-      /*       organisateur : ligue.organisateur,  */
+      organisateur: ligue.organisateur,
       isMatchRetour: ligue.isMatchRetour,
     };
 
