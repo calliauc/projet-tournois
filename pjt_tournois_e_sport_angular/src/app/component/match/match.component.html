@@ -5,17 +5,24 @@
   <div class="card-body">
     <table class="table">
       <tr>
-        <th>ID</th>
         <th>ID Tournoi</th>
         <th>ID Journee</th>
+        <th>ID Match</th>
         <th>Joueur 1</th>
         <th>Joueur 2</th>
+        <th>Score J1</th>
+        <th>Score J2</th>
       </tr>
       <tr *ngFor="let m of matchObservable | async">
-        <td>{{ m.id }}</td>
-        <td>{{ m.journee?.id }}</td>
         <td>{{ m.journee?.tournoi?.idTournoi }}</td>
-        <td *ngFor="let j of m.inscriptions">{{ j.id?.joueur?.username }}</td>
+        <td>{{ m.journee?.id }}</td>
+        <td>{{ m.id }}</td>
+        <td *ngFor="let r of m.resultats">
+          {{ r?.participant?.id?.joueur?.username }}
+        </td>
+        <td *ngFor="let r of m.resultats">
+          <div>{{ r?.scoreMatch }}</div>
+        </td>
 
         <td>
           <div>
