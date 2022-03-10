@@ -30,6 +30,7 @@
           <td *ngFor="let p of m.inscriptions">
             {{ p?.id?.joueur?.username }}
           </td>
+          <td></td>
         </ng-template>
         <div
           *ngIf="
@@ -37,6 +38,7 @@
             else resultat
           "
         ></div>
+        <td></td>
         <ng-template #resultat>
           <td *ngFor="let r of m.resultats">
             <div>{{ r.participant?.id?.joueur?.username }}</div>
@@ -45,41 +47,38 @@
             <div>{{ r?.scoreMatch }}</div>
           </td>
         </ng-template>
-        <td></td>
 
-        <td colspan="2">
-          <div style.display="flex" style.justify-content="flex-start">
+        <div style.display="flex" style.justify-content="flex-start">
+          <td>
             <a
-              *ngIf="
-                m.resultats![0] == undefined || m.resultats![0] == null;
-                else gogo
-              "
+              style.justify-content="flex-start"
               [routerLink]="['/match', 'resultat', m.id]"
               routerLinkActive="active"
               class="btn btn-outline-primary"
               style.display="flex"
             >
-              enregistrer le résultat
+              enregistrer/modifier le résultat
             </a>
 
-            <ng-template #gogo>
-              <a
-                [routerLink]="[
-                  '/match',
-                  'resultat',
-                  m.id,
-                  (m?.resultats)![0].id!,
-                  (m?.resultats)![1].id!
-                ]"
-                routerLinkActive="active"
-                class="btn btn-outline-primary"
-                style.display="flex"
-              >
-                modifier le résultat
-              </a>
-            </ng-template>
-          </div>
-        </td>
+            <!-- <a
+              style.justify-content="flex-start"
+              *ngIf="m.resultats![0] != undefined || m.resultats![0] != null"
+              [routerLink]="[
+                '/match',
+                'resultat',
+                m.id,
+                (m?.resultats)![0].id!,
+                (m?.resultats)![1].id!
+              ]"
+              routerLinkActive="active"
+              class="btn btn-outline-primary"
+              style.display="flex"
+            >
+              modifier le résultat
+            </a> -->
+          </td>
+        </div>
+
         <td></td>
       </tr>
     </table>
