@@ -29,11 +29,12 @@ import { JourneeEditComponent } from './component/journee/journee-edit/journee-e
 import { TournoiResumeComponent } from './component/tournoi/tournoi-resume/tournoi-resume.component';
 import { TournoiDetailsComponent } from './component/tournoi/tournoi-details/tournoi-details.component';
 import { MatchComponent } from './component/match/match.component';
-import { ArbreFinalesComponent } from './component/tournoi/details/champ/arbre-finales/arbre-finales.component';
-import { PoulesComponent } from './component/tournoi/details/champ/poules/poules.component';
-import { JourneesComponent } from './component/tournoi/details/ligue/journees/journees.component';
-import { DescriptionComponent } from './component/tournoi/details/description/description.component';
 import { MatchsNextComponent } from './component/tournoi/details/matchs-next/matchs-next.component';
+import { ChampArbreFinalesComponent } from './component/tournoi/details/champ/champ-arbre-finales/champ-arbre-finales.component';
+import { ChampDescriptionComponent } from './component/tournoi/details/champ/champ-description/champ-description.component';
+import { ChampPoulesComponent } from './component/tournoi/details/champ/champ-poules/champ-poules.component';
+import { LigueDescriptionComponent } from './component/tournoi/details/ligue/ligue-description/ligue-description.component';
+import { LigueJourneesComponent } from './component/tournoi/details/ligue/ligue-journees/ligue-journees.component';
 
 @NgModule({
   declarations: [
@@ -58,11 +59,12 @@ import { MatchsNextComponent } from './component/tournoi/details/matchs-next/mat
     TournoiResumeComponent,
     TournoiDetailsComponent,
     MatchComponent,
-    ArbreFinalesComponent,
-    PoulesComponent,
-    JourneesComponent,
-    DescriptionComponent,
     MatchsNextComponent,
+    ChampArbreFinalesComponent,
+    ChampDescriptionComponent,
+    ChampPoulesComponent,
+    LigueDescriptionComponent,
+    LigueJourneesComponent,
   ],
   imports: [
     BrowserModule,
