@@ -136,26 +136,28 @@ export class UtilisateurEditComponent implements OnInit {
   save() {
     if (this.utilisateur.id) {
       console.log('In save() : update : ' + this.utilisateur);
-      this.utilisateur.password = this.form.get('passwordGrp')!.get('password')
-        ?.value as string;
-
+      this.setUserData();
       this.utilisateurService.update(this.utilisateur).subscribe((ok) => {
         this.isUpdate = false;
         this.router.navigateByUrl('/utilisateur');
       });
     } else {
       console.log('In save(): create');
-      this.utilisateur.username = this.form.get('login')!.value as string;
-      this.utilisateur.mail = this.form.get('mail')!.value as string;
-      this.utilisateur.password = this.form.get('passwordGrp')!.get('password')
-        ?.value as string;
-      this.utilisateur.roles = this.form.get('roles')!.value as Role[];
+      this.setUserData();
       console.log(this.utilisateur);
 
       this.utilisateurService.create(this.utilisateur).subscribe((ok) => {
         this.router.navigateByUrl('/accueil');
       });
     }
+  }
+
+  setUserData() {
+    this.utilisateur.username = this.form.get('login')!.value as string;
+    this.utilisateur.mail = this.form.get('mail')!.value as string;
+    this.utilisateur.password = this.form.get('passwordGrp')!.get('password')
+      ?.value as string;
+    this.utilisateur.roles = this.form.get('roles')!.value as Role[];
   }
 
   get errorPassword(): string {

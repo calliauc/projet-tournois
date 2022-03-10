@@ -23,21 +23,22 @@ export class ResultatService {
   }
 
   public create(resultat: Resultat): Observable<Resultat> {
+    console.log(this.resultatToJsonToCreate(resultat));
     return this.httpClient.post<Resultat>(
       ResultatService.URL,
-      this.resultatToJson(resultat)
+      this.resultatToJsonToCreate(resultat)
     );
   }
 
   public update(resultat: Resultat): Observable<Resultat> {
-    console.log(this.resultatToJson(resultat));
+    console.log(this.resultatToJsonToUpdate(resultat));
     return this.httpClient.put<Resultat>(
       `${ResultatService.URL}/${resultat.id}`,
-      this.resultatToJson(resultat)
+      this.resultatToJsonToUpdate(resultat)
     );
   }
 
-  private resultatToJson(resultat: Resultat): any {
+  private resultatToJsonToUpdate(resultat: Resultat): any {
     const obj = {
       id: resultat.id,
       positionMatch: resultat.positionMatch,
@@ -47,7 +48,7 @@ export class ResultatService {
     if (resultat.match) {
       Object.assign(obj, {
         match: {
-          matchId: resultat.match.id,
+          id: resultat.match.id,
         },
       });
     }
@@ -55,11 +56,35 @@ export class ResultatService {
     if (resultat.participant) {
       Object.assign(obj, {
         participant: {
-          idTournoi: resultat.participant.id?.tournoi?.idTournoi,
-          idParticipant: resultat.participant.id?.joueur?.id,
+          id: {
+            joueur: {
+              id: resultat.participant?.id?.joueur?.id,
+            },
+            tournoi: {
+              type: resultat.participant?.id?.tournoi?.type,
+              idTournoi: resultat.participant?.id?.tournoi?.idTournoi,
+            },
+          },
         },
       });
     }
+    return obj;
+  }
+
+  private resultatToJsonToCreate(resultat: Resultat): any {
+    const obj = {
+      positionMatch: resultat.positionMatch,
+      scoreMatch: resultat.scoreMatch,
+    };
+
+    if (resultat.match) {
+      Object.assign(obj, {
+        match: {
+          id: resultat.match.id,
+        },
+      });
+    }
+
     return obj;
   }
 }
