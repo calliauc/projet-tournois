@@ -6,12 +6,17 @@
     <!-- <div *ngIf="champ.poules">Pas encore de poules</div> -->
     <div *ngIf="champ.poules">
       <div *ngFor="let poule of champ.poules">
-        <p>{{ poule.nom }}</p>
         <div *ngFor="let journee of poule.journeesAJouer">
-          <p>Journée : {{ journee.id }}</p>
-          <div *ngFor="let match of journee.matchsAJouerPourJournee">
-            {{ match.id }}
-          </div>
+          <table>
+            <tr>
+              <th colspan="2">
+                <p>{{ poule.nom }} Journée {{ journee.id }}</p>
+              </th>
+            </tr>
+            <tr *ngFor="let match of journee.matchsAJouerPourJournee">
+              <td>match : {{ match.id }}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>

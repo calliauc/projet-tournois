@@ -33,7 +33,7 @@ public class Match {
 	private Long id;
 
 	@ManyToMany(mappedBy="matchs")
-	@JsonView({Views.MatchWithIncriptions.class, Views.JourneeWithTournoiAndMatch.class, Views.TournoiWithInscriptions.class})
+	@JsonView({Views.MatchWithIncriptions.class, Views.JourneeWithTournoiAndMatch.class, Views.TournoiWithInscriptions.class })
 	private List<Inscription> inscriptions = new ArrayList<Inscription>();
 	
 	@OneToMany(mappedBy = "prochainMatch")
