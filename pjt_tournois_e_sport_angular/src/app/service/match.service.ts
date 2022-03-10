@@ -18,6 +18,10 @@ export class MatchService {
     return this.http.get<Match[]>(MatchService.URL + '/journee/' + id);
   }
 
+  getByTournoi(id: number): Observable<Match[]> {
+    return this.http.get<Match[]>(MatchService.URL + '/tournoi/' + id);
+  }
+
   delete(id: number): Observable<void> {
     return this.http.delete<void>(MatchService.URL + '/' + id);
   }

@@ -59,6 +59,13 @@ public class MatchRestController {
 		return matchService.getByJourn(id);
 	}
 	
+	@GetMapping("/tournoi/{id}")
+	@JsonView(Views.MatchWithIncriptions.class)
+	public List<Match> getByTournoi(@PathVariable Long id) {
+		return matchService.getByTourn(id);
+	}
+	
+	
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("")
 	@JsonView(Views.Match.class)

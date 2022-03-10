@@ -15,6 +15,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
@@ -64,6 +65,10 @@ public class MatchService {
 		return matchRepo.findByJournee(j);
 	}
 
+	public List<Match> getByTourn(Long id) {
+		Tournoi t = tournoiRepo.getById(id);
+		return matchRepo.getMatchByTournoi(t);
+	}
 	public Match createOrUpdate(Match m) {
 		checkData(m);
 		if (m.getId() == null) {

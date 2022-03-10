@@ -23,6 +23,9 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 	@Query("select m FROM Match m WHERE tournoi = :tournoi AND match_is_fini = false")
 	List<Match> getMatchsNotFinishedInTournoi(@Param("tournoi") Tournoi tournoi);
 	
-	List<Match> findByJournee(Journee journee); 
+	List<Match> findByJournee(Journee journee);
+	
+	@Query("select m from Match m join m.journee as mjournee where mjournee.tournoi = :tournoi")
+	List<Match> getMatchByTournoi(@Param("tournoi") Tournoi tournoi);
 
 }

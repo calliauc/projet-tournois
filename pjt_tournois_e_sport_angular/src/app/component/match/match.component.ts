@@ -10,9 +10,9 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./match.component.css'],
 })
 export class MatchComponent implements OnInit {
-  matchObservable!: Observable<Match[]>;
-  rechercheMatch!: Observable<Match[]>;
-  match!: Observable<Match>;
+  matchObservable!: Observable<Match[]> | undefined;
+  rechercheMatch!: Observable<Match[]> | undefined;
+  match: Match | undefined;
   typeRecherche!: string;
   idRecherche!: number;
 
@@ -24,21 +24,64 @@ export class MatchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.matchObservable = undefined;
+    this.matchObservable = this.matchService.getAll();
+    this.typeRecherche = 'match';
+    this.idRecherche = 100;
+    this.match = undefined;
+    this.rechercheMatch = undefined;
+  }
+
+  getAll() {
     this.matchObservable = this.matchService.getAll();
   }
 
   getByIdMatch(idMatch: number) {
-    if (idMatch) {
-      this.match = this.matchService.get(idMatch);
-    }
+    this.activatedRoute.params.subscribe((params) => {
+      if (idMatch) {
+        this.matchService.get(idMatch).subscribe((result) => {
+          console.log(result);
+          this.match = result;
+        });
+      }
+    });
   }
-
-  getByIdTournoi(idTournoi: number) {}
 
   getByJournee(idJournee: number) {
     if (idJournee) {
-      this.rechercheMatch = this.matchService.getByJournee(idJournee);
+      this.matchObservable = this.matchService.getByJournee(idJournee);
     }
+  }
+
+  getByTournoi(idTournoi: number) {
+    if (idTournoi) {
+      this.matchObservable = this.matchService.getByTournoi(idTournoi);
+    }
+  }
+
+  searchMatch() {
+    console.log(this.typeRecherche);
+    if (this.typeRecherche == 'Match') {
+      this.getByIdMatch(this.idRecherche);
+    }
+    if (this.typeRecherche == 'Journee') {
+      this.getByJournee(this.idRecherche);
+    }
+    if (this.typeRecherche == 'Tournoi') {
+      this.getByTournoi(this.idRecherche);
+    }
+  }
+
+  setRechercheTournoi() {
+    this.typeRecherche = 'Tournoi';
+  }
+
+  setRechercheJournee() {
+    this.typeRecherche = 'Journee';
+  }
+
+  setRechercheMatch() {
+    this.typeRecherche = 'Match';
   }
 
   delete(id: number) {
