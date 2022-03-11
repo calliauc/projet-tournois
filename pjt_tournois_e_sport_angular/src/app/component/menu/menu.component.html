@@ -10,16 +10,19 @@
           Accueil</a
         >
       </li>
-
-      <li class="nav-item">
-        <a
-          *ngIf="authenticated"
-          routerLink="/tournoi"
-          routerLinkActive="active"
-          class="nav-link active"
-          >Tournois admin</a
+      <ng-container *ngFor="let role of utilisateur.roles">
+        <li
+          class="nav-item"
+          *ngIf="authenticated && (isOrga(role) || isAdmin(role))"
         >
-      </li>
+          <a
+            routerLink="/tournoi"
+            routerLinkActive="active"
+            class="nav-link active"
+            >Tournois admin</a
+          >
+        </li>
+      </ng-container>
       <li class="nav-item">
         <a
           *ngIf="authenticated"
