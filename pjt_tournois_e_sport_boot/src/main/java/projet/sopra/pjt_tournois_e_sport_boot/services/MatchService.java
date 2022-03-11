@@ -12,15 +12,18 @@ import org.springframework.stereotype.Service;
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.MatchException;
 import projet.sopra.pjt_tournois_e_sport_boot.exceptions.UtilisateurException;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Inscription;
+import projet.sopra.pjt_tournois_e_sport_boot.model.InscriptionKey;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Journee;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Match;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Resultat;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
+import projet.sopra.pjt_tournois_e_sport_boot.model.Utilisateur;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.InscriptionRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.JourneeRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.MatchRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.ResultatRepository;
 import projet.sopra.pjt_tournois_e_sport_boot.repositories.TournoiRepository;
+import projet.sopra.pjt_tournois_e_sport_boot.repositories.UtilisateurRepository;
 
 @Service
 public class MatchService {
@@ -41,6 +44,9 @@ public class MatchService {
 
 	@Autowired
 	private ResultatRepository resultatRepo;
+	
+	@Autowired
+	private UtilisateurRepository utlisateurRepo;
 
 	@Autowired
 	private Validator validator;
@@ -68,6 +74,14 @@ public class MatchService {
 	public List<Match> getByTourn(Long id) {
 		Tournoi t = tournoiRepo.getById(id);
 		return matchRepo.getMatchByTournoi(t);
+	}
+	public List<Match> getByInscription(Long idJoueur, Long idTournoi){
+		Utilisateur user = utlisateurRepo.getById(idJoueur);
+		Tournoi tourn = tournoiRepo.getById(idTournoi);
+		InscriptionKey key = new InscriptionKey(user, tourn);
+		Inscription i = inscriptionRepo.findById(key).orElseThrow();
+		return matchRepo.getMatchsWithInscription(i);
+		
 	}
 	public Match createOrUpdate(Match m) {
 		checkData(m);
