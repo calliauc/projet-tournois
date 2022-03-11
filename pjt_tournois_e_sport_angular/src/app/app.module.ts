@@ -42,6 +42,7 @@ import { ChampMatchsNextComponent } from './component/tournoi/details/champ/cham
 import { LigueMatchsNextComponent } from './component/tournoi/details/ligue/ligue-matchs-next/ligue-matchs-next.component';
 import { LigueInscriptionComponent } from './component/tournoi/details/ligue/ligue-inscription/ligue-inscription.component';
 import { ChampInscriptionComponent } from './component/tournoi/details/champ/champ-inscription/champ-inscription.component';
+import { ChampPouleSoloComponent } from './component/tournoi/details/champ/champ-poule-solo/champ-poule-solo.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ChampInscriptionComponent } from './component/tournoi/details/champ/cha
     LigueMatchsNextComponent,
     LigueInscriptionComponent,
     ChampInscriptionComponent,
+    ChampPouleSoloComponent,
   ],
   imports: [
     BrowserModule,

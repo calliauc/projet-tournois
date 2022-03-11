@@ -22,6 +22,12 @@ export class InscriptionService {
     );
   }
 
+  public getByTournoi(idTournoi: number): Observable<Inscription[]> {
+    return this.httpClient.get<Inscription[]>(
+      `${InscriptionService.URL}/tournoi_${idTournoi}`
+    );
+  }
+
   public delete(idJoueur: number, idTournoi: number): Observable<void> {
     return this.httpClient.delete<void>(
       `${InscriptionService.URL}/${idJoueur}&${idTournoi}`

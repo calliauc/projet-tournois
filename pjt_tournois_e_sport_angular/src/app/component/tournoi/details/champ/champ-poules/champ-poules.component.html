@@ -3,22 +3,8 @@
     <h3>Poules</h3>
   </div>
   <div class="card-body">
-    <!-- <div *ngIf="champ.poules">Pas encore de poules</div> -->
-    <div *ngIf="champ.poules">
-      <div *ngFor="let poule of champ.poules">
-        <div *ngFor="let journee of poule.journeesAJouer">
-          <table>
-            <tr>
-              <th colspan="2">
-                <p>{{ poule.nom }} Journée {{ journee.id }}</p>
-              </th>
-            </tr>
-            <tr *ngFor="let match of journee.matchsAJouerPourJournee">
-              <td>match : {{ match.id }}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
+    <div *ngFor="let poule of champ.poules">
+      <app-champ-poule-solo [idPoule]="poule.idTournoi"></app-champ-poule-solo>
     </div>
   </div>
 </div>
