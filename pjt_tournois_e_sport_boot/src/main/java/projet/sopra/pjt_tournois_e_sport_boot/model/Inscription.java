@@ -34,11 +34,11 @@ public class Inscription {
 			Views.TournoiWithInscriptions.class, Views.UserWithIncriptions.class, Views.Match.class,
 			Views.Classement.class, Views.JourneeWithTournoiAndMatch.class, Views.MatchWithIncriptions.class })
 	private InscriptionKey id;
-	@JsonView({ Views.InscriptionWithId.class, Views.Classement.class })
+	@JsonView({Views.InscriptionWithId.class, Views.Classement.class,Views.UserWithIncriptions.class})
 	@Column(name = "position")
 	@PositiveOrZero
 	private int position;
-	@JsonView({ Views.InscriptionWithId.class, Views.Classement.class })
+	@JsonView({Views.InscriptionWithId.class, Views.Classement.class, Views.UserWithIncriptions.class})
 	@Column(name = "score")
 	@PositiveOrZero
 	private int score;
