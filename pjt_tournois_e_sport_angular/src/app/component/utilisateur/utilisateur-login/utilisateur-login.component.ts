@@ -45,6 +45,7 @@ export class UtilisateurLoginComponent implements OnInit {
             )
           );
           this.router.navigateByUrl('/accueil');
+          location.reload();
         },
         error: (error) => {
           this.error = true;

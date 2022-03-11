@@ -22,6 +22,11 @@ export class MatchService {
     return this.http.get<Match[]>(MatchService.URL + '/tournoi/' + id);
   }
 
+  getByInscription(idJoueur: number, idTournoi: number): Observable<Match[]> {
+    return this.http.get<Match[]>(
+      MatchService.URL + '/' + idJoueur + '/' + idTournoi
+    );
+  }
   delete(id: number): Observable<void> {
     return this.http.delete<void>(MatchService.URL + '/' + id);
   }

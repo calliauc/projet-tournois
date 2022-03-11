@@ -31,19 +31,20 @@ public class Inscription {
 	/// ATTRIBUTES
 	@EmbeddedId
 	@JsonView({ Views.InscriptionWithId.class, Views.ResultatWithInscriptionAndMatch.class,
-			Views.TournoiWithInscriptions.class, Views.UserWithIncriptions.class, Views.Match.class, Views.Classement.class, Views.JourneeWithTournoiAndMatch.class})
+			Views.TournoiWithInscriptions.class, Views.UserWithIncriptions.class, Views.Match.class,
+			Views.Classement.class, Views.JourneeWithTournoiAndMatch.class, Views.MatchWithIncriptions.class })
 	private InscriptionKey id;
-	@JsonView({Views.InscriptionWithId.class, Views.Classement.class})
+	@JsonView({ Views.InscriptionWithId.class, Views.Classement.class })
 	@Column(name = "position")
 	@PositiveOrZero
 	private int position;
-	@JsonView({Views.InscriptionWithId.class, Views.Classement.class})
+	@JsonView({ Views.InscriptionWithId.class, Views.Classement.class })
 	@Column(name = "score")
 	@PositiveOrZero
 	private int score;
 	/// somme des differences de scores de chaque match -- > sigma (score_joueur -
 	/// score_adversaire) /!\ ne marche que pour les duels
-	@JsonView({Views.InscriptionWithId.class, Views.Classement.class})
+	@JsonView({ Views.InscriptionWithId.class, Views.Classement.class })
 	@Column(name = "score_difference")
 	private int scoreDifference;
 	@JsonView(Views.InscriptionWithId.class)
@@ -52,8 +53,7 @@ public class Inscription {
 	private Match prochainMatch;
 	@ManyToMany
 	private List<Match> matchs = new ArrayList<Match>();
-	
-	
+
 	@OneToMany(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonView(Views.InscriptionWithId.class)
 	private List<Resultat> resultats;
@@ -62,14 +62,10 @@ public class Inscription {
 	public Inscription() {
 
 	}
-	
-	
 
 	public Inscription(InscriptionKey id) {
 		this.id = id;
 	}
-
-
 
 	public Inscription(int position, int score, Match prochainMatch) {
 		super();
@@ -77,8 +73,6 @@ public class Inscription {
 		this.score = score;
 		this.prochainMatch = prochainMatch;
 	}
-	
-	
 
 	public Inscription(InscriptionKey id, @PositiveOrZero int position, @PositiveOrZero int score, int scoreDifference,
 			Match prochainMatch) {
@@ -89,10 +83,8 @@ public class Inscription {
 		this.prochainMatch = prochainMatch;
 	}
 
-
-
 	/// GETTERS
-	
+
 	public int getPosition() {
 		return position;
 	}
@@ -142,19 +134,14 @@ public class Inscription {
 	public void setScoreDifference(int score_difference) {
 		this.scoreDifference = score_difference;
 	}
-	
 
 	public List<Resultat> getResultats() {
 		return resultats;
 	}
 
-
-
 	public void setResultats(List<Resultat> resultats) {
 		this.resultats = resultats;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -189,7 +176,5 @@ public class Inscription {
 			return (int) (e2.getScoreDifference() - e1.getScoreDifference());
 		}
 	};
-
-	
 
 }
