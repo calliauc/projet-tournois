@@ -27,6 +27,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.model.Ligue;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Tournoi;
 import projet.sopra.pjt_tournois_e_sport_boot.model.Views;
 import projet.sopra.pjt_tournois_e_sport_boot.services.InscriptionService;
+import projet.sopra.pjt_tournois_e_sport_boot.services.MatchGenerationService;
 import projet.sopra.pjt_tournois_e_sport_boot.services.TournoiService;
 
 @RestController
@@ -43,7 +44,10 @@ public class TournoiRestController {
 	private TournoiService tournoiService;
 	@Autowired
 	private InscriptionService inscriptionService;
+	@Autowired
+	private MatchGenerationService matchGenerationService;
 
+	
 	//// CRUD
 
 	@GetMapping("")
@@ -126,6 +130,14 @@ public class TournoiRestController {
 		return tournoiService.getClassementLigue(id);
 	}
 
+	@GetMapping("/init/champ/{id}")
+	@JsonView(Views.TournoiWithInscriptions.class)
+	private Tournoi initChamp(@PathVariable Long id) {
+		matchGenerationService.initChampionnat((Championnat)tournoiService.getById(id));
+		return tournoiService.getById(id);
+	}
+
+	
 	//// METHODS
 
 	private Tournoi save(Tournoi tournoi, BindingResult br) {
@@ -135,4 +147,6 @@ public class TournoiRestController {
 		return tournoiService.createOrUpdate(tournoi);
 
 	}
+	
+	
 }

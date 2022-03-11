@@ -21,6 +21,12 @@ export class ChampionnatService {
     return this.http.get<Championnat>(ChampionnatService.URL + '/' + id);
   }
 
+  init(id: number): Observable<Championnat> {
+    return this.http.get<Championnat>(
+      ChampionnatService.URL + '/init' + 'champ' + id
+    );
+  }
+
   update(tournoi: Championnat): Observable<Championnat> {
     return this.http.put<Championnat>(
       ChampionnatService.URL + '/championnat_' + tournoi.idTournoi,

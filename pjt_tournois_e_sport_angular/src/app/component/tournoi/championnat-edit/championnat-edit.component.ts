@@ -40,10 +40,10 @@ export class ChampionnatEditComponent implements OnInit {
         console.log(result);
         this.orga = result;
       });
-    this.tournoi.organisateur = this.orga;
   }
 
   save() {
+    this.tournoi.organisateur = this.orga;
     if (this.tournoi.idTournoi) {
       this.championnatService.update(this.tournoi).subscribe((ok) => {
         this.router.navigate(['/tournoi']);
