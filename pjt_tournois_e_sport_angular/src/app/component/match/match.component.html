@@ -49,8 +49,37 @@
             </div>
           </td>
           <td>
-            <button class="btn btn-success" (click)="getAll()">
+            <button
+              id="voirAllMatchs"
+              class="btn btn-success"
+              (click)="getAll()"
+            >
               Voir tous les matchs
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <h5>Par inscription :</h5>
+        </tr>
+        <tr>
+          <td>Id Joueur :</td>
+          <td>Id Tournoi :</td>
+        </tr>
+
+        <tr>
+          <td>
+            <input type="number" class="form-control" [(ngModel)]="idJoueur" />
+          </td>
+          <td>
+            <input type="number" class="form-control" [(ngModel)]="idTournoi" />
+          </td>
+          <td>
+            <button
+              (click)="getByInscription()"
+              type="button"
+              class="btn btn-primary"
+            >
+              Rechercher
             </button>
           </td>
         </tr>
