@@ -5,13 +5,13 @@
   <div class="card-body">
     <table class="table">
       <tr>
-        <th>ID Joueur</th>
+        <th *ngIf="!fromMyProfile">ID Joueur</th>
         <th>ID Tournoi</th>
         <th>Position joueur</th>
         <th>Score global</th>
       </tr>
-      <tr *ngFor="let i of inscriptionsObservable | async">
-        <td>{{ i.id!.joueur!.id }}</td>
+      <tr *ngFor="let i of inscriptions">
+        <td *ngIf="!fromMyProfile">{{ i.id!.joueur!.id }}</td>
         <td>{{ i.id!.tournoi!.idTournoi }}</td>
         <td>{{ i.position }}</td>
         <td>{{ i.score }}</td>
@@ -37,6 +37,7 @@
             Supprimer l'inscription
           </button>
         </td>
+
       </tr>
     </table>
     <a

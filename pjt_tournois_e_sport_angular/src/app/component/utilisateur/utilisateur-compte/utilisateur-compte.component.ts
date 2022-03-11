@@ -13,7 +13,7 @@ import { Tournoi } from 'src/app/model/tournoi';
 export class UtilisateurCompteComponent implements OnInit {
   userObservable!: Observable<Utilisateur>;
   user: Utilisateur = new Utilisateur();
-  roles = Role;
+  // roles = Role;
   tournois: Tournoi[] = [];
 
   constructor(private userService: UtilisateurService) {}
@@ -32,8 +32,6 @@ export class UtilisateurCompteComponent implements OnInit {
             this.user.mail +
             this.user.roles
         );
-        console.log('mes tournois (orga) : ' + this.user.tournois);
-        console.log('mes tournois (inscriptions) : ' + this.user.inscriptions);
 
         this.userService
           .getTournoisOfUser(this.user.id!)
@@ -41,25 +39,16 @@ export class UtilisateurCompteComponent implements OnInit {
             const userTemp = result;
             this.user.tournois = userTemp.tournois;
           });
-      });
-  }
+        //console.log('mes tournois (orga) : ' + this.user.tournois);
 
-  // get Tournois(): Tournoi[] {
-  //   console.log('mes tournois (orga) : ' + this.user.tournois);
-  //   let tournoi: Tournoi[] = [];
-  //   for (let t of this.user.tournois!) {
-  //     console.log('idTournoi = ' + t.idTournoi);
-  //     tournoi.push(t!);
-  //   }
+        this.userService
+          .getInscriptionsOfUser(this.user.id!)
+          .subscribe((result) => {
+            const userTemp = result;
+            this.user.inscriptions = userTemp.inscriptions;
+          });
 
-  //   return tournoi;
-  // }
-
-  getInscriptions() {
-    this.userService
-      .getInscriptionsOfUser(this.user.id!)
-      .subscribe((result) => {
-        this.user = result;
+        //console.log('mes tournois (inscriptions) : ' + this.user.inscriptions);
       });
   }
 

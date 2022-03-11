@@ -33,7 +33,7 @@
 
     <ng-container *ngFor="let role of user.roles">
       <div *ngIf=" isPlayer(role)">
-        <app-inscription title="Mes inscriptions"></app-inscription>
+        <app-inscription title="Mes inscriptions" [fromMyProfile]=true [inscriptions]="user.inscriptions!" ></app-inscription>
       </div>
 
       <div *ngIf="isOrga(role)">
