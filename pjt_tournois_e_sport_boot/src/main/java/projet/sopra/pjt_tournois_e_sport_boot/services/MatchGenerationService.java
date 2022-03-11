@@ -362,25 +362,17 @@ public class MatchGenerationService {
 
 		LOGGER.trace("Set la list des journée dans la ligue");
 		poule.setJourneesAJouer(journees);
-		LOGGER.info("===================Poule et journées===================");
-		for (Journee j : poule.getJourneesAJouer()) {
-			LOGGER.info("Journee : "+j.getId());
-			for (Match m : j.getMatchsAJouerPourJournee()) {
-				LOGGER.info("match : "+m.getId());
-			}
-		}
 		LOGGER.trace("Set les prochains matchs");
 		matchService.setAllProchainMatch(poule.getIdTournoi());
-//		try {
-//			LOGGER.info("TEST SAUVEGARDE POULE");
-//			tournoiRepo.save(poule);
-//			LOGGER.debug("Sauvegarde ok");
-//		} catch (Exception e) {
-//			LOGGER.error("Sauvegarde NOT OK");
-//			LOGGER.error("Erreur : " + e);
-//			System.exit(1);
-//		}
-//
+		try {
+			LOGGER.info("TEST SAUVEGARDE POULE");
+			tournoiRepo.save(poule);
+			LOGGER.debug("Sauvegarde ok");
+		} catch (Exception e) {
+			LOGGER.error("Sauvegarde NOT OK");
+			LOGGER.error("Erreur : " + e);
+			System.exit(1);
+		}
 		LOGGER.info("Fin generation match poule");
 	}
 
