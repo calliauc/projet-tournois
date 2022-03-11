@@ -353,8 +353,7 @@ public class MatchGenerationService {
 				for (Inscription x : m.getInscriptions()) {
 					LOGGER.trace("" + x.getId().getJoueur().getUsername());
 				}
-				matchsJournee.add(m);
-				matchRepo.save(m);
+				
 			}
 			if (isPair != 1) {
 				LOGGER.trace("Solo : " + inscriptionsLigue.get(inscriptionsLigue.size() / 2));
