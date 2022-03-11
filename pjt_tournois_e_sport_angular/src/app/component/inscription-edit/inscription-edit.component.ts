@@ -1,3 +1,4 @@
+import { Utilisateur } from 'src/app/model/utilisateur';
 import { TournoiService } from './../../service/tournoi.service';
 import { UtilisateurService } from './../../service/utilisateur.service';
 import { Observable, map, debounceTime } from 'rxjs';
