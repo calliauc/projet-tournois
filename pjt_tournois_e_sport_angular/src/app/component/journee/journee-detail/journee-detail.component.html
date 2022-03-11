@@ -36,6 +36,8 @@
     <table *ngFor="let m of journee.matchsAJouerPourJournee">
       <tr>
         <th>Match {{ m?.id }}</th>
+        <th>Participants</th>
+        <th>Scores</th>
       </tr>
       <tr *ngFor="let i of m.inscriptions">
         <td>{{ i.id?.joueur?.username }}</td>
