@@ -3,9 +3,9 @@
   <tr>
     <th>Matchs</th>
   </tr>
-  <tr *ngFor="">
-    <td *ngFor="let item; of">
-      <p></p>
-    </td>
+  <tr *ngFor="let match of matchs">
+    <ng-container *ngFor="let id of match.inscriptions">
+      <td>{{ id.idJoueur }}</td>
+    </ng-container>
   </tr>
 </table>

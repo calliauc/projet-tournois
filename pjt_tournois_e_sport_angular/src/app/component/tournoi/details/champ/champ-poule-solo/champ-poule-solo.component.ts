@@ -27,5 +27,8 @@ export class ChampPouleSoloComponent implements OnInit {
     this.pouleService
       .get(this.idPoule as number)
       .subscribe((result) => (this.poule = result));
+    this.matchService
+      .getByTournoi(this.idPoule as number)
+      .subscribe((result) => (this.matchs = result));
   }
 }
