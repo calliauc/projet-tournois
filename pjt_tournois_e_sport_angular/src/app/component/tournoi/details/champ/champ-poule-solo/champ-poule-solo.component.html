@@ -1,6 +1,11 @@
-<p>champ-poule-solo works!</p>
-<p>idPoule = {{ idPoule }}</p>
-<p>Poule : {{ poule.nom }}</p>
-<div *ngFor="let inscrit of inscrits">
-  <p>{{ inscrit.id }}</p>
-</div>
+<p>Poule : {{ poule.nom }} {{ idPoule }}</p>
+<table class="table">
+  <tr>
+    <th>Matchs</th>
+  </tr>
+  <tr *ngFor="">
+    <td *ngFor="let item; of">
+      <p></p>
+    </td>
+  </tr>
+</table>
