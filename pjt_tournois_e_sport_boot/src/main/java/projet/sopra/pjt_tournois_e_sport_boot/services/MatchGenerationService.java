@@ -335,11 +335,21 @@ public class MatchGenerationService {
 			LOGGER.debug("Journée sauvegardée");
 			List<Match> matchsJournee = new ArrayList<Match>();
 			for (int j = 0; j < poule.getListeInscriptions().size() / 2; j++) {
-				LOGGER.trace("Match : " + j);
+				System.out.println("Match : " + j);
+				List<Inscription> inscriptionMatch = new ArrayList(); 
+				Inscription j1 = inscriptionsLigue.get(j);
+				Inscription j2 = inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1));
+				inscriptionMatch.add(j1);
+				inscriptionMatch.add(j2);
 				Match m = new Match();
 				m.setJournee(jour);
-				m.getInscriptions().add(inscriptionsLigue.get(j));
-				m.getInscriptions().add(inscriptionsLigue.get(inscriptionsLigue.size() - (j + 1)));
+				m.setInscriptions(inscriptionMatch); 
+				matchsJournee.add(m);
+				matchRepo.save(m);
+				j1.getMatchs().add(m);
+				j2.getMatchs().add(m);
+				inscriptionRepo.save(j1);
+				inscriptionRepo.save(j2);
 				for (Inscription x : m.getInscriptions()) {
 					LOGGER.trace("" + x.getId().getJoueur().getUsername());
 				}
@@ -380,7 +390,7 @@ public class MatchGenerationService {
 //			LOGGER.error("Erreur : " + e);
 //			System.exit(1);
 //		}
-//
+		
 		LOGGER.info("Fin generation match poule");
 	}
 
