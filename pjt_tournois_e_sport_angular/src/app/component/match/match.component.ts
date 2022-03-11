@@ -16,6 +16,9 @@ export class MatchComponent implements OnInit {
   typeRecherche!: string;
   idRecherche!: number;
 
+  idTournoi!: number;
+  idJoueur!: number;
+
   constructor(
     private matchService: MatchService,
     private activatedRoute: ActivatedRoute,
@@ -53,9 +56,18 @@ export class MatchComponent implements OnInit {
     }
   }
 
-  getByTournoi(idTournoi: number) {
-    if (idTournoi) {
-      this.matchObservable = this.matchService.getByTournoi(idTournoi);
+  getByTournoi(id: number) {
+    if (id) {
+      this.matchObservable = this.matchService.getByTournoi(id);
+    }
+  }
+
+  getByInscription() {
+    if (this.idTournoi && this.idJoueur) {
+      this.matchObservable = this.matchService.getByInscription(
+        this.idJoueur,
+        this.idTournoi
+      );
     }
   }
 
