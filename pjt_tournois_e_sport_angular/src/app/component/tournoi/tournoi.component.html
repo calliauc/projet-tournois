@@ -11,7 +11,7 @@
         <th>Date de création</th>
         <th>Date de début</th>
         <th>Jeu</th>
-        <th>Nombre de participants par match</th>
+        <!-- <th>Nombre de participants par match</th> -->
         <th>Nombre de participants total</th>
         <th>Etat des inscriptions</th>
         <th>Avancement</th>
@@ -30,7 +30,7 @@
         <td>{{ t.dateDeDebut }}</td>
         <td>{{ t.jeu }}</td>
         <!--<td>{{ t.listeInscriptions }}</td>-->
-        <td>{{ t.nbParticipantsParMatch }}</td>
+        <!-- <td>{{ t.nbParticipantsParMatch }}</td> -->
         <td>{{ t.nbParticipantsTotal }}</td>
         <td>{{ t.statutInscriptions }}</td>
         <td>{{ t.statutTemps }}</td>
@@ -63,7 +63,7 @@
             </button>
           </div>
         </td>
-        <td>
+        <!-- <td>
           <div>
             <a
               [routerLink]="['/ligue', 'classement', t.idTournoi]"
@@ -72,7 +72,7 @@
               >classement</a
             >
           </div>
-        </td>
+        </td> -->
       </tr>
     </table>
     <div class="btn-group" role="group">
