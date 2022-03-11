@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Inscription } from 'src/app/model/inscription';
+import { Match } from 'src/app/model/match';
 import { Poule } from 'src/app/model/poule';
 import { InscriptionService } from 'src/app/service/inscription.service';
+import { MatchService } from 'src/app/service/match.service';
 import { PouleService } from 'src/app/service/poule.service';
 
 @Component({
@@ -13,12 +15,12 @@ export class ChampPouleSoloComponent implements OnInit {
   @Input()
   idPoule: number | undefined = 0;
 
-  inscrits: Inscription[] = [];
+  matchs: Match[] = [];
   poule: Poule = new Poule();
 
   constructor(
     private pouleService: PouleService,
-    private inscriptionService: InscriptionService
+    private matchService: MatchService
   ) {}
 
   ngOnInit(): void {
