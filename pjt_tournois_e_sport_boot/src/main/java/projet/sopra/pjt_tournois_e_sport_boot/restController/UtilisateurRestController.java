@@ -34,7 +34,7 @@ import projet.sopra.pjt_tournois_e_sport_boot.services.UtilisateurService;
 
 @RestController
 @RequestMapping("api/utilisateur")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class UtilisateurRestController {
 
 	@Autowired

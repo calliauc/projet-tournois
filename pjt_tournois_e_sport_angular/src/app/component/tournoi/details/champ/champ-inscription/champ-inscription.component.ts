@@ -1,19 +1,20 @@
-import { Inscription } from 'src/app/model/inscription';
+import { Championnat } from 'src/app/model/championnat';
 import { UtilisateurService } from 'src/app/service/utilisateur.service';
 import { InscriptionService } from './../../../../../service/inscription.service';
+import { Inscription } from 'src/app/model/inscription';
 import { Utilisateur } from 'src/app/model/utilisateur';
 import { Ligue } from 'src/app/model/ligue';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-ligue-inscription',
-  templateUrl: './ligue-inscription.component.html',
-  styleUrls: ['./ligue-inscription.component.css'],
+  selector: 'app-champ-inscription',
+  templateUrl: './champ-inscription.component.html',
+  styleUrls: ['./champ-inscription.component.css'],
 })
-export class LigueInscriptionComponent implements OnInit {
+export class ChampInscriptionComponent implements OnInit {
   @Input()
-  ligue: Ligue = new Ligue();
+  champ: Championnat = new Championnat();
 
   user: Utilisateur = new Utilisateur();
   inscription: Inscription = new Inscription();
@@ -34,8 +35,8 @@ export class LigueInscriptionComponent implements OnInit {
 
   joueurInscription() {
     this.inscription.idJoueur = this.user.id;
-    this.inscription.idTournoi = this.ligue.idTournoi;
-    if (confirm('Confirmer votre inscription à la ligue ?')) {
+    this.inscription.idTournoi = this.champ.idTournoi;
+    if (confirm('Confirmer votre inscription au championnat ?')) {
       this.inscriptionService.create(this.inscription).subscribe((ok) => {
         alert('Inscription bien prise en compte !');
         this.router.navigate(['/tournoi-resume']);
